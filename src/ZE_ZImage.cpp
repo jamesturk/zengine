@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.19 2003/01/24 06:30:42 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.20 2003/01/24 10:27:42 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -103,6 +103,19 @@ void ZImage::Attach(SDL_Surface *surface)
 
 	Release();		//avoid most user inflicted memory leaks
 
+    //surface conversion//
+    SDL_Surface *temp = surface;
+    surface = SDL_DisplayFormatAlpha(temp);
+    if(surface)
+    {
+        FreeImage(temp);
+    }
+    else    //can't convert
+    {
+        rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
+        surface = temp;
+    }
+
     if(surface)
     {
         rWidth = surface->w;
@@ -145,25 +158,13 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
             rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
         else
         {
-            //surface conversion//
             temp = rImage;
-            rImage = SDL_DisplayFormat(temp);
-            if(rImage)
-            {
-                FreeImage(temp);
-                temp = rImage;
-                rImage = NULL;
-                Attach(temp); //Rebind new image.
-            }
-            else    //can't convert
-            {
-                rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::SetColorKey: %s",SDL_GetError()));
-                rImage = temp;
-            }
+            rImage = NULL;
+            Attach(temp);   //do the reattach
         }
     }
     else
-        rEngine->ReportError(ZERR_NOIMAGE,"SetColorKey.");
+        rEngine->ReportError(ZERR_NOIMAGE,"SetColorKey");
 }
 
 void ZImage::Flip(bool horizontal, bool vertical)
@@ -206,7 +207,6 @@ void ZImage::Bind() const
 void ZImage::Draw(float x, float y) const
 {
     Bind();
-
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(x,y);
         glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2f(x+rWidth,y);
