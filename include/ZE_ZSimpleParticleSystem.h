@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine simple particle system, ZSimpleParticleSystem based on ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.4 2003/08/02 01:18:45 cozman Exp $<br>
+    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.5 2003/11/24 22:22:07 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -218,10 +218,9 @@ class ZSimpleParticleSystem : public ZBaseParticleSystem<particleType>
             \param maxEnergyDelta Maximum energy delta.
         **/
         void SetEnergyRange(float minEnergy, float maxEnergy, float minEnergyDelta=0, float maxEnergyDelta=0);
-
+        
         /*!
             \brief Sets range of initial size and sizeDelta. 
-
             Sets the possible ranges for a particles starting size and it's sizeDelta.
             \param minSize Minimum initial size.
             \param maxSize Maximum initial size.

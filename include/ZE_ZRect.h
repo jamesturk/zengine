@@ -13,7 +13,7 @@
     \brief Definition file for ZRect.
 
     Definition file for ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.h,v 1.13 2003/10/03 22:03:29 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.h,v 1.14 2003/11/24 22:22:07 cozman Exp $<br>
     \author James Turk
 **/
 

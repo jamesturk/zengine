@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.28 2003/10/13 21:48:13 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.29 2003/11/24 22:22:07 cozman Exp $<br>
     \author James Turk
 **/
 

@@ -13,7 +13,7 @@
     \brief Definition file for ZMusic.
 
     Definition file for ZMusic, the Music file wrapper for ZEngine.
-    <br>$Id: ZE_ZMusic.h,v 1.9 2003/06/11 00:15:26 cozman Exp $<br>
+    <br>$Id: ZE_ZMusic.h,v 1.10 2003/11/24 22:22:07 cozman Exp $<br>
     \author James Turk
 **/
 

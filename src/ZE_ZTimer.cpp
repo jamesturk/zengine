@@ -13,7 +13,7 @@
     \brief Source file for ZTimer.
 
     Implementation of ZTimer, the basic Timer class for ZEngine.
-    <br>$Id: ZE_ZTimer.cpp,v 1.11 2003/07/12 09:22:13 cozman Exp $<br>
+    <br>$Id: ZE_ZTimer.cpp,v 1.12 2003/11/24 22:20:49 cozman Exp $<br>
     \author James Turk
 **/
 

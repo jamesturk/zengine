@@ -13,7 +13,7 @@
     \brief Source file for ZRect.
 
     Implementation of ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.cpp,v 1.14 2003/08/02 01:18:45 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.cpp,v 1.15 2003/11/24 22:20:49 cozman Exp $<br>
     \author James Turk
 **/
 

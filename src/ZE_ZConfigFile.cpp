@@ -13,7 +13,7 @@
     \brief Source file for ZConfigFile.
 
     Implementation of ZConfigFile, the ZEngine INI-Style Config File.
-    <br>$Id: ZE_ZConfigFile.cpp,v 1.14 2003/07/11 20:51:44 cozman Exp $<br>
+    <br>$Id: ZE_ZConfigFile.cpp,v 1.15 2003/11/24 22:20:49 cozman Exp $<br>
     \author James Turk
 **/
 
