@@ -17,8 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZRectTest", "ZRectTest.vcpr
 EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
-		ConfigName.0 = Debug
-		ConfigName.1 = Release
+		ConfigName.0 = Release
 	EndGlobalSection
 	GlobalSection(ProjectDependencies) = postSolution
 		{7DA4211A-D6BD-4F3E-8FC6-AA47DC8EBC66}.0 = {65AA7404-28C1-4B15-979E-4D3A14092CC1}
@@ -30,36 +29,20 @@ Global
 		{37D500C5-E6C4-4E56-BFAA-33F1303B147C}.0 = {65AA7404-28C1-4B15-979E-4D3A14092CC1}
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
-		{65AA7404-28C1-4B15-979E-4D3A14092CC1}.Debug.ActiveCfg = Debug|Win32
-		{65AA7404-28C1-4B15-979E-4D3A14092CC1}.Debug.Build.0 = Debug|Win32
 		{65AA7404-28C1-4B15-979E-4D3A14092CC1}.Release.ActiveCfg = Release|Win32
 		{65AA7404-28C1-4B15-979E-4D3A14092CC1}.Release.Build.0 = Release|Win32
-		{7DA4211A-D6BD-4F3E-8FC6-AA47DC8EBC66}.Debug.ActiveCfg = Debug|Win32
-		{7DA4211A-D6BD-4F3E-8FC6-AA47DC8EBC66}.Debug.Build.0 = Debug|Win32
 		{7DA4211A-D6BD-4F3E-8FC6-AA47DC8EBC66}.Release.ActiveCfg = Release|Win32
 		{7DA4211A-D6BD-4F3E-8FC6-AA47DC8EBC66}.Release.Build.0 = Release|Win32
-		{999F6F58-3518-4F66-AEDD-FAD808DA2878}.Debug.ActiveCfg = Debug|Win32
-		{999F6F58-3518-4F66-AEDD-FAD808DA2878}.Debug.Build.0 = Debug|Win32
 		{999F6F58-3518-4F66-AEDD-FAD808DA2878}.Release.ActiveCfg = Release|Win32
 		{999F6F58-3518-4F66-AEDD-FAD808DA2878}.Release.Build.0 = Release|Win32
-		{18BBFFEC-92F0-40C7-BDF9-2C2D5CA62673}.Debug.ActiveCfg = Debug|Win32
-		{18BBFFEC-92F0-40C7-BDF9-2C2D5CA62673}.Debug.Build.0 = Debug|Win32
 		{18BBFFEC-92F0-40C7-BDF9-2C2D5CA62673}.Release.ActiveCfg = Release|Win32
 		{18BBFFEC-92F0-40C7-BDF9-2C2D5CA62673}.Release.Build.0 = Release|Win32
-		{C658B38D-B4E7-434D-8431-88BAD8CF0781}.Debug.ActiveCfg = Debug|Win32
-		{C658B38D-B4E7-434D-8431-88BAD8CF0781}.Debug.Build.0 = Debug|Win32
 		{C658B38D-B4E7-434D-8431-88BAD8CF0781}.Release.ActiveCfg = Release|Win32
 		{C658B38D-B4E7-434D-8431-88BAD8CF0781}.Release.Build.0 = Release|Win32
-		{1CE76EE8-27D4-41AE-9229-5B09922EBFE9}.Debug.ActiveCfg = Debug|Win32
-		{1CE76EE8-27D4-41AE-9229-5B09922EBFE9}.Debug.Build.0 = Debug|Win32
 		{1CE76EE8-27D4-41AE-9229-5B09922EBFE9}.Release.ActiveCfg = Release|Win32
 		{1CE76EE8-27D4-41AE-9229-5B09922EBFE9}.Release.Build.0 = Release|Win32
-		{68E3AB20-1BC1-4852-9A91-33DADFCED7CA}.Debug.ActiveCfg = Debug|Win32
-		{68E3AB20-1BC1-4852-9A91-33DADFCED7CA}.Debug.Build.0 = Debug|Win32
 		{68E3AB20-1BC1-4852-9A91-33DADFCED7CA}.Release.ActiveCfg = Release|Win32
 		{68E3AB20-1BC1-4852-9A91-33DADFCED7CA}.Release.Build.0 = Release|Win32
-		{37D500C5-E6C4-4E56-BFAA-33F1303B147C}.Debug.ActiveCfg = Debug|Win32
-		{37D500C5-E6C4-4E56-BFAA-33F1303B147C}.Debug.Build.0 = Debug|Win32
 		{37D500C5-E6C4-4E56-BFAA-33F1303B147C}.Release.ActiveCfg = Release|Win32
 		{37D500C5-E6C4-4E56-BFAA-33F1303B147C}.Release.Build.0 = Release|Win32
 	EndGlobalSection

@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.23 2003/03/15 03:34:08 cozman Exp $<br>
+$Id: ZEngine.h,v 1.24 2003/04/27 18:55:00 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -16,8 +16,8 @@ $Id: ZEngine.h,v 1.23 2003/03/15 03:34:08 cozman Exp $<br>
     \mainpage ZEngine Documentation
 
     \author James Turk
-    \version 0.8.2
-    \date January 28, 2003
+    \version 0.8.3
+    \date April 27, 2003
 
     \section ZEngine About ZEngine
     <br>
@@ -48,6 +48,7 @@ $Id: ZEngine.h,v 1.23 2003/03/15 03:34:08 cozman Exp $<br>
     James Turk <a href="mailto:james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes<br>
     Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
     Sean <a href="mailto:sean@conceptofzero.net">sean@conceptofzero.net</a> - MSVC++6 Project Files<br>
+    Kevin Watters <a href="mailto:kwatters@adelphia.net">kwatters@adelphia.net</a> - Fix to ZImage::SetColorKey<br>
 **/
 
 #ifndef __zengine_h__

@@ -1,7 +1,9 @@
 ZEngine Version Log for Version 0.8.2
-$Id: changelog.txt,v 1.30 2003/04/27 18:37:39 cozman Exp $
+$Id: changelog.txt,v 1.31 2003/04/27 18:54:58 cozman Exp $
 
 0.8.3 
+    -Fixed project files for people who don't want to add ZEngine to their path.
+    -Altered layout of some of the header files to hopefully be more readable.
     -Fixed minor bugs in ZImage, allowing Gewi to work properly.
     -Added loading of fonts from withen an archive via PhysFS (needs SDL_ttf 2.0.6)
     -Changed behavior of ZImage::Bind to work with blending.

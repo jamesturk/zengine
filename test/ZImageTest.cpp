@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.16 2003/01/25 20:36:13 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.17 2003/04/27 18:55:00 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -90,7 +90,6 @@ void Test()
             image1.SetAlpha(alpha);
             image1.Draw(0,0);
 
-            
             image2.DrawRotated(100,0,angle);
             if(++angle > 360)
                 angle = 0.0f;
