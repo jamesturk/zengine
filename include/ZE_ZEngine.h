@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$id$<br>
+    <br>$Id: ZE_ZEngine.h,v 1.32 2003/05/13 01:15:20 cozman Exp $<br>
     \author James Turk
 **/
 
