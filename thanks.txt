@@ -1,26 +1,1 @@
-The following must be thanked for ZEngine:
-
-Sam Lantinga and the SDL Crew - Creating and Maintaining such a great library and helping on the mailing list.
-    http://libsdl.org
-Dimitri van Heesch and Everyone Associated with Doxygen - Providing such a great Documentation Tool.
-    http://doxygen.org
-Everybody Associated with ConceptOfZero.net - Keeping Me Working on ZEngine.
-    http://conceptofzero.net
-The people at the Kahvi Collective - Providing tons of free Ogg music.
-    http://www.kahvi.org
-Sourceforge.net - Providing hosting for the project and CVS.
-    http://sourceforge.net
-Some people at GameDev.net for helping out in OpenGL.
-    http://gamedev.net
-gametutorials.com and nehe.gamedev.net for Linking to ZEngine and for their OpenGL support.
-    http://gametutorials.com & http://nehe.gamedev.net
-People at Bloodshed and in charge of MingW for together providing a great free compiler and IDE based on GCC.
-    http://bloodshed.net & http://mingw.org
-Makoto Matsumoto and Takuji Nishimura for authoring the Mersenne Twister algorithm, and making it freely available.
-    http://www.math.keio.ac.jp/~matumoto/emt.html
-Authors of zlib for making a great library, and making it free and open source.
-    http://www.gzip.org/zlib/
-Gilles Volant for making Unzip, making zlib so easy to use.
-    http://www.winimage.com/zLibDll/unzip.html
-
-Also see the test/bin/readme.txt file for credits on the data used in the demos.
+The following must be thanked for ZEngine:Sam Lantinga and the SDL Crew - Creating and Maintaining such a great library and helping on the mailing list.    http://libsdl.orgDimitri van Heesch and Everyone Associated with Doxygen - Providing such a great Documentation Tool.    http://doxygen.orgEverybody Associated with ConceptOfZero.net - Keeping Me Working on ZEngine.    http://conceptofzero.netThe people at the Kahvi Collective - Providing tons of free Ogg music.    http://www.kahvi.orgSourceforge.net - Providing hosting for the project and CVS.    http://sourceforge.netSome people at GameDev.net for helping out in OpenGL.    http://gamedev.netgametutorials.com and nehe.gamedev.net for Linking to ZEngine and for their OpenGL support.    http://gametutorials.com & http://nehe.gamedev.netPeople at Bloodshed and in charge of MingW for together providing a great free compiler and IDE based on GCC.    http://bloodshed.net & http://mingw.orgMakoto Matsumoto and Takuji Nishimura for authoring the Mersenne Twister algorithm, and making it freely available.    http://www.math.keio.ac.jp/~matumoto/emt.htmlAuthors of zlib for making a great library, and making it free and open source.    http://www.gzip.org/zlib/Gilles Volant for making Unzip, making zlib so easy to use.    http://www.winimage.com/zLibDll/unzip.htmlAlso see the test/bin/readme.txt file for credits on the data used in the demos.
