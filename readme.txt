@@ -32,7 +32,8 @@ mingw or cygwin you can replace the linux makefile with makefile.mingw32.
 and others) as well as the path to ZEngine before building.
 -If you are using gcc on any OS you need to change configure (not the
 makefile) to meet your needs then run make.
-If you are having a problem building ask on http://conceptofzero.net/forums.
+If you are having a problem building ask at 
+http://www.conceptofzero.net/forums/index.php?act=SF&f=15
 ------------------------------------------------------------
 IV. Using ZEngine:
 
