@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*Id: */
+/*$Id: ZMouseTest.cpp,v 1.11 2003/01/04 05:18:51 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
