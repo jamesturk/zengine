@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZClient.cpp <br>
-Description: Implementation source file for core ZEngine TCP Client Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZClient.cpp,v 1.5 2003/04/27 19:12:48 cozman Exp $<br>
-
+/**
     \file ZE_ZClient.cpp
     \brief Source file for ZClient.
 
     Implementation file for ZClient, the TCP Client class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZClient.h"

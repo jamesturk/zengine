@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_ZSound.h <br>
-Description: Header file for core ZEngine Sound Wrapper Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZSound.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
-
     \file ZE_ZSound.h
     \brief Definition file for ZSound.
 
     Definition file for ZSound, the Sound Effect wrapper for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zsound_h__

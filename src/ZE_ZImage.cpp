@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZImage.cpp <br>
-Description: Implementation source file for core ZEngine Image or Texture Object. <br>
-Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.30 2003/04/18 21:52:49 cozman Exp $<br>
-
+/**
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZImage.h"

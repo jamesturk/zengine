@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZTimer.cpp <br>
-Description: Implementation source file for core ZEngine Timer Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZTimer.cpp,v 1.6 2003/02/10 04:40:30 cozman Exp $<br>
-
+/**
     \file ZE_ZTimer.cpp
     \brief Source file for ZTimer.
 
     Implementation of ZTimer, the basic Timer class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZTimer.h"

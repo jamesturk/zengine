@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header:
-File: ZE_ZMusic.cpp <br>
-Description: Implementation source file for core ZEngine Music Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZMusic.cpp,v 1.6 2003/02/10 04:02:38 cozman Exp $<br>
-
+/**
     \file ZE_ZMusic.cpp
     \brief Source file for ZMusic.
 
     Implementation of ZMusic, the basic Music class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZMusic.h"

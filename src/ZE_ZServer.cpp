@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZServer.cpp <br>
-Description: Implementation source file for core ZEngine TCP Server Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZServer.cpp,v 1.4 2003/04/08 03:30:50 cozman Exp $<br>
-
+/**
     \file ZE_ZServer.cpp
     \brief Source file for ZServer.
 
     Implementation file for ZServer, the TCP Server class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZServer.h"

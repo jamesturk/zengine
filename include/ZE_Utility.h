@@ -9,18 +9,15 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_Utility.h <br>
-Description: Header file for ZEngine Utilities. <br>
-Author(s): James Turk <br>
-$Id: ZE_Utility.h,v 1.2 2003/04/28 02:01:20 cozman Exp $<br>
-
     \file ZE_Utility.h
     \brief Definition file for ZEngine Utilities.
 
     Definition file for ZEngine Utilities which are used throughout the engine and can be used in
     conjunction with ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
+
 
 #ifndef __ze_utility_h__
 #define __ze_utility_h__

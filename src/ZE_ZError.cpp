@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header:
-File: ZE_ZError.cpp <br>
-Description: Implementation source file for core ZEngine Error Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZError.cpp,v 1.5 2003/03/01 20:43:41 cozman Exp $<br>
-
+/**
     \file ZE_ZError.cpp
     \brief Source file for ZError.
 
     Implementation of ZError, the ZEngine internal error information storage class.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZError.h"

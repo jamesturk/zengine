@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_ZTimer.h <br>
-Description: Header file for core ZEngine Timer Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZTimer.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
-
     \file ZE_ZTimer.h
     \brief Definition file for ZTimer.
 
     Definition file for ZTimer, the Timer class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_ztimer_h__

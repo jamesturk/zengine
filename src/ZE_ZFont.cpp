@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZFont.cpp <br>
-Description: Implementation source file for core ZEngine Font Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.8 2003/04/08 03:34:25 cozman Exp $<br>
-
+/**
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZFont.h"

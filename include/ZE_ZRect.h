@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_ZRect.h <br>
-Description: Header file for core ZEngine Rectangle Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.9 2003/02/16 21:54:29 cozman Exp $<br>
-
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
 
     Definition file for ZRect, the Rectangle class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zrect_h__

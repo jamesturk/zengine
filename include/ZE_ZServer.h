@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_ZServer.h <br>
-Description: Header file for core ZEngine TCP Server Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZServer.h,v 1.5 2003/04/27 22:05:25 cozman Exp $<br>
-
     \file ZE_ZServer.h
     \brief Definition file for ZServer.
 
     Definition file for ZServer, the TCP Server class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zserver_h__

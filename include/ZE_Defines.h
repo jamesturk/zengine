@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header:
-File: ZE_Defines.h <br>
-Description: Defines header file for ZEngine class, where all #define statements to control compilation options are placed. <br>
-Author(s): James Turk <br>
-$Id: ZE_Defines.h,v 1.13 2003/05/07 18:38:43 cozman Exp $<br>
-
     \file ZE_Defines.h
-    \brief Define file for ZEngine.
+    \brief Define file for ZEngine where all #define statements to control compilation options are placed.
 
     Definition file, holds #define statements describing optional features of ZEngine.
+    <br>$ id: ZE_Defines.h,v 1.13 2003/05/07 18:38:43 cozman Exp $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_defines_h__

@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZRect.cpp <br>
-Description: Implementation source file for core ZEngine Rectangle Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.9 2003/02/10 05:40:28 cozman Exp $<br>
-
+/**
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
 
     Implementation of ZRect, the Rectangle class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZRect.h"

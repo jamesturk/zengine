@@ -9,17 +9,13 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_ZError.h <br>
-Description: Header file for ZEngine Error Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.7 2003/03/01 20:42:52 cozman Exp $<br>
-
     \file ZE_ZError.h
     \brief Definition file for ZError.
 
     Definition file for ZError, the Error logging class for ZEngine.
     This class should never be used by the average user, it is used by ZEngine to store information on an error.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zerror_h__

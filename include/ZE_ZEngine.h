@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header:
-File: ZE_ZEngine.h <br>
-Description: Header file for ZEngine class, the core of the ZEngine. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.24 2003/04/28 00:23:06 cozman Exp $<br>
-
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zengine_h__

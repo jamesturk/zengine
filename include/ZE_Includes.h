@@ -9,17 +9,13 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_Includes.h <br>
-Description: Header file for ZEngine universal includes. <br>
-Author(s): James Turk <br>
-$Id: ZE_Includes.h,v 1.8 2003/04/27 22:05:25 cozman Exp $<br>
-
     \file ZE_Includes.h
     \brief Include file for SDL and C++ Includes that many ZEngine files need.
 
     ZE_*.h files should only include this file and any other ZE_*.h files that they need, External Library or C/C++ Standard Library
     files should be included from within this file.
+    $ id: ZE_Includes.h,v 1.8 2003/04/27 22:05:25 cozman Exp $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_includes_h__

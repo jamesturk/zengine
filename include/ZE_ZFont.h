@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header: 
-File: ZE_ZFont.h <br>
-Description: Header file for core ZEngine Font Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZFont.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
-
     \file ZE_ZFont.h
     \brief Definition file for ZFont.
 
     Definition file for ZFont, the basic Font class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zfont_h__

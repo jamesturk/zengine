@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header:
-File: ZE_ZSound.cpp <br>
-Description: Implementation source file for core ZEngine Sound Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZSound.cpp,v 1.6 2003/02/10 04:02:39 cozman Exp $<br>
-
+/**
     \file ZE_ZSound.cpp
     \brief Source file for ZSound.
 
     Implementation of ZSound, the basic Sound class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZSound.h"

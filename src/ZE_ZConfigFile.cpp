@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header: 
-File: ZE_ZConfigFile.cpp <br>
-Description: Implementation source file for ZConfigFile, the ZEngine INI-Style Config File. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.cpp,v 1.8 2003/04/28 03:15:18 cozman Exp $<br>
-
+/**
     \file ZE_ZConfigFile.cpp
     \brief Source file for ZConfigFile.
 
     Implementation of ZConfigFile, the ZEngine INI-Style Config File.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_ZConfigFile.h"

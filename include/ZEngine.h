@@ -1,15 +1,11 @@
 /*!
-\par File Header:
-File: ZEngine.h <br>
-Description: Public Header File for ZEngine. <br>
-Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.24 2003/04/27 18:55:00 cozman Exp $<br>
-
     \file ZEngine.h
     \brief Header file for ZEngine.
 
     Header file for ZEngine Game Engine from Concept of Zero, this is the file that programs that wish to 
     utilize ZEngine should include.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 /*!

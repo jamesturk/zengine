@@ -9,16 +9,12 @@
 *******************************************************************************/
 
 /*!
-\par File Header:
-File: ZE_ZImage.h <br>
-Description: Header file for core ZEngine Image and Texture Object. <br>
-Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.16 2003/02/10 05:26:18 cozman Exp $<br>
-
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #ifndef __ze_zimage_h__

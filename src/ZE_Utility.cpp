@@ -8,17 +8,13 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*!
-\par File Header:
-File: ZE_Utility.cpp <br>
-Description: Implementation source file for ZEngine Utilities. <br>
-Author(s): James Turk <br>
-$Id: ZE_Utility.cpp,v 1.5 2003/04/28 02:01:20 cozman Exp $<br>
-
+/**
     \file ZE_Utility.cpp
     \brief Source file for ZEngine utility functions.
 
     Source file containing open utilities for use inside and alongside ZEngine.
+    <br>$ id: $<br>
+    \author James Turk
 **/
 
 #include "ZE_Utility.h"
