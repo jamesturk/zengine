@@ -9,11 +9,11 @@ VI.  History of ZEngine
 ------------------------------------------------------------
 I. About ZEngine 0.8
 
-ZEngine is a game library which is designed to compile that SDL and OpenGL
-are available on.  ZEngine is a set of classes and a main ZEngine class which
-are designed to make game development easier and more organized.  As of 0.7.7
-ZEngine uses OpenGL to do the 2D display, so it is much faster and can take
-advantage of hardware accelerated features.   This file provides a simple
+ZEngine is a game library which is designed for any platform that SDL and/or
+OpenGL is available on.  ZEngine is a set of classes and a main ZEngine class 
+which are designed to make game development easier and more organized.  As of 
+0.7.7 ZEngine can use OpenGL to do the 2D display, so it is much faster and can
+take advantage of hardware accelerated features.   This file provides a simple
 overview of using it, more on the subject can be found in the docs and at
 http://zengine.sourceforge.net/tutorials/.
 ------------------------------------------------------------
@@ -30,7 +30,7 @@ ZEngine can be built on any system any system that has SDL and OpenGL
 available. If you are in VC++ the folder vc7 contains project files for use,
 Dev-C++ project files are in the devcpp folder, and if you are in a gcc 
 compiler you can change the config & makefile to meet your needs.
--If you are using VC++ you will need to add the path to the dependencies (SDL 
+-If you are using an IDE you will need to add the path to the dependencies (SDL
 and others) as well as the path to ZEngine before building.
 
 See dependencies.txt for information on obtaining the dependencies.
@@ -103,5 +103,12 @@ unlike DirectX where Input and Graphics were entirely separate things. ZEngine
 runs a lot faster on most systems now, due to the OpenGL rendering, and as a
 little treat I threw in just in time for the 0.8.0 release, ZEngine attempts 
 to detect surface loss, and even provides methods to restore it.
+    From 0.8.0 to 0.8.5 some very large changes were made to separate ZEngine
+from other simple 2D apis.  Features such as an optional framerate limiter,
+error handling, convenient overloads, an extremely extensible particle system,
+and better support for more compilers.  Also as ZEngine stabilizes more small
+features, bugfixes, cleanups and enhancements to existing code have been made
+and the number of users (at least what is indicated by the number of emails
+and IMs I've been getting) has been rising steadily.
 
     -James Turk james@conceptofzero.net

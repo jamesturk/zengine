@@ -3,15 +3,19 @@ upon have their own licenses, see readme.txt,lgpl.txt and dependencies.txt for
 more info.
 
 A Note From James:
-    I chose to license ZEngine under the most liberal license I could find.
-I really didn't want to think that anybody would steal all the work put into
-this engine and call it their own.  I'd like to know if you're using it, but
-I didn't choose a license that required it, and I'd also like to know what
-you add to it or any problems you find in it, but I'm not going to require
-any of that because there are people that will do that and people that
-won't and I dont think the people that follow the rule follow it simply
-because they have to and the people that violate open source licenses
-aren't bright enough to have anything to contribute anyway.
+    I chose to license ZEngine under the most liberal license I could find for
+a number of reasons.  I really didn't want to think that anybody would steal all
+the work put into this and call it their own, and the person that does would do
+that even if it were under a more restrictive license.  I would like to know 
+where ZEngine is being used, but I'm not going to require it and I'd also like 
+to know what you add to it or any problems you find in it.  You shouldn't have 
+to be forced to help the community, because it is my belief that most people 
+will do what they can, and I can't possibly hope to understand all the complex
+scenarios that may prevent someone from using a library under a certain license
+so I'd prefer to give the user the freedom to make their code closed-source 
+where they feel it should be, but I'd like to encourage everyone to try to give
+back to the community when possible.  Generally the people that violate open 
+source licenses aren't bright enough to have anything to contribute.
 
 Note: Files in the src/external and include/external directories are not part
 of ZEngine, but may be used by ZEngine to interface with external libraries.
