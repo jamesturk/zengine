@@ -13,7 +13,7 @@
 File: ZE_ZObject.h <br>
 Description: Header file for ZEngine core Object ZObject, base of most ZEngine objects. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZObject.h,v 1.1 2002/11/21 05:41:11 cozman Exp $<br>
+$Id: ZE_ZObject.h,v 1.1.1.1 2002/11/21 05:41:11 cozman Exp $<br>
 
     \file ZE_ZObject.h
     \brief Definition file for ZObject Base Class.

@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZImage.cpp,v 1.1 2002/11/21 05:41:13 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.1.1.1 2002/11/21 05:41:13 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.

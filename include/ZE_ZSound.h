@@ -13,7 +13,7 @@
 File: ZE_ZSound.h <br>
 Description: Header file for core ZEngine Sound Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.h,v 1.1 2002/11/21 05:41:12 cozman Exp $<br>
+$Id: ZE_ZSound.h,v 1.1.1.1 2002/11/21 05:41:12 cozman Exp $<br>
 
     \file ZE_ZSound.h
     \brief Definition file for ZSound.

@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.1.1.1 2002/11/21 05:41:10 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.

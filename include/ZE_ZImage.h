@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZImage.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.1.1.1 2002/11/21 05:41:10 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.

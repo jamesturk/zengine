@@ -13,7 +13,7 @@
 File: ZE_DataPtr.h <br>
 Description: Header file for ZEngine Data Pointer Classes <br>
 Author(s): James Turk <br>
-$Id: ZE_DataPtr.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_DataPtr.h,v 1.1.1.1 2002/11/21 05:41:10 cozman Exp $<br>
 
     \file ZE_DataPtr.h
     \brief Definition file for ZEngine Data/Pointer Classes. ([Image,Font,Sound,Music]Data/Ptr)

@@ -13,7 +13,7 @@
 File: ZE_ZMusic.h <br>
 Description: Header file for core ZEngine Music Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.h,v 1.1 2002/11/21 05:41:11 cozman Exp $<br>
+$Id: ZE_ZMusic.h,v 1.1.1.1 2002/11/21 05:41:11 cozman Exp $<br>
 
     \file ZE_ZMusic.h
     \brief Definition file for ZMusic.

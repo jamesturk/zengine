@@ -13,7 +13,7 @@
 File: ZE_ZSound.cpp <br>
 Description: Implementation source file for core ZEngine Sound Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.cpp,v 1.1 2002/11/21 05:41:13 cozman Exp $<br>
+$Id: ZE_ZSound.cpp,v 1.1.1.1 2002/11/21 05:41:13 cozman Exp $<br>
 
     \file ZE_ZSound.cpp
     \brief Source file for ZSound.

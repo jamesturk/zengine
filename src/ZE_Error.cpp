@@ -13,7 +13,7 @@
 File: ZE_Error.cpp <br>
 Description: Implementation source file for ZEngine error logging utility functions. <br>
 Author(s): James Turk <br>
-$Id: ZE_Error.cpp,v 1.1 2002/11/21 05:41:12 cozman Exp $<br>
+$Id: ZE_Error.cpp,v 1.1.1.1 2002/11/21 05:41:12 cozman Exp $<br>
 
     \file ZE_Error.cpp
     \brief Source file for error logging utilities.
