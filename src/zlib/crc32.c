@@ -9,7 +9,7 @@
  * of two increase in speed on a Power PC G4 (PPC7455) using gcc -O3.
  */
 
-/* @(#) $Id: crc32.c,v 1.3 2003/12/13 04:14:38 cozman Exp $ */
+/* @(#) $Id: crc32.c,v 1.4 2003/12/13 04:28:35 cozman Exp $ */
 
 #ifdef MAKECRCH
 #  include <stdio.h>
@@ -18,7 +18,7 @@
 #  endif /* !DYNAMIC_CRC_TABLE */
 #endif /* MAKECRCH */
 
-#include "zutil.h"      /* for STDC and FAR definitions */
+#include "zlib/zutil.h"      /* for STDC and FAR definitions */
 
 #define local static
 
@@ -171,7 +171,7 @@ local void write_table(out, table)
 /* ========================================================================
  * Tables of CRC-32s of all single-byte values, made by make_crc_table().
  */
-#include "crc32.h"
+#include "zlib/crc32.h"
 #endif /* DYNAMIC_CRC_TABLE */
 
 /* =========================================================================

@@ -38,8 +38,8 @@ woven in by Terry Thorsen 1/2003.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "zlib.h"
-#include "unzip.h"
+#include "zlib/zlib.h"
+#include "zlib/unzip.h"
 
 #ifdef STDC
 #  include <stddef.h>
@@ -153,7 +153,7 @@ typedef struct
 
 
 #ifndef NOUNCRYPT
-#include "crypt.h"
+#include "zlib/crypt.h"
 #endif
 
 /* ===========================================================================

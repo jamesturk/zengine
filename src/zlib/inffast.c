@@ -3,10 +3,10 @@
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-#include "zutil.h"
-#include "inftrees.h"
-#include "inflate.h"
-#include "inffast.h"
+#include "zlib/zutil.h"
+#include "zlib/inftrees.h"
+#include "zlib/inflate.h"
+#include "zlib/inffast.h"
 
 #ifndef ASMINF
 

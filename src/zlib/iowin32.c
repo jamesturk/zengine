@@ -9,9 +9,9 @@
 
 #include <stdlib.h>
 
-#include "zlib.h"
-#include "ioapi.h"
-#include "iowin32.h"
+#include "zlib/zlib.h"
+#include "zlib/ioapi.h"
+#include "zlib/iowin32.h"
 
 #ifndef INVALID_HANDLE_VALUE
 #define INVALID_HANDLE_VALUE (0xFFFFFFFF)

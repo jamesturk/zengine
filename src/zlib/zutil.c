@@ -3,9 +3,9 @@
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-/* @(#) $Id: zutil.c,v 1.3 2003/12/13 04:14:38 cozman Exp $ */
+/* @(#) $Id: zutil.c,v 1.4 2003/12/13 04:28:35 cozman Exp $ */
 
-#include "zutil.h"
+#include "zlib/zutil.h"
 
 #ifndef NO_DUMMY_DECL
 struct internal_state      {int dummy;}; /* for buggy compilers */

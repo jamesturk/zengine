@@ -8,12 +8,12 @@
    subject to change. Applications should only use zlib.h.
  */
 
-/* @(#) $Id: deflate.h,v 1.2 2003/12/13 04:15:27 cozman Exp $ */
+/* @(#) $Id: deflate.h,v 1.3 2003/12/13 04:28:35 cozman Exp $ */
 
 #ifndef DEFLATE_H
 #define DEFLATE_H
 
-#include "zutil.h"
+#include "zlib/zutil.h"
 
 /* define NO_GZIP when compiling if you want to disable gzip header and
    trailer creation by deflate().  NO_GZIP would be used to avoid linking in

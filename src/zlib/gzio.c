@@ -5,11 +5,11 @@
  * Compile this file with -DNO_GZCOMPRESS to avoid the compression code.
  */
 
-/* @(#) $Id: gzio.c,v 1.3 2003/12/13 04:14:38 cozman Exp $ */
+/* @(#) $Id: gzio.c,v 1.4 2003/12/13 04:28:35 cozman Exp $ */
 
 #include <stdio.h>
 
-#include "zutil.h"
+#include "zlib/zutil.h"
 
 #ifdef NO_DEFLATE       /* for compatiblity with old definition */
 #  define NO_GZCOMPRESS

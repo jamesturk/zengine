@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.58 2003/11/25 01:02:17 cozman Exp $
+$Id: changelog.txt,v 1.59 2003/12/13 04:28:35 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -13,6 +13,10 @@ Changes are marked with symbols that describe them:
 0.8.6
     ! Removed SetupDisplay/SetupSound and integrated them into CreateDisplay.
     ! Removed bulk of old error logging system and added new simpler system.
+    + Added ZAnimation class.
+    # Turned off warnings for zlib files.
+    # Switched to updated zlib 1.2.1.
+    # Changed data files to binary format in CVS, fixing problems with some data files.
     # Changed forums to http://sourceforge.net/forum/?group_id=62098
     # OpenFromImage Alpha Fix (thanks to Stinus Petersen)
     # ZImage copy constructor width/height fix.

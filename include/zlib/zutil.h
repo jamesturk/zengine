@@ -8,13 +8,13 @@
    subject to change. Applications should only use zlib.h.
  */
 
-/* @(#) $Id: zutil.h,v 1.2 2003/12/13 04:15:27 cozman Exp $ */
+/* @(#) $Id: zutil.h,v 1.3 2003/12/13 04:28:35 cozman Exp $ */
 
 #ifndef ZUTIL_H
 #define ZUTIL_H
 
 #define ZLIB_INTERNAL
-#include "zlib.h"
+#include "zlib/zlib.h"
 
 #ifdef STDC
 #  include <stddef.h>

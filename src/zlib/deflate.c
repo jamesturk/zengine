@@ -47,9 +47,9 @@
  *
  */
 
-/* @(#) $Id: deflate.c,v 1.3 2003/12/13 04:14:38 cozman Exp $ */
+/* @(#) $Id: deflate.c,v 1.4 2003/12/13 04:28:35 cozman Exp $ */
 
-#include "deflate.h"
+#include "zlib/deflate.h"
 
 const char deflate_copyright[] =
    " deflate 1.2.1 Copyright 1995-2003 Jean-loup Gailly ";
