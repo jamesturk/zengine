@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.7 2003/02/10 04:40:16 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.8 2003/02/10 05:40:28 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -65,6 +65,14 @@ class ZRect
             \param height Value for height.
         **/
         ZRect(float x, float y, float width, float height);
+
+        /*!
+            \brief Constructor for ZRect that uses an SDL_Rect.
+
+            Constructor for ZRect that initializes from an SDL_Rect.
+            \param rect SDL_Rect to intialize from.
+        **/
+        ZRect(const SDL_Rect &rect);
 
         /*!
             \brief Copy constructor for ZRect.
