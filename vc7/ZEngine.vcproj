@@ -95,6 +95,9 @@
 				RelativePath="..\src\ZE_ZTimer.cpp">
 			</File>
 			<File
+				RelativePath="..\src\ZE_main.cpp">
+			</File>
+			<File
 				RelativePath="..\src\external\physfsrwops.cpp">
 			</File>
 		</Filter>
