@@ -107,7 +107,7 @@ void Test()
         engine->Clear();    //clear screen
 
         for(int i=0; i <= 4; i++)
-            text[i].Draw(0,i*50);
+            text[i].Draw(0,i*50.0f);
         
         engine->UpdateScreen();    //update the screen
 

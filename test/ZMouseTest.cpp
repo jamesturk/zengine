@@ -77,7 +77,7 @@ void Test()
         //draw the images//
         text[engine->MouseInRect(&textRect)].Draw(100,100);
         text[2].Draw(0,0);
-        cursor.Draw(engine->MouseX()-8,engine->MouseY()-8);
+        cursor.Draw(engine->MouseX()-8.0f,engine->MouseY()-8.0f);
 
         engine->UpdateScreen();    //update the screen
 

@@ -68,7 +68,7 @@ void Test()
         engine->Clear();    //clear screen
         //draw the images//
         for(int i=0; i <= 4; i++)
-            text[i].Draw(10*i,50*i);
+            text[i].Draw(10.0f*i,50.0f*i);
         engine->UpdateScreen();    //update the screen
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
