@@ -24,7 +24,8 @@ ZEngine::ZEngine() :
     mSecPerFrame(0.0),
     mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
     mMouseX(0), mMouseY(0), mMouseB(0),
-    mLogStyle(ZLOG_TEXT), mErrlog(stderr), mEventFilter(NULL)
+    mEventFilter(NULL),
+    mLogStyle(ZLOG_NONE), mMinSeverity(ZERR_NOTE), mErrlog(NULL)
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
@@ -83,10 +84,50 @@ void ZEngine::ReleaseInstance()
     sInstance = NULL;
 }
 
-bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, 
-            int soundRate, bool stereo, std::string icon)
+void ZEngine::InitErrorLog(ZErrorLogStyle logStyle, std::string logFile, ZErrorSeverity minSeverity)
 {
-    Uint32 sdlFlags=SDL_INIT_VIDEO|SDL_INIT_TIMER;
+    mMinSeverity = minSeverity;
+    mLogStyle = logStyle;
+
+    if(logStyle != ZLOG_NONE && logFile.length())
+    {
+        //stderr & stdout directed to their appropriate streams
+        if(logFile == "stderr")
+            mErrlog = stderr;
+        else if(logFile == "stdout")
+            mErrlog = stdout;
+        else
+            mErrlog = std::fopen(logFile.c_str(),"w");
+
+        if(logStyle == ZLOG_HTML)
+        {
+            fprintf(mErrlog,
+                "<html><head><title>ZEngine Error Log</title>\n<style type=\"text/css\">\n<!--\n"
+                "p { margin: 0 }\n"
+                ".note { font-style:italic color:gray }\n"
+                ".verbose { font-style:italic; background:yellow; font-size:small }\n"
+                ".depr { font-weight:bold; background:blue; color:white }\n"
+                ".warning { font-weight:bold; background:yellow }\n"
+                ".error { font-weight:bold; background:orange }\n"
+                ".critical { font-weight:bold; background:red; color:white }\n"
+                "-->\n</style>\n</head>\n<body>\n");
+            fflush(mErrlog);
+        }
+    }
+}
+
+bool ZEngine::InitSound()
+{
+    mAudiereDevice = audiere::OpenDevice();
+    if(!mAudiereDevice)
+    {
+        ReportError(ZERR_CRITICAL,"Failed to initialize sound, AudiereDevice creation failed.");
+    }
+    return (mAudiereDevice != NULL);
+}
+
+bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, std::string icon)
+{
     Uint32 vidFlags=0;
     SDL_Surface *iconImg;
     bool status=true;   //status of setup, only true if everything went flawlessly
@@ -99,26 +140,12 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     if(!mInitialized)
     {
-        //audio only initialized if soundRate != 0
-        if(soundRate)
-            sdlFlags |= SDL_INIT_AUDIO;
-        if(SDL_Init(sdlFlags) < 0) 
+        if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) < 0)
         {
             ReportError(ZERR_CRITICAL,"Error initializing SDL: %s",SDL_GetError());
             return false;   //return now, nothing else should be called
         }
     }
-    
-#ifdef USE_SDL_MIXER
-    if(!mInitialized)
-    {
-        if(Mix_OpenAudio(soundRate, AUDIO_S16SYS, stereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
-        {
-            ReportError(ZERR_ERROR,"Error initializing SDL_mixer: %s",SDL_GetError());
-            status = false;
-        }
-    }
-#endif //USE_SDL_MIXER
 
     //set vidFlags and bpp//
     if(mFullscreen)
@@ -204,9 +231,6 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
     {
         ReportError(ZERR_CRITICAL,"Error creating display: Unknown Error. %dx%d %dBPP (%s)", width, height, bpp, SDL_GetError());
 
-#ifdef USE_SDL_MIXER
-        Mix_CloseAudio();
-#endif
         SDL_Quit();
 
         return false;   //bail if display fails
@@ -246,10 +270,6 @@ void ZEngine::CloseDisplay()
         TTF_Quit();
 #endif
 
-#ifdef USE_SDL_MIXER
-        Mix_CloseAudio();
-#endif
-
         SDL_Quit();
 
         if(mErrlog && mErrlog != stderr && mErrlog != stdin)
@@ -269,11 +289,6 @@ void ZEngine::ToggleFullscreen()
     SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
 
-SDL_Surface *ZEngine::Display()
-{
-    return mScreen;
-}
-
 void ZEngine::Update()
 {
 #if (GFX_BACKEND == ZE_OGL)
@@ -289,10 +304,9 @@ void ZEngine::Update()
 
 #if (GFX_BACKEND == ZE_OGL)
 
-void ZEngine::Clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
+void ZEngine::ClearDisplay(Uint8 red, Uint8 green, Uint8 blue)
 {
-    GLclampf r = red/255.0f, g = green/255.0f, b = blue/255.0f, a = alpha/255.0f;
-    glClearColor(r,g,b,a);
+    glClearColor(red/255.0f,green/255.0f,blue/255.0f,1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
 }
@@ -369,7 +383,7 @@ bool ZEngine::TimerIsPaused()
     return mPaused;
 }
 
-double ZEngine::GetFrameTime()
+double ZEngine::GetFrameSpeed()
 {
     return mSecPerFrame;
 }
@@ -537,55 +551,24 @@ void ZEngine::SetEventFilter(SDL_EventFilter filter)
     mEventFilter = filter;
 }
 
-void ZEngine::SetErrorLog(ZErrorLogStyle logStyle, std::string logFile)
-{
-    mLogStyle = logStyle;
-
-    if(logStyle != ZLOG_NONE && logFile.length())
-    {
-        //stderr & stdout directed to their appropriate streams
-        if(logFile == "stderr")
-            mErrlog = stderr;
-        else if(logFile == "stdout")
-            mErrlog = stdout;
-        else
-            mErrlog = std::fopen(logFile.c_str(),"w");
-
-        if(logStyle == ZLOG_HTML)
-        {
-            fprintf(mErrlog,
-                "<html><head><title>ZEngine Error Log</title>\n<style type=\"text/css\">\n<!--\n"
-                "p { margin: 0 }\n"
-                ".note { font-style:italic color:gray }\n"
-                ".verbose { font-style:italic; background:yellow; font-size:small }\n"
-                ".depr { font-weight:bold; background:blue; color:white }\n"
-                ".warning { font-weight:bold; background:yellow }\n"
-                ".error { font-weight:bold; background:orange }\n"
-                ".critical { font-weight:bold; background:red; color:white }\n"
-                "-->\n</style>\n</head>\n<body>\n");
-            fflush(mErrlog);
-        }
-    }
-}
-
 void ZEngine::ReportError(ZErrorSeverity severity, std::string desc, ...)
 {
     static std::string prefix[] = { 
-        " ",
         "VERBOSE: ",
         "DEPRECIATED: ",
         "WARNING: ",
         "ERROR: ",
         "CRITICAL: "
+        " ",
     };
 
     static std::string style[] = { 
-        "note",
         "verbose",
         "depr",
         "warning",
         "error",
-        "critical"
+        "critical",
+        "note"
     };
 
     if(mLogStyle != ZLOG_NONE)
@@ -713,6 +696,16 @@ double ZEngine::GetDoubleResource(std::string type, std::string id, std::string 
             ReportError(ZERR_WARNING,"GetDoubleResource(%s,%s,%s) failed, not a double.",type.c_str(),id.c_str(),element.c_str());
     }
     return ret;
+}
+
+audiere::AudioDevicePtr ZEngine::GetSoundDevice()
+{
+    return mAudiereDevice;
+}
+
+SDL_Surface *ZEngine::GetDisplayPointer()
+{
+    return mScreen;
 }
 
 bool ZEngine::DisplayCreated()

@@ -157,28 +157,6 @@ void FreeImage(SDL_Surface *&image)
     }
 }
 
-#ifdef USE_SDL_MIXER
-
-void FreeSound(Mix_Chunk *&chunk)
-{
-    if(chunk)
-    {
-        Mix_FreeChunk(chunk);
-        chunk = NULL;
-    }
-}
-
-void FreeMusic(Mix_Music *&music)
-{
-    if(music)
-    {
-        Mix_FreeMusic(music);
-        music = NULL;
-    }
-}
-
-#endif 
-
 #ifdef USE_SDL_TTF
 
 void FreeFont(TTF_Font *&font)

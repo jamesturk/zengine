@@ -24,12 +24,12 @@ class ZRect;
 
 enum ZErrorSeverity
 {
-    ZERR_NOTE,
     ZERR_VERBOSE,
     ZERR_DEPRECIATED,
     ZERR_WARNING,
     ZERR_ERROR,
-    ZERR_CRITICAL
+    ZERR_CRITICAL,
+    ZERR_NOTE
 };
 
 enum ZErrorLogStyle
@@ -44,7 +44,7 @@ class ZEngine
     public:
         static VersionInfo Version;
 
-    private:        
+    private:
         static ZEngine *sInstance;
         SDL_Surface *mScreen;
         bool mFullscreen;
@@ -64,17 +64,15 @@ class ZEngine
         int mMouseX;
         int mMouseY;
         Uint8 mMouseB;
-        ZErrorLogStyle mLogStyle;
-        std::FILE *mErrlog;
         SDL_EventFilter mEventFilter;
+        ZErrorLogStyle mLogStyle;
+        ZErrorSeverity mMinSeverity;
+        std::FILE *mErrlog;
         ZRandGen mRandGen;
         TiXmlDocument rZRF;
-
-#ifdef USE_SDL_MIXER 
-        bool mSoundInitialized;
-        int mSoundRate;
-        bool mStereo;
-#endif 
+#ifdef USE_AUDIERE
+        audiere::AudioDevicePtr mAudiereDevice;
+#endif //USE_AUDIERE
 
         ZEngine();
 
@@ -84,14 +82,14 @@ class ZEngine
         static ZEngine* GetInstance();
         static void ReleaseInstance();
 
-        bool CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title="ZEngine Application", 
-            int soundRate=22050, bool stereo=false, std::string icon="");
+        void InitErrorLog(ZErrorLogStyle logStyle=ZLOG_HTML, std::string logFile="errlog.html", ZErrorSeverity severityFilter=ZERR_VERBOSE);
+        bool InitSound();
+        bool CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title="ZEngine Application", std::string icon="");
         void CloseDisplay();
         void ToggleFullscreen();
 
-        SDL_Surface* Display();
         void Update();
-        void Clear(Uint8 red=0, Uint8 green=0, Uint8 blue=0, Uint8 alpha=255);
+        void ClearDisplay(Uint8 red=0, Uint8 green=0, Uint8 blue=0);
 
 #if (GFX_BACKEND == ZE_OGL)       
         void SetGL2D();
@@ -103,14 +101,14 @@ class ZEngine
         void UnpauseTimer();
         bool TimerIsPaused();
 
-        double GetFrameTime();
+        double GetFrameSpeed();
         double GetFramerate();
         
         bool IsActive();
 
         void RequestQuit();
         bool QuitRequested();
-        
+
         void SetReloadNeed(bool state);
         bool ImagesNeedReload();
 
@@ -129,7 +127,6 @@ class ZEngine
         void CheckEvents();
         void SetEventFilter(SDL_EventFilter filter);
         
-        void SetErrorLog(ZErrorLogStyle logStyle, std::string logFile);
         void ReportError(ZErrorSeverity type, std::string desc, ...);        
         void WriteLog(std::string str, ...);
 
@@ -147,6 +144,10 @@ class ZEngine
         int GetIntResource(std::string type, std::string id, std::string element);       
         double GetDoubleResource(std::string type, std::string id, std::string element);
 
+#ifdef USE_AUDIERE
+        audiere::AudioDevicePtr GetSoundDevice();
+#endif //USE_AUDIERE
+        SDL_Surface* GetDisplayPointer();
         bool DisplayCreated();
         int DisplayWidth();
         int DisplayHeight();

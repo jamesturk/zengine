@@ -15,7 +15,7 @@
 #ifdef USE_SDL_TTF
 #include "ZE_ZFont.h"
 #endif
-#ifdef USE_SDL_MIXER
+#ifdef USE_AUDIERE
 #include "ZE_ZSound.h"
 #include "ZE_ZMusic.h"
 #endif

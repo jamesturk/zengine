@@ -23,8 +23,8 @@
 #ifdef USE_SDL_TTF
 #include "SDL_ttf.h"
 #endif
-#ifdef USE_SDL_MIXER
-#include "SDL_mixer.h"
+#ifdef USE_AUDIERE
+#include "audiere.h"
 #endif
 
 #include "zlib/unzip.h"

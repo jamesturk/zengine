@@ -12,42 +12,23 @@
 #define __ze_zmusic_h__
 
 #include "ZE_ZEngine.h"
+#include "ZE_ZSoundBase.h"
 
-#ifdef USE_SDL_MIXER
+#ifdef USE_AUDIERE
 
 namespace ZE
 {
-class ZMusic
+
+class ZMusic : public ZSoundBase
 {
-    protected:
-        ZEngine* rEngine;
-        Mix_Music *rMusic;
     public:
-        static const int LoopInfinite;
-        
         ZMusic();
         ZMusic(std::string filename);
-        virtual ~ZMusic();
-        
         void Open(std::string filename);
-        void OpenFromZRF(std::string resourceId);
-        
-        void Release();
-        void Play(int loopNum=0, int fadeTime=0) const;
-        void Pause() const;
-        void Unpause() const;
-        void Rewind() const;
-        void Stop(int fadeTime=0) const;
-        void SetVolume(int volume);
-
-        bool IsLoaded() const;
-        bool IsPlaying() const;
-        bool IsPaused() const;
-        int GetVolume() const;
 };
 
 }
 
-#endif //USE_SDL_MIXER
+#endif //USE_AUDIERE
 
 #endif //__ze_zmusic_h__

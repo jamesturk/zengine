@@ -27,11 +27,6 @@ GLuint SurfaceToTexture(SDL_Surface *surface, GLfloat *texcoord);
 
 void FreeImage(SDL_Surface *&image);
 
-#ifdef USE_SDL_MIXER
-void FreeSound(Mix_Chunk *&chunk);
-void FreeMusic(Mix_Music *&music);
-#endif
-
 #ifdef USE_SDL_TTF
 void FreeFont(TTF_Font *&font);
 #endif

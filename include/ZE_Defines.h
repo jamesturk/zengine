@@ -19,6 +19,6 @@
 
 #define USE_SDL_TTF
 #define USE_SDL_IMAGE
-#define USE_SDL_MIXER
+#define USE_AUDIERE
 
 #endif //__ze_defines_h__
