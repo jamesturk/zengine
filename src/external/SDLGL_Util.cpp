@@ -72,7 +72,7 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
     }
 
     /* Create an OpenGL texture for the image */
-    glGenTextures(1, &texture);
+    glGenTextures(1, &texture); //sometimes this returns a used ID?.. related to bug 723910 - ZImage Draws Wrong Image
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
