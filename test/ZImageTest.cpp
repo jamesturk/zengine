@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZImageTest.cpp,v 1.30 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZImageTest.cpp,v 1.31 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,7 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZImageTest","title","ZImage Test");
 
     engine->SetResourceFile("resources.zrf");
-
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -49,7 +49,7 @@ void Test()
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
 
-    engine->SetErrorLog(ZLOG_HTML,"err.html");
+    engine->InitErrorLog();
     engine->ReportError(ZERR_CRITICAL,"This is a critical test error!!! Something has gone seriously wrong!");
     engine->ReportError(ZERR_DEPRECIATED,"This is a test of a depreciated feature.");
     engine->ReportError(ZERR_ERROR,"This is a normal error, but only a test.");
@@ -88,7 +88,7 @@ void Test()
             }
 
             //movement//
-            movDelta = static_cast<float>(engine->GetFrameTime()*30);
+            movDelta = static_cast<float>(engine->GetFrameSpeed()*30);
             if(engine->KeyIsPressed(SDLK_LEFT))
                 clipRect.MoveRel(-movDelta,0);
             if(engine->KeyIsPressed(SDLK_RIGHT))
@@ -113,9 +113,9 @@ void Test()
             if(engine->KeyIsPressed(SDLK_ESCAPE))
                 engine->RequestQuit();
 
-            engine->Clear();    //clear screen
+            engine->ClearDisplay();    //clear screen
             //draw the images//
-            alpha += static_cast<float>(alphaDelta*engine->GetFrameTime());
+            alpha += static_cast<float>(alphaDelta*engine->GetFrameSpeed());
             if(alpha >= 255 || alpha <= 0)
                 alphaDelta *= -1.0f;
             image1.SetAlpha(static_cast<Uint8>(alpha));
@@ -123,7 +123,7 @@ void Test()
 
 #if (GFX_BACKEND == ZE_OGL)
             image2.DrawRotated(100,0,angle);
-            angle += static_cast<float>(150*engine->GetFrameTime());
+            angle += static_cast<float>(150*engine->GetFrameSpeed());
             if(angle > 360)
                 angle = 0.0f;
 #elif (GFX_BACKEND == ZE_SDL)

@@ -65,6 +65,9 @@
 				RelativePath="..\src\ZE_ZAnimation.cpp">
 			</File>
 			<File
+				RelativePath="..\src\ZE_ZAudioBase.cpp">
+			</File>
+			<File
 				RelativePath="..\src\ZE_ZConfigFile.cpp">
 			</File>
 			<File
@@ -111,6 +114,9 @@
 				RelativePath="..\include\ZE_ZAnimation.h">
 			</File>
 			<File
+				RelativePath="..\include\ZE_ZAudioBase.h">
+			</File>
+			<File
 				RelativePath="..\include\ZE_ZBaseParticleSystem.h">
 			</File>
 			<File
@@ -145,6 +151,9 @@
 			</File>
 			<File
 				RelativePath="..\include\ZEngine.h">
+			</File>
+			<File
+				RelativePath="..\..\ZE-deps\include\audiere.h">
 			</File>
 		</Filter>
 		<Filter

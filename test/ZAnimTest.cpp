@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZAnimTest.cpp,v 1.2 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZAnimTest.cpp,v 1.3 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -30,6 +30,7 @@ bool Initialize()
     fs = cfg.GetBool("ZAnimTest","fullscreen",false);
     title = cfg.GetString("ZAnimTest","title","ZAnimation Test");
 
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -72,7 +73,7 @@ void Test()
             for(i=0; i < 8; ++i)
                 tank[i].Update();
             
-            engine->Clear();
+            engine->ClearDisplay();
 
             for(i=0; i < 8; ++i)
                 tank[i].Draw(200*(i/2),200*(i%2));

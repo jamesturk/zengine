@@ -70,9 +70,14 @@ class ZEngine
         std::FILE *mErrlog;
         ZRandGen mRandGen;
         TiXmlDocument rZRF;
-#ifdef USE_AUDIERE
+#if SND_BACKEND == ZE_MIXER
+        int mMixerFrequency;
+        Uint16 mMixerFormat;
+        int mMixerChannels;
+        int mMixerChunksize;
+#elif SND_BACKEND == ZE_AUDIERE
         audiere::AudioDevicePtr mAudiereDevice;
-#endif //USE_AUDIERE
+#endif
 
         ZEngine();
 
@@ -83,7 +88,11 @@ class ZEngine
         static void ReleaseInstance();
 
         void InitErrorLog(ZErrorLogStyle logStyle=ZLOG_HTML, std::string logFile="errlog.html", ZErrorSeverity severityFilter=ZERR_VERBOSE);
-        bool InitSound();
+#if SND_BACKEND == ZE_MIXER
+        void InitAudio(int frequency=MIX_DEFAULT_FREQUENCY, bool stereo=true, Uint16 format=MIX_DEFAULT_FORMAT, int chunksize=4096);
+#elif SND_BACKEND == ZE_AUDIERE
+        bool InitAudio();
+#endif
         bool CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title="ZEngine Application", std::string icon="");
         void CloseDisplay();
         void ToggleFullscreen();
@@ -144,9 +153,9 @@ class ZEngine
         int GetIntResource(std::string type, std::string id, std::string element);       
         double GetDoubleResource(std::string type, std::string id, std::string element);
 
-#ifdef USE_AUDIERE
+#if SND_BACKEND == ZE_AUDIERE
         audiere::AudioDevicePtr GetSoundDevice();
-#endif //USE_AUDIERE
+#endif
         SDL_Surface* GetDisplayPointer();
         bool DisplayCreated();
         int DisplayWidth();

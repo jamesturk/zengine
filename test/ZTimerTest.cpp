@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZTimerTest.cpp,v 1.21 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZTimerTest.cpp,v 1.22 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,7 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZTimerTest","title","ZTimer Test");
 
     engine->SetResourceFile("resources.zrf");
-
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -105,7 +105,7 @@ void Test()
             font.DrawText(FormatStr("%s Time: %d",TimerName[1].c_str(),TimerOne.GetTime()),text[2]);
             font.DrawText(FormatStr("%s Time: %d",TimerName[2].c_str(),TimerTwo.GetTime()),text[3]);
 
-            engine->Clear();    //clear screen
+            engine->ClearDisplay();    //clear screen
 
             for(int i=0; i <= 4; i++)
                 text[i].Draw(0,i*30);

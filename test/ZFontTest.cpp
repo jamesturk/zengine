@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZFontTest.cpp,v 1.20 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZFontTest.cpp,v 1.21 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,7 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZFontTest","title","ZFont Test");
 
     engine->SetResourceFile("resources.zrf");
-
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -69,7 +69,7 @@ void Test()
                 engine->RequestQuit();
             betsy.DrawText(FormatStr("FPS: %.2f",engine->GetFramerate()),text[5]);
 
-            engine->Clear();    //clear screen
+            engine->ClearDisplay();    //clear screen
             //draw the images//
             for(int i=0; i <= 5; i++)
                 text[i].Draw(10*i,50*i);

@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZMusicTest.cpp,v 1.22 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZMusicTest.cpp,v 1.23 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -30,6 +30,7 @@ bool Initialize()
     fs = cfg.GetBool("ZMusicTest","fullscreen",false);
     title = cfg.GetString("ZMusicTest","title","ZMusic Test");
 
+    engine->InitAudio();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -37,15 +38,15 @@ void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    ZMusic song("data/music.ogg");
+    ZMusic song("data/sample.ogg");
     ZFont font("data/almontew.ttf",48);
     ZImage text[4];
 
     if(!song.IsLoaded())    //this executes if there is no music.ogg file
     {
         engine->CreateDisplay(800,70,32,false,"ZMusic Test");
-        engine->Clear();
-        font.DrawText("Music.ogg does not exist, please read music.txt.",text[0]);
+        engine->ClearDisplay();
+        font.DrawText("sample.ogg does not exist, please read music.txt.",text[0]);
         text[0].Draw(0,0);
         engine->Update();
         do
@@ -76,21 +77,24 @@ void Test()
                     song.Pause();
                 if(engine->KeyIsPressed(SDLK_u))
                     song.Unpause();
+#if SND_BACKEND == ZE_MIXER
                 if(engine->KeyIsPressed(SDLK_f))
-                    song.Stop(5000);
+                    song.Stop(200);
+#endif
                 if(engine->KeyIsPressed(SDLK_h))
                     song.Stop();
                 if(engine->KeyIsPressed(SDLK_SPACE))
                     song.Play();
                 if(engine->KeyIsPressed(SDLK_UP))
                     song.SetVolume(song.GetVolume()+1);
-                if(engine->KeyIsPressed(SDLK_DOWN))
+                if(engine->KeyIsPressed(SDLK_DOWN) && song.GetVolume() > 0)
                     song.SetVolume(song.GetVolume()-1);
+                if(engine->KeyIsPressed(SDLK_v))
+                    song.SetVolume(100);
+                
+                font.DrawText(FormatStr("Volume: %d%%",song.GetVolume()),text[3]);
 
-
-                font.DrawText(FormatStr("Volume: %d",song.GetVolume()),text[3]);
-
-                engine->Clear();    //clear screen
+                engine->ClearDisplay();    //clear screen
                 for(int i=0; i < 4; i++)
                     text[i].Draw(0,i*50);
                 engine->Update();    //update the screen

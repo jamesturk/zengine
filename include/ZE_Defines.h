@@ -17,8 +17,12 @@
 #define ZE_SDL (2)
 #define GFX_BACKEND (ZE_OGL)
 
+#define ZE_NONE (0)
+#define ZE_MIXER (1)
+#define ZE_AUDIERE (2)
+#define SND_BACKEND (ZE_MIXER)
+
 #define USE_SDL_TTF
 #define USE_SDL_IMAGE
-#define USE_AUDIERE
 
 #endif //__ze_defines_h__

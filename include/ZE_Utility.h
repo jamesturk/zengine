@@ -11,6 +11,7 @@
 #ifndef __ze_utility_h__
 #define __ze_utility_h__
 
+#include "ZE_Defines.h"
 #include "ZE_Includes.h"
 
 namespace ZE
@@ -18,6 +19,7 @@ namespace ZE
 
 std::string FormatStr(std::string fmtStr, ...);
 
+int LoadFromZip(std::string zipname, std::string filename, void *&buffer);
 SDL_RWops* RWFromZip(std::string zipname, std::string filename);
 
 #if (GFX_BACKEND == ZE_OGL)
@@ -26,6 +28,11 @@ GLuint SurfaceToTexture(SDL_Surface *surface, GLfloat *texcoord);
 #endif //GFX_BACKEND
 
 void FreeImage(SDL_Surface *&image);
+
+#if SND_BACKEND == ZE_MIXER
+void FreeSound(Mix_Chunk *&chunk);
+void FreeMusic(Mix_Music *&music);
+#endif
 
 #ifdef USE_SDL_TTF
 void FreeFont(TTF_Font *&font);

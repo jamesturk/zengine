@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZMouseTest.cpp,v 1.22 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZMouseTest.cpp,v 1.23 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,7 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZMouseTest","title","ZMouse Test");
 
     engine->SetResourceFile("resources.zrf");
-
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -78,7 +78,7 @@ void Test()
                 font.DrawText(FormatStr("Mouse at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
                 
 
-            engine->Clear();    //clear screen
+            engine->ClearDisplay();    //clear screen
             //draw the images//
             text[engine->MouseInRect(textRect)].Draw(100,100);
             text[2].Draw(0,0);

@@ -23,7 +23,10 @@
 #ifdef USE_SDL_TTF
 #include "SDL_ttf.h"
 #endif
-#ifdef USE_AUDIERE
+
+#if SND_BACKEND == ZE_MIXER
+#include "SDL_mixer.h"
+#elif SND_BACKEND == ZE_AUDIERE
 #include "audiere.h"
 #endif
 

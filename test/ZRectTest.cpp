@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZRectTest.cpp,v 1.23 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZRectTest.cpp,v 1.24 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -29,7 +29,7 @@ bool Initialize()
     bpp = cfg.GetInt("ZRectTest","bpp",32);
     fs = cfg.GetBool("ZRectTest","fullscreen",false);
     title = cfg.GetString("ZRectTest","title","ZRect Test");
-
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -49,7 +49,7 @@ void Test()
             if(engine->KeyIsPressed(SDLK_ESCAPE))
                 engine->RequestQuit();
             //movement//
-            movDelta = static_cast<float>(engine->GetFrameTime()*30);
+            movDelta = static_cast<float>(engine->GetFrameSpeed()*30);
             if(engine->KeyIsPressed(SDLK_LEFT))
                 moveRect.MoveRel(-movDelta,0);
             if(engine->KeyIsPressed(SDLK_RIGHT))
@@ -69,7 +69,7 @@ void Test()
                 moveRect.ResizeRel(-2,-2);
             }
 
-            engine->Clear();
+            engine->ClearDisplay();
             moveRect.Draw(255,0,0,128);
             stillRect.Draw(0,0,255,128);
             moveRect.Intersection(stillRect).Draw(0,255,0);

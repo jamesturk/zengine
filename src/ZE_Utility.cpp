@@ -26,23 +26,24 @@ std::string FormatStr(std::string fmtStr, ...)
     return buf;
 }
 
-SDL_RWops* RWFromZip(std::string zipname, std::string filename)
+int LoadFromZip(std::string zipname, std::string filename, void *&buffer)
 {
     unzFile zip = unzOpen(zipname.c_str());
     unz_file_info info;
-    void *buffer;
+    
+    buffer = NULL;  //start off buffer as NULL
 
     if(!zip)    //failed to open zip
     {
         ZEngine::GetInstance()->ReportError(ZERR_WARNING,"Could not open zipfile %s",zipname.c_str());
-        return NULL;
+        return 0;
     }
 
     //locate the file and open it (last param means case sensitive comparison)
     unzLocateFile(zip,filename.c_str(),0);
     if(unzOpenCurrentFile(zip) != UNZ_OK)   //failed to open file within zip
     {
-        return NULL;    //error should reported in calling function
+        return 0;    //error should reported in calling function
     }
 
     //find current file info (we are looking for uncompressed file size)
@@ -55,7 +56,7 @@ SDL_RWops* RWFromZip(std::string zipname, std::string filename)
         unzCloseCurrentFile(zip);
         unzClose(zip);
         ZEngine::GetInstance()->ReportError(ZERR_ERROR,"RWFromZip failed to allocate enough memory for buffer while loading %s from %s.",filename.c_str(),zipname.c_str());
-        return NULL;
+        return 0;
     }
 
     //load into memory
@@ -65,7 +66,17 @@ SDL_RWops* RWFromZip(std::string zipname, std::string filename)
     unzCloseCurrentFile(zip);
     unzClose(zip);
 
-    return SDL_RWFromMem(buffer, info.uncompressed_size);   //return buffer in RW form
+    return info.uncompressed_size;  //return the buffer size
+}
+
+SDL_RWops* RWFromZip(std::string zipname, std::string filename)
+{
+    void *buffer;
+    int bufSize;
+
+    bufSize = LoadFromZip(zipname,filename,buffer);
+
+    return SDL_RWFromMem(buffer,bufSize);
 }
 
 #if (GFX_BACKEND == ZE_OGL)
@@ -156,6 +167,28 @@ void FreeImage(SDL_Surface *&image)
         image = NULL;
     }
 }
+
+#if SND_BACKEND == ZE_MIXER
+
+void FreeSound(Mix_Chunk *&chunk)
+{
+    if(chunk)
+    {
+        Mix_FreeChunk(chunk);
+        chunk = NULL;
+    }
+}
+
+void FreeMusic(Mix_Music *&music)
+{
+    if(music)
+    {
+        Mix_FreeMusic(music);
+        music = NULL;
+    }
+}
+
+#endif //ZE_MIXER
 
 #ifdef USE_SDL_TTF
 

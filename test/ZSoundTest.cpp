@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZSoundTest.cpp,v 1.22 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZSoundTest.cpp,v 1.23 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,7 +31,8 @@ bool Initialize()
     title = cfg.GetString("ZSoundTest","title","ZSound Test");
 
     engine->SetResourceFile("resources.zrf");
-
+    engine->InitErrorLog();
+    engine->InitAudio();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -48,7 +49,6 @@ void Test()
     for(int i=0; i < 4; i++)
         sample[i].OpenFromZip("data/data.zip",FormatStr("%s.wav",name[i].c_str()));
     sample[4].OpenFromZRF("whip");
-
 
     font.DrawText("(P)ause\t(U)npause",text[0]);
     font.DrawText("(F)ade Out\t(H)alt\t",text[1]);
@@ -77,21 +77,23 @@ void Test()
                 sample[sampleNum].Pause();
             if(engine->KeyIsPressed(SDLK_u))
                 sample[sampleNum].Unpause();
+#if SND_BACKEND == ZE_MIXER
             if(engine->KeyIsPressed(SDLK_f))
-                sample[sampleNum].Stop(5000);
+                sample[sampleNum].Stop(200);
+#endif
             if(engine->KeyIsPressed(SDLK_h))
                 sample[sampleNum].Stop();
             if(engine->KeyIsPressed(SDLK_SPACE))
                 sample[sampleNum].Play();
-            if(engine->KeyIsPressed(SDLK_UP))
+            if(engine->KeyIsPressed(SDLK_UP) && sample[sampleNum].GetVolume() < 100)
                 sample[sampleNum].SetVolume(sample[sampleNum].GetVolume()+1);
-            if(engine->KeyIsPressed(SDLK_DOWN))
+            if(engine->KeyIsPressed(SDLK_DOWN) && sample[sampleNum].GetVolume() > 0)
                 sample[sampleNum].SetVolume(sample[sampleNum].GetVolume()-1);
 
-            font.DrawText(FormatStr("Volume: %d",sample[sampleNum].GetVolume()),text[4]);
+            font.DrawText(FormatStr("Volume: %d%%",sample[sampleNum].GetVolume()),text[4]);
             font.DrawText(FormatStr("Sample: %s",name[sampleNum].c_str()),text[5]);
 
-            engine->Clear();    //clear screen
+            engine->ClearDisplay();    //clear screen
             for(int i=0; i < 6; i++)
                 text[i].Draw(0,i*50);
             engine->Update();    //update the screen

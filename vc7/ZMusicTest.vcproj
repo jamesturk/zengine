@@ -38,9 +38,10 @@
 sdlmain.lib
 opengl32.lib
 sdl_ttf.lib
-sdl_mixer.lib
 sdl_image.lib
-ZEngineS.lib"
+ZEngineS.lib
+SDL_mixer.lib
+audiere.lib"
 				OutputFile="../test/bin/ZMusicTest.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../lib"

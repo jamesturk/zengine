@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-// $Id: ZParticleTest.cpp,v 1.10 2003/12/31 12:27:58 cozman Exp $
+// $Id: ZParticleTest.cpp,v 1.11 2004/01/13 23:56:28 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,7 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZParticleTest","title","ZParticle Test");
 
     engine->SetResourceFile("resources.zrf");
-
+    engine->InitErrorLog();
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -127,9 +127,9 @@ void Test()
                 engine->RequestQuit();
 
             for(i=0; i < 3; ++i)
-                    effect[i].Update();
+                effect[i].Update();
 
-            engine->Clear();
+            engine->ClearDisplay();
             bg.Draw(0,0);
 
             for(i=0; i < 3; ++i)

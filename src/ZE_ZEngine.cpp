@@ -26,6 +26,9 @@ ZEngine::ZEngine() :
     mMouseX(0), mMouseY(0), mMouseB(0),
     mEventFilter(NULL),
     mLogStyle(ZLOG_NONE), mMinSeverity(ZERR_NOTE), mErrlog(NULL)
+#if SND_BACKEND == ZE_MIXER
+    ,mMixerFrequency(0),mMixerFormat(0),mMixerChannels(0),mMixerChunksize(0)
+#endif
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
@@ -49,9 +52,8 @@ TiXmlElement* ZEngine::FindElement(std::string type, std::string id)
                 elem = elem->NextSiblingElement();
         }
 
-        //if it gets here, element not found
-        ReportError(ZERR_WARNING,"No '%s' resource found with id '%s'",type.c_str(),id.c_str());
-        elem = NULL;
+        if(!elem)
+            ReportError(ZERR_WARNING,"No '%s' resource found with id '%s'",type.c_str(),id.c_str());
     }
     else
     {
@@ -116,7 +118,16 @@ void ZEngine::InitErrorLog(ZErrorLogStyle logStyle, std::string logFile, ZErrorS
     }
 }
 
-bool ZEngine::InitSound()
+#if SND_BACKEND == ZE_MIXER
+void ZEngine::InitAudio(int frequency, bool stereo, Uint16 format,  int chunksize)
+{
+    mMixerFrequency = frequency;
+    mMixerChannels = stereo ? 2 : 1;
+    mMixerFormat = format;
+    mMixerChunksize = chunksize;
+}
+#elif SND_BACKEND == ZE_AUDIERE
+bool ZEngine::InitAudio()
 {
     mAudiereDevice = audiere::OpenDevice();
     if(!mAudiereDevice)
@@ -125,9 +136,11 @@ bool ZEngine::InitSound()
     }
     return (mAudiereDevice != NULL);
 }
+#endif //SND_BACKEND
 
 bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, std::string icon)
 {
+    Uint32 sdlFlags=SDL_INIT_VIDEO|SDL_INIT_TIMER;
     Uint32 vidFlags=0;
     SDL_Surface *iconImg;
     bool status=true;   //status of setup, only true if everything went flawlessly
@@ -138,14 +151,30 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     mFullscreen = fullscreen;
 
+#if SND_BACKEND == ZE_MIXER
+    if(mMixerFrequency && mMixerFormat && mMixerChannels && mMixerChunksize)
+        sdlFlags |= SDL_INIT_AUDIO;
+#endif
+
     if(!mInitialized)
     {
-        if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) < 0)
+        if(SDL_Init(sdlFlags) < 0)
         {
             ReportError(ZERR_CRITICAL,"Error initializing SDL: %s",SDL_GetError());
             return false;   //return now, nothing else should be called
         }
     }
+
+#if SND_BACKEND == ZE_MIXER
+    if(!mInitialized && mMixerFrequency && mMixerFormat && mMixerChannels && mMixerChunksize)
+    {
+        if(Mix_OpenAudio(mMixerFrequency,mMixerFormat,mMixerChannels,mMixerChunksize) < 0)
+        {
+            ReportError(ZERR_ERROR,"Error initializing SDL_mixer: %s",SDL_GetError());
+            status = false;
+        }
+    }
+#endif //USE_SDL_MIXER
 
     //set vidFlags and bpp//
     if(mFullscreen)
@@ -698,10 +727,12 @@ double ZEngine::GetDoubleResource(std::string type, std::string id, std::string 
     return ret;
 }
 
+#if SND_BACKEND == ZE_AUDIERE
 audiere::AudioDevicePtr ZEngine::GetSoundDevice()
 {
     return mAudiereDevice;
 }
+#endif
 
 SDL_Surface *ZEngine::GetDisplayPointer()
 {

@@ -8,33 +8,40 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-#ifndef __ze_zsoundbase_h__
-#define __ze_zsoundbase_h__
+#ifndef __ze_zaudiobase_h__
+#define __ze_zaudiobase_h__
 
 #include "ZE_ZEngine.h"
 
-#ifdef USE_AUDIERE
+#if SND_BACKEND == ZE_AUDIERE
 
 namespace ZE
 {
 
-class ZSoundBase
+class ZAudioBase
 {
     protected:
-        //ZEngine* rEngine;
+        ZEngine* rEngine;
         audiere::AudioDevicePtr rDevice;
         audiere::OutputStreamPtr rStream;
+        int rPausePos;
 
     public:
-        ZSoundBase();
-        virtual ~ZSoundBase();
+        ZAudioBase();
+        virtual ~ZAudioBase();
 
         virtual void Open(std::string filename)=0;
+        virtual void OpenFromZip(std::string zipname, std::string filename)=0;
+        virtual void OpenFromZRF(std::string resourceId)=0;
+        //void Release();
 
         void Play(bool loop=false);
+        void Pause();
+        void Unpause();
+        void Rewind();
         void Stop();
 
-        void SetVolume(float volume);
+        void SetVolume(int volume);
         void SetPan(float pan);
         void SetPitch(float pitch);
         void SetPosition(int position);
@@ -42,8 +49,9 @@ class ZSoundBase
 
         bool IsLoaded() const;
         bool IsPlaying() const;
+        bool IsPaused() const;
         bool IsSeekable() const;
-        float GetVolume() const;
+        int GetVolume() const;
         float GetPan() const;
         float GetPitch() const;
         int GetPosition() const;
@@ -52,6 +60,6 @@ class ZSoundBase
 
 }
 
-#endif //USE_AUDIERE
+#endif //ZE_AUDIERE
 
-#endif //__ze_zsound_h__
+#endif //__ze_zaudiobase_h__
