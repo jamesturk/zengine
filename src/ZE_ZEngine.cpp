@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.45 2003/06/11 00:15:08 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.46 2003/06/11 05:51:15 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -25,46 +25,30 @@ namespace ZE
 VersionInfo ZEngine::Version(0,8,4,"dev");
 ZEngine *ZEngine::sInstance=NULL;
 
-ZEngine::ZEngine()
-{
-    mInitialized = false;
-    mWidth = 800;
-    mHeight = 600;
-    mBPP = -1;
-    mFullscreen = true;
-
+ZEngine::ZEngine() : 
+    mInitialized(false), mWidth(800), mHeight(600), mBPP(-1), mFullscreen(true),
 #ifdef USE_SDL_MIXER 
-    mRate = 22050;
-    mStereo = false;
+    mRate(22050), mStereo(false),
 #endif
-    mNeedReload = false;
-
-    mScreen = NULL;
-
-    mEventFilter = NULL;
-    mActive = mQuit = false;
-    mKeyIsPressed = NULL;
-    mMouseX = mMouseY = 0;
-    mMouseB = 0;
-
+    mNeedReload(false),mScreen(NULL),
+    mEventFilter(NULL), mActive(false), mQuit(false), mKeyIsPressed(NULL), 
+    mMouseX(0), mMouseY(0), mMouseB(0),
+    mUnpauseOnActive(false), mPaused(false),
+    mDesiredFramerate(0), mNextUpdate(0), mLastPause(0), mPausedTime(0), mLastTime(0),
+    mSecPerFrame(0.0),
+    mLogAllErrors(true), mErrlog(stderr)
+{
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
-
-    mUnpauseOnActive = mPaused = false;
-    mDesiredFramerate = 0;
-    mNextUpdate = mLastPause = mPausedTime = mLastTime = 0;
-    mSecPerFrame = 0.0;
-
+    
     ZError::CreateStringTable();
-    mLogAllErrors = true;
-    mErrlog = stderr;
 
     SeedRandom(static_cast<unsigned long>(time(NULL)));
 }
 
 ZEngine* ZEngine::GetInstance()
 {
-    if(!sInstance)
+    if(!sInstance)  //first time through, gets new instance, each time after returns same one
         sInstance = new ZEngine;
 
     return sInstance;
@@ -74,8 +58,8 @@ void ZEngine::ReleaseInstance()
 {
     if(sInstance)
     {
-        ZError::DestroyStringTable();
-        sInstance->CloseDisplay();
+        ZError::DestroyStringTable();   //part of fix to memory leak with static members
+        sInstance->CloseDisplay();  
         delete sInstance;
     }
     sInstance = NULL;
@@ -107,6 +91,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
 
     if(!mInitialized)
     {
+        //audio initialized just in case, must be initialized w/ video to work so InitSubsystem wasn't an option
         if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
         {
             ReportError(ZERR_SDL_INIT,SDL_GetError());
@@ -134,7 +119,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
         ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",mBPP));
         mBPP = -1;
     }
-    else
+    else    //this decides correcr BPP
     {
         if(mBPP == -1)
             mBPP = SDL_GetVideoInfo()->vfmt->BitsPerPixel;
@@ -152,6 +137,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
         }
     }
 
+    //buffer sizes
     switch (mBPP)
     {
         case 8:
@@ -172,6 +158,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
             break;
     }
 
+    //key GL attributes
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, rgb_size[0]);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, rgb_size[1]);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, rgb_size[2]);
@@ -297,7 +284,7 @@ void ZEngine::ToggleFullscreen()
     else
         CreateDisplay(title);
 #endif
-    SetReloadNeed(true);
+    SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
 
 bool ZEngine::Initialized()
@@ -314,10 +301,12 @@ void ZEngine::Update()
 {
     SDL_GL_SwapBuffers();
 
+    //keeps track of spf//
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
-    mLastTime = GetTime();
+    mLastTime = GetTime();  
 
-    if(mDesiredFramerate)
+    //framerate limiting//
+    if(mDesiredFramerate)   
     {
         if(mLastTime < mNextUpdate)
             SDL_Delay(mNextUpdate-mLastTime);
@@ -334,15 +323,17 @@ void ZEngine::Clear(float red, float green, float blue, float alpha)
 
 void ZEngine::SetGL2D()
 {
+    //disable unused features for 2D//
     glPushAttrib(GL_ENABLE_BIT);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
     glEnable(GL_TEXTURE_2D);
 
-    /* This allows alpha blending of 2D textures with the scene*/
+    // This allows alpha blending of 2D textures with the scene //
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
+    //setup viewport & ortho mode to emulate standard 2D API conventions
     glViewport(0, 0, mWidth, mHeight);
 
     glMatrixMode(GL_PROJECTION);
@@ -363,7 +354,7 @@ void ZEngine::Delay(Uint32 milliseconds)
 
 Uint32 ZEngine::GetTime()
 {
-    if(mPaused)
+    if(mPaused) //when paused time hasn't been added to mPausedTime 
         return SDL_GetTicks() - (mPausedTime +  (SDL_GetTicks() - mLastPause));
     else
         return SDL_GetTicks() - mPausedTime;
@@ -382,6 +373,7 @@ void ZEngine::UnpauseTimer()
 {
     if(mPaused)
     {
+        //mPaused time accumulates total time engine has been paused in all pauses
         mPausedTime += (SDL_GetTicks() - mLastPause);
         mPaused = false;
     }
@@ -394,7 +386,7 @@ double ZEngine::GetFrameTime()
 
 double ZEngine::GetFramerate()
 {
-    return mSecPerFrame ? 1/mSecPerFrame : 0;
+    return mSecPerFrame ? 1/mSecPerFrame : 0;   //avoid /0
 }
 
 void ZEngine::SetDesiredFramerate(Uint8 rate)
@@ -450,7 +442,7 @@ bool ZEngine::KeyIsPressed(SDLKey key)
 bool ZEngine::KeyPress(SDLKey key)
 {
     bool temp = mKeyPress[key];
-    mKeyPress[key] = false;
+    mKeyPress[key] = false; //checking removes the press, this is used to detect single presses
     return temp;
 }
 
@@ -486,6 +478,7 @@ bool ZEngine::RButtonPressed()
 
 bool ZEngine::MouseInRect(SDL_Rect *rect)
 {
+    //useful function, needed so much it made it in
     return (mMouseX >= rect->x && mMouseX <= rect->x+rect->w && 
         mMouseY >= rect->y && mMouseY <= rect->y+rect->h);
 }
@@ -498,8 +491,9 @@ void ZEngine::CheckEvents()
     {
         if(!mEventFilter || mEventFilter(&event))    //if the filter returns 0 it is removing the event, it will not be processed
         {
-            switch(event.type)
+            switch(event.type)  //only certain events are handled, mEventFilter can handle user requests
             {
+                //these events try and catch all video changes, for potential surface loss
                 case SDL_VIDEOEXPOSE:
                 case SDL_ACTIVEEVENT:
                     if(event.active.state & SDL_APPACTIVE || event.active.state & SDL_APPINPUTFOCUS)
@@ -525,6 +519,7 @@ void ZEngine::CheckEvents()
                         }
                     }
                     break;
+                    //SDL_KEYDOWN/UP messages manipulate the mKeyPress array, used for single presses
                 case SDL_KEYDOWN:
                     mKeyPress[event.key.keysym.sym] = true;
                     break;
@@ -540,7 +535,7 @@ void ZEngine::CheckEvents()
         }
     }
 
-    mKeyIsPressed = SDL_GetKeyState(NULL);        //recommended but not needed (says Sam)
+    mKeyIsPressed = SDL_GetKeyState(NULL);        //recommended but not needed (says Sam on the list)
 
     //Alt-X or Alt-F4
     if((mKeyIsPressed[SDLK_x] || mKeyIsPressed[SDLK_F4]) && 
@@ -562,9 +557,11 @@ void ZEngine::InitPhysFS(std::string argv)
     std::string::size_type pos;
     PHYSFS_init(argv.c_str());
 
-    pos = argv.rfind(PHYSFS_getDirSeparator());
+    //example c:/home/games/agame/bin/agame.exe rfind finds the slash before the exe
+    //and the substr returns the root dir: c:/home/games/agame/bin/
+    pos = argv.rfind(PHYSFS_getDirSeparator()); //find last slash
     if(pos != std::string::npos)
-        AddPhysFSDir(argv.substr(0,pos));
+        AddPhysFSDir(argv.substr(0,pos));   //everything up to last slash
 }
 
 void ZEngine::AddPhysFSDir(std::string dir)
@@ -579,12 +576,13 @@ void ZEngine::SetErrorLog(bool logAll, std::string logFile)
     mLogAllErrors = logAll;
     if(logFile.length())
     {
+        //stderr & stdout are special cases, and should be directed to their appropriate streams
         if(logFile == "stderr")
             mErrlog = stderr;
         else if(logFile == "stdout")
             mErrlog = stdout;
         else
-            mErrlog = fopen(logFile.c_str(),"w");
+            mErrlog = std::fopen(logFile.c_str(),"w");
     }
 }
 
@@ -595,7 +593,7 @@ void ZEngine::ReportError(ZErrorCode code, std::string desc, std::string file, u
     if(mLogAllErrors)
     {
         LogError(mCurError);
-        fflush(mErrlog);
+        std::fflush(mErrlog);
     }
     else
         mErrorQueue.push(mCurError);
@@ -610,18 +608,17 @@ ZErrorCode ZEngine::GetLastError()
 
 void ZEngine::WriteLog(std::string str)
 {
-    fprintf(mErrlog,str.c_str());
-    fprintf(mErrlog,"\n");
+    std::fprintf(mErrlog,str.c_str());
+    std::fprintf(mErrlog,"\n");
 }
 
 void ZEngine::LogError(ZError error)
 {
-    fprintf(mErrlog,error.LogString().c_str());
+    std::fprintf(mErrlog,error.LogString().c_str());
 }
 
 void ZEngine::FlushErrors()
 {
-    mCurError.Create(ZERR_NONE);
     while(!mErrorQueue.empty())
     {
         LogError(mErrorQueue.front());

@@ -13,7 +13,7 @@
     \brief Source file for ZTimer.
 
     Implementation of ZTimer, the basic Timer class for ZEngine.
-    <br>$Id: ZE_ZTimer.cpp,v 1.8 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZTimer.cpp,v 1.9 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -30,11 +30,11 @@ Uint32 ZTimer::GetParentTime() const
         return SDL_GetTicks();
 }
 
-ZTimer::ZTimer(bool useZEngine)
+ZTimer::ZTimer(bool useZEngine) : 
+    rEngine(ZEngine::GetInstance()),
+    rUseZEngine(useZEngine),
+    rPaused(false)
 {
-    rEngine = ZEngine::GetInstance();
-    rUseZEngine = useZEngine;
-    rPaused = false;
     Reset();
 }
 
@@ -61,6 +61,7 @@ void ZTimer::Unpause()
 {
     if(rPaused)
     {
+        //when unpausing update the total paused time by that pause
         rPausedTime += (GetParentTime()-rLastPause);
         rPaused = false;
     }
@@ -68,10 +69,10 @@ void ZTimer::Unpause()
 
 Uint32 ZTimer::GetTime() const
 {
-    if(rPaused)
+    if(rPaused) //when paused timer adjusted to subtract currently paused time
         return GetParentTime() - (rPausedTime +  (GetParentTime() - rLastPause));
     else
-        return GetParentTime() - rPausedTime;
+        return GetParentTime() - rPausedTime;   //paused time is the cotal amt of time the program has been paused
 }
 
 bool ZTimer::IsPaused() const

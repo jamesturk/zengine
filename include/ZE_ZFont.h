@@ -121,8 +121,9 @@ class ZFont
             \param r Red component of color (0-255).
             \param g Green component of color (0-255).
             \param b Blue component of color (0-255).
+            \param a Alpha component of drawn font, including background if present. (0-255) (Optional, defaults to 255.)
         **/
-        void SetColor(Uint8 r, Uint8 g, Uint8 b);
+        void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a=255);
 
         /*!
             \brief Set Background rColor.

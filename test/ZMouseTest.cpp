@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.12 2003/01/12 19:00:17 cozman Exp $*/
+/*$Id: ZMouseTest.cpp,v 1.13 2003/06/11 05:51:47 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -21,7 +21,7 @@ bool Initialize()
     ZConfigFile cfg("tests.zcf");
     int w,h,bpp,rate;
     bool fs;
-    string title;
+    std::string title;
 
     w = cfg.GetInt("ZMouseTest","width",800);
     h = cfg.GetInt("ZMouseTest","height",600);

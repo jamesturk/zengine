@@ -13,7 +13,7 @@
     \brief Source file for ZError.
 
     Implementation of ZError, the ZEngine internal error information storage class.
-    <br>$Id: ZE_ZError.cpp,v 1.9 2003/06/11 00:15:09 cozman Exp $<br>
+    <br>$Id: ZE_ZError.cpp,v 1.10 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -28,6 +28,7 @@ void ZError::CreateStringTable()
 {
     if(!sErrorDesc)
     {
+        //create error strings
         sErrorDesc = new std::string[ZERR_LAST]; 
         sErrorDesc[ZERR_NONE] = "No Error. [%s]";
         sErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
@@ -59,15 +60,8 @@ void ZError::DestroyStringTable()
     }
 }
 
-ZError::ZError(ZErrorCode code, std::string desc, std::string file, int line)
-{
-    rCode = code;
-    rDescription = desc;
-    rFilename = file;
-    rLine = line;
-}
-
-ZError::~ZError()
+ZError::ZError(ZErrorCode code, std::string desc, std::string file, int line) :
+    rCode(code), rDescription(desc), rFilename(file), rLine(line)
 {
 }
 
@@ -88,13 +82,14 @@ std::string ZError::LogString() const
 {
     std::string msg;
     
+    //if there is a description be sure to integrate it
     msg = rDescription.length() ? FormatStr(sErrorDesc[rCode].c_str(),rDescription.c_str()) : sErrorDesc[rCode];
 
-    if(rLine != 0)
+    if(rLine != 0) //if there is a line (there is also a filename)
         return FormatStr(" -%s(%d): %s\n",rFilename.c_str(),rLine,msg.c_str());
-    else if(rFilename.length())
+    else if(rFilename.length()) //no line, just filename
         return FormatStr(" -%s: %s\n",rFilename.c_str(),msg.c_str());
-    else
+    else    //just the message
         return FormatStr(" -%s\n",msg.c_str());
 }
 

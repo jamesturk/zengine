@@ -13,7 +13,7 @@
     \brief Source file for ZMusic.
 
     Implementation of ZMusic, the basic Music class for ZEngine.
-    <br>$Id: ZE_ZMusic.cpp,v 1.9 2003/06/11 00:15:10 cozman Exp $<br>
+    <br>$Id: ZE_ZMusic.cpp,v 1.10 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -24,18 +24,19 @@
 namespace ZE
 {
 
-const int ZMusic::LoopInfinite = -1;
+//ZMusic is a very simple class, each call basically wraps a self-explanatory function of SDL_Mixer
+const int ZMusic::LoopInfinite = -1;    //constant for infinite, as used by SDL_Mixer
 
-ZMusic::ZMusic()
+ZMusic::ZMusic() : 
+    rEngine(ZEngine::GetInstance()),
+    rMusic(NULL)
 {
-    rEngine = ZEngine::GetInstance();
-    rMusic = NULL;
 }
 
-ZMusic::ZMusic(std::string filename)
+ZMusic::ZMusic(std::string filename) : 
+    rEngine(ZEngine::GetInstance()),
+    rMusic(NULL)
 {
-    rEngine = ZEngine::GetInstance();
-    rMusic = NULL;
     Open(filename);
 }
 

@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZTimerTest.cpp,v 1.12 2003/02/10 05:16:30 cozman Exp $*/
+/*$Id: ZTimerTest.cpp,v 1.13 2003/06/11 05:51:47 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -21,7 +21,7 @@ bool Initialize()
     ZConfigFile cfg("tests.zcf");
     int w,h,bpp,rate;
     bool fs;
-    string title;
+    std::string title;
 
     w = cfg.GetInt("ZTimerTest","width",800);
     h = cfg.GetInt("ZTimerTest","height",600);
@@ -39,7 +39,7 @@ void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    string TimerName[3] = {"ZEngine Timer", "ZEngine Hooked Timer", "SDL Hooked Timer"};
+    std::string TimerName[3] = {"ZEngine Timer", "ZEngine Hooked Timer", "SDL Hooked Timer"};
     int curTimer = 0;
 
     //Open and Setup Font and Create Images and Timers//

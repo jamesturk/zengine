@@ -13,7 +13,7 @@
     \brief Source file for ZClient.
 
     Implementation file for ZClient, the TCP Client class for ZEngine.
-    <br>$Id: ZE_ZClient.cpp,v 1.8 2003/06/11 00:15:08 cozman Exp $<br>
+    <br>$Id: ZE_ZClient.cpp,v 1.9 2003/06/11 05:51:15 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -30,6 +30,7 @@ std::string num2dotted4(unsigned int num)
     int d=16777216; //2^24
     int m;
     
+    //the dotted IP a.b.c.d = a256^3+b256^2+c256+d, this is the numeric ip algorithm in reverse
     while(d > 0)
     {
         m = num/d;
@@ -41,13 +42,13 @@ std::string num2dotted4(unsigned int num)
     return FormatStr("%d.%d.%d.%d",ip[3],ip[2],ip[1],ip[0]);
 }
 
-ZClient::ZClient(bool verbose)
+ZClient::ZClient(bool verbose) :
+    rEngine(ZEngine::GetInstance()),
+    rSocket(NULL),
+    rSocketSet(NULL),
+    rVerbose(verbose),
+    rWaitTime(0)
 {
-    rEngine = ZEngine::GetInstance();
-    rSocket = NULL;
-    rSocketSet = NULL;
-    rVerbose = verbose;
-    rWaitTime = 0;
 }
 
 ZClient::~ZClient()
@@ -59,6 +60,7 @@ bool ZClient::Connect(char *server, Uint16 port)
 {
     IPaddress ip;
 
+    //see if the IP is reachable
     if(SDLNet_ResolveHost(&ip,server,port) < 0)
         rEngine->ReportError(ZERR_NET_CLIENT,FormatStr("Failed to resolve host: %s:%d",server,port));
     else if(rVerbose)
@@ -113,6 +115,7 @@ bool ZClient::Send(ZByte *data, int size)
     {
         sent = SDLNet_TCP_Send(rSocket,data,size);
 
+        //send < size means that entire packet didn't send.. which is a problem
         if(sent < size)
         {
             rEngine->ReportError(ZERR_NET_CLIENT,FormatStr("Failed to send data, closing socket: %s", SDLNet_GetError()));
@@ -137,8 +140,10 @@ int ZClient::Receive(ZByte *data)
 
     if(rSocket)
     {
+        //check if data is waiting on the socket
         if(SDLNet_CheckSockets(rSocketSet, rWaitTime) > 0 && SDLNet_SocketReady(rSocket))
         {
+            //if recieved 0 (data was waiting) something happened 
             received = SDLNet_TCP_Recv(rSocket,data,MAX_MSG_LEN);
             if(received <= 0)
             {

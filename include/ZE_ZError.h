@@ -14,7 +14,7 @@
 
     Definition file for ZError, the Error logging class for ZEngine.
     This class should never be used by the average user, it is used by ZEngine to store information on an error.
-    <br>$Id: ZE_ZError.h,v 1.11 2003/06/11 00:15:25 cozman Exp $<br>
+    <br>$Id: ZE_ZError.h,v 1.12 2003/06/11 05:51:32 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -101,13 +101,6 @@ class ZError
             \param line Optional argument specifying the line the error occured on.
         **/
         ZError(ZErrorCode code=ZERR_NONE, std::string desc="", std::string file="", int line=0);
-
-        /*!
-            \brief Virtual Destructor.
-
-            Virtual destructor making future inheritance safe.
-        **/
-        virtual ~ZError();
 
         /*!
             \brief Set members of error object.

@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.34 2003/06/11 00:15:09 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.35 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,51 +22,51 @@
 namespace ZE
 {
 
-ZImage::ZImage()
+ZImage::ZImage() : 
+    rEngine(ZEngine::GetInstance()),
+    rImage(NULL),
+    rAlpha(255)
 {
-    rEngine = ZEngine::GetInstance();
-    rImage = NULL;
-    rAlpha = 255;
     Release();
 }
 
-ZImage::ZImage(const ZImage &rhs)
+ZImage::ZImage(const ZImage &rhs) : 
+    rEngine(ZEngine::GetInstance()),
+    rImage(NULL),
+    rAlpha(rhs.Alpha())
 {
-    rEngine = ZEngine::GetInstance();
-    rImage = NULL;
-    rAlpha = rhs.Alpha();
     OpenFromImage(rhs.Surface(),0,0,(Sint16)rhs.Width(),(Sint16)rhs.Height());
 }
 
-ZImage::ZImage(std::string filename)
+ZImage::ZImage(std::string filename) : 
+    rEngine(ZEngine::GetInstance()),
+    rImage(NULL),
+    rAlpha(255)
 {
-    rEngine = ZEngine::GetInstance();
-    rImage = NULL;
-    rAlpha = 255;
     Open(filename);
 }
 
-ZImage::ZImage(SDL_Surface *surface)
+ZImage::ZImage(SDL_Surface *surface) : 
+    rEngine(ZEngine::GetInstance()),
+    rImage(NULL),
+    rAlpha(255)
 {
-    rEngine = ZEngine::GetInstance();
-    rImage = NULL;
-    rAlpha = 255;
     Attach(surface);
 }
 
-ZImage::ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
+ZImage::ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h) : 
+    rEngine(ZEngine::GetInstance()),
+    rImage(NULL),
+    rAlpha(255)
 {
-    rEngine = ZEngine::GetInstance();
-    rImage = NULL;
-    rAlpha = 255;
     OpenFromImage(img,x,y,w,h);
 }
 
-ZImage::ZImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
+ZImage::ZImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h) : 
+    rEngine(ZEngine::GetInstance()),
+    rImage(NULL),
+    rAlpha(255)
 {
-    rEngine = ZEngine::GetInstance();
-    rImage = NULL;
-    rAlpha = 255;
     OpenFromImage(img.Surface(),x,y,w,h);   //call SDL_Surface* version instead of taking the long way
 }
 
@@ -116,15 +116,16 @@ void ZImage::OpenFromImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint
     OpenFromImage(img.Surface(),x,y,w,h);
 }
 
+//attach is really the core of ZImage, everything calls it, it converts SDL_Surface->OpenGL Texture->ZImage
 void ZImage::Attach(SDL_Surface *surface)
 {
     GLfloat coord[4];
 
-	Release();		//avoid most user inflicted memory leaks
+	Release();		//avoid most user inflicted memory leaks associated with ZImage
 
     //surface conversion//
     SDL_Surface *temp = surface;
-    surface = SDL_DisplayFormatAlpha(temp);
+    surface = SDL_DisplayFormatAlpha(temp); //TTF_RenderTextBlended relys on this
     if(surface)
     {
         FreeImage(temp);
@@ -139,7 +140,7 @@ void ZImage::Attach(SDL_Surface *surface)
     {
         rWidth = surface->w;
         rHeight = surface->h;
-        rTexID = SDL_GL_LoadTexture(surface,coord);
+        rTexID = SDL_GL_LoadTexture(surface,coord); //major helper, not written by me, found on libsdl.org
         rTexMinX = coord[0];
         rTexMinY = coord[1];
         rTexMaxX = coord[2];
@@ -152,17 +153,17 @@ void ZImage::Attach(SDL_Surface *surface)
 
 void ZImage::Reload()
 {
+    //this little hack helps to reload images to OpenGL surfaces after loss
     SDL_Surface *temp = rImage;
-    rImage = NULL;
+    rImage = NULL;  
     Attach(temp);
 }
 
 void ZImage::Release()
 {
+    //set everything back the way it came
     if(glIsTexture(rTexID))
-    {
         glDeleteTextures(1,&rTexID);
-    }
     rTexMinX = rTexMinY = rTexMaxX = rTexMaxY = 0.0f;
     rTexID = rWidth = rHeight = 0;
     FreeImage(rImage);
@@ -175,7 +176,6 @@ void ZImage::SetAlpha(Uint8 alpha)
 
 void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 {
-    SDL_Surface *temp=NULL;
     Uint32 color = SDL_MapRGB(rImage->format,red,green,blue);
 
     if(rImage)
@@ -183,11 +183,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
         if(SDL_SetColorKey(rImage, SDL_SRCCOLORKEY, color) < 0)
             rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
         else
-        {
-            temp = rImage;
-            rImage = NULL;
-            Attach(temp);   //do the reattach
-        }
+            Reload(); //do the reattach hack, this gets a new OpenGL surface for the same image
     }
     else
         rEngine->ReportError(ZERR_NOIMAGE,"SetColorKey");
@@ -196,12 +192,14 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 void ZImage::Flip(bool horizontal, bool vertical)
 {
     GLfloat temp;
+    //all that a flip does is invert the Min/Max coordinates
     if(horizontal)
     {
         temp = rTexMinX;
         rTexMinX = rTexMaxX;
         rTexMaxX = temp;
     }
+
     if(vertical)
     {
         temp = rTexMinY;
@@ -210,6 +208,7 @@ void ZImage::Flip(bool horizontal, bool vertical)
     }
 }
 
+//stretching and resizing is very inexpensive, done via variables
 void ZImage::Stretch(float xFactor, float yFactor)
 {
     rWidth = static_cast<unsigned int>(xFactor*rWidth);
@@ -222,6 +221,7 @@ void ZImage::Resize(unsigned int width, unsigned int height)
     rHeight = height;
 }
 
+//this is available for other uses of ZEngine
 void ZImage::Bind() const
 {
     if(rTexID)
@@ -238,15 +238,15 @@ void ZImage::Draw(int x, int y) const
 
 void ZImage::Draw(float x, float y) const
 {
-    glColor4ub(255,255,255,rAlpha); 
+    glColor4ub(255,255,255,rAlpha); //sets the color correctly
     Bind();
-    glBegin(GL_TRIANGLE_STRIP);
+    glBegin(GL_TRIANGLE_STRIP); //triangle strips, speedier?
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(x,y);
         glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2f(x+rWidth,y);
         glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2f(x,y+rHeight);
         glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(x+rWidth,y+rHeight);
     glEnd();
-    glColor4ub(255,255,255,255);    //return to standard color state
+    glColor4ub(255,255,255,255);    //be responsible, return to standard color state
 }
 
 void ZImage::DrawRotated(int x, int y, float angle) const
@@ -256,16 +256,17 @@ void ZImage::DrawRotated(int x, int y, float angle) const
 
 void ZImage::DrawRotated(float x, float y, float angle) const
 {
-    float cX,cY; //center variables
-
+    //center point
+    float cX,cY; 
     cX = rWidth/2.0f;
     cY = rHeight/2.0f;
 
     glPushMatrix();
-    glTranslatef(x+cX,y+cY,0);
-    glRotatef(angle,0,0,1.0f);
+    glTranslatef(x+cX,y+cY,0);  //translate to center
+    glRotatef(angle,0,0,1.0f);  //rotate on z axis, to keep x&y parallel to 2D plane
     glColor4ub(255,255,255,rAlpha); 
     Bind(); 
+    //draw is modified to be based around center//
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(-cX,-cY);
         glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2f(-cX+rWidth,-cY);

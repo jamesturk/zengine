@@ -13,7 +13,7 @@
     \brief Source file for ZServer.
 
     Implementation file for ZServer, the TCP Server class for ZEngine.
-    <br>$Id: ZE_ZServer.cpp,v 1.6 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZServer.cpp,v 1.7 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -27,21 +27,17 @@ namespace ZE
 void ZServer::CloseSocket(int num)
 {
     SDLNet_TCP_Close(rClientSockets[num]);
-    rClientSockets[num] = NULL;
+    rClientSockets[num] = NULL; //closed sockets should be NULL to mark them closed
     if(rVerbose)
         rEngine->WriteLog(FormatStr("Closing socket #%d",num));
 }
 
-ZServer::ZServer(bool v)
+ZServer::ZServer(bool verbose)
 {
-    rEngine = ZEngine::GetInstance();
-
-    rSocket = NULL;
-    rSocketSet = NULL;
-    rClientSockets = NULL;
-    rMaxClients = 0;
-    rVerbose = v;
-    rWaitTime = 0;
+    rEngine(ZEngine::GetInstance()),
+    rSocket(NULL), rSocketSet(NULL), rClientSockets(NULL),
+    rMaxClients(0), rVerbose(verbose), rWaitTime(0)
+{
 }
 
 ZServer::~ZServer()
@@ -97,6 +93,7 @@ void ZServer::Stop()
         SDLNet_FreeSocketSet(rSocketSet);
         rSocketSet = NULL;
     }
+    //each client must be let go, old memory leak
     if(rClientSockets)
     {
         for(int i=0; i < rMaxClients; ++i)
@@ -160,6 +157,7 @@ void ZServer::CheckSockets()
             size = result;
             if(rVerbose)
                 rEngine->WriteLog("ZServer: Mirroring data: ");
+
             for(int j=0; j < rMaxClients; ++j)
             {
                 if(rClientSockets[j] && i != j) //send to open sockets that aren't the same

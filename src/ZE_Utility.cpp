@@ -13,7 +13,7 @@
     \brief Source file for ZEngine utility functions.
 
     Source file containing open utilities for use inside and alongside ZEngine.
-    <br>$Id: ZE_Utility.cpp,v 1.8 2003/06/11 00:15:08 cozman Exp $<br>
+    <br>$Id: ZE_Utility.cpp,v 1.9 2003/06/11 05:51:15 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -26,13 +26,14 @@ std::string FormatStr(const char *fmtstr, ...)
 {
     char buf[512];
     va_list args;
-
+    //simply puts args into the buffer using standard parsing rules
     va_start(args,fmtstr);
     vsprintf(buf, fmtstr, args);
     va_end(args);
     return buf;
 }
 
+//Each of the Free*s safely frees & NULLs the pointer
 void FreeImage(SDL_Surface *&image)
 {
     if(image)

@@ -6,7 +6,7 @@
 
     Implementation file for VersinInfo class, simple class for containing and comparing 
     version numbers.
-    <br>$Id: VersionInfo.cpp,v 1.3 2003/06/11 00:15:07 cozman Exp $<br>
+    <br>$Id: VersionInfo.cpp,v 1.4 2003/06/11 05:51:15 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -26,6 +26,7 @@ std::string VersionInfo::GetString() const
 
 bool VersionInfo::operator<(const VersionInfo &rhs) const
 {
+    //chained compares, compare numbers in order of importance
     if(this->major < rhs.major)
         return true;
     else if(this->major == rhs.major)
@@ -38,24 +39,19 @@ bool VersionInfo::operator<(const VersionInfo &rhs) const
                 return true;
             else if(this->release == rhs.release)
             {
-                if(this->extra.length() == 0 && rhs.extra.length() != 0)
-                    return true;
-                else if(this->extra.length() && rhs.extra.length())
-                {
-                    return this->extra[0] < rhs.extra[0];
-                }
+                return this->extra < rhs.extra; //just compare the strings at the end
             }
         }
     }
-    return false;
+    return false;   //if it reaches this point rhs is >=
 }
 
 bool VersionInfo::operator==(const VersionInfo &rhs) const
 {
-    return this->GetString() == rhs.GetString();
+    return this->GetString() == rhs.GetString();    //only equal data produces equal strings
 }
 
 bool VersionInfo::operator>(const VersionInfo &rhs) const
 {
-    return !((*this) < rhs || (*this) == rhs);
+    return !((*this) < rhs || (*this) == rhs);  //if not < and not ==, must be >
 }

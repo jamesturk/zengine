@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.40 2003/06/11 00:15:25 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.41 2003/06/11 05:51:32 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -102,7 +102,7 @@ class ZEngine
         //! Option controlling how logfile is used.
         bool mLogAllErrors;
         //! C-style FILE* for error logging.
-        FILE *mErrlog;
+        std::FILE *mErrlog;
         //! Event filter, for users who need to process their own events.
         SDL_EventFilter mEventFilter;
 

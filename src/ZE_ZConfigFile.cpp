@@ -13,7 +13,7 @@
     \brief Source file for ZConfigFile.
 
     Implementation of ZConfigFile, the ZEngine INI-Style Config File.
-    <br>$Id: ZE_ZConfigFile.cpp,v 1.11 2003/06/11 00:15:08 cozman Exp $<br>
+    <br>$Id: ZE_ZConfigFile.cpp,v 1.12 2003/06/11 05:51:15 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -30,12 +30,12 @@ std::string ZConfigFile::CleanString(std::string str)  const
     //cycle through, only copy spaces and if a character is uppercase, convert it to lowercase
     for(std::string::size_type i = 0; i < str.length(); ++i)
     {
-        if(!isspace(str[i]) || inQuotes)
+        if(!std::isspace(str[i]) || inQuotes)   //if it's in quotes leave it be
         {
             if(str[i] == '\"')
-                inQuotes = !inQuotes;
-            if(isupper(str[i]) && !inQuotes)
-                str[i] = static_cast<char>(tolower(str[i]));
+                inQuotes = !inQuotes;   //each quote toggles the quote state
+            if(std::isupper(str[i]) && !inQuotes)
+                str[i] = static_cast<char>(std::tolower(str[i]));
             tmpStr += str[i];
         }
     }
@@ -48,6 +48,7 @@ bool ZConfigFile::Exists(std::string sec) const
 
     sec = CleanString(sec);
 
+    //check list for 'cleaned' version of string
     for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
     {
         if(CleanString((*secIter).section) == sec)
@@ -64,6 +65,7 @@ bool ZConfigFile::Exists(std::string sec, std::string var) const
     sec = CleanString(sec);
     var = CleanString(var);
 
+    //first find section, then do same search for variable
     for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
     {
         if(CleanString((*secIter).section) == sec)
@@ -83,19 +85,19 @@ void ZConfigFile::SetVariable(std::string sec, std::string var, std::string val)
     std::list<ZCF_Section>::iterator secIter;
     std::list<ZCF_Variable>::iterator varIter;
 
-    if(Exists(CleanString(sec)))
+    if(Exists(CleanString(sec)))    //if section exists find it
     {
         sec = CleanString(sec);
         for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
         {
             if(CleanString((*secIter).section) == sec)    //if this is the section
             {
-                if(Exists(sec,var))
+                if(Exists(sec,var)) //if variable exists find it
                 {
                     var = CleanString(var);
                     for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
                     {
-                        if(CleanString((*varIter).var) == var)    //if this is the variable
+                        if(CleanString((*varIter).var) == var)    //once variable found, set value
                         {
                             (*varIter).val = val;
                             break;    //break from this loop
@@ -124,13 +126,14 @@ void ZConfigFile::SetVariable(std::string sec, std::string var, std::string val)
 
 std::string ZConfigFile::GetVariable(std::string sec, std::string var, std::string defVal) const
 {
+    //finds variable in same manner as SetVariable, but if not found doesn't create, just returns default value
     std::list<ZCF_Section>::const_iterator secIter;
     std::list<ZCF_Variable>::const_iterator varIter;
 
     sec = CleanString(sec);
     var = CleanString(var);
 
-    if(Exists(sec))
+    if(Exists(sec)) 
     {
         for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
         {
@@ -157,11 +160,13 @@ std::string ZConfigFile::GetVariable(std::string sec, std::string var, std::stri
     return defVal;    //if it gets to the end just return the default
 }
 
-ZConfigFile::ZConfigFile() {}
+ZConfigFile::ZConfigFile() 
+{
+}
 
 ZConfigFile::ZConfigFile(std::string rFilename)
 {
-    Process(rFilename);
+    Process(rFilename); //process does all the work
 }
 
 ZConfigFile::~ZConfigFile()
@@ -173,12 +178,12 @@ void ZConfigFile::Process(std::string filename)
 {
     rFilename = filename;
 
-    std::ifstream cfile(rFilename.c_str());
+    std::ifstream cfile(rFilename.c_str()); 
     std::string section, str, var, tmp;
 
-    rFileLayout.clear();
+    rFileLayout.clear();    //layout must be cleared, in case variable is being used multiple times
 
-    while(!cfile.eof() && cfile.is_open())
+    while(!cfile.eof() && cfile.is_open())  //parses entire file
     {
         std::getline(cfile,str);    //read in a line
         tmp = CleanString(str);    //get a clean version
@@ -195,6 +200,7 @@ void ZConfigFile::Process(std::string filename)
     cfile.close();
 }
 
+//each get* gets the variable (stored as a string) from using GetVariable, then converts it to the desired format
 float ZConfigFile::GetFloat(std::string section, std::string var, float defVal) const
 {
     std::string val;
@@ -273,6 +279,7 @@ std::string ZConfigFile::GetString(std::string section, std::string var, std::st
         return val;
 }
 
+//each set* converts it's variable to a string, then places it in using SetVariable
 void ZConfigFile::SetFloat(std::string section, std::string var, float val)
 {
     char buf[20];
@@ -315,6 +322,7 @@ void ZConfigFile::Flush()
     //in case the filename is already cleared somehow
     if(rFilename.length())
     {
+        //open the file blanked out, to not duplicate entries
         std::ofstream cfile(rFilename.c_str(), std::ios::out|std::ios::trunc);
 
         if(cfile)
@@ -343,7 +351,7 @@ void ZConfigFile::Flush()
 
 void ZConfigFile::Close()
 {
-    Flush();
+    Flush();    //when the file is closed it should be flushed to disk
     rFilename = "";
 }
 

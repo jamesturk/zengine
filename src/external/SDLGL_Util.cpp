@@ -4,14 +4,13 @@
 
 #include "external/SDLGL_Util.h"
 
+//finds nearest power of two (going up), needed for surfaces
 int power_of_two(int input)
 {
     int value = 1;
 
-    while(value < input) 
-    {
-        value <<= 1;
-    }
+    while(value < input) //texture coord must be >= input
+        value <<= 1;    //value <<= 1 is the same as value *= 2
     return value;
 }
 

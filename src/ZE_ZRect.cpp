@@ -13,7 +13,7 @@
     \brief Source file for ZRect.
 
     Implementation of ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.cpp,v 1.11 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.cpp,v 1.12 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -153,6 +153,7 @@ ZRect ZRect::Intersection(const ZRect &rect) const
 {
     float tempX=0,tempY=0,tempW=0,tempH=0;
 
+    //can only grab the intersection if they intersect
     if(Intersects(rect))
     {
         tempX = rX > rect.X() ? rX : rect.X();

@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.17 2003/04/27 18:55:00 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.18 2003/06/11 05:51:47 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -21,7 +21,7 @@ bool Initialize()
     ZConfigFile cfg("tests.zcf");
     int w,h,bpp,rate;
     bool fs;
-    string title;
+    std::string title;
 
     w = cfg.GetInt("ZImageTest","width",800);
     h = cfg.GetInt("ZImageTest","height",600);

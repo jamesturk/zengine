@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZFontTest.cpp,v 1.11 2003/01/12 19:00:14 cozman Exp $*/
+/*$Id: ZFontTest.cpp,v 1.12 2003/06/11 05:51:47 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -42,7 +42,7 @@ void Test()
     //Open and Setup all the Fonts and Create Images//
     ZImage text[6];
     ZFont almonte("data/almontew.ttf",48), axaxax("data/axaxax.ttf",32), betsy("data/betsy.ttf",64);
-    almonte.SetColor(255,0,0);
+    almonte.SetColor(255,0,0,128);
     almonte.DrawText("This is the font test.",text[0]);
     axaxax.SetColor(0,255,255);
     axaxax.SetStyle(true,false,false);

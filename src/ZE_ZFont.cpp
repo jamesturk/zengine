@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.11 2003/06/11 00:15:09 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.12 2003/06/11 05:51:16 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -24,18 +24,18 @@
 namespace ZE
 {
 
-ZFont::ZFont()
+ZFont::ZFont() : 
+    rEngine(ZEngine::GetInstance()), 
+    rFont(NULL)
 {
-    rEngine = ZEngine::GetInstance();
-    rFont = NULL;
     rColor.r = rColor.g = rColor.b = rColor.unused = 255;
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;
 }
 
-ZFont::ZFont(std::string filename, int size)
+ZFont::ZFont(std::string filename, int size) : 
+    rEngine(ZEngine::GetInstance()), 
+    rFont(NULL)
 {
-    rEngine = ZEngine::GetInstance();
-    rFont = NULL;
     rColor.r = rColor.g = rColor.b = rColor.unused = 255;
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;
     Open(filename,size);
@@ -49,6 +49,7 @@ ZFont::~ZFont()
 void ZFont::Open(std::string filename, int size)
 {
     Release();
+    rFilename = filename;
     rFont = rEngine->LoadFont(filename,size);
 }
 
@@ -59,19 +60,22 @@ void ZFont::Release()
 
 void ZFont::DrawText(std::string text, ZImage &image) const
 {
-    image.Attach(TTF_RenderText_Solid(rFont, text.c_str(), rColor));
+    image.Attach(TTF_RenderText_Blended(rFont, text.c_str(), rColor));
+    image.SetAlpha(rColor.unused);  //the images alpha comes from the SetColor a parameter
 }
 
 void ZFont::DrawShadedText(std::string text, ZImage &image) const
 {
     image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
+    image.SetAlpha(rColor.unused);  
 }
 
-void ZFont::SetColor(Uint8 r, Uint8 g, Uint8 b)
+void ZFont::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     rColor.r = r;
     rColor.g = g;
     rColor.b = b;
+    rColor.unused = a;  //used in DrawText and DrawBlendedText
 }
 
 void ZFont::SetBGColor(Uint8 r, Uint8 g, Uint8 b)
