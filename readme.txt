@@ -106,9 +106,12 @@ to detect surface loss, and even provides methods to restore it.
     From 0.8.0 to 0.8.5 some very large changes were made to separate ZEngine
 from other simple 2D apis.  Features such as an optional framerate limiter,
 error handling, convenient overloads, an extremely extensible particle system,
-and better support for more compilers.  Also as ZEngine stabilizes more small
-features, bugfixes, cleanups and enhancements to existing code have been made
-and the number of users (at least what is indicated by the number of emails
-and IMs I've been getting) has been rising steadily.
+and better support for more compilers. And one of the very useful
+changes is that now, where the great but complex PhysFS used to be used, the 
+small and embeddable zlib has come to the rescue allowing compression of 
+resources in archives.  Also as ZEngine stabilizes more small features, 
+bugfixes, cleanups and enhancements to existing code have been made and the 
+number of users (at least what is indicated by the number of emails and IMs
+I've been getting) has been rising steadily. 
 
     -James Turk james@conceptofzero.net
