@@ -13,7 +13,7 @@
 File: ZE_ZClient.cpp <br>
 Description: Implementation source file for core ZEngine TCP Client Object. <br>
 Author(s): James Turk <br>
-$Id:<br>
+$Id: ZE_ZClient.cpp,v 1.2 2003/03/14 22:20:13 cozman Exp $<br>
 
     \file ZE_ZClient.cpp
     \brief Source file for ZClient.
