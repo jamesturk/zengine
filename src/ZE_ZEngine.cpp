@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.61 2003/10/05 19:31:03 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.62 2003/10/11 16:21:49 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -252,10 +252,6 @@ void ZEngine::CloseDisplay()
         Mix_CloseAudio();
 #endif
 
-#ifdef USE_PHYSFS
-        PHYSFS_deinit();
-#endif
-
         SDL_Quit();
 
         if(mErrlog != stderr && mErrlog != stdin)
@@ -320,7 +316,7 @@ void ZEngine::Clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
 {
     GLclampf r = red/255.0f, g = green/255.0f, b = blue/255.0f, a = alpha/255.0f;
     glClearColor(r,g,b,a);
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
 }
 
@@ -366,7 +362,7 @@ void ZEngine::Delay(Uint32 milliseconds)
 
 Uint32 ZEngine::GetTime()
 {
-    if(mPaused) //when paused time hasn't been added to mPausedTime 
+    if(mPaused) //when paused time hasn't been added to mPausedTime yet
         return SDL_GetTicks() - (mPausedTime +  (SDL_GetTicks() - mLastPause));
     else
         return SDL_GetTicks() - mPausedTime;
@@ -385,7 +381,7 @@ void ZEngine::UnpauseTimer()
 {
     if(mPaused)
     {
-        //mPaused time accumulates total time engine has been paused in all pauses
+        //mPaused time accumulates total time engine has been paused
         mPausedTime += (SDL_GetTicks() - mLastPause);
         mPaused = false;
     }
@@ -495,7 +491,7 @@ bool ZEngine::MButtonPressed()
 
 bool ZEngine::MouseInRect(SDL_Rect *rect)
 {
-    //useful function, needed so much it made it in
+    //useful function, needed so much it made it into ZEngine
     return (mMouseX >= rect->x && mMouseX <= rect->x+rect->w && 
         mMouseY >= rect->y && mMouseY <= rect->y+rect->h);
 }
@@ -571,27 +567,6 @@ void ZEngine::SetEventFilter(SDL_EventFilter filter)
 {
     mEventFilter = filter;
 }
-
-#ifdef USE_PHYSFS
-
-void ZEngine::InitPhysFS(std::string argv)
-{
-    std::string::size_type pos;
-    PHYSFS_init(argv.c_str());
-
-    //example c:/home/games/agame/bin/agame.exe rfind finds the slash before the exe
-    //and the substr returns the root dir: c:/home/games/agame/bin/
-    pos = argv.rfind(PHYSFS_getDirSeparator()); //find last slash
-    if(pos != std::string::npos)
-        AddPhysFSDir(argv.substr(0,pos));   //everything up to last slash
-}
-
-void ZEngine::AddPhysFSDir(std::string dir)
-{
-    PHYSFS_addToSearchPath(dir.c_str(),0);
-}
-
-#endif //USE_PHYSFS
 
 void ZEngine::SetErrorLog(bool logAll, std::string logFile)
 {

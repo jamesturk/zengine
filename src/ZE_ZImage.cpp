@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.47 2003/09/24 02:03:18 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.48 2003/10/11 16:21:50 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -157,21 +157,19 @@ void ZImage::Attach(SDL_Surface *surface)
 
 	Release();		//avoid most user inflicted memory leaks associated with ZImage
 
-    //surface conversion//
-    SDL_Surface *temp = surface;
-    surface = SDL_DisplayFormatAlpha(temp); //TTF_RenderTextBlended relys on this
     if(surface)
     {
-        FreeImage(temp);
-    }
-    else    //can't convert
-    {
-        rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
-        surface = temp;
-    }
-
-    if(surface)
-    {
+        SDL_Surface *temp = SDL_DisplayFormatAlpha(surface); //TTF_RenderTextBlended relys on this
+        if(temp) //if conversion succeeds, free old surface
+        {
+            FreeImage(surface);
+            surface = temp;
+        }
+        else    //can't convert, leave surface as is
+        {
+            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
+        }
+    
         rWidth = static_cast<float>(surface->w);
         rHeight = static_cast<float>(surface->h);
         rTexID = SDL_GL_LoadTexture(surface,coord); //major helper, not written by me, from libsdl.org
@@ -211,10 +209,11 @@ void ZImage::SetAlpha(Uint8 alpha)
 
 void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 {
-    Uint32 color = SDL_MapRGB(rImage->format,red,green,blue);
+    Uint32 color;
 
     if(rImage)
     {
+        color = SDL_MapRGB(rImage->format,red,green,blue);
         if(SDL_SetColorKey(rImage, SDL_SRCCOLORKEY, color) < 0)
             rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
         else
@@ -344,10 +343,7 @@ void ZImage::DrawClipped(float x, float y, ZRect clipRect) const
         glEnd();
         glColor4ub(255,255,255,255);    //be responsible, return to standard color state
     }
-    else    //doesn't contain nor intersect
-    {
-        //draw nothing
-    }
+    //otherwise it doesn't contain nor intersect, so nothing should be drawn
 }
 
 void ZImage::DrawClipped(float x, float y, ZRect clipRect, Uint8 vc[]) const
@@ -434,22 +430,22 @@ bool ZImage::IsLoaded() const
 void ZImage::Attach(SDL_Surface *surface)
 {
     Release();
-
-    //surface conversion//
-    SDL_Surface *temp = surface;
-    surface = SDL_DisplayFormatAlpha(temp); //TTF_RenderTextBlended relys on this
+    
     if(surface)
     {
-        FreeImage(temp);
-    }
-    else    //can't convert
-    {
-        rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
-        surface = temp;
-    }
+        SDL_Surface *temp = SDL_DisplayFormatAlpha(surface); //TTF_RenderTextBlended relys on this
+        if(temp) //if conversion succeeds, free old surface
+        {
+            FreeImage(surface);
+            surface = temp;
+        }
+        else    //can't convert, leave surface as is
+        {
+            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
+        }
 
-    if(surface)
         rImage = surface;
+    }
     else
         rEngine->ReportError(ZERR_NOIMAGE,"Attach");
 }
@@ -478,10 +474,11 @@ void ZImage::SetAlpha(Uint8 alpha)
 
 void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 {
-    Uint32 color = SDL_MapRGBA(rImage->format,red,green,blue,255);
+    Uint32 color;
 
     if(rImage)
     {
+        color = SDL_MapRGBA(rImage->format,red,green,blue,255);
         if(SDL_SetColorKey(rImage, SDL_RLEACCEL|SDL_SRCCOLORKEY, color) < 0)
             rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
         //surface conversion//
@@ -514,13 +511,11 @@ void ZImage::DrawClipped(int x, int y, ZRect clipRect) const
     ZRect img(static_cast<Sint16>(x),static_cast<Sint16>(y),static_cast<Sint16>(rImage->w),static_cast<Sint16>(rImage->h));
     SDL_Rect inRect,imgRect;
     
-
     imgRect = inRect = clipRect.Intersection(img).SDLrect();
     inRect.x -= x;
     inRect.y -= y;
     
     SDL_BlitSurface(rImage, &inRect, rEngine->Display(), &imgRect);
-    //SDL_FillRect(rEngine->Display(), &inRect, SDL_MapRGB(rEngine->Display()->format,0,255,0));
 }
 
 bool ZImage::IsLoaded() const
