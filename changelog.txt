@@ -1,5 +1,12 @@
 ZEngine Version Log for Version 0.8.3
-$Id: changelog.txt,v 1.34 2003/04/28 02:30:20 cozman Exp $
+$Id: changelog.txt,v 1.35 2003/06/11 05:58:29 cozman Exp $
+
+0.8.4
+    -Changed default font rendering to blended, much better results.  Also added alpha parameter.
+    -ZEngine no longer forces use namespace std, library references prefixed with std::.
+    -Revised all source, cleaned up various areas.
+    -Moved versioning information.
+    -Changed way event hook is implemented, more control, threadsafe.
 
 0.8.3 
     -Changed Macros in ZE_Utility to functions.
