@@ -13,7 +13,7 @@
 File: ZE_Includes.h <br>
 Description: Header file for ZEngine universal includes. <br>
 Author(s): James Turk <br>
-$Id: ZE_Includes.h,v 1.4 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_Includes.h,v 1.5 2003/01/13 05:53:47 cozman Exp $<br>
 
     \file ZE_Includes.h
     \brief Include file for SDL and C++ Includes that many ZEngine files need.
@@ -46,8 +46,9 @@ $Id: ZE_Includes.h,v 1.4 2002/12/29 06:50:19 cozman Exp $<br>
 
 #include <string>
 #include <vector>
-#include <fstream>
+#include <queue>
 #include <list>
+#include <fstream>
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
