@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine simple particle system, ZSimpleParticleSystem based on ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.2 2003/07/10 19:21:36 cozman Exp $<br>
+    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.3 2003/07/10 23:45:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -163,6 +163,13 @@ class ZSimpleParticleSystem : public ZBaseParticleSystem<particleType>
         virtual void Render();
 
         /*!
+            \brief Reload image.
+
+            Reload image if mode is DS_IMAGE, usage is same as ZImage::Reload.
+        **/
+        void ReloadImage();
+
+        /*!
             \brief Sets ParticleDrawStyle for this system.
 
             Sets the method of drawing particles, point, line, or image particles.
@@ -272,6 +279,8 @@ void ZSimpleParticleSystem<particleType>::UpdateParticle(int index, float elapse
     rParticles[index].yPos += rParticles[index].yVel*elapsedTime;
     rParticles[index].size += rParticles[index].sizeDelta*elapsedTime;
     rParticles[index].energy += rParticles[index].energyDelta*elapsedTime;
+    if(rParticles[index].size <= 0)
+        rParticles[index].energy = 0;
 }
 
 template <class particleType>
@@ -321,6 +330,13 @@ void ZSimpleParticleSystem<particleType>::Render()
             glEnd();
             break;
     }
+}
+
+template <class particleType>
+void ZSimpleParticleSystem<particleType>::ReloadImage()
+{
+    if(rStyle == DS_IMAGE)
+        rImage.Reload();
 }
 
 template <class particleType>

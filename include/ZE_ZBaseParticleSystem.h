@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine particle system class ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.2 2003/07/10 19:20:56 cozman Exp $<br>
+    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.3 2003/07/10 23:45:08 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -75,6 +75,8 @@ class ZBaseParticleSystem
         unsigned int rNumParticlesPerSec;
         //! Millisecond format time of last update.
         Uint32 rLastUpdate;
+        //! Boolean value indicating if system is paused.
+        bool rPaused;
 
         /*!
             \brief Adds a new particle.
@@ -133,9 +135,46 @@ class ZBaseParticleSystem
             \brief Updates status of particle system.
             
             Updates entire particle system, calling update on every particle, emitting necessary new
-            particles, removing particles which have an energy <= 0 or are off the screen.
+            particles, removing particles which have an energy <= 0 or are off the screen. Virtual for
+            special cases, but generally should not be overridden.
         **/
-        void Update();
+        virtual void Update();
+
+        /*!
+            \brief Empties particle system of all particles.
+
+            Empties particle system of all particles, does not alter paused state.
+        **/
+        void Clear();
+
+        /*!
+            \brief Pauses particle system.
+            
+            Pauses particle system, particles may still be drawn but particles are not updated.
+        **/
+        void Pause();
+
+        /*!
+            \brief Unpauses particle system.
+
+            Returns particle system to active state, system starts unpaused.
+        **/
+        void Unpause();
+
+        /*!
+            \brief Clears system and pauses it.
+
+            Same as calling Clear() and then Pause(), use unpause to restart system.
+        **/
+        void Stop();
+
+        /*!
+            \brief Detect if particle system is currently paused.
+
+            Returns bool indicating if the particle system is currently paused.
+            \return true if paused, false if active
+        **/
+        bool Paused();
                 
         /*!
             \brief Sets max particles allowed in system.
@@ -172,6 +211,7 @@ ZBaseParticleSystem<particleType>::ZBaseParticleSystem()
     rParticles = NULL;
     rMaxParticles = rCurParticles = rNumParticlesPerSec = 0;
     rLastUpdate = rEngine->GetTime();
+    rPaused = false;
 }
 
 template <class particleType>
@@ -198,28 +238,63 @@ void ZBaseParticleSystem<particleType>::Update()
     double emitAmount;
     static double overflow=0;
 
-    //update every particle and remove dead particles
-    for(unsigned int i=0; i < rCurParticles; ++i)
+    if(!rPaused)
     {
-        UpdateParticle(i,elapsed);
-        if(rParticles[i].xPos < 0 || rParticles[i].xPos > rEngine->Width() 
-            || rParticles[i].yPos < 0 || rParticles[i].yPos > rEngine->Height() || rParticles[i].energy <= 0)
+        //update every particle and remove dead particles
+        for(unsigned int i=0; i < rCurParticles; ++i)
         {
-            rParticles[i] = rParticles[--rCurParticles];
-            --i;    //go back one to process that particle
+            UpdateParticle(i,elapsed);
+            if(rParticles[i].xPos < 0 || rParticles[i].xPos > rEngine->Width() 
+                || rParticles[i].yPos < 0 || rParticles[i].yPos > rEngine->Height() || rParticles[i].energy <= 0)
+            {
+                rParticles[i] = rParticles[--rCurParticles];
+                --i;    //go back one to process that particle
+            }
+        }
+
+        emitAmount = elapsed*rNumParticlesPerSec;
+        overflow += emitAmount - static_cast<int>(emitAmount); //only floating point portion of emitAmount
+        Emit(static_cast<int>(emitAmount));
+        if(overflow >= .95) //a little lower than one, for tolerance
+        {
+            Emit(1);
+            overflow = 0;   //dump & clear overflow
         }
     }
 
     rLastUpdate = rEngine->GetTime();
+}
 
-    emitAmount = elapsed*rNumParticlesPerSec;
-    overflow += emitAmount - static_cast<int>(emitAmount); //only floating point portion of emitAmount
-    Emit(static_cast<int>(emitAmount));
-    if(overflow >= .95) //a little lower than one, for tolerance
-    {
-        Emit(1);
-        overflow = 0;   //dump & clear overflow
-    }
+
+template <class particleType>
+void ZBaseParticleSystem<particleType>::Clear()
+{
+    rCurParticles = 0;
+}
+    
+template <class particleType>
+void ZBaseParticleSystem<particleType>::Pause()
+{
+    rPaused = true;
+}
+
+template <class particleType>
+void ZBaseParticleSystem<particleType>::Unpause()
+{
+    rPaused = false;
+}
+
+template <class particleType>
+void ZBaseParticleSystem<particleType>::Stop()
+{
+    Clear();
+    Pause();
+}
+
+template <class particleType>
+bool ZBaseParticleSystem<particleType>::Paused()
+{
+    return rPaused;
 }
 
 template <class particleType>
