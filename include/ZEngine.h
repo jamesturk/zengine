@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.11 2002/12/27 03:15:33 cozman Exp $<br>
+$Id: ZEngine.h,v 1.12 2002/12/29 06:50:19 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -16,8 +16,8 @@ $Id: ZEngine.h,v 1.11 2002/12/27 03:15:33 cozman Exp $<br>
     \mainpage ZEngine Documentation
 
     \author James Turk
-    \version 0.8.0-rc4
-    \date December 26, 2002
+    \version 0.8.0
+    \date December 29, 2002
 
     \section ZEngine About ZEngine
     <br>
@@ -31,16 +31,22 @@ $Id: ZEngine.h,v 1.11 2002/12/27 03:15:33 cozman Exp $<br>
     
     \section Licensing Licensing
     <br>
-<pre>        This file is Part of the ZEngine Library for SDL Game Development.
-                      Copyright (C) 2002 ConceptOfZero.net
-             Licensed under the BSD License, see licensing.txt.
-        and the library is developed for http://www.conceptofzero.net/
+<pre>        This file is Part of the ZEngine Library for 2D game development.
+                   Copyright (C) 2002, 2003 James Turk
+
+                     Licensed under a BSD-style license.
+
+    The maintainer of this library is James Turk (james@conceptofzero.net) 
+     and the home of this Library is http://www.zengine.sourceforge.net
     </pre>
     \section Authors Contributing Authors
     <br>
     James Turk <a href="mailto:james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes<br>
     Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
 **/
+
+#ifndef __zengine_h__
+#define __zengine_h__
 
 #include "ZE_ZEngine.h"
 #include "ZE_Macros.h"
@@ -56,3 +62,4 @@ $Id: ZEngine.h,v 1.11 2002/12/27 03:15:33 cozman Exp $<br>
 #include "ZE_ZMusic.h"
 #endif
 
+#endif //__zengine_h__

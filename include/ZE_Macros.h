@@ -1,11 +1,11 @@
 /*******************************************************************************
-         This file is Part of the ZEngine Library for SDL Game Development.
-                      Copyright (C) 2002 ConceptOfZero.net
+        This file is Part of the ZEngine Library for 2D game development.
+                   Copyright (C) 2002, 2003 James Turk
 
-             Licensed under the BSD License, see licensing.txt.
+                     Licensed under a BSD-style license.
 
-    The maintainer of this library is James Turk (jturk@conceptofzero.net) 
-         and the home of this Library is http://www.conceptofzero.net/
+    The maintainer of this library is James Turk (james@conceptofzero.net) 
+     and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
 /*!
@@ -13,7 +13,7 @@
 File: ZE_Macros.h <br>
 Description: Header file for ZEngine Macros. <br>
 Author(s): James Turk <br>
-$Id: ZE_Macros.h,v 1.3 2002/12/04 23:51:22 cozman Exp $<br>
+$Id: ZE_Macros.h,v 1.4 2002/12/29 06:50:19 cozman Exp $<br>
 
     \file ZE_Macros.h
     \brief Definition file for ZEngine Macros
