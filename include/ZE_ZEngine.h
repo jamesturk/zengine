@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$ id: $<br>
+    <br>$id:$<br>
     \author James Turk
 **/
 
