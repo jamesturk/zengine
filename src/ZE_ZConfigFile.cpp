@@ -13,7 +13,7 @@
 File: ZE_ZConfigFile.cpp <br>
 Description: Implementation source file for ZConfigFile, the ZEngine INI-Style Config File. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.cpp,v 1.4 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZConfigFile.cpp,v 1.5 2003/02/10 03:04:46 cozman Exp $<br>
 
     \file ZE_ZConfigFile.cpp
     \brief Source file for ZConfigFile.
@@ -199,6 +199,25 @@ void ZConfigFile::Process(string filename)
     cfile.close();
 }
 
+float ZConfigFile::GetFloat(string section, string var, float defVal) const
+{
+    string val;
+    char tmp[20];
+
+    section = CleanString(section);
+    var = CleanString(var);
+
+    section = '[' + section + ']';
+
+    sprintf(tmp,"%d",defVal);
+    val = GetVariable(section,var,tmp);
+
+    if(!atof(val.c_str()) && val[0] !='0')    //if it is zero but doesn't start with a zero
+        return defVal;
+    else
+        return static_cast<float>(atof(val.c_str()));   //atof returns a double(?!)
+}
+
 int ZConfigFile::GetInt(string section, string var, int defVal) const
 {
     string val;
@@ -256,6 +275,15 @@ string ZConfigFile::GetString(string section, string var, string defVal) const
         return val.substr(1,val.length()-2);    //chop off quotes
     else
         return val;
+}
+
+void ZConfigFile::SetFloat(string section, string var, float val)
+{
+    char buf[20];
+    sprintf(buf,"%f",val);
+
+    section = '[' + section + ']';
+    SetVariable(section,var,buf);
 }
 
 void ZConfigFile::SetInt(string section, string var, int val)
