@@ -11,10 +11,9 @@ SOURCES = ./src/external/SDLGL_Util.cpp ./src/VersionInfo.cpp ./src/ZE_Utility.c
 	./src/ZE_ZError.cpp ./src/ZE_ZFont.cpp ./src/ZE_ZImage.cpp ./src/ZE_ZMusic.cpp \
 	./src/ZE_ZRandGen.cpp ./src/ZE_ZRect.cpp ./src/ZE_ZServer.cpp ./src/ZE_ZSound.cpp \
 	./src/ZE_ZTimer.cpp ./src/external/physfsrwops.cpp
-	
-OBJECTS = SDLGL_Util.o VersionInfo.o ZE_Utility.o ZE_ZClient.o ZE_ZConfigFile.o \
-	ZE_ZEngine.o ZE_ZError.o ZE_ZFont.o ZE_ZImage.o ZE_ZMusic.o ZE_ZRandGen.o ZE_ZRect.o \
-	ZE_ZServer.o ZE_ZSound.o ZE_ZTimer.o physfsrwops.o
+
+#SOURCES with path stripped and .cpp changed to .o
+OBJECTS = $(notdir $(SOURCES:.cpp=.o))
 
 #build targets#
 
