@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.54 2003/10/24 21:20:09 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.55 2003/11/23 19:30:26 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -23,7 +23,6 @@
 #include "ZE_Defines.h"
 #include "ZE_Utility.h"
 #include "ZE_Includes.h"
-#include "ZE_ZError.h"
 #include "ZE_ZRandGen.h"
 #include "VersionInfo.h"
 
@@ -36,6 +35,31 @@ namespace ZE
 {
 
 class ZRect;
+
+/*!
+    \brief Enumeration of ZEngine error codes.
+
+    All the error codes currently possibly by ZEngine, note that ZERR_LAST is not used as an error code, but instead
+    as a range check on the others.
+**/
+enum ZErrorCode 
+{
+    ZERR_NONE,          /*!< No error has occured.  */
+    ZERR_SDL_INTERNAL,  /*!< Error internal to SDL has occured, usually more detail is given by SDL. */
+    ZERR_SDL_INIT,      /*!< Error Initializing SDL. */
+    ZERR_MIX_INIT,      /*!< Error Initializing SDL_mixer. */
+    ZERR_TTF_INIT,      /*!< Error Initializing SDL_ttf. */
+    ZERR_VIDMODE,       /*!< Error setting up the display. */
+    ZERR_LOAD_IMAGE,    /*!< Error loading an image. */
+    ZERR_LOAD_SOUND,    /*!< Error loading a sound sample. */
+    ZERR_LOAD_MUSIC,    /*!< Error loading music. */
+    ZERR_LOAD_FONT,     /*!< Error loading a font. */
+    ZERR_NOIMAGE,       /*!< Error trying to use a ZImage without properly loading an image. */
+    ZERR_NOSOUND,       /*!< Error trying to use a ZSound without properly loading a sound. */
+    ZERR_NOMUSIC,       /*!< Error trying to use a ZMusic without properly loading music. */
+    ZERR_NOFONT,        /*!< Error trying to use a ZFont without properly loading a font. */
+    ZERR_LAST           /*!< Value used as range index, not a valid error code. */
+};
 
 /*!
     \brief Main ZEngine Singleton Class
@@ -90,14 +114,10 @@ class ZEngine
         int mMouseY;
         //! Mouse Button Information
         Uint8 mMouseB;
-        //! Stack of Errors which have occured.
-        std::queue<ZError> mErrorQueue;
-        //! Current error.
-        ZError mCurError;
-        //! Option controlling how logfile is used.
-        bool mLogAllErrors;
         //! C-style FILE* for error logging.
         std::FILE *mErrlog;
+        //! Static Array of Error Identifiers
+        std::string mErrorDesc[ZERR_LAST];
         //! Event filter, for users who need to process their own events.
         SDL_EventFilter mEventFilter;
         //! Random Generator for general use.
@@ -485,15 +505,6 @@ class ZEngine
     /////////////////
     //Error Logging//
     /////////////////
-    private:
-        /*!
-            \brief Writes an error to file.
-
-            Writes error to current error file.
-            \since 0.8.2
-            \param error ZError to write to file.
-        **/
-        void LogError(ZError error);
 
     public:
         /*!
@@ -501,24 +512,22 @@ class ZEngine
 
             Change the way errors are logged and the file they are logged to, before calling this errors are logged to stderr.
             (SDL may define stderr.txt on some platforms.)
-            \since 0.8.2
-            \param logAll If set to true every error will be written to file instead of stored in the logfile.
-            \param logFile Name of file to use as log, passing in stderr or stdio will set the log to the C streams. 
+            \since 0.8.6
+            \param logFile Name of file to use as log, passing in stderr or stdio will set the log to the respective C stream.
             Passing in nothing will not change the current error log file, which defaults to stderr.
         **/
-        void SetErrorLog(bool logAll, std::string logFile="");
+        void SetErrorLog(std::string logFile);
+
+        void DisableErrorLog();
+
 
         /*!
             \brief Report an error.
 
             Adds the error to the the error queue, and sets the current error to this error.
             \since 0.8.2
-            \param code ZErrorCode of error.
-            \param desc Optional std::string describing error.
-            \param file Optional argument specifying the file the error occured in.
-            \param line Optional argument specifying the line the error occured on.
         **/
-        void ReportError(ZErrorCode code, std::string desc="", std::string file="", unsigned int line=0);
+        void ReportError(ZErrorCode type, std::string desc="", ...);
 
         /*!
             \brief Get the last error.
