@@ -25,7 +25,7 @@ This application uses dynamic linking to comply with these licenses (namely the 
 
 This is a license template for using ZEngine, if you are not using the 5 LGPL libraries listed you may remove the ones you are not using, and if you are not using SDL_image you dont need to include the part about SDL_Image libraries.  
 
-Your game's readme file (or some other location) should probably tell the end-user to look in this file for licensing information, and you should always include a copy of the LGPL along with this (to meet the requirements of the LGPL).  A copy of the LGPL can be obtained from http://www.gnu.org/copyleft/lesser.txt.  (Make sure you change the note "(see lgpl.txt)" to reflect what you call the lgpl text file in your release.)
+Your game's readme file (or some other location) should probably tell the end-user to look in this file for licensing information, and you should always include a copy of the LGPL along with this (to meet the requirements of the LGPL).  A copy of the LGPL can be obtained from http://www.gnu.org/copyleft/lesser.txt.
 
 
 Things to change in your version of this file:
