@@ -167,9 +167,9 @@
 00484 <span class="preprocessor"></span>
 00485     <span class="comment">//Physfs Utilities//</span>
 00487 <span class="comment"></span>
-00493 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a36">InitPhysFS</a>(string argv);
+00493 <span class="comment"></span>        <span class="keywordtype">void</span> InitPhysFS(string argv);
 00494 
-00501         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a37">AddPhysFSDir</a>(string dir);
+00501         <span class="keywordtype">void</span> AddPhysFSDir(string dir);
 00502 
 00503 <span class="preprocessor">#endif    //USE_PHYSFS</span>
 00504 <span class="preprocessor"></span>
@@ -178,59 +178,59 @@
 00516 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#c1">LogError</a>(<a class="code" href="classZE_1_1ZError.html">ZError</a> error);
 00517 
 00518     <span class="keyword">public</span>:
-00529         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a38">SetErrorLog</a>(<span class="keywordtype">bool</span> logAll, string logFile=<span class="stringliteral">""</span>);
+00529         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a36">SetErrorLog</a>(<span class="keywordtype">bool</span> logAll, string logFile=<span class="stringliteral">""</span>);
 00530 
-00541         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a39">ReportError</a>(ZErrorCode code, string desc=<span class="stringliteral">""</span>, string file=<span class="stringliteral">""</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line=0);
+00541         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a37">ReportError</a>(ZErrorCode code, string desc=<span class="stringliteral">""</span>, string file=<span class="stringliteral">""</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line=0);
 00542 
-00550         <a class="code" href="namespaceZE.html#a20">ZErrorCode</a> <a class="code" href="classZE_1_1ZEngine.html#a40">GetLastError</a>();
+00550         <a class="code" href="namespaceZE.html#a24">ZErrorCode</a> <a class="code" href="classZE_1_1ZEngine.html#a38">GetLastError</a>();
 00551 
-00559         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a41">WriteLog</a>(string str);
+00559         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a39">WriteLog</a>(string str);
 00560 
-00567         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a42">FlushErrors</a>();
+00567         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a40">FlushErrors</a>();
 00568 
 00570     <span class="comment">//Random Number Generation//</span>
 00572 <span class="comment"></span>
-00580 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a43">SeedRandom</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);
+00580 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a41">SeedRandom</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);
 00581 
-00590         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classZE_1_1ZEngine.html#a44">RandLong</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> max);
+00590         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classZE_1_1ZEngine.html#a42">RandLong</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> max);
 00591 
-00601         <span class="keywordtype">long</span> <a class="code" href="classZE_1_1ZEngine.html#a44">RandLong</a>(<span class="keywordtype">long</span> min, <span class="keywordtype">long</span> max);
+00601         <span class="keywordtype">long</span> <a class="code" href="classZE_1_1ZEngine.html#a42">RandLong</a>(<span class="keywordtype">long</span> min, <span class="keywordtype">long</span> max);
 00602 
-00610         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a46">RandDouble</a>();
+00610         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a44">RandDouble</a>();
 00611 
-00621         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a46">RandDouble</a>(<span class="keywordtype">double</span> min, <span class="keywordtype">double</span> max);
+00621         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a44">RandDouble</a>(<span class="keywordtype">double</span> min, <span class="keywordtype">double</span> max);
 00622 
 00624     <span class="comment">//Data Loading + Unloading//</span>
 00626 <span class="comment"></span>
-00633 <span class="comment"></span>        SDL_Surface* <a class="code" href="classZE_1_1ZEngine.html#a48">LoadImage</a>(string filename);
+00633 <span class="comment"></span>        SDL_Surface* <a class="code" href="classZE_1_1ZEngine.html#a46">LoadImage</a>(string filename);
 00634 
 00635 <span class="preprocessor">#ifdef USE_SDL_MIXER</span>
 00636 <span class="preprocessor"></span>
-00643         Mix_Chunk* <a class="code" href="classZE_1_1ZEngine.html#a49">LoadSound</a>(string filename);
+00643         Mix_Chunk* <a class="code" href="classZE_1_1ZEngine.html#a47">LoadSound</a>(string filename);
 00644 
-00652         Mix_Music* <a class="code" href="classZE_1_1ZEngine.html#a50">LoadMusic</a>(string filename);
+00652         Mix_Music* <a class="code" href="classZE_1_1ZEngine.html#a48">LoadMusic</a>(string filename);
 00653 <span class="preprocessor">#endif</span>
 00654 <span class="preprocessor"></span>
 00655 <span class="preprocessor">#ifdef USE_SDL_TTF</span>
 00656 <span class="preprocessor"></span>
-00664         TTF_Font* <a class="code" href="classZE_1_1ZEngine.html#a51">LoadFont</a>(string filename, <span class="keywordtype">int</span> size);
+00664         TTF_Font* <a class="code" href="classZE_1_1ZEngine.html#a49">LoadFont</a>(string filename, <span class="keywordtype">int</span> size);
 00665 <span class="preprocessor">#endif </span>
 00666 <span class="preprocessor"></span>
 00668     <span class="comment">//Accessors//</span>
 00670 <span class="comment"></span>
-00677 <span class="comment"></span>        <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a52">Width</a>();
+00677 <span class="comment"></span>        <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a50">Width</a>();
 00678 
-00685         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a53">Height</a>();
+00685         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a51">Height</a>();
 00686 
-00693         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a54">BPP</a>();
+00693         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a52">BPP</a>();
 00694 
-00701         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a55">IsFullscreen</a>();
+00701         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a53">IsFullscreen</a>();
 00702 };
 00703 
 00704 }
 00705 
 00706 <span class="preprocessor">#endif //__ze_zengine_h__</span>
-</pre></div><hr><address style="align: right;"><small>Generated on Sun Apr 27 18:16:26 2003 for ZEngine by
+</pre></div><hr><address style="align: right;"><small>Generated on Sun Apr 27 21:57:34 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>

@@ -13,7 +13,7 @@
 File: ZE_Utility.h <br>
 Description: Header file for ZEngine Utilities. <br>
 Author(s): James Turk <br>
-$Id: ZE_Utility.h,v 1.1 2003/01/15 05:31:51 cozman Exp $<br>
+$Id: ZE_Utility.h,v 1.2 2003/04/28 02:01:20 cozman Exp $<br>
 
     \file ZE_Utility.h
     \brief Definition file for ZEngine Utilities.
@@ -42,30 +42,45 @@ namespace ZE
 string FormatStr(const char *fmtstr, ...);
 
 //////////
-//Macros//
+//Memory//
 //////////
 
 /*!
+    \brief Properly free SDL_Surface. 
+    
     Safely free an SDL_Surface* and set it to NULL.
+    \param image Image to free and set to NULL.
 **/
-#define FreeImage(image) if(image){SDL_FreeSurface(image); image = NULL;}
+void FreeImage(SDL_Surface *&image);
 
 #ifdef USE_SDL_MIXER
+
 /*!
+    \brief Properly free Mix_Chunk. 
+    
     Safely free a Mix_Chunk* and set it to NULL.
+    \param chunk Chunk to free and set to NULL.
 **/
-#define FreeSound(sound) if(sound){Mix_FreeChunk(sound); sound = NULL;}
+void FreeSound(Mix_Chunk *&chunk);
+
 /*!
+    \brief Properly free Mix_Music.
+    
     Safely free a Mix_Music* and set it to NULL.
+    \param music Music to free and set to NULL.
 **/
-#define FreeMusic(music) if(music){Mix_FreeMusic(music); music = NULL;}
+void FreeMusic(Mix_Music *&music);
+
 #endif
 
 #ifdef USE_SDL_TTF
 /*!
-    Safely free a TTF_Font and set it to NULL.
+    \brief Properly free TTF_Font. 
+    
+    Safely free a TTF_Font* and set it to NULL.
+    \param font Font to free and set to NULL.
 **/
-#define FreeFont(font) if(font){TTF_CloseFont(font); font = NULL;}
+void FreeFont(TTF_Font *&font);
 #endif
 
 

@@ -13,7 +13,7 @@
 File: ZE_Utility.cpp <br>
 Description: Implementation source file for ZEngine Utilities. <br>
 Author(s): James Turk <br>
-$Id: ZE_Utility.cpp,v 1.4 2003/01/19 01:03:57 cozman Exp $<br>
+$Id: ZE_Utility.cpp,v 1.5 2003/04/28 02:01:20 cozman Exp $<br>
 
     \file ZE_Utility.cpp
     \brief Source file for ZEngine utility functions.
@@ -36,6 +36,50 @@ string FormatStr(const char *fmtstr, ...)
     va_end(args);
     return buf;
 }
+
+void FreeImage(SDL_Surface *&image)
+{
+    if(image)
+    {
+        SDL_FreeSurface(image);
+        image = NULL;
+    }
+}
+
+#ifdef USE_SDL_MIXER
+
+void FreeSound(Mix_Chunk *&chunk)
+{
+    if(chunk)
+    {
+        Mix_FreeChunk(chunk);
+        chunk = NULL;
+    }
+}
+
+void FreeMusic(Mix_Music *&music)
+{
+    if(music)
+    {
+        Mix_FreeMusic(music);
+        music = NULL;
+    }
+}
+
+#endif 
+
+#ifdef USE_SDL_TTF
+
+void FreeFont(TTF_Font *&font)
+{
+    if(font)
+    {
+        TTF_CloseFont(font);
+        font = NULL;
+    }
+}
+
+#endif
 
 }
 
