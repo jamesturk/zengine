@@ -100,6 +100,9 @@
 				RelativePath="..\src\ZE_ZTimer.cpp">
 			</File>
 			<File
+				RelativePath="..\src\external\mt19937ar.cpp">
+			</File>
+			<File
 				RelativePath="..\src\external\physfsrwops.cpp">
 			</File>
 		</Filter>
@@ -153,6 +156,9 @@
 			</File>
 			<File
 				RelativePath="..\include\ZEngine.h">
+			</File>
+			<File
+				RelativePath="..\include\external\mt19937ar.h">
 			</File>
 			<File
 				RelativePath="..\include\external\physfsrwops.h">

@@ -13,7 +13,7 @@
 File: ZE_ZServer.h <br>
 Description: Header file for core ZEngine TCP Server Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZServer.h,v 1.3 2003/03/19 04:12:52 cozman Exp $<br>
+$Id: ZE_ZServer.h,v 1.4 2003/04/27 21:50:47 cozman Exp $<br>
 
     \file ZE_ZServer.h
     \brief Definition file for ZServer.
@@ -33,6 +33,7 @@ namespace ZE
 
 /*!
     \brief ZEngine class for simplified TCP server.
+    \since 0.8.3
 
     ZServer server class, used to create a simple TCP game server for use with ZClient.  A very simple turnaround server, all the server does
     is accept connections and relay all recieved data to all other clients.

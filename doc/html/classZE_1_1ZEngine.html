@@ -96,22 +96,32 @@
 <tr><td>&nbsp;</td><td><font size=-1><em>Write to the log.</em> <a href="#a39"></a><em></em></font><br><br></td></tr>
 <tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a40">FlushErrors</a> ()</td></tr>
 <tr><td>&nbsp;</td><td><font size=-1><em>Flush Stack of Errors to file.</em> <a href="#a40"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>SDL_Surface *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a41">LoadImage</a> (string filename)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Load an Image.</em> <a href="#a41"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>Mix_Chunk *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a42">LoadSound</a> (string filename)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Load a Sound.</em> <a href="#a42"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>Mix_Music *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a43">LoadMusic</a> (string filename)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Load a Music File.</em> <a href="#a43"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>TTF_Font *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a44">LoadFont</a> (string filename, int size)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Load a Font.</em> <a href="#a44"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a45">Width</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get Current Display Width.</em> <a href="#a45"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a46">Height</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get Current Display Height.</em> <a href="#a46"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a47">BPP</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get Current Display BPP.</em> <a href="#a47"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>bool&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a48">IsFullscreen</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get Fullscreen setting.</em> <a href="#a48"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a41">SeedRandom</a> (unsigned long seed)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Seed random number generator.</em> <a href="#a41"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>unsigned long&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a42">RandLong</a> (unsigned long max)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Obtain random integer [0,max).</em> <a href="#a42"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>long&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a43">RandLong</a> (long min, long max)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Obtain random integer [min,max].</em> <a href="#a43"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>double&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a44">RandDouble</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Obtain random double [0,1).</em> <a href="#a44"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>double&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a45">RandDouble</a> (double min, double max)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Obtain random double [min,max].</em> <a href="#a45"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>SDL_Surface *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a46">LoadImage</a> (string filename)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Load an Image.</em> <a href="#a46"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>Mix_Chunk *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a47">LoadSound</a> (string filename)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Load a Sound.</em> <a href="#a47"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>Mix_Music *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a48">LoadMusic</a> (string filename)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Load a Music File.</em> <a href="#a48"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>TTF_Font *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a49">LoadFont</a> (string filename, int size)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Load a Font.</em> <a href="#a49"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a50">Width</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get Current Display Width.</em> <a href="#a50"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a51">Height</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get Current Display Height.</em> <a href="#a51"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a52">BPP</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get Current Display BPP.</em> <a href="#a52"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>bool&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a53">IsFullscreen</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get Fullscreen setting.</em> <a href="#a53"></a><em></em></font><br><br></td></tr>
 <tr><td colspan=2><br><h2>Static Public Methods</h2></td></tr>
 <tr><td nowrap align=right valign=top>ZEngine *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#d0">GetInstance</a> ()</td></tr>
 <tr><td>&nbsp;</td><td><font size=-1><em>Get Instance.</em> <a href="#d0"></a><em></em></font><br><br></td></tr>
@@ -1743,7 +1753,200 @@ Write the error stack to the error log. <dl compact><dt><b>Since:</b></dt><dd>0.
     </td>
   </tr>
 </table>
-<a name="a41" doxytag="ZE::ZEngine::LoadImage"></a><p>
+<a name="a41" doxytag="ZE::ZEngine::SeedRandom"></a><p>
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+  <tr>
+    <td class="md">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> void ZE::ZEngine::SeedRandom </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">unsigned long&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>&nbsp; <em>seed</em>          </td>
+          <td class="md" valign="top">)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Reseed Mersenne Twister (MT19937) random number generator. NOTE: Generator is initialized upon creation of <a class="el" href="classZE_1_1ZEngine.html">ZEngine</a> using time. (Faster and more random than rand(), see src/external/mt19937ar.c) <dl compact><dt><b>Since:</b></dt><dd>0.8.3 </dd></dl>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign=top><em>seed</em>&nbsp;</td><td>Seed for random sequence. </td></tr>
+  </table>
+</dl>
+    </td>
+  </tr>
+</table>
+<a name="a42" doxytag="ZE::ZEngine::RandLong"></a><p>
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+  <tr>
+    <td class="md">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> unsigned long ZE::ZEngine::RandLong </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">unsigned long&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>&nbsp; <em>max</em>          </td>
+          <td class="md" valign="top">)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Obtain random long l where 0 &lt;= l &lt; max. <dl compact><dt><b>Since:</b></dt><dd>0.8.3 </dd></dl>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign=top><em>max</em>&nbsp;</td><td>Limit for random number. </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>Random unsigned long. </dd></dl>
+    </td>
+  </tr>
+</table>
+<a name="a43" doxytag="ZE::ZEngine::RandLong"></a><p>
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+  <tr>
+    <td class="md">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> long ZE::ZEngine::RandLong </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">long&nbsp;</td>
+          <td class="mdname" nowrap>&nbsp; <em>min</em>, </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="md" nowrap>long&nbsp;</td>
+          <td class="mdname" nowrap>&nbsp; <em>max</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Obtain random long l where min &lt;= l &lt;= max. <dl compact><dt><b>Since:</b></dt><dd>0.8.3 </dd></dl>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign=top><em>min</em>&nbsp;</td><td>Lower limit for random number. </td></tr>
+    <tr><td valign=top><em>max</em>&nbsp;</td><td>Upper limit for random number. </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>Random long. </dd></dl>
+    </td>
+  </tr>
+</table>
+<a name="a44" doxytag="ZE::ZEngine::RandDouble"></a><p>
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+  <tr>
+    <td class="md">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> double ZE::ZEngine::RandDouble </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
+          <td class="md" valign="top">)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Obtain random double d where 0 &lt;= d &lt; 1. <dl compact><dt><b>Since:</b></dt><dd>0.8.3 </dd></dl>
+<dl compact><dt><b>Returns:</b></dt><dd>Random double [0,1). </dd></dl>
+    </td>
+  </tr>
+</table>
+<a name="a45" doxytag="ZE::ZEngine::RandDouble"></a><p>
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+  <tr>
+    <td class="md">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> double ZE::ZEngine::RandDouble </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">double&nbsp;</td>
+          <td class="mdname" nowrap>&nbsp; <em>min</em>, </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="md" nowrap>double&nbsp;</td>
+          <td class="mdname" nowrap>&nbsp; <em>max</em></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Obtain random double d where min &lt;= d &lt;= max. <dl compact><dt><b>Since:</b></dt><dd>0.8.3 </dd></dl>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign=top><em>min</em>&nbsp;</td><td>Lower limit for random number. </td></tr>
+    <tr><td valign=top><em>max</em>&nbsp;</td><td>Upper limit for random number. </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>Random double [min,max]. </dd></dl>
+    </td>
+  </tr>
+</table>
+<a name="a46" doxytag="ZE::ZEngine::LoadImage"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1778,7 +1981,7 @@ Loads an Image to an ImageData class which keeps vital information on the Image.
     </td>
   </tr>
 </table>
-<a name="a42" doxytag="ZE::ZEngine::LoadSound"></a><p>
+<a name="a47" doxytag="ZE::ZEngine::LoadSound"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1813,7 +2016,7 @@ Loads a Sound to a SoundData class which keeps vital information on the Sound <d
     </td>
   </tr>
 </table>
-<a name="a43" doxytag="ZE::ZEngine::LoadMusic"></a><p>
+<a name="a48" doxytag="ZE::ZEngine::LoadMusic"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1848,7 +2051,7 @@ Loads a Music Clip to a MusicData class which keeps vital information on the Mus
     </td>
   </tr>
 </table>
-<a name="a44" doxytag="ZE::ZEngine::LoadFont"></a><p>
+<a name="a49" doxytag="ZE::ZEngine::LoadFont"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1893,7 +2096,7 @@ Loads a Font to a FontData class which keeps vital information on the Font <dl c
     </td>
   </tr>
 </table>
-<a name="a45" doxytag="ZE::ZEngine::Width"></a><p>
+<a name="a50" doxytag="ZE::ZEngine::Width"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1922,7 +2125,7 @@ Get Width of Window or Fullscreen mode. <dl compact><dt><b>Returns:</b></dt><dd>
     </td>
   </tr>
 </table>
-<a name="a46" doxytag="ZE::ZEngine::Height"></a><p>
+<a name="a51" doxytag="ZE::ZEngine::Height"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1951,7 +2154,7 @@ Get Height of Window or Fullscreen mode. <dl compact><dt><b>Returns:</b></dt><dd
     </td>
   </tr>
 </table>
-<a name="a47" doxytag="ZE::ZEngine::BPP"></a><p>
+<a name="a52" doxytag="ZE::ZEngine::BPP"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -1980,7 +2183,7 @@ Get BPP of Window or Fullscreen mode. <dl compact><dt><b>Returns:</b></dt><dd>BP
     </td>
   </tr>
 </table>
-<a name="a48" doxytag="ZE::ZEngine::IsFullscreen"></a><p>
+<a name="a53" doxytag="ZE::ZEngine::IsFullscreen"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -2011,7 +2214,7 @@ Get Fullscreen setting of Display. <dl compact><dt><b>Returns:</b></dt><dd>True 
 </table>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/include/<a class="el" href="ZE__ZEngine_8h-source.html">ZE_ZEngine.h</a><li>/src/<a class="el" href="ZE__ZEngine_8cpp.html">ZE_ZEngine.cpp</a></ul>
-<hr><address style="align: right;"><small>Generated on Sun Apr 27 14:53:40 2003 for ZEngine by
+<hr><address style="align: right;"><small>Generated on Sun Apr 27 17:49:38 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>

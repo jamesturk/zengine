@@ -1,5 +1,5 @@
-ZEngine Version Log for Version 0.8.2
-$Id: changelog.txt,v 1.31 2003/04/27 18:54:58 cozman Exp $
+ZEngine Version Log for Version 0.8.3
+$Id: changelog.txt,v 1.32 2003/04/27 21:50:43 cozman Exp $
 
 0.8.3 
     -Fixed project files for people who don't want to add ZEngine to their path.

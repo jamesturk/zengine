@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.34 2003/04/08 03:30:50 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.35 2003/04/27 21:50:48 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -629,6 +629,31 @@ void ZEngine::FlushErrors()
         LogError(mErrorQueue.front());
         mErrorQueue.pop();
     }
+}
+
+void ZEngine::SeedRandom(unsigned long seed)
+{
+    init_genrand(seed);
+}
+
+unsigned long ZEngine::RandLong(unsigned long max)
+{
+    return genrand_int32()%max;
+}
+
+long ZEngine::RandLong(long min, long max)
+{
+    return min + genrand_int32()%(max-min);
+}
+
+double ZEngine::RandDouble()
+{
+    return genrand_real2();
+}
+
+double ZEngine::RandDouble(double min, double max)
+{
+    return min + (genrand_real1()*(max-min));
 }
 
 SDL_Surface* ZEngine::LoadImage(string filename)
