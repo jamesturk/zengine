@@ -29,11 +29,11 @@
  *          Addison-Wesley, 1983. ISBN 0-201-06672-6.
  */
 
-/* @(#) $Id: trees.c,v 1.1 2003/10/13 21:01:25 cozman Exp $ */
+/* @(#) $Id: trees.c,v 1.2 2003/10/13 21:07:33 cozman Exp $ */
 
 /* #define GEN_TREES_H */
 
-#include "deflate.h"
+#include "zlib/deflate.h"
 
 #ifdef DEBUG
 #  include <ctype.h>
@@ -115,7 +115,7 @@ local int base_dist[D_CODES];
 /* First normalized distance for each code (0 = distance of 1) */
 
 #else
-#  include "trees.h"
+#  include "zlib/trees.h"
 #endif /* GEN_TREES_H */
 
 struct static_tree_desc_s {

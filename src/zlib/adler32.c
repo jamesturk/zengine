@@ -3,9 +3,9 @@
  * For conditions of distribution and use, see copyright notice in zlib.h 
  */
 
-/* @(#) $Id: adler32.c,v 1.1 2003/10/13 21:01:25 cozman Exp $ */
+/* @(#) $Id: adler32.c,v 1.2 2003/10/13 21:07:33 cozman Exp $ */
 
-#include "zlib.h"
+#include "zlib/zlib.h"
 
 #define BASE 65521L /* largest prime smaller than 65536 */
 #define NMAX 5552

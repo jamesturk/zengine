@@ -17,8 +17,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "zutil.h"
-#include "inftrees.h"
+#include "zlib/zutil.h"
+#include "zlib/inftrees.h"
 
 /* simplify the use of the inflate_huft type with some defines */
 #define exop word.what.Exop

@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "zlib.h"
-#include "unzip.h"
+#include "zlib/zlib.h"
+#include "zlib/unzip.h"
 
 #ifdef STDC
 #  include <stddef.h>

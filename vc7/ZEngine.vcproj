@@ -21,7 +21,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories="../include;../zlib"
+				AdditionalIncludeDirectories="../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
@@ -158,46 +158,46 @@
 			<Filter
 				Name="Header Files">
 				<File
-					RelativePath="..\zlib\deflate.h">
+					RelativePath="..\include\zlib\deflate.h">
 				</File>
 				<File
-					RelativePath="..\zlib\infblock.h">
+					RelativePath="..\include\zlib\infblock.h">
 				</File>
 				<File
-					RelativePath="..\zlib\infcodes.h">
+					RelativePath="..\include\zlib\infcodes.h">
 				</File>
 				<File
-					RelativePath="..\zlib\inffast.h">
+					RelativePath="..\include\zlib\inffast.h">
 				</File>
 				<File
-					RelativePath="..\zlib\inffixed.h">
+					RelativePath="..\include\zlib\inffixed.h">
 				</File>
 				<File
-					RelativePath="..\zlib\inftrees.h">
+					RelativePath="..\include\zlib\inftrees.h">
 				</File>
 				<File
-					RelativePath="..\zlib\infutil.h">
+					RelativePath="..\include\zlib\infutil.h">
 				</File>
 				<File
-					RelativePath="..\zlib\trees.h">
+					RelativePath="..\include\zlib\trees.h">
 				</File>
 				<File
-					RelativePath="..\zlib\unzip.h">
+					RelativePath="..\include\zlib\unzip.h">
 				</File>
 				<File
-					RelativePath="..\zlib\zconf.h">
+					RelativePath="..\include\zlib\zconf.h">
 				</File>
 				<File
-					RelativePath="..\zlib\zlib.h">
+					RelativePath="..\include\zlib\zlib.h">
 				</File>
 				<File
-					RelativePath="..\zlib\zutil.h">
+					RelativePath="..\include\zlib\zutil.h">
 				</File>
 			</Filter>
 			<Filter
 				Name="Source Files">
 				<File
-					RelativePath="..\zlib\adler32.c">
+					RelativePath="..\src\zlib\adler32.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -206,7 +206,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\compress.c">
+					RelativePath="..\src\zlib\compress.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -215,7 +215,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\crc32.c">
+					RelativePath="..\src\zlib\crc32.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -224,7 +224,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\deflate.c">
+					RelativePath="..\src\zlib\deflate.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -233,7 +233,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\gzio.c">
+					RelativePath="..\src\zlib\gzio.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -242,7 +242,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\infblock.c">
+					RelativePath="..\src\zlib\infblock.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -251,7 +251,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\infcodes.c">
+					RelativePath="..\src\zlib\infcodes.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -260,7 +260,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\inffast.c">
+					RelativePath="..\src\zlib\inffast.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -269,7 +269,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\inflate.c">
+					RelativePath="..\src\zlib\inflate.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -278,7 +278,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\inftrees.c">
+					RelativePath="..\src\zlib\inftrees.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -287,7 +287,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\infutil.c">
+					RelativePath="..\src\zlib\infutil.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -296,7 +296,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\maketree.c">
+					RelativePath="..\src\zlib\maketree.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -305,7 +305,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\trees.c">
+					RelativePath="..\src\zlib\trees.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -314,7 +314,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\uncompr.c">
+					RelativePath="..\src\zlib\uncompr.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -323,7 +323,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\unzip.c">
+					RelativePath="..\src\zlib\unzip.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool
@@ -332,7 +332,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\zlib\zutil.c">
+					RelativePath="..\src\zlib\zutil.c">
 					<FileConfiguration
 						Name="Release|Win32">
 						<Tool

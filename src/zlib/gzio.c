@@ -5,11 +5,11 @@
  * Compile this file with -DNO_DEFLATE to avoid the compression code.
  */
 
-/* @(#) $Id: gzio.c,v 1.1 2003/10/13 21:01:25 cozman Exp $ */
+/* @(#) $Id: gzio.c,v 1.2 2003/10/13 21:07:33 cozman Exp $ */
 
 #include <stdio.h>
 
-#include "zutil.h"
+#include "zlib/zutil.h"
 
 struct internal_state {int dummy;}; /* for buggy compilers */
 

@@ -3,9 +3,9 @@
  * For conditions of distribution and use, see copyright notice in zlib.h 
  */
 
-/* @(#) $Id: compress.c,v 1.1 2003/10/13 21:01:25 cozman Exp $ */
+/* @(#) $Id: compress.c,v 1.2 2003/10/13 21:07:33 cozman Exp $ */
 
-#include "zlib.h"
+#include "zlib/zlib.h"
 
 /* ===========================================================================
      Compresses the source buffer into the destination buffer. The level
