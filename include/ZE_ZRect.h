@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.2 2002/12/01 08:36:39 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.3 2002/12/04 05:22:40 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -38,13 +38,13 @@ class ZRect
 {
     protected:  
         //! X Position of top left corner of rectangle.
-        int rX;
+        float rX;
         //! Y Position of top left corner of rectangle.
-        int rY;
+        float rY;
         //! Width of Rectangle.
-        int rWidth;
+        float rWidth;
         //! Height of Rectangle.
-        int rHeight;
+        float rHeight;
 
     public:
 
@@ -64,7 +64,7 @@ class ZRect
             \param width Value for width.
             \param height Value for height.
         **/
-        ZRect(int x, int y, int width, int height);
+        ZRect(float x, float y, float width, float height);
 
         /*!
             \brief Copy constructor for ZRect.
@@ -111,7 +111,7 @@ class ZRect
             \param x New x position for rectangle.
             \param y New y position for rectangle.
         **/
-        void Move(int x, int y);
+        void Move(float x, float y);
 
         /*!
             \brief Changes the location of the rectangle based upon the current location.
@@ -120,7 +120,7 @@ class ZRect
             \param xMove Offset for new x position from current.
             \param yMove Offset for new y position from current.
         **/
-        void MoveRel(int xMove, int yMove);
+        void MoveRel(float xMove, float yMove);
 
         /*!
             \brief Resize rectangle.
@@ -129,7 +129,7 @@ class ZRect
             \param width New width for rectangle.
             \param height New height for rectangle.
         **/
-        void Resize(int width, int height);
+        void Resize(float width, float height);
 
         /*!
             \brief Grows or shrinks current rectangle.
@@ -138,7 +138,7 @@ class ZRect
             \param widthChange Amount to add or subtract from width.
             \param heightChange Amount to add or subtract from height.
         **/
-        void ResizeRel(int widthChange, int heightChange);
+        void ResizeRel(float widthChange, float heightChange);
 
         /*!
             \brief Check if one ZRect intersects another.
@@ -157,7 +157,7 @@ class ZRect
             \param y Y value of poitn to check.
             \return Boolean variable, true if point is inside rectangle, false otherwise.
         **/
-        bool Contains(int x, int y) const;
+        bool Contains(float x, float y) const;
 
         /*!
             \brief Check if a rectangle contains a given point.
@@ -191,7 +191,7 @@ class ZRect
             Access private X location member.
             \return Value of mX.
         **/
-        int X() const;
+        float X() const;
 
         /*!
             \brief Returns Y Location.
@@ -199,7 +199,7 @@ class ZRect
             Access private Y location member.
             \return Value of mY.
         **/
-        int Y() const;
+        float Y() const;
 
         /*!
             \brief Return position of left side.
@@ -207,7 +207,7 @@ class ZRect
             Find X position of left side of rectangle.
             \return X position of left side.
         **/
-        int Left() const;
+        float Left() const;
 
         /*!
             \brief Return position of right side.
@@ -215,7 +215,7 @@ class ZRect
             Find X position of right side of rectangle.
             \return X position of right side.
         **/
-        int Right() const;
+        float Right() const;
 
         /*!
             \brief Return position of top side.
@@ -223,7 +223,7 @@ class ZRect
             Find Y position of top side of rectangle.
             \return Y position of top side.
         **/
-        int Top() const;
+        float Top() const;
 
         /*!
             \brief Return position of bottom side.
@@ -231,7 +231,7 @@ class ZRect
             Find Y position of left side of rectangle.
             \return Y position of bottom side.
         **/
-        int Bottom() const;
+        float Bottom() const;
 
         /*!
             \brief Returns Width.
@@ -239,7 +239,7 @@ class ZRect
             Access private width member.
             \return Value of mWidth.
         **/
-        int Width() const;
+        float Width() const;
 
         /*!
             \brief Returns Height.
@@ -247,7 +247,7 @@ class ZRect
             Access private height member.
             \return Value of mHeight.
         **/
-        int Height() const;
+        float Height() const;
 };
 
 } //namspace ZE

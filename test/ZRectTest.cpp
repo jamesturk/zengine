@@ -35,6 +35,7 @@ void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZRect moveRect(0,0,25,25),stillRect(100,100,100,100);
+    double movDelta;
 
     do
     {
@@ -49,14 +50,15 @@ void Test()
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();
         //movement//
+        movDelta = engine->GetFrameTime()*30;
         if(engine->KeyPress(SDLK_LEFT))
-            moveRect.MoveRel(-3,0);
+            moveRect.MoveRel(-movDelta,0);
         if(engine->KeyPress(SDLK_RIGHT))
-            moveRect.MoveRel(3,0);
+            moveRect.MoveRel(movDelta,0);
         if(engine->KeyPress(SDLK_UP))
-            moveRect.MoveRel(0,-3);
+            moveRect.MoveRel(0,-movDelta);
         if(engine->KeyPress(SDLK_DOWN))
-            moveRect.MoveRel(0,3);
+            moveRect.MoveRel(0,movDelta);
         if(engine->KeyIsPressed(SDLK_EQUALS))
         {
             moveRect.MoveRel(-1,-1);

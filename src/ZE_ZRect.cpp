@@ -13,7 +13,7 @@
 File: ZE_ZRect.cpp <br>
 Description: Implementation source file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.2 2002/12/01 08:36:39 cozman Exp $<br>
+$Id: ZE_ZRect.cpp,v 1.3 2002/12/04 05:22:39 cozman Exp $<br>
 
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
@@ -31,7 +31,7 @@ ZRect::ZRect() :
 {
 }
 
-ZRect::ZRect(int x, int y, int width, int height) :
+ZRect::ZRect(float x, float y, float width, float height) :
     rX(x),rY(y),rWidth(width),rHeight(height)
 {
 }
@@ -90,32 +90,32 @@ void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
 {
     glColor4ub(red,green,blue,alpha);
     glBegin(GL_QUADS);
-        glVertex2i(rX, rY);
-        glVertex2i(rX+rWidth, rY);
-        glVertex2i(rX+rWidth, rY+rHeight);
-        glVertex2i(rX, rY+rHeight);
+        glVertex2f(rX, rY);
+        glVertex2f(rX+rWidth, rY);
+        glVertex2f(rX+rWidth, rY+rHeight);
+        glVertex2f(rX, rY+rHeight);
     glEnd();
 }
 
-void ZRect::Move(int x, int y)
+void ZRect::Move(float x, float y)
 {
     rX = x;
     rY = y;
 }
 
-void ZRect::MoveRel(int xMove, int yMove)
+void ZRect::MoveRel(float xMove, float yMove)
 {
     rX += xMove;
     rY += yMove;
 }
 
-void ZRect::Resize(int width, int height)
+void ZRect::Resize(float width, float height)
 {
     rWidth = width;
     rHeight = height;
 }
 
-void ZRect::ResizeRel(int widthChange, int heightChange)
+void ZRect::ResizeRel(float widthChange, float heightChange)
 {
     rWidth += widthChange;
     rHeight += heightChange;
@@ -127,7 +127,7 @@ bool ZRect::Intersects(const ZRect &rect) const
         rY > rect.Bottom() || rect.Top() > rY+rHeight);
 }
 
-bool ZRect::Contains(int x, int y) const
+bool ZRect::Contains(float x, float y) const
 {
     return x > rX && x < rX+rWidth && y > rY && y < rY+rHeight;
 }
@@ -141,7 +141,7 @@ bool ZRect::Contains(const ZRect &rect) const
 
 ZRect ZRect::Intersection(const ZRect &rect) const
 {
-    int tempX=0,tempY=0,tempW=0,tempH=0;
+    float tempX=0,tempY=0,tempW=0,tempH=0;
 
     if(Intersects(rect))
     {
@@ -169,42 +169,42 @@ SDL_Rect ZRect::SDLrect() const
     return ret;
 }
 
-int ZRect::X() const
+float ZRect::X() const
 {
     return rX;
 }
 
-int ZRect::Y() const
+float ZRect::Y() const
 {
     return rY;
 }
 
-int ZRect::Left() const
+float ZRect::Left() const
 {
     return rX;
 }
 
-int ZRect::Right() const
+float ZRect::Right() const
 {
     return rX+rWidth;
 }
 
-int ZRect::Top() const
+float ZRect::Top() const
 {
     return rY;
 }
 
-int ZRect::Bottom() const
+float ZRect::Bottom() const
 {
     return rY+rHeight;
 }
 
-int ZRect::Width() const
+float ZRect::Width() const
 {
     return rWidth;
 }
 
-int ZRect::Height() const
+float ZRect::Height() const
 {
     return rHeight;
 }
