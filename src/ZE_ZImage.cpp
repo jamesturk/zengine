@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.40 2003/08/07 05:54:45 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.41 2003/08/08 03:52:25 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -140,8 +140,8 @@ void ZImage::Attach(SDL_Surface *surface)
 
     if(surface)
     {
-        rWidth = surface->w;
-        rHeight = surface->h;
+        rWidth = static_cast<float>(surface->w);
+        rHeight = static_cast<float>(surface->h);
         rTexID = SDL_GL_LoadTexture(surface,coord); //major helper, not written by me, from libsdl.org
         rTexMinX = coord[0];
         rTexMinY = coord[1];
@@ -167,7 +167,8 @@ void ZImage::Release()
     if(glIsTexture(rTexID))
         glDeleteTextures(1,&rTexID);
     rTexMinX = rTexMinY = rTexMaxX = rTexMaxY = 0.0f;
-    rTexID = rWidth = rHeight = 0;
+    rTexID = 0;
+    rWidth = rHeight = 0;
     FreeImage(rImage);
 }
 
@@ -193,7 +194,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 
 void ZImage::Draw(int x, int y) const
 {
-    Draw(x,y);
+    Draw(static_cast<float>(x),static_cast<float>(y));
 }
 
 void ZImage::Draw(float x, float y) const
