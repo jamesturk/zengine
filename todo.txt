@@ -1,7 +1,8 @@
 ZEngine Todo List
     -'ZDisplayList' class or similar solution.
     -Add Support for ZLib in ZMusic.  (Waiting on SDL_mixer.)
-    -ZSprite class (using XML layout?)
+    -ZSprite class
+    -ZResourceFile class
     -Entirely New ZFont class, using display lists (possible)
     -OSX support
     -Lua Scripting Integration
