@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.30 2003/03/01 20:47:00 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.31 2003/03/17 04:23:20 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -250,7 +250,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
 #endif //USE_SDL_NET
 
     if(!mInitialized)
-        mLastTime = mPausedTime = SDL_GetTicks();
+        mPausedTime = SDL_GetTicks();
     mActive = true;
     mInitialized = true;    //if it makes it to the end it has been initialized
 
@@ -319,6 +319,7 @@ void ZEngine::Update()
 {
     SDL_GL_SwapBuffers();
 
+    WriteLog(FormatStr("mSec = %f \t mLastTime=%d",mSecPerFrame,mLastTime));
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
     mLastTime = GetTime();
 
@@ -399,7 +400,7 @@ double ZEngine::GetFrameTime()
 
 double ZEngine::GetFramerate()
 {
-    return 1/mSecPerFrame;
+    return mSecPerFrame ? 1/mSecPerFrame : 0;
 }
 
 void ZEngine::SetDesiredFramerate(Uint8 rate)
