@@ -4,7 +4,7 @@
 
     Header file for ZEngine Game Engine from Concept of Zero, this is the file that programs that wish to 
     utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.29 2003/07/13 00:46:57 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.30 2003/08/01 21:54:28 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -27,7 +27,6 @@
     to have no leaks.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website : http://zengine.sourceforge.net/.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine tutorials : http://zengine.sourceforge.net/tutorials/.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine forums : http://www.conceptofzero.net/index.php?name=PNphpBB2&file=viewforum&f=4
     
     \section Licensing Licensing
     <br>
@@ -45,6 +44,7 @@
     Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
     Sean <a href="mailto:sean@conceptofzero.net">sean@conceptofzero.net</a> - MSVC++6 Project Files<br>
     Kevin Watters <a href="mailto:kwatters@adelphia.net">kwatters@adelphia.net</a> - Fix to ZImage::SetColorKey<br>
+    Atani <a href="atani@atani-software.net">atani@atani-software.net</a> - Revised Linux Build System<br>
 **/
 
 #ifndef __zengine_h__
