@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.4 2002/12/03 06:19:43 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.5 2002/12/05 00:06:32 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -103,7 +103,6 @@ void ZEngine::CreateDisplay(string title, string icon)
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
     {
         LogError(FormatStr("SDL could not be Initialized: %s", SDL_GetError()));
-        //CloseWindow();
     }
     
 #ifdef USE_SDL_MIXER
@@ -311,7 +310,7 @@ bool ZEngine::KeyIsPressed(SDLKey key)
 bool ZEngine::KeyPress(SDLKey key)
 {
     bool temp = mKeyPress[key];
-    mKeyPress[key] = false;
+//    mKeyPress[key] = false;
     return temp;
 }
 
