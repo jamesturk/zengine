@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.11 2003/01/25 19:56:05 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.12 2003/02/10 04:07:05 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -24,7 +24,7 @@ $Id: ZE_ZImage.h,v 1.11 2003/01/25 19:56:05 cozman Exp $<br>
 #ifndef __ze_zimage_h__
 #define __ze_zimage_h__
 
-#include "ZE_ZObject.h"
+#include "ZE_ZEngine.h"
 
 namespace ZE
 {
@@ -34,9 +34,11 @@ namespace ZE
 
     ZImage image drawing class, class wraps common features of SDL_Surface.  Inherited from ZObject.
 **/
-class ZImage : public ZObject
+class ZImage
 {
     protected:
+        //! Pointer to ZEngine Object
+        ZEngine* rEngine;
         //! Texture lower X, used internally for flip.
         GLfloat rTexMinX;
         //! Texture lower Y, used internally for flip

@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.23 2003/02/10 02:40:35 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.24 2003/02/10 04:02:38 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -28,14 +28,15 @@ namespace ZE
 
 ZImage::ZImage()
 {
+    rEngine = ZEngine::GetInstance();
     rImage = NULL;
     rAlpha = 255;
     Release();
 }
 
-ZImage::ZImage(const ZImage &rhs) :
-    ZObject()
+ZImage::ZImage(const ZImage &rhs)
 {
+    rEngine = ZEngine::GetInstance();
     rImage = NULL;
     rAlpha = rhs.Alpha();
     OpenFromImage(rhs.Surface(),0,0,(Sint16)rhs.Width(),(Sint16)rhs.Height());
@@ -43,6 +44,7 @@ ZImage::ZImage(const ZImage &rhs) :
 
 ZImage::ZImage(string filename)
 {
+    rEngine = ZEngine::GetInstance();
     rImage = NULL;
     rAlpha = 255;
     Open(filename);
@@ -50,6 +52,7 @@ ZImage::ZImage(string filename)
 
 ZImage::ZImage(SDL_Surface *surface)
 {
+    rEngine = ZEngine::GetInstance();
     rImage = NULL;
     rAlpha = 255;
     Attach(surface);
@@ -57,6 +60,7 @@ ZImage::ZImage(SDL_Surface *surface)
 
 ZImage::ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
 {
+    rEngine = ZEngine::GetInstance();
     rImage = NULL;
     rAlpha = 255;
     OpenFromImage(img,x,y,w,h);

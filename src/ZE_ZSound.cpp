@@ -13,7 +13,7 @@
 File: ZE_ZSound.cpp <br>
 Description: Implementation source file for core ZEngine Sound Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZSound.cpp,v 1.6 2003/02/10 04:02:39 cozman Exp $<br>
 
     \file ZE_ZSound.cpp
     \brief Source file for ZSound.
@@ -32,12 +32,14 @@ const int ZSound::LoopInfinite = -1;
 
 ZSound::ZSound()
 {
+    rEngine = ZEngine::GetInstance();
     rSound = NULL;
     rChannelID = -1;    //request channel ID
 }
 
 ZSound::ZSound(string filename)
 {
+    rEngine = ZEngine::GetInstance();
     rSound = NULL;
     rChannelID = -1;    //request channel ID
     Open(filename);

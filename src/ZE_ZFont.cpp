@@ -13,7 +13,7 @@
 File: ZE_ZFont.cpp <br>
 Description: Implementation source file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZFont.cpp,v 1.6 2003/02/10 04:02:38 cozman Exp $<br>
 
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
@@ -28,9 +28,9 @@ $Id: ZE_ZFont.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
 namespace ZE
 {
 
-
 ZFont::ZFont()
 {
+    rEngine = ZEngine::GetInstance();
     rFont = NULL;
     rColor.r = rColor.g = rColor.b = rColor.unused = 255;
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;
@@ -38,6 +38,7 @@ ZFont::ZFont()
 
 ZFont::ZFont(string filename, int size)
 {
+    rEngine = ZEngine::GetInstance();
     rFont = NULL;
     rColor.r = rColor.g = rColor.b = rColor.unused = 255;
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;

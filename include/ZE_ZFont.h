@@ -13,7 +13,7 @@
 File: ZE_ZFont.h <br>
 Description: Header file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
+$Id: ZE_ZFont.h,v 1.5 2003/02/10 04:07:04 cozman Exp $<br>
 
     \file ZE_ZFont.h
     \brief Definition file for ZFont.
@@ -24,7 +24,7 @@ $Id: ZE_ZFont.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 #ifndef __ze_zfont_h__
 #define __ze_zfont_h__
 
-#include "ZE_ZObject.h"
+#include "ZE_ZEngine.h"
 #include "ZE_ZImage.h"
 
 #ifdef USE_SDL_TTF
@@ -37,9 +37,11 @@ namespace ZE
 
     ZFont font container class, class wraps common features of SDL_TTF.  Inherited from ZObject.
 **/
-class ZFont : public ZObject
+class ZFont
 {
     protected:
+        //! Pointer to ZEngine Object
+        ZEngine* rEngine;
         //! Pointer to font data.
         TTF_Font *rFont;
         //! Filename, for resizing.

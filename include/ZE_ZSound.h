@@ -13,7 +13,7 @@
 File: ZE_ZSound.h <br>
 Description: Header file for core ZEngine Sound Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
+$Id: ZE_ZSound.h,v 1.5 2003/02/10 04:07:05 cozman Exp $<br>
 
     \file ZE_ZSound.h
     \brief Definition file for ZSound.
@@ -24,7 +24,7 @@ $Id: ZE_ZSound.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 #ifndef __ze_zsound_h__
 #define __ze_zsound_h__
 
-#include "ZE_ZObject.h"
+#include "ZE_ZEngine.h"
 
 #ifdef USE_SDL_MIXER
 
@@ -36,9 +36,11 @@ namespace ZE
 
     ZSound music class, class wraps common features for SDL_Mixer's Mix_Chunk.  Inherited from ZObject.
 **/
-class ZSound : public ZObject 
+class ZSound
 {
     protected:
+        //! Pointer to ZEngine Object
+        ZEngine* rEngine;
         //! Pointer to music data.
         Mix_Chunk* rSound;
         //! Channel ID Number from SDL_Mixer.

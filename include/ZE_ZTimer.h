@@ -13,7 +13,7 @@
 File: ZE_ZTimer.h <br>
 Description: Header file for core ZEngine Timer Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZTimer.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
+$Id: ZE_ZTimer.h,v 1.5 2003/02/10 04:07:05 cozman Exp $<br>
 
     \file ZE_ZTimer.h
     \brief Definition file for ZTimer.
@@ -24,7 +24,7 @@ $Id: ZE_ZTimer.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 #ifndef __ze_ztimer_h__
 #define __ze_ztimer_h__
 
-#include "ZE_ZObject.h"
+#include "ZE_ZEngine.h"
 
 namespace ZE
 {
@@ -34,9 +34,11 @@ namespace ZE
 
     ZTimer timing class, class wraps common features of SDL timer.  Inherited from ZObject and tied to ZEngine main timer.
 **/
-class ZTimer : public ZObject 
+class ZTimer
 {
     protected:
+        //! Pointer to ZEngine Object
+        ZEngine* rEngine;
         //! Paused / Unpaused state of Timer
         bool rPaused;
         //! Using ZEngine timer or SDL global timer.

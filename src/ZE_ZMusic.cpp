@@ -13,7 +13,7 @@
 File: ZE_ZMusic.cpp <br>
 Description: Implementation source file for core ZEngine Music Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZMusic.cpp,v 1.6 2003/02/10 04:02:38 cozman Exp $<br>
 
     \file ZE_ZMusic.cpp
     \brief Source file for ZMusic.
@@ -32,11 +32,13 @@ const int ZMusic::LoopInfinite = -1;
 
 ZMusic::ZMusic()
 {
+    rEngine = ZEngine::GetInstance();
     rMusic = NULL;
 }
 
 ZMusic::ZMusic(string filename)
 {
+    rEngine = ZEngine::GetInstance();
     rMusic = NULL;
     Open(filename);
 }

@@ -13,7 +13,7 @@
 File: ZE_ZConfigFile.cpp <br>
 Description: Implementation source file for ZConfigFile, the ZEngine INI-Style Config File. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.cpp,v 1.5 2003/02/10 03:04:46 cozman Exp $<br>
+$Id: ZE_ZConfigFile.cpp,v 1.6 2003/02/10 04:02:38 cozman Exp $<br>
 
     \file ZE_ZConfigFile.cpp
     \brief Source file for ZConfigFile.
@@ -52,7 +52,7 @@ bool ZConfigFile::Exists(string sec) const
 
     sec = CleanString(sec);
 
-    for(secIter = mFileLayout.begin(); secIter != mFileLayout.end(); secIter++)
+    for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
     {
         if(CleanString((*secIter).section) == sec)
             return true;
@@ -68,7 +68,7 @@ bool ZConfigFile::Exists(string sec, string var) const
     sec = CleanString(sec);
     var = CleanString(var);
 
-    for(secIter = mFileLayout.begin(); secIter != mFileLayout.end(); secIter++)
+    for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
     {
         if(CleanString((*secIter).section) == sec)
         {
@@ -90,7 +90,7 @@ void ZConfigFile::SetVariable(string sec, string var, string val)
     if(Exists(CleanString(sec)))
     {
         sec = CleanString(sec);
-        for(secIter = mFileLayout.begin(); secIter != mFileLayout.end(); secIter++)
+        for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
         {
             if(CleanString((*secIter).section) == sec)    //if this is the section
             {
@@ -121,7 +121,7 @@ void ZConfigFile::SetVariable(string sec, string var, string val)
     {
         ZCF_Section tempSec;
         tempSec.section = sec;
-        mFileLayout.push_back(tempSec);
+        rFileLayout.push_back(tempSec);
         SetVariable(sec,var,val);
     }
 }
@@ -136,7 +136,7 @@ string ZConfigFile::GetVariable(string sec, string var, string defVal) const
 
     if(Exists(sec))
     {
-        for(secIter = mFileLayout.begin(); secIter != mFileLayout.end(); secIter++)
+        for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
         {
             if(CleanString((*secIter).section) == sec)    //if this is the section
             {
@@ -163,9 +163,9 @@ string ZConfigFile::GetVariable(string sec, string var, string defVal) const
 
 ZConfigFile::ZConfigFile() {}
 
-ZConfigFile::ZConfigFile(string mFilename)
+ZConfigFile::ZConfigFile(string rFilename)
 {
-    Process(mFilename);
+    Process(rFilename);
 }
 
 ZConfigFile::~ZConfigFile()
@@ -175,12 +175,12 @@ ZConfigFile::~ZConfigFile()
 
 void ZConfigFile::Process(string filename)
 {
-    mFilename = filename;
+    rFilename = filename;
 
-    ifstream cfile(mFilename.c_str());
+    ifstream cfile(rFilename.c_str());
     string section, str, var, tmp;
 
-    mFileLayout.clear();
+    rFileLayout.clear();
 
     while(!cfile.eof() && cfile.is_open())
     {
@@ -317,14 +317,14 @@ void ZConfigFile::Flush()
     string secName;
 
     //in case the filename is already cleared somehow
-    if(mFilename.length())
+    if(rFilename.length())
     {
-        ofstream cfile(mFilename.c_str(), ios::out|ios::trunc);
+        ofstream cfile(rFilename.c_str(), ios::out|ios::trunc);
 
         if(cfile)
         {
             //iteration through sections
-            for(secIter = mFileLayout.begin(); secIter != mFileLayout.end(); secIter++)
+            for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
             {
                 //ensure that section is valid
                 secName = CleanString((*secIter).section);
@@ -348,7 +348,7 @@ void ZConfigFile::Flush()
 void ZConfigFile::Close()
 {
     Flush();
-    mFilename = "";
+    rFilename = "";
 }
 
 }

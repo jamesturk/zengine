@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.7 2003/02/10 03:19:37 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.8 2003/02/10 04:07:04 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -25,7 +25,7 @@ $Id: ZE_ZConfigFile.h,v 1.7 2003/02/10 03:19:37 cozman Exp $<br>
 #ifndef __ze_zconfigfile_h__
 #define __ze_zconfigfile_h__
 
-#include "ZE_ZObject.h"        //included even though ZCF isn't derived (to obtain all other needed headers)
+#include "ZE_ZEngine.h"
 
 namespace ZE
 {
@@ -35,12 +35,11 @@ namespace ZE
 
     ZConfigFile class for INI-style configuration files for games or applications.  Inherited from ZObject.
 **/
-class ZConfigFile : public ZObject
+class ZConfigFile
 {
     private:
 
         //Private Types//
-
 
         /*!
             \brief ZConfigFile Variable class.
@@ -71,11 +70,11 @@ class ZConfigFile : public ZObject
                 list<ZCF_Variable> varList;
         };
 
+    protected:
         //! List of sections of internal type.
-        list<ZCF_Section> mFileLayout;
-
+        list<ZCF_Section> rFileLayout;
         //! Filename of file currently open.
-        string mFilename;
+        string rFilename;
 
         /*!
             \brief Reformat a string in a form more suitable to parsing.

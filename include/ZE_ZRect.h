@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.5 2003/01/16 05:46:39 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.6 2003/02/10 04:07:05 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -24,7 +24,7 @@ $Id: ZE_ZRect.h,v 1.5 2003/01/16 05:46:39 cozman Exp $<br>
 #ifndef __ze_zrect_h__
 #define __ze_zrect_h__
 
-#include "ZE_ZObject.h"        //included even though ZRect isn't derived (to obtain all other needed headers)
+#include "ZE_ZEngine.h"
 
 namespace ZE
 {
