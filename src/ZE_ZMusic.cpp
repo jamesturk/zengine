@@ -13,7 +13,7 @@
 File: ZE_ZMusic.cpp <br>
 Description: Implementation source file for core ZEngine Music Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZMusic.cpp,v 1.4 2003/01/13 06:00:38 cozman Exp $<br>
 
     \file ZE_ZMusic.cpp
     \brief Source file for ZMusic.
@@ -71,7 +71,7 @@ void ZMusic::Play(int loopNum, int fadeTime)
             Mix_PlayMusic(rMusic, loopNum);
     }
     else
-        LogError("ZMusic not initialized in ZMusic::Play.");
+        rEngine->ReportError(ZERR_NOMUSIC, "Play");
 }
 
 void ZMusic::Pause()
@@ -79,7 +79,7 @@ void ZMusic::Pause()
     if(rMusic)
         Mix_PauseMusic();
     else
-        LogError("ZMusic not initialized in ZMusic::Pause.");
+        rEngine->ReportError(ZERR_NOMUSIC, "Pause");
 }
 
 void ZMusic::Unpause()
@@ -87,7 +87,7 @@ void ZMusic::Unpause()
     if(rMusic)
         Mix_ResumeMusic();
     else
-        LogError("ZMusic not initialized in ZMusic::Unpause.");
+        rEngine->ReportError(ZERR_NOMUSIC, "Unpause");
 }
 
 void ZMusic::Rewind()
@@ -95,7 +95,7 @@ void ZMusic::Rewind()
     if(rMusic)
         Mix_RewindMusic();
     else
-        LogError("ZMusic not initialized in ZMusic::Rewind.");
+        rEngine->ReportError(ZERR_NOMUSIC, "Rewind");
 }
 
 void ZMusic::Stop(int fadeTime)
@@ -108,7 +108,7 @@ void ZMusic::Stop(int fadeTime)
             Mix_HaltMusic();
     }
     else
-        LogError("ZMusic not initialized in ZMusic::Stop.");
+        rEngine->ReportError(ZERR_NOMUSIC, "Stop");
 }
 
 void ZMusic::SetVolume(int volume)
@@ -116,7 +116,7 @@ void ZMusic::SetVolume(int volume)
     if(rMusic)
         Mix_VolumeMusic(volume);
     else
-        LogError("ZMusic not initialized in ZMusic::SetVolume.");
+        rEngine->ReportError(ZERR_NOMUSIC, "SetVolume");
 }
 
 bool ZMusic::IsLoaded()
@@ -130,7 +130,7 @@ bool ZMusic::IsPlaying()
         return Mix_PlayingMusic() > 0;
     else
     {
-        LogError("ZMusic not initialized in ZMusic::IsPlaying.");
+        rEngine->ReportError(ZERR_NOMUSIC, "IsPlaying");
         return false;
     }
 }
@@ -141,7 +141,7 @@ bool ZMusic::IsPaused()
         return Mix_PausedMusic() > 0;
     else
     {
-        LogError("ZMusic not initialized in ZMusic::IsPaused.");
+        rEngine->ReportError(ZERR_NOMUSIC, "IsPaused");
         return false;
     }
 }
@@ -152,7 +152,7 @@ int ZMusic::Volume()
         return Mix_VolumeMusic(-1);
     else
     {
-        LogError("ZMusic not initialized in ZMusic::GetVolume.");
+        rEngine->ReportError(ZERR_NOMUSIC, "GetVolume");
         return false;
     }
 }

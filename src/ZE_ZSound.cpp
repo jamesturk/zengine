@@ -13,7 +13,7 @@
 File: ZE_ZSound.cpp <br>
 Description: Implementation source file for core ZEngine Sound Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZSound.cpp,v 1.4 2003/01/13 06:00:38 cozman Exp $<br>
 
     \file ZE_ZSound.cpp
     \brief Source file for ZSound.
@@ -74,7 +74,7 @@ void ZSound::Play(int loopNum, int fadeTime)
             rChannelID = Mix_PlayChannel(rChannelID, rSound, loopNum);
     }
     else if(!rSound)
-        LogError("ZSound not initialized in ZSound::Play.");
+        rEngine->ReportError(ZERR_NOSOUND, "Play");
 }
 
 void ZSound::Pause()
@@ -82,7 +82,7 @@ void ZSound::Pause()
     if(rSound && rChannelID >= 0)
         Mix_Pause(rChannelID);
     else if(!rSound)
-        LogError("ZSound not initialized in ZSound::Pause.");
+        rEngine->ReportError(ZERR_NOSOUND, "Pause");
 }
 
 void ZSound::Unpause()
@@ -90,7 +90,7 @@ void ZSound::Unpause()
     if(rSound && rChannelID >= 0)
         Mix_Resume(rChannelID);
     else if(!rSound)
-        LogError("ZSound not initialized in ZSound::Unpause.");
+        rEngine->ReportError(ZERR_NOSOUND, "Unpause");
 }
 
 void ZSound::Stop(int fadeTime)
@@ -103,7 +103,7 @@ void ZSound::Stop(int fadeTime)
             Mix_HaltChannel(rChannelID);
     }
     else if(!rSound)
-        LogError("ZSound not initialized in ZSound::Stop.");
+        rEngine->ReportError(ZERR_NOSOUND, "Stop");
 }
 
 void ZSound::SetVolume(int volume)
@@ -111,7 +111,7 @@ void ZSound::SetVolume(int volume)
     if(rSound)
         Mix_VolumeChunk(rSound,volume);
     else
-        LogError("ZSound not initialized in ZSound::SetVolume.");
+        rEngine->ReportError(ZERR_NOSOUND, "SetVolume");
 }
 
 bool ZSound::IsLoaded()
@@ -126,7 +126,7 @@ bool ZSound::IsPlaying()
     else
     {
         if(rChannelID >= 0)
-            LogError("ZSound not initialized in ZSound::IsPlaying().");
+            rEngine->ReportError(ZERR_NOSOUND, "IsPlaying");
         return false;
     }
 }
@@ -137,7 +137,7 @@ bool ZSound::IsPaused()
         return Mix_Paused(rChannelID) > 0;
     else
     {
-        LogError("ZSound not initialized in ZSound::IsPaused().");
+        rEngine->ReportError(ZERR_NOSOUND, "IsPaused");
         return false;
     }
 }
@@ -148,7 +148,7 @@ int ZSound::Volume()
         return Mix_VolumeChunk(rSound,-1);
     else
     {
-        LogError("ZSound not initialized in ZSound::GetVolume().");
+        rEngine->ReportError(ZERR_NOSOUND, "GetVolume");
         return -1;
     }
 }

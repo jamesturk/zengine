@@ -13,7 +13,7 @@
 File: ZE_ZFont.cpp <br>
 Description: Implementation source file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZFont.cpp,v 1.4 2003/01/13 06:00:38 cozman Exp $<br>
 
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
@@ -100,7 +100,7 @@ void ZFont::SetStyle(bool Bold, bool Italic, bool Underline)
     if(rFont)
         TTF_SetFontStyle(rFont,flags);
     else
-        LogError("ZFont not initialized in ZFont::SetStyle.");
+        rEngine->ReportError(ZERR_NOFONT,"SetStyle");
 }
 
 void ZFont::Resize(int size)
@@ -119,7 +119,7 @@ bool ZFont::IsBold()
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_BOLD) > 0;
     else
     {
-        LogError("ZFont not initialized in ZFont::IsBold.");
+        rEngine->ReportError(ZERR_NOFONT, "IsBold");
         return false;
     }
 }
@@ -130,7 +130,7 @@ bool ZFont::IsItalic()
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_ITALIC) > 0;
     else
     {
-        LogError("ZFont not initialized in ZFont::IsItalic.");
+        rEngine->ReportError(ZERR_NOFONT, "IsItalic");
         return false;
     }
 }
@@ -141,7 +141,7 @@ bool ZFont::IsUnderlined()
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_UNDERLINE) > 0;
     else
     {
-        LogError("ZFont not initialized in ZFont::IsUnderlined.");
+        rEngine->ReportError(ZERR_NOFONT, "IsUnderlined");
         return false;
     }
 }
@@ -152,7 +152,7 @@ int ZFont::Height()
         return TTF_FontHeight(rFont);
     else
     {
-        LogError("ZFont not initialized in ZFont::GetHeight.");
+        rEngine->ReportError(ZERR_NOFONT, "GetHeight");
         return 0;
     }
 }
@@ -163,7 +163,7 @@ int ZFont::LineSkip()
         return TTF_FontLineSkip(rFont);
     else
     {
-        LogError("ZFont not initialized in ZFont::GetLineSkip.");
+        rEngine->ReportError(ZERR_NOFONT, "GetLineSkip");
         return 0;
     }
 }
@@ -179,7 +179,7 @@ int ZFont::StringWidth(string text)
     }
     else
     {
-        LogError("ZFont not initialized in ZFont::GetStringWidth.");
+        rEngine->ReportError(ZERR_NOFONT, "GetStringWidth");
         return 0;
     }
 }
@@ -195,7 +195,7 @@ int ZFont::StringHeight(string text)
     }
     else
     {
-        LogError("ZFont not initialized in ZFont::GetStringHeight.");
+        rEngine->ReportError(ZERR_NOFONT, "GetStringHeight");
         return 0;
     }
 }

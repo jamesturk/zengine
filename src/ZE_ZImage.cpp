@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.13 2003/01/08 06:07:06 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.14 2003/01/13 06:00:38 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -79,13 +79,13 @@ void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sin
     rect.h = h;
 
     if(!image)
-        LogError("Invalid Parameter to ZImage::OpenFromImage.");
+        rEngine->ReportError(ZERR_NOIMAGE,"OpenFromImage");
 
     cutImg = SDL_CreateRGBSurface(0, rect.w, rect.h, rEngine->BPP(),
         screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
 
     if(!cutImg)
-        LogError(FormatStr("SDL_CreateRGBSurface failed in ZImage::OpenFromImage."));
+        rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_CreateRGBSurface failed in ZImage::OpenFromImage: %s.",SDL_GetError()));
 
     SDL_BlitSurface(image,&rect,cutImg,NULL);
     Attach(cutImg);
@@ -109,7 +109,7 @@ void ZImage::Attach(SDL_Surface *surface)
         rImage = surface;
     }
     else
-        LogError("Invalid surface passed to ZImage::Attach.");
+        rEngine->ReportError(ZERR_NOIMAGE,"Attach");
 }
 
 void ZImage::Reload()
@@ -136,7 +136,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
     if(rImage)
     {
         if(SDL_SetColorKey(rImage, SDL_SRCCOLORKEY, color) < 0)
-            LogError("Invalid Call to SDL_SetColorKey.");
+            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
         else
         {
             //surface conversion//
@@ -151,13 +151,13 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
             }
             else    //can't convert
             {
-                LogError("Surface conversion failed.");
+                rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::SetColorKey: %s",SDL_GetError()));
                 rImage = temp;
             }
         }
     }
     else
-        LogError("ZImage not initialized in ZImage::SetColorKey.");
+        rEngine->ReportError(ZERR_NOIMAGE,"SetColorKey.");
 }
 
 void ZImage::Flip(bool horizontal, bool vertical)
@@ -191,7 +191,10 @@ void ZImage::Resize(unsigned int width, unsigned int height)
 
 void ZImage::Bind()
 {
-    glBindTexture(GL_TEXTURE_2D, rTexID);
+    if(!rTexID)
+        rEngine->ReportError(ZERR_NOIMAGE,"Bind");
+    else
+        glBindTexture(GL_TEXTURE_2D, rTexID);
 }
 
 void ZImage::Draw(float x, float y)
