@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.13 2003/01/19 02:05:13 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.14 2003/01/19 05:43:40 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -117,7 +117,7 @@ class ZEngine
 
             \param width Desired width of screen or window.
             \param height Desired height of screen or window.
-            \param bpp Desired BPP for screen (only works in fullscreen).
+            \param bpp Desired BPP for screen (generally use 32).
             \param fullscreen A bool for fullscreen setting.
         **/
         void SetupDisplay(int width, int height, int bpp, bool fullscreen);

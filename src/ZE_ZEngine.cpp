@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.18 2003/01/19 04:55:18 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.19 2003/01/19 05:43:40 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -105,9 +105,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
     SDL_Surface *iconImg;
     bool status=true;   //status of setup
     int bpp;
-#ifdef USE_OPENGL
     int rgb_size[3];
-#endif //USE_OPENGL
 
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
     {
@@ -151,7 +149,6 @@ bool ZEngine::CreateDisplay(string title, string icon)
         mBPP = 24;
 #endif
 
-#ifdef USE_OPENGL
     switch (mBPP)
     {
         case 8:
@@ -184,7 +181,6 @@ bool ZEngine::CreateDisplay(string title, string icon)
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
     flags |= SDL_OPENGL;
-#endif //USE_OPENGL
 
     //Window Manager settings//
     SDL_EnableKeyRepeat(30,30);
@@ -217,9 +213,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
     mHeight = mScreen->h;
     mBPP = mScreen->format->BitsPerPixel;
 
-#ifdef USE_OPENGL
     SetGL2D();
-#endif //USE_OPENGL
 
     mKeyIsPressed = SDL_GetKeyState(NULL);
 
