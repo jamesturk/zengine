@@ -14,7 +14,7 @@
 
     Definition file for ZEngine Utilities which are used throughout the engine and can be used in
     conjunction with ZEngine.
-    <br>$Id: ZE_Utility.h,v 1.9 2003/10/13 21:48:12 cozman Exp $<br>
+    <br>$Id: ZE_Utility.h,v 1.10 2003/11/24 02:02:25 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -36,7 +36,7 @@ namespace ZE
     \param ... variable number of arguments after fmtstr
     \return std::string of parsed and combined std::string
 **/
-std::string FormatStr(const char *fmtstr, ...);
+std::string FormatStr(const std::string fmtstr, ...);
 
 /*!
     \brief Extracts a SDL_RWops memory structure from a zip archive.

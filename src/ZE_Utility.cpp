@@ -13,7 +13,7 @@
     \brief Source file for ZEngine utility functions.
 
     Source file containing open utilities for use inside and alongside ZEngine.
-    <br>$Id: ZE_Utility.cpp,v 1.13 2003/10/13 21:48:13 cozman Exp $<br>
+    <br>$Id: ZE_Utility.cpp,v 1.14 2003/11/24 02:07:03 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,14 +22,15 @@
 namespace ZE
 {
 
-std::string FormatStr(const char *fmtstr, ...)
+std::string FormatStr(const std::string fmtstr, ...)
 {
     char buf[512];
     va_list args;
     //simply puts args into the buffer using standard parsing rules
     va_start(args,fmtstr);
-    vsprintf(buf, fmtstr, args);
+    vsprintf(buf, fmtstr.c_str(), args);
     va_end(args);
+
     return buf;
 }
 
