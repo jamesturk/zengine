@@ -13,9 +13,9 @@
 File: ZE_Utility.cpp <br>
 Description: Implementation source file for ZEngine Utilities. <br>
 Author(s): James Turk <br>
-$Id: ZE_Utility.cpp,v 1.2 2003/01/16 04:42:04 cozman Exp $<br>
+$Id: ZE_Utility.cpp,v 1.3 2003/01/16 04:47:35 cozman Exp $<br>
 
-    \file ZE_ZUtility.cpp
+    \file ZE_Utility.cpp
     \brief Source file for ZEngine utility functions.
 
     Source file containing open utilities for use inside and alongside ZEngine.
