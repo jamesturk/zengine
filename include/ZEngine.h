@@ -3,7 +3,7 @@
     \brief Header file for ZEngine.
 
     Public header file for ZEngine, this is the file that programs that wish to utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.33 2003/10/05 19:31:03 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.34 2003/10/06 00:04:11 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -39,11 +39,11 @@
     </pre>
     \section Authors Contributing Authors
     <br>
-    James Turk <a href="mailto:james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes<br>
-    Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
-    Sean <a href="mailto:sean@conceptofzero.net">sean@conceptofzero.net</a> - MSVC++6 Project Files<br>
-    Kevin Watters <a href="mailto:kwatters@adelphia.net">kwatters@adelphia.net</a> - Fix to ZImage::SetColorKey<br>
-    Atani <a href="mailto:atani@atani-software.net">atani@atani-software.net</a> - Revised Linux Build System<br>
+    James Turk <a href="mailto:james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes <br>
+    Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance <br>
+    Sean <a href="mailto:sean@conceptofzero.net">sean@conceptofzero.net</a> - MSVC++6 Project Files <br>
+    Kevin Watters <a href="mailto:kwatters@adelphia.net">kwatters@adelphia.net</a> - Fix to ZImage::SetColorKey <br>
+    Atani <a href="mailto:atani@atani-software.net">atani@atani-software.net</a> - Revised Linux Build System <br>
 **/
 
 #ifndef __zengine_h__
