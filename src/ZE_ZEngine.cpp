@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.52 2003/07/12 01:25:42 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.53 2003/07/13 05:35:11 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -50,7 +50,6 @@ ZEngine* ZEngine::GetInstance()
         sInstance = new ZEngine;
 
     return sInstance;
-    sInstance = NULL;
 }
 
 void ZEngine::ReleaseInstance()
