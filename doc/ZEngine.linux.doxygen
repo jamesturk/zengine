@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = ZEngine
 PROJECT_NUMBER         = 0.8.0-rc1
-OUTPUT_DIRECTORY       = /home/James/ZEngine-dev/doc
+OUTPUT_DIRECTORY       = /home/James/ZEngine-0.8.0-rc1/doc
 OUTPUT_LANGUAGE        = English
 EXTRACT_ALL            = NO
 EXTRACT_PRIVATE        = YES
@@ -19,7 +19,7 @@ REPEAT_BRIEF           = NO
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = 
+STRIP_FROM_PATH        = /home/James/ZEngine-0.8.0-rc1/ 
 INTERNAL_DOCS          = NO
 STRIP_CODE_COMMENTS    = YES
 CASE_SENSE_NAMES       = YES
@@ -52,12 +52,12 @@ QUIET                  = NO
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_FORMAT            = "$file:$line: $text"
-WARN_LOGFILE           = /home/James/ZEngine-dev/doc/ZEngine.log
+WARN_LOGFILE           = /home/James/ZEngine-0.8.0-rc1/doc/ZEngine.log
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = /home/James/ZEngine-dev/src \
-                         /home/James/ZEngine-dev/include
+INPUT                  = /home/James/ZEngine-0.8.0-rc1/src \
+                         /home/James/ZEngine-0.8.0-rc1/include
 FILE_PATTERNS          = 
 RECURSIVE              = YES
 EXCLUDE                = 
