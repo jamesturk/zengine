@@ -16,6 +16,7 @@ TD.mdname { background-color: #f2f2ff; font-weight: bold; color: #602020; width:
 DIV.groupHeader { margin-left: 16px; margin-top: 12px; margin-bottom: 6px; font-weight: bold }
 DIV.groupText { margin-left: 16px; font-style: italic; font-size: smaller }
 BODY { background: white; color: black }
+EM.mdesc { font-size: smaller }
 TD.indexkey { 
    background-color: #eeeeff; 
    font-weight: bold; 

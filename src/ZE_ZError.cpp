@@ -13,7 +13,7 @@
     \brief Source file for ZError.
 
     Implementation of ZError, the ZEngine internal error information storage class.
-    <br>$Id: ZE_ZError.cpp,v 1.10 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZError.cpp,v 1.11 2003/07/05 00:40:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,42 +22,29 @@
 namespace ZE
 {
 
-std::string *ZError::sErrorDesc = NULL; 
+std::string ZError::sErrorDesc[ZERR_LAST];
 
 void ZError::CreateStringTable()
 {
-    if(!sErrorDesc)
-    {
-        //create error strings
-        sErrorDesc = new std::string[ZERR_LAST]; 
-        sErrorDesc[ZERR_NONE] = "No Error. [%s]";
-        sErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
-        sErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
-        sErrorDesc[ZERR_MIX_INIT] = "Error Initializing SDL_mixer: %s";
-        sErrorDesc[ZERR_TTF_INIT] = "Error Initializing SDL_ttf: %s";
-        sErrorDesc[ZERR_NET_INIT] = "Error Initializing SDL_net: %s";
-        sErrorDesc[ZERR_VIDMODE] = "Error Creating Display: %s";
-        sErrorDesc[ZERR_LOAD_IMAGE] = "Failed to load Image: %s";
-        sErrorDesc[ZERR_LOAD_SOUND] = "Failed to load Sound: %s"; 
-        sErrorDesc[ZERR_LOAD_MUSIC] = "Failed to load Music: %s";
-        sErrorDesc[ZERR_LOAD_FONT] = "Failed to load Font: %s";
-        sErrorDesc[ZERR_NOIMAGE] = "Called ZImage::%s with no Image loaded.";
-        sErrorDesc[ZERR_NOSOUND] = "Called ZSound::%s with no Sound loaded.";
-        sErrorDesc[ZERR_NOMUSIC] = "Called ZMusic::%s with no Music loaded.";
-        sErrorDesc[ZERR_NOFONT] = "Called ZFont::%s with no Font loaded.";
-        sErrorDesc[ZERR_NOSOCKET] = "Called ZClient::%s with no open Socket.";
-        sErrorDesc[ZERR_NET_CLIENT] = "ZClient encountered a problem: %s";
-        sErrorDesc[ZERR_NET_SERVER] = "ZServer encountered a problem: %s";
-    }
-}
-
-void ZError::DestroyStringTable()
-{
-    if(sErrorDesc)
-    {
-        delete []sErrorDesc;
-        sErrorDesc = NULL;
-    }
+    //create error strings
+    sErrorDesc[ZERR_NONE] = "No Error. [%s]";
+    sErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
+    sErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
+    sErrorDesc[ZERR_MIX_INIT] = "Error Initializing SDL_mixer: %s";
+    sErrorDesc[ZERR_TTF_INIT] = "Error Initializing SDL_ttf: %s";
+    sErrorDesc[ZERR_NET_INIT] = "Error Initializing SDL_net: %s";
+    sErrorDesc[ZERR_VIDMODE] = "Error Creating Display: %s";
+    sErrorDesc[ZERR_LOAD_IMAGE] = "Failed to load Image: %s";
+    sErrorDesc[ZERR_LOAD_SOUND] = "Failed to load Sound: %s"; 
+    sErrorDesc[ZERR_LOAD_MUSIC] = "Failed to load Music: %s";
+    sErrorDesc[ZERR_LOAD_FONT] = "Failed to load Font: %s";
+    sErrorDesc[ZERR_NOIMAGE] = "Called ZImage::%s with no Image loaded.";
+    sErrorDesc[ZERR_NOSOUND] = "Called ZSound::%s with no Sound loaded.";
+    sErrorDesc[ZERR_NOMUSIC] = "Called ZMusic::%s with no Music loaded.";
+    sErrorDesc[ZERR_NOFONT] = "Called ZFont::%s with no Font loaded.";
+    sErrorDesc[ZERR_NOSOCKET] = "Called ZClient::%s with no open Socket.";
+    sErrorDesc[ZERR_NET_CLIENT] = "ZClient encountered a problem: %s";
+    sErrorDesc[ZERR_NET_SERVER] = "ZServer encountered a problem: %s";
 }
 
 ZError::ZError(ZErrorCode code, std::string desc, std::string file, int line) :

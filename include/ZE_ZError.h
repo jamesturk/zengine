@@ -14,7 +14,7 @@
 
     Definition file for ZError, the Error logging class for ZEngine.
     This class should never be used by the average user, it is used by ZEngine to store information on an error.
-    <br>$Id: ZE_ZError.h,v 1.12 2003/06/11 05:51:32 cozman Exp $<br>
+    <br>$Id: ZE_ZError.h,v 1.13 2003/07/05 00:40:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -66,7 +66,7 @@ class ZError
 {
     protected:
         //! Static Array of Error Identifiers
-        static std::string *sErrorDesc;
+        static std::string sErrorDesc[ZERR_LAST];
         //! Error ID.
         ZErrorCode rCode;
         //! Error Description.
@@ -78,18 +78,11 @@ class ZError
 
     public:
         /*!
-            \brief Construct std::string table for error strings.
+            \brief Construct string table for error strings.
 
-            Constructs a std::string table for errors, enabling ZEngine to properly delete the table on exit.
+            Constructs a string table for errors, enabling ZEngine to properly delete the table on exit.
         **/
         static void CreateStringTable();
-
-        /*!
-            \brief Destroy std::string table of error strings.
-
-            Properly delete the std::string table, freeing all memory used by the strings.
-        **/
-        static void DestroyStringTable();
 
         /*!
             \brief Default constructor for ZError.
@@ -126,9 +119,9 @@ class ZError
         ZErrorCode Code() const;
 
         /*!
-            \brief Get formatted std::string for log file.
+            \brief Get formatted string for log file.
 
-            Return the std::string to be written to the logfile.  Called by ZEngine in LogError.
+            Return the string to be written to the logfile.  Called by ZEngine in LogError.
         **/
         std::string LogString() const;
 };

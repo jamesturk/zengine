@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.41 2003/06/11 05:51:32 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.42 2003/07/05 00:40:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -26,6 +26,7 @@
 #include "ZE_Utility.h"
 #include "ZE_Includes.h"
 #include "ZE_ZError.h"
+#include "ZE_ZRandGen.h"
 #include "VersionInfo.h"
 
 /*!
@@ -105,6 +106,8 @@ class ZEngine
         std::FILE *mErrlog;
         //! Event filter, for users who need to process their own events.
         SDL_EventFilter mEventFilter;
+        //! Random Generator for general use.
+        ZRandGen mRandGen;
 
 #ifdef USE_SDL_MIXER 
         //! Sound Bitrate
@@ -570,53 +573,76 @@ class ZEngine
         /*!
             \brief Seed random number generator. 
 
-            Reseed Mersenne Twister (MT19937) random number generator.  NOTE: Generator is initialized upon creation of ZEngine using time.
-            (Faster and more random than rand(), see src/external/mt19937ar.c)
-            \since 0.8.3
+            Reseed Mersenne Twister random number generator.  NOTE: Generator is initialized upon creation of object using time.
             \param seed Seed for random sequence.
         **/
-        void SeedRandom(unsigned long seed);
+        void SeedRandGen(unsigned long seed);
+
+        /*!
+            \brief Obtain random integer [0,max).
+
+            Obtain random int l where 0 <= l < max.
+            \param max Limit for random number.
+            \return Random unsigned int.
+        **/
+        unsigned int Rand(unsigned int max);
 
         /*!
             \brief Obtain random integer [0,max).
 
             Obtain random long l where 0 <= l < max.
-            \since 0.8.3
             \param max Limit for random number.
             \return Random unsigned long.
         **/
-        unsigned long RandLong(unsigned long max);
+        unsigned long Rand(unsigned long max);
+
+        /*!
+            \brief Obtain random integer [min,max].
+
+            Obtain random int l where min <= l <= max.
+            \param min Lower limit for random number.
+            \param max Upper limit for random number.
+            \return Random int.
+        **/
+        int Rand(int min, int max);
 
         /*!
             \brief Obtain random integer [min,max].
 
             Obtain random long l where min <= l <= max.
-            \since 0.8.3
             \param min Lower limit for random number.
             \param max Upper limit for random number.
             \return Random long.
         **/
-        long RandLong(long min, long max);
+        long Rand(long min, long max);
+
+        /*!
+            \brief Obtain random integer [min,max].
+
+            Obtain random float l where min <= l <= max.
+            \param min Lower limit for random number.
+            \param max Upper limit for random number.
+            \return Random float.
+        **/
+        float Rand(float min, float max);
+
+        /*!
+            \brief Obtain random integer [min,max].
+
+            Obtain random double l where min <= l <= max.
+            \param min Lower limit for random number.
+            \param max Upper limit for random number.
+            \return Random double.
+        **/
+        double Rand(double min, double max);
 
         /*!
             \brief Obtain random double [0,1).
 
             Obtain random double d where 0 <= d < 1.
-            \since 0.8.3
             \return Random double [0,1).
         **/
         double RandDouble();
-
-        /*!
-            \brief Obtain random double [min,max].
-
-            Obtain random double d where min <= d <= max.
-            \since 0.8.3
-            \param min Lower limit for random number.
-            \param max Upper limit for random number.
-            \return Random double [min,max].
-        **/
-        double RandDouble(double min, double max);
 
     ////////////////////////////
     //Data Loading + Unloading//

@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.13 2003/06/11 05:51:47 cozman Exp $*/
+/*$Id: ZMouseTest.cpp,v 1.14 2003/07/05 00:40:45 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -78,7 +78,7 @@ void Test()
             //draw the images//
             text[engine->MouseInRect(&textRect)].Draw(100,100);
             text[2].Draw(0,0);
-            cursor.Draw(engine->MouseX()-8.0f,engine->MouseY()-8.0f);
+            cursor.Draw(engine->MouseX()-8,engine->MouseY()-8);
 
             engine->Update();    //update the screen
         }

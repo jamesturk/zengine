@@ -85,6 +85,9 @@
 				RelativePath="..\src\ZE_ZMusic.cpp">
 			</File>
 			<File
+				RelativePath="..\src\ZE_ZRandGen.cpp">
+			</File>
+			<File
 				RelativePath="..\src\ZE_ZRect.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
@@ -101,9 +104,6 @@
 			</File>
 			<File
 				RelativePath="..\src\ZE_ZTimer.cpp">
-			</File>
-			<File
-				RelativePath="..\src\external\mt19937ar.cpp">
 			</File>
 			<File
 				RelativePath="..\src\external\physfsrwops.cpp">
@@ -149,6 +149,9 @@
 				RelativePath="..\include\ZE_ZMusic.h">
 			</File>
 			<File
+				RelativePath="..\include\ZE_ZRandGen.h">
+			</File>
+			<File
 				RelativePath="..\include\ZE_ZRect.h">
 			</File>
 			<File
@@ -162,9 +165,6 @@
 			</File>
 			<File
 				RelativePath="..\include\ZEngine.h">
-			</File>
-			<File
-				RelativePath="..\include\external\mt19937ar.h">
 			</File>
 			<File
 				RelativePath="..\include\external\physfsrwops.h">

@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.47 2003/06/16 07:45:03 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.48 2003/07/05 00:40:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -42,8 +42,6 @@ ZEngine::ZEngine() :
         mKeyPress[k] = false;
     
     ZError::CreateStringTable();
-
-    SeedRandom(static_cast<unsigned long>(std::time(NULL)));
 }
 
 ZEngine* ZEngine::GetInstance()
@@ -58,7 +56,6 @@ void ZEngine::ReleaseInstance()
 {
     if(sInstance)
     {
-        ZError::DestroyStringTable();   //part of fix to memory leak with static members
         sInstance->CloseDisplay();  
         delete sInstance;
     }
@@ -626,29 +623,44 @@ void ZEngine::FlushErrors()
     }
 }
 
-void ZEngine::SeedRandom(unsigned long seed)
+void ZEngine::SeedRandGen(unsigned long seed)
 {
-    init_genrand(seed);
+    mRandGen.Seed(seed);
 }
 
-unsigned long ZEngine::RandLong(unsigned long max)
+unsigned int ZEngine::Rand(unsigned int max)
 {
-    return genrand_int32()%max;
+    return mRandGen.Rand(max);
 }
 
-long ZEngine::RandLong(long min, long max)
+unsigned long ZEngine::Rand(unsigned long max)
 {
-    return min + genrand_int32()%(max-min+1);
+    return mRandGen.Rand(max);
+}
+
+int ZEngine::Rand(int min, int max)
+{
+    return mRandGen.Rand(min,max);
+}
+
+long ZEngine::Rand(long min, long max)
+{
+    return mRandGen.Rand(min,max);
+}
+
+float ZEngine::Rand(float min, float max)
+{
+    return mRandGen.Rand(min,max);
+}
+
+double ZEngine::Rand(double min, double max)
+{
+    return mRandGen.Rand(min,max);
 }
 
 double ZEngine::RandDouble()
 {
-    return genrand_real2();
-}
-
-double ZEngine::RandDouble(double min, double max)
-{
-    return min + (genrand_real1()*(max-min));
+    return mRandGen.RandDouble();
 }
 
 SDL_Surface* ZEngine::LoadImage(std::string filename)

@@ -42,13 +42,11 @@
 #include "physfs.h"
 #include "external/physfsrwops.h"
 #endif
-#include "external/mt19937ar.h"
 
 #include <string>   //used frequently
 #include <queue>    //used by ZEngine for ZErrors
 #include <list>     //used by ZConfigFile
 #include <fstream>  //used by ZConfigFile
 #include <cctype>   //used in parsing
-#include <ctime>    //used to seed the random generator
 
 #endif //__ze_includes_h__

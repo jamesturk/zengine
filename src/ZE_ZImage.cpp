@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.35 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.36 2003/07/05 00:40:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -140,7 +140,7 @@ void ZImage::Attach(SDL_Surface *surface)
     {
         rWidth = surface->w;
         rHeight = surface->h;
-        rTexID = SDL_GL_LoadTexture(surface,coord); //major helper, not written by me, found on libsdl.org
+        rTexID = SDL_GL_LoadTexture(surface,coord); //major helper, not written by me, from libsdl.org
         rTexMinX = coord[0];
         rTexMinY = coord[1];
         rTexMaxX = coord[2];
@@ -233,7 +233,16 @@ void ZImage::Bind() const
 
 void ZImage::Draw(int x, int y) const
 {
-    Draw(static_cast<float>(x),static_cast<float>(y));
+    //source is same as float version, but uses glVertex2i
+    glColor4ub(255,255,255,rAlpha);
+    Bind();
+    glBegin(GL_TRIANGLE_STRIP);
+        glTexCoord2f(rTexMinX,rTexMinY);    glVertex2i(x,y);
+        glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2i(x+rWidth,y);
+        glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2i(x,y+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2i(x+rWidth,y+rHeight);
+    glEnd();
+    glColor4ub(255,255,255,255);
 }
 
 void ZImage::Draw(float x, float y) const
