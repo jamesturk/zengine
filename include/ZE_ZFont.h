@@ -13,7 +13,7 @@
     \brief Definition file for ZFont.
 
     Definition file for ZFont, the basic Font class for ZEngine.
-    <br>$ Id $<br>
+    <br>$id$<br>
     \author James Turk
 **/
 
