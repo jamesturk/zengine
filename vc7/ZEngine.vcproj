@@ -100,6 +100,9 @@
 					RelativePath="..\src\ZE_ZEngine.cpp">
 				</File>
 				<File
+					RelativePath="..\src\ZE_ZError.cpp">
+				</File>
+				<File
 					RelativePath="..\src\ZE_ZFont.cpp">
 				</File>
 				<File
@@ -133,9 +136,6 @@
 			<Filter
 				Name="Utility"
 				Filter="">
-				<File
-					RelativePath="..\src\ZE_Error.cpp">
-				</File>
 			</Filter>
 			<Filter
 				Name="External">
@@ -157,9 +157,6 @@
 				RelativePath="..\include\ZE_Includes.h">
 			</File>
 			<File
-				RelativePath="..\include\ZE_ZEngine.h">
-			</File>
-			<File
 				RelativePath="..\include\ZEngine.h">
 			</File>
 			<Filter
@@ -167,6 +164,12 @@
 				Filter="">
 				<File
 					RelativePath="..\include\ZE_ZConfigFile.h">
+				</File>
+				<File
+					RelativePath="..\include\ZE_ZEngine.h">
+				</File>
+				<File
+					RelativePath="..\include\ZE_ZError.h">
 				</File>
 				<File
 					RelativePath="..\include\ZE_ZFont.h">
@@ -193,9 +196,6 @@
 			<Filter
 				Name="Utility"
 				Filter="">
-				<File
-					RelativePath="..\include\ZE_Error.h">
-				</File>
 				<File
 					RelativePath="..\include\ZE_Macros.h">
 				</File>
