@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.46 2003/06/11 05:51:15 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.47 2003/06/16 07:45:03 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -43,7 +43,7 @@ ZEngine::ZEngine() :
     
     ZError::CreateStringTable();
 
-    SeedRandom(static_cast<unsigned long>(time(NULL)));
+    SeedRandom(static_cast<unsigned long>(std::time(NULL)));
 }
 
 ZEngine* ZEngine::GetInstance()

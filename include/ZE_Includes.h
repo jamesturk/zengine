@@ -44,15 +44,11 @@
 #endif
 #include "external/mt19937ar.h"
 
-#include <string>
-#include <vector>
-#include <queue>
-#include <list>
-#include <fstream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstdarg>
-#include <cctype>
-#include <ctime>
+#include <string>   //used frequently
+#include <queue>    //used by ZEngine for ZErrors
+#include <list>     //used by ZConfigFile
+#include <fstream>  //used by ZConfigFile
+#include <cctype>   //used in parsing
+#include <ctime>    //used to seed the random generator
 
 #endif //__ze_includes_h__

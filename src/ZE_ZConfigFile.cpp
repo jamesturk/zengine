@@ -13,7 +13,7 @@
     \brief Source file for ZConfigFile.
 
     Implementation of ZConfigFile, the ZEngine INI-Style Config File.
-    <br>$Id: ZE_ZConfigFile.cpp,v 1.12 2003/06/11 05:51:15 cozman Exp $<br>
+    <br>$Id: ZE_ZConfigFile.cpp,v 1.13 2003/06/16 07:45:03 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -191,7 +191,7 @@ void ZConfigFile::Process(std::string filename)
         //if std::string is bracketed it is a section, if it begins in a letter it is a variable
         if(tmp[0] == '[' && tmp[tmp.length()-1] == ']')
             section = str;
-        else if(isalpha(tmp[0]))
+        else if(std::isalpha(tmp[0]))
         {
             var = str.substr(0,str.find('='));    //split the std::string at the equals sign
             SetVariable(section,var,str.substr(str.find('=')+1,str.length()-var.length()-1));

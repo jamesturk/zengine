@@ -58,6 +58,9 @@
 				RelativePath="..\src\external\SDLGL_Util.cpp">
 			</File>
 			<File
+				RelativePath="..\src\VersionInfo.cpp">
+			</File>
+			<File
 				RelativePath="..\src\ZE_Utility.cpp">
 			</File>
 			<File
@@ -111,6 +114,9 @@
 			Filter="h;hpp;hxx;hm;inl;inc">
 			<File
 				RelativePath="..\include\external\SDLGL_Util.h">
+			</File>
+			<File
+				RelativePath="..\include\VersionInfo.h">
 			</File>
 			<File
 				RelativePath="..\include\ZE_Defines.h">
