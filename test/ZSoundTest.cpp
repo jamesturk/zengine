@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.14 2003/07/10 20:45:39 cozman Exp $*/
+/*$Id: ZSoundTest.cpp,v 1.15 2003/07/10 23:30:07 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -52,7 +52,7 @@ void Test()
     font.DrawText("(P)ause\t(U)npause",text[0]);
     font.DrawText("(F)ade Out\t(H)alt\t",text[1]);
     font.DrawText("Space - Play\t Up/Down - Control Volume",text[2]);
-    font.DrawText("1-5 Change Sample Being Controled",text[3]);
+    font.DrawText("1-5 Change Sample Being Controlled",text[3]);
     do
     {
         //In the active loop, check events first//

@@ -1,1 +1,1 @@
-To use the music example program it is necessary to obtain an ogg vorbis file (see http://www.kahvi.org/ for tons of options) and make sure that it is at test/bin/data/music.ogg
+To use the music example program it is necessary to obtain an ogg vorbis file (see http://www.kahvi.org/ for tons of options) and make sure that it is at test/bin/data/music.ogg.  I have not included an ogg because to include an entire music file would increase the size of the ZEngine distribution as much as 10x (compressed music doesn't recompress well in zip or gz form).
