@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.17 2003/09/24 02:05:56 cozman Exp $*/
+/*$Id: ZSoundTest.cpp,v 1.18 2003/10/05 19:20:52 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -48,7 +48,7 @@ void Test()
 
     for(int i=0; i < 4; i++)
         sample[i].OpenFromZip("data/data.zip",FormatStr("%s.wav",name[i].c_str()));
-    sample[i].Open("data/whip.wav");
+    sample[4].Open("data/whip.wav");
 
 
     font.DrawText("(P)ause\t(U)npause",text[0]);
