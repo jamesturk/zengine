@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.15 2003/01/25 19:59:38 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.16 2003/01/25 20:36:13 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -43,7 +43,7 @@ void Test()
 
     //Open and Setup all the Images//
     SDL_Surface *temp;
-    ZImage image1, image2, image3, textImage, cp;
+    ZImage image1, image2, image3, textImage;
     ZFont font("data/almontew.ttf",30);
 
     font.SetColor(0,255,0);
