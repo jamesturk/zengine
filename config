@@ -1,7 +1,7 @@
 #Config file for ZEngine#
   #Edit only this file#
 
-BUILD_NAME=ZEngine-0.8.4
+BUILD_NAME=ZEngine-0.8.5
 
     ###Cygwin###
 #GL_LIB_NAME=OpenGL32
