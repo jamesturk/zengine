@@ -65,9 +65,6 @@
 				RelativePath="..\src\ZE_Utility.cpp">
 			</File>
 			<File
-				RelativePath="..\src\ZE_ZClient.cpp">
-			</File>
-			<File
 				RelativePath="..\src\ZE_ZConfigFile.cpp">
 			</File>
 			<File
@@ -90,9 +87,6 @@
 			</File>
 			<File
 				RelativePath="..\src\ZE_ZRect.cpp">
-			</File>
-			<File
-				RelativePath="..\src\ZE_ZServer.cpp">
 			</File>
 			<File
 				RelativePath="..\src\ZE_ZSound.cpp">
@@ -126,9 +120,6 @@
 				RelativePath="..\include\ZE_ZBaseParticleSystem.h">
 			</File>
 			<File
-				RelativePath="..\include\ZE_ZClient.h">
-			</File>
-			<File
 				RelativePath="..\include\ZE_ZConfigFile.h">
 			</File>
 			<File
@@ -151,9 +142,6 @@
 			</File>
 			<File
 				RelativePath="..\include\ZE_ZRect.h">
-			</File>
-			<File
-				RelativePath="..\include\ZE_ZServer.h">
 			</File>
 			<File
 				RelativePath="..\include\ZE_ZSimpleParticleSystem.h">
