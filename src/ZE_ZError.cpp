@@ -13,7 +13,7 @@
     \brief Source file for ZError.
 
     Implementation of ZError, the ZEngine internal error information storage class.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZError.cpp,v 1.8 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

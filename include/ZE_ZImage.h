@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZImage.h,v 1.18 2003/05/13 01:30:51 cozman Exp $<br>
     \author James Turk
 **/
 

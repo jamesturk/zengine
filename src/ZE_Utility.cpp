@@ -13,7 +13,7 @@
     \brief Source file for ZEngine utility functions.
 
     Source file containing open utilities for use inside and alongside ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_Utility.cpp,v 1.7 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

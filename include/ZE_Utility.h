@@ -14,7 +14,7 @@
 
     Definition file for ZEngine Utilities which are used throughout the engine and can be used in
     conjunction with ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_Utility.h,v 1.4 2003/05/13 01:30:50 cozman Exp $<br>
     \author James Turk
 **/
 

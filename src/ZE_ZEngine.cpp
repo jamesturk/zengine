@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.40 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

@@ -13,7 +13,7 @@
     \brief Source file for ZMusic.
 
     Implementation of ZMusic, the basic Music class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZMusic.cpp,v 1.8 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.32 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

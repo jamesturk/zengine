@@ -13,7 +13,7 @@
     \brief Source file for ZClient.
 
     Implementation file for ZClient, the TCP Client class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZClient.cpp,v 1.7 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

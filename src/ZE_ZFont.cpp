@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.10 2003/05/13 01:31:30 cozman Exp $<br>
     \author James Turk
 **/
 

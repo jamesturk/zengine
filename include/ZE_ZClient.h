@@ -13,7 +13,7 @@
     \brief Definition file for ZClient.
 
     Definition file for ZClient, the TCP Client class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZClient.h,v 1.6 2003/05/13 01:30:51 cozman Exp $<br>
     \author James Turk
 **/
 

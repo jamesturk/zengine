@@ -13,7 +13,7 @@
     \brief Definition file for ZServer.
 
     Definition file for ZServer, the TCP Server class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZServer.h,v 1.7 2003/05/13 01:30:51 cozman Exp $<br>
     \author James Turk
 **/
 

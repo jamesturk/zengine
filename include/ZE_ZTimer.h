@@ -13,7 +13,7 @@
     \brief Definition file for ZTimer.
 
     Definition file for ZTimer, the Timer class for ZEngine.
-    <br>$ id: $<br>
+    <br>$Id: ZE_ZTimer.h,v 1.8 2003/05/13 01:30:51 cozman Exp $<br>
     \author James Turk
 **/
 

@@ -4,7 +4,7 @@
 
     Header file for ZEngine Game Engine from Concept of Zero, this is the file that programs that wish to 
     utilize ZEngine should include.
-    <br>$ id: $<br>
+    <br>$Id: ZEngine.h,v 1.26 2003/05/13 01:30:51 cozman Exp $<br>
     \author James Turk
 **/
 
