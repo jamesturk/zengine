@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.19 2003/02/02 23:30:15 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.20 2003/02/03 00:04:28 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -386,9 +386,8 @@ class ZEngine
         /*!
             \brief Set Key repeat rate.
 
-            Calls SDL_EnableKeyRepeat(rate,rate) because usually this is the desired movement style for games.
-            The rate is set to 30 upon the creation of the display, pass zero to disable this.
-            SDL_EnableKeyRepeat can be called separately: http://sdldoc.csn.ul.ie/sdlenablekeyrepeat.php.
+            Calls SDL_EnableKeyRepeat(rate,rate) because usually this is the desired movement style for games. 0 to disable.
+            If 2 different values are needed SDL_EnableKeyRepeat can be called separately: http://sdldoc.csn.ul.ie/sdlenablekeyrepeat.php.
 
             \param rate Desired key repeat rate.
         **/
