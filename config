@@ -1,27 +1,28 @@
 #Config file for ZEngine#
   #Edit only this file#
 
-BUILD= ZEngine-0.8.4
+BUILD_NAME=ZEngine-0.8.4
 
-#Define compiler commands:
-CC= g++
-AR= ar rcs
+    ###Cygwin###
+#EXE=.exe
+#GL_LIB_NAME=OpenGL32
+#GL_INC_PATH=-I/usr/include/w32api/GL
+#GL_LIB_PATH=-L/lib/w32api
 
-#Define compiler options:
-WARN=-W -Wall
-LIBS=-lZEngineS -lSDL_mixer -lSDL_image -lSDL_ttf -lSDLmain -lSDL -lGL
-INC_PATH=-I/usr/include/SDL
+    ###Linux###
+GL_LIB_NAME=GL
 
-#Define install location:
-INSTALL_ROOT= /usr/local
-INSTALL_INC= $(INSTALL_ROOT)/include/$(BUILD)
-INSTALL_LIB= $(INSTALL_ROOT)/lib
-INSTALL_DOC= $(INSTALL_ROOT)/doc/$(BUILD)
+##Define compiler commands:
+CC=g++
+AR=ar rcs
 
-############change nothing below this line#################
-LIB= $(ZE)/lib
-SRC= $(ZE)/src
-TEST = $(ZE)/test
+###Define compiler options:
+WARN_LEVEL=-W -Wall
+SDL_INC_PATH=-I/usr/local/include/SDL
+SDL_LIB_PATH=-L/usr/local/lib/
+LIBS=-lZEngineS -lSDL_mixer -lSDL_image -lSDL_ttf -lSDLmain -lSDL -l$(GL_LIB_NAME)
 
-INCLUDE_PATH = -I$(ZE)/include $(INC_PATH)
-CFLAGS = -O2 $(WARN) $(INCLUDE_PATH)
+##Define install location:
+INSTALL_INC= /usr/local/include/$(BUILD_NAME)
+INSTALL_LIB= /usr/local/lib
+INSTALL_DOC= /usr/local/doc/$(BUILD_NAME)
