@@ -62,6 +62,9 @@
 				RelativePath="..\src\ZE_Utility.cpp">
 			</File>
 			<File
+				RelativePath="..\src\ZE_ZAnimation.cpp">
+			</File>
+			<File
 				RelativePath="..\src\ZE_ZConfigFile.cpp">
 			</File>
 			<File
@@ -103,6 +106,9 @@
 			</File>
 			<File
 				RelativePath="..\include\ZE_Utility.h">
+			</File>
+			<File
+				RelativePath="..\include\ZE_ZAnimation.h">
 			</File>
 			<File
 				RelativePath="..\include\ZE_ZBaseParticleSystem.h">
