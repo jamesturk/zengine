@@ -1,1 +1,1 @@
-The projects in this directory were built using Dev-C++ 4.9.8.0 (aka 5 beta 8) Dev-C++ 4 has problems creating portable project files. 
+The projects in this directory were built for Dev-C++ 4.9.8.0 (aka 5 beta 8) Dev-C++ 4 has problems creating portable project files due to absolute path names.  Also the GCC 2.95 that DevC++4 comes with is not recommended, GCC 3.2 is recommended.
