@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.52 2003/10/03 22:03:29 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.53 2003/10/21 01:17:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -52,18 +52,14 @@ class ZEngine
     private:        
         //! Static Pointer to Instance of ZEngine for Singleton.
         static ZEngine *sInstance;
-        //! Width of Display
-        int mWidth;
-        //! Height of Display
-        int mHeight;
-        //! BPP Setting of Display
-        int mBPP;
-        //! Fullscreen setting of Display
-        bool mFullscreen;
-        //! If ZEngine display has been setup.
-        bool mInitialized;
         //! Pointer to Display
         SDL_Surface *mScreen;
+        //! Fullscreen setting of Display
+        bool mFullscreen;
+        //! Filename of window icon.
+        std::string mIconFile;
+        //! If ZEngine display has been setup.
+        bool mInitialized;
         //! Keep track of paused state of game.
         bool mPaused;
         //! Keep track of if ZEngine should unpause on active event.
@@ -150,41 +146,22 @@ class ZEngine
     //////////////////
 
         /*!
-            \brief Setup Display for SDL.
+            \brief Create Display (window or fullscreen).
 
-            Sets display parameters to specified parameters. (called before CreateDisplay)
+            Create a window or fullscreen display given the screen options, a title, icon, 
 
             \param width Desired width of screen or window.
             \param height Desired height of screen or window.
             \param bpp Desired BPP for screen, generally use 8,16 or 32, pass -1 if you want ZEngine to guess the best choice.
             \param fullscreen A bool for fullscreen setting.
-        **/
-        void SetupDisplay(int width, int height, int bpp, bool fullscreen);
-
-#ifdef USE_SDL_MIXER
-        /*!
-            \brief Setup Sound for SDL.
-
-            Set sound settings to specified parameters. (If not called before CreateDisplay rate will default to 22050+mono)
-
-            \param rate Desired sound bitrate.
+            \param soundRate Desired sound bitrate.
             \param stereo A bool for stereo setting.
-        **/
-        void SetupSound(int rate, bool stereo);
-#endif 
-
-        /*!
-            \brief Create Display with predefined settings.
-
-            SetupDisplay and SetupSound should be called prior to this to change settings, settings from those do not go into effect 
-            until this function is called.  Specify no icon file to use default icon for OS.  Returns result of setting up ZEngine, and logs 
-            error if false is returned (Trys not to fail + returns bool in versions >= 0.8.2).
-
             \param title Window Title.
             \param icon Path to Icon File.
             \return result of setting up the display, true if everything went ok, false if any setup failed (check GetLastError).
         **/
-        bool CreateDisplay(std::string title, std::string icon="");
+        bool CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, 
+            int soundRate=22050, bool stereo=false, std::string icon="");
 
         /*!
             \brief Quit SDL and any Subsystems.
