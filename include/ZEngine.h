@@ -3,7 +3,7 @@
     \brief Header file for ZEngine.
 
     Public header file for ZEngine, this is the file that programs that wish to utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.35 2003/10/20 00:11:58 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.36 2003/11/23 19:29:01 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -59,6 +59,7 @@
 #include "ZE_ZRandGen.h"
 #include "ZE_ZBaseParticleSystem.h"
 #include "ZE_ZSimpleParticleSystem.h"
+#include "ZE_ZAnimation.h"
 #ifdef USE_SDL_TTF
 #include "ZE_ZFont.h"
 #endif

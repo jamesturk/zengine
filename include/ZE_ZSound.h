@@ -13,7 +13,7 @@
     \brief Definition file for ZSound.
 
     Definition file for ZSound, the Sound Effect wrapper for ZEngine.
-    <br>$Id: ZE_ZSound.h,v 1.10 2003/09/24 01:49:52 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.h,v 1.11 2003/11/23 19:27:41 cozman Exp $<br>
     \author James Turk
 **/
 

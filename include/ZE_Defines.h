@@ -13,7 +13,7 @@
     \brief Define file for ZEngine where all #define statements to control compilation options are placed.
 
     Definition file, holds #define statements describing optional features of ZEngine.
-    <br>$Id: ZE_Defines.h,v 1.24 2003/10/03 22:03:29 cozman Exp $<br>
+    <br>$Id: ZE_Defines.h,v 1.25 2003/11/23 19:31:24 cozman Exp $<br>
     \author James Turk
 **/
 
