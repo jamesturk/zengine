@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.6 2002/12/04 23:58:54 cozman Exp $<br>
+$Id: ZEngine.h,v 1.7 2002/12/05 00:15:33 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -29,13 +29,13 @@ $Id: ZEngine.h,v 1.6 2002/12/04 23:58:54 cozman Exp $<br>
     and making the engine much faster in most test cases.<br>
     
     \section Licensing Licensing
-    <br>
+    <br><pre>
          This file is Part of the ZEngine Library for SDL Game Development.
                       Copyright (C) 2002 ConceptOfZero.net
              Licensed under the BSD License, see licensing.txt.
-     The maintainer of this library is James Turk (james @ conceptofzero.net) 
+     The maintainer of this library is James Turk (james@conceptofzero.net) 
          and the home of this Library is http://www.conceptofzero.net/
-   
+    <pre>
     \section Authors Contributing Authors
     <br>
     James Turk <a href="james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes
