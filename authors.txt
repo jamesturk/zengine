@@ -7,3 +7,4 @@ Gamer Tazar tazar@conceptofzero.net - OpenGL assistance
 Sean sean@conceptofzero.net - MSVC++6 Project Files
 Kevin Watters kwatters@adelphia.net - Fix to ZImage::SetColorKey
 Atani atani@atani-software.net - Revised Linux Build System
+Stinus Petersen (bison@flytlet.dk) - Fix for ZImage::OpenFromImage with alpha images

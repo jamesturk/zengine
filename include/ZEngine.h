@@ -3,7 +3,7 @@
     \brief Header file for ZEngine.
 
     Public header file for ZEngine, this is the file that programs that wish to utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.36 2003/11/23 19:29:01 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.37 2003/11/23 19:34:02 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -44,6 +44,7 @@
     Sean <a href="mailto:sean@conceptofzero.net">sean@conceptofzero.net</a> - MSVC++6 Project Files <br>
     Kevin Watters <a href="mailto:kwatters@adelphia.net">kwatters@adelphia.net</a> - Fix to ZImage::SetColorKey <br>
     Atani <a href="mailto:atani@atani-software.net">atani@atani-software.net</a> - Revised Linux Build System <br>
+    Stinus Petersen <a href="mailto:bison@flytlet.dk">bison@flytlet.dk</a> - Fix for ZImage::OpenFromImage with alpha images <br>
 **/
 
 #ifndef __zengine_h__
