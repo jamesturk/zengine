@@ -8,14 +8,14 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.11 2003/01/04 05:18:51 cozman Exp $*/
+/*$Id: ZMouseTest.cpp,v 1.12 2003/01/12 19:00:17 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
 using namespace ZE;
 
-void Initialize()
+bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
@@ -31,8 +31,8 @@ void Initialize()
     rate = cfg.GetInt("ZMouseTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateDisplay(title);
     engine->SetDesiredFramerate(rate);
+    return engine->CreateDisplay(title);
 }
 
 void Test()
@@ -59,25 +59,29 @@ void Test()
     {
         //In the active loop, check events first//
         engine->CheckEvents();
-        if(engine->KeyIsPressed(SDLK_ESCAPE))
-            engine->RequestQuit();
 
-        //show where mouse is (clicked or not)//
-        if(engine->RButtonPressed())
-            font.DrawText(FormatStr("Right button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
-        else if(engine->LButtonPressed())
-            font.DrawText(FormatStr("Left button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
-        else
-            font.DrawText(FormatStr("Mouse at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
-            
+        if(engine->IsActive())
+        {
+            if(engine->KeyIsPressed(SDLK_ESCAPE))
+                engine->RequestQuit();
 
-        engine->Clear();    //clear screen
-        //draw the images//
-        text[engine->MouseInRect(&textRect)].Draw(100,100);
-        text[2].Draw(0,0);
-        cursor.Draw(engine->MouseX()-8.0f,engine->MouseY()-8.0f);
+            //show where mouse is (clicked or not)//
+            if(engine->RButtonPressed())
+                font.DrawText(FormatStr("Right button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
+            else if(engine->LButtonPressed())
+                font.DrawText(FormatStr("Left button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
+            else
+                font.DrawText(FormatStr("Mouse at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
+                
 
-        engine->Update();    //update the screen
+            engine->Clear();    //clear screen
+            //draw the images//
+            text[engine->MouseInRect(&textRect)].Draw(100,100);
+            text[2].Draw(0,0);
+            cursor.Draw(engine->MouseX()-8.0f,engine->MouseY()-8.0f);
+
+            engine->Update();    //update the screen
+        }
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
@@ -86,9 +90,11 @@ int main(int argc, char *argv[])
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    Initialize();
-    //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
-    Test();
+    if(Initialize())
+    {
+        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
+        Test();
+    }
 
     ZEngine::ReleaseInstance();    //release engine instance
     return 0;

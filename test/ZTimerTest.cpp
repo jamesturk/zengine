@@ -8,14 +8,14 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZTimerTest.cpp,v 1.10 2003/01/04 05:18:51 cozman Exp $*/
+/*$Id: ZTimerTest.cpp,v 1.11 2003/01/12 19:00:25 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
 using namespace ZE;
 
-void Initialize()
+bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
@@ -31,8 +31,8 @@ void Initialize()
     rate = cfg.GetInt("ZTimerTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateDisplay(title);
     engine->SetDesiredFramerate(rate);
+    return engine->CreateDisplay(title);
 }
 
 void Test()
@@ -54,60 +54,64 @@ void Test()
     {
         //In the active loop, check events first//
         engine->CheckEvents();
-        if(engine->KeyIsPressed(SDLK_ESCAPE))
-            engine->RequestQuit();
-        //pause current timer//
-        if(engine->KeyIsPressed(SDLK_p))
+
+        if(engine->IsActive())
         {
-            switch(curTimer)
+            if(engine->KeyIsPressed(SDLK_ESCAPE))
+                engine->RequestQuit();
+            //pause current timer//
+            if(engine->KeyIsPressed(SDLK_p))
             {
-                case 0:
-                    engine->PauseTimer();
-                    break;
-                case 1:
-                    TimerOne.Pause();
-                    break;
-                case 2:
-                    TimerTwo.Pause();
-                    break;
+                switch(curTimer)
+                {
+                    case 0:
+                        engine->PauseTimer();
+                        break;
+                    case 1:
+                        TimerOne.Pause();
+                        break;
+                    case 2:
+                        TimerTwo.Pause();
+                        break;
+                }
             }
-        }
-        //unpause current timer//
-        if(engine->KeyIsPressed(SDLK_u))
-        {
-            switch(curTimer)
+            //unpause current timer//
+            if(engine->KeyIsPressed(SDLK_u))
             {
-                case 0:
-                    engine->UnpauseTimer();
-                    break;
-                case 1:
-                    TimerOne.Unpause();
-                    break;
-                case 2:
-                    TimerTwo.Unpause();
-                    break;
+                switch(curTimer)
+                {
+                    case 0:
+                        engine->UnpauseTimer();
+                        break;
+                    case 1:
+                        TimerOne.Unpause();
+                        break;
+                    case 2:
+                        TimerTwo.Unpause();
+                        break;
+                }
             }
+            //switch//
+            if(engine->KeyIsPressed(SDLK_t))
+            {
+                if(++curTimer > 2)
+                    curTimer = 0;
+                engine->Delay(200);
+            }
+
+            //Render all the fonts//
+            font.DrawText(FormatStr("Current Timer: %s",TimerName[curTimer].c_str()),text[0]);
+            font.DrawText(FormatStr("%s Time: %d",TimerName[0].c_str(),engine->GetTime()),text[1]);
+            font.DrawText(FormatStr("%s Time: %d",TimerName[1].c_str(),TimerOne.GetTime()),text[2]);
+            font.DrawText(FormatStr("%s Time: %d",TimerName[2].c_str(),TimerTwo.GetTime()),text[3]);
+
+            engine->Clear();    //clear screen
+
+            for(int i=0; i <= 4; i++)
+                text[i].Draw(0,i*50.0f);
+            
+            engine->Update();    //update the screen
         }
-        //switch//
-        if(engine->KeyIsPressed(SDLK_t))
-        {
-            if(++curTimer > 2)
-                curTimer = 0;
-            engine->Delay(200);
-        }
-
-        //Render all the fonts//
-        font.DrawText(FormatStr("Current Timer: %s",TimerName[curTimer].c_str()),text[0]);
-        font.DrawText(FormatStr("%s Time: %d",TimerName[0].c_str(),engine->GetTime()),text[1]);
-        font.DrawText(FormatStr("%s Time: %d",TimerName[1].c_str(),TimerOne.GetTime()),text[2]);
-        font.DrawText(FormatStr("%s Time: %d",TimerName[2].c_str(),TimerTwo.GetTime()),text[3]);
-
-        engine->Clear();    //clear screen
-
-        for(int i=0; i <= 4; i++)
-            text[i].Draw(0,i*50.0f);
-        
-        engine->Update();    //update the screen
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
@@ -116,9 +120,11 @@ int main(int argc, char *argv[])
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    Initialize();
-    //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
-    Test();
+    if(Initialize())
+    {
+        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
+        Test();
+    }
 
     ZEngine::ReleaseInstance();    //release engine instance
     return 0;

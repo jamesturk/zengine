@@ -8,14 +8,14 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZFontTest.cpp,v 1.10 2003/01/04 05:18:51 cozman Exp $*/
+/*$Id: ZFontTest.cpp,v 1.11 2003/01/12 19:00:14 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
 using namespace ZE;
 
-void Initialize()
+bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
@@ -31,8 +31,8 @@ void Initialize()
     rate = cfg.GetInt("ZFontTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateDisplay(title);
     engine->SetDesiredFramerate(rate);
+    return engine->CreateDisplay(title);
 }
 
 void Test()
@@ -60,15 +60,18 @@ void Test()
     {
         //In the active loop, check events first//
         engine->CheckEvents();
-        if(engine->KeyIsPressed(SDLK_ESCAPE))
-            engine->RequestQuit();
-        betsy.DrawText(FormatStr("FPS: %.2f",engine->GetFramerate()),text[5]);
+        if(engine->IsActive())
+        {
+            if(engine->KeyIsPressed(SDLK_ESCAPE))
+                engine->RequestQuit();
+            betsy.DrawText(FormatStr("FPS: %.2f",engine->GetFramerate()),text[5]);
 
-        engine->Clear();    //clear screen
-        //draw the images//
-        for(int i=0; i <= 5; i++)
-            text[i].Draw(10.0f*i,50.0f*i);
-        engine->Update();    //update the screen
+            engine->Clear();    //clear screen
+            //draw the images//
+            for(int i=0; i <= 5; i++)
+                text[i].Draw(10.0f*i,50.0f*i);
+            engine->Update();    //update the screen
+        }
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
@@ -77,9 +80,11 @@ int main(int argc, char *argv[])
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    Initialize();
-    //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
-    Test();
+    if(Initialize())
+    {
+        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
+        Test();
+    }
 
     ZEngine::ReleaseInstance();    //release engine instance
     return 0;

@@ -8,14 +8,14 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.13 2003/01/04 05:18:51 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.14 2003/01/12 19:00:15 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
 using namespace ZE;
 
-void Initialize()
+bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
@@ -31,8 +31,8 @@ void Initialize()
     rate = cfg.GetInt("ZImageTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateDisplay(title);
     engine->SetDesiredFramerate(rate);
+    return engine->CreateDisplay(title);
 }
 
 void Test()
@@ -62,47 +62,52 @@ void Test()
         //In the active loop, check events first//
         engine->CheckEvents();
 
-        if(engine->ImagesNeedReload())
+        if(engine->IsActive())
         {
-            image1.Reload();
-            image2.Reload();
-            image3.Reload();
-            textImage.Reload();
-            engine->SetReloadNeed(false);   //very important for speed, without this you'd be reloading every frame
+            if(engine->ImagesNeedReload())
+            {
+                image1.Reload();
+                image2.Reload();
+                image3.Reload();
+                textImage.Reload();
+                engine->SetReloadNeed(false);   //very important for speed, without this you'd be reloading every frame
+            }
+
+            if(engine->KeyIsPressed(SDLK_s))
+            {
+                //code to toggle screen//
+                engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
+                engine->CreateDisplay("ZImage Test");
+                engine->SetReloadNeed(true);
+            }
+            if(engine->KeyIsPressed(SDLK_ESCAPE))
+                engine->RequestQuit();
+
+            engine->Clear();    //clear screen
+            //draw the images//
+            image1.Draw(0,0);
+            
+            image2.DrawRotated(100,0,angle);
+            if(++angle > 360)
+                angle = 0.0f;
+
+            image3.Draw(200,0);
+            textImage.Draw(0,100);
+            engine->Update();    //update the screen
         }
-
-        if(engine->KeyIsPressed(SDLK_s))
-        {
-            //code to toggle screen//
-            engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
-            engine->CreateDisplay("ZImage Test");
-            engine->SetReloadNeed(true);
-        }
-        if(engine->KeyIsPressed(SDLK_ESCAPE))
-            engine->RequestQuit();
-
-        engine->Clear();    //clear screen
-        //draw the images//
-        image1.Draw(0,0);
-        
-        image2.DrawRotated(100,0,angle);
-        if(++angle > 360)
-            angle = 0.0f;
-
-        image3.Draw(200,0);
-        textImage.Draw(0,100);
-        engine->Update();    //update the screen
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    Initialize();
-    //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
-    Test();
+    if(Initialize())
+    {
+        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
+        Test();
+    }
 
     ZEngine::ReleaseInstance();    //release engine instance
     return 0;

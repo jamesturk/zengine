@@ -1,11 +1,12 @@
 ZEngine Version Log for Version 0.8.1
-$Id: changelog.txt,v 1.22 2003/01/12 07:09:04 cozman Exp $
+$Id: changelog.txt,v 1.23 2003/01/12 19:01:17 cozman Exp $
 
 0.8.2
+    -Updated examples to use newer features and check for errors.
     -Changed ZEngine::CreateDisplay to return a bool.
     -Added \since option to documentation (Everything after 0.8.0 will be labeled with a version.)
-    -Added "desired framerate" code to ZEngine.
     -Added "desired framerate" functionality into the test programs.
+    -Added "desired framerate" code to ZEngine.
     -Fixed OpenGL color bleed in ZRect.
 
 0.8.1

@@ -8,14 +8,14 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMusicTest.cpp,v 1.12 2003/01/04 05:18:51 cozman Exp $*/
+/*$Id: ZMusicTest.cpp,v 1.13 2003/01/12 19:00:19 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
 using namespace ZE;
 
-void Initialize()
+bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
@@ -31,8 +31,8 @@ void Initialize()
     rate = cfg.GetInt("ZMusicTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateDisplay(title);
     engine->SetDesiredFramerate(rate);
+    return engine->CreateDisplay(title);
 }
 
 void Test()
@@ -53,7 +53,6 @@ void Test()
         engine->Update();
         do
         {
-            
             engine->CheckEvents();
             engine->Update();
         } while(!engine->QuitRequested());
@@ -69,32 +68,36 @@ void Test()
         {
             //In the active loop, check events first//
             engine->CheckEvents();
-            if(engine->KeyIsPressed(SDLK_ESCAPE))
-                engine->RequestQuit();
-            if(engine->KeyIsPressed(SDLK_r))
-                song.Rewind();
-            if(engine->KeyIsPressed(SDLK_p))
-                song.Pause();
-            if(engine->KeyIsPressed(SDLK_u))
-                song.Unpause();
-            if(engine->KeyIsPressed(SDLK_f))
-                song.Stop(5000);
-            if(engine->KeyIsPressed(SDLK_h))
-                song.Stop();
-            if(engine->KeyIsPressed(SDLK_SPACE))
-                song.Play();
-            if(engine->KeyIsPressed(SDLK_UP))
-                song.SetVolume(song.Volume()+1);
-            if(engine->KeyIsPressed(SDLK_DOWN))
-                song.SetVolume(song.Volume()-1);
+
+            if(engine->IsActive())
+            {
+                if(engine->KeyIsPressed(SDLK_ESCAPE))
+                    engine->RequestQuit();
+                if(engine->KeyIsPressed(SDLK_r))
+                    song.Rewind();
+                if(engine->KeyIsPressed(SDLK_p))
+                    song.Pause();
+                if(engine->KeyIsPressed(SDLK_u))
+                    song.Unpause();
+                if(engine->KeyIsPressed(SDLK_f))
+                    song.Stop(5000);
+                if(engine->KeyIsPressed(SDLK_h))
+                    song.Stop();
+                if(engine->KeyIsPressed(SDLK_SPACE))
+                    song.Play();
+                if(engine->KeyIsPressed(SDLK_UP))
+                    song.SetVolume(song.Volume()+1);
+                if(engine->KeyIsPressed(SDLK_DOWN))
+                    song.SetVolume(song.Volume()-1);
 
 
-            font.DrawText(FormatStr("Volume: %d",song.Volume()),text[3]);
+                font.DrawText(FormatStr("Volume: %d",song.Volume()),text[3]);
 
-            engine->Clear();    //clear screen
-            for(int i=0; i < 4; i++)
-                text[i].Draw(0,i*50.0f);
-            engine->Update();    //update the screen
+                engine->Clear();    //clear screen
+                for(int i=0; i < 4; i++)
+                    text[i].Draw(0,i*50.0f);
+                engine->Update();    //update the screen
+            }
         } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
     }
 }
@@ -103,9 +106,11 @@ int main(int argc, char *argv[])
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    Initialize();
-    //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
-    Test();
+    if(Initialize())
+    {
+        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
+        Test();
+    }
 
     ZEngine::ReleaseInstance();    //release engine instance
     return 0;

@@ -8,14 +8,14 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZRectTest.cpp,v 1.14 2003/01/08 06:07:07 cozman Exp $*/
+/*$Id: ZRectTest.cpp,v 1.15 2003/01/12 19:00:21 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
 using namespace ZE;
 
-void Initialize()
+bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
@@ -31,8 +31,8 @@ void Initialize()
     rate = cfg.GetInt("ZRectTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateDisplay(title);
     engine->SetDesiredFramerate(rate);
+    return engine->CreateDisplay(title);
 }
 
 void Test()
@@ -45,34 +45,38 @@ void Test()
     {
         //In the active loop, check events first//
         engine->CheckEvents();
-        if(engine->KeyIsPressed(SDLK_ESCAPE))
-            engine->RequestQuit();
-        //movement//
-        movDelta = static_cast<float>(engine->GetFrameTime()*30);
-        if(engine->KeyIsPressed(SDLK_LEFT))
-            moveRect.MoveRel(-movDelta,0);
-        if(engine->KeyIsPressed(SDLK_RIGHT))
-            moveRect.MoveRel(movDelta,0);
-        if(engine->KeyIsPressed(SDLK_UP))
-            moveRect.MoveRel(0,-movDelta);
-        if(engine->KeyIsPressed(SDLK_DOWN))
-            moveRect.MoveRel(0,movDelta);
-        if(engine->KeyIsPressed(SDLK_EQUALS))
-        {
-            moveRect.MoveRel(-1,-1);
-            moveRect.ResizeRel(2,2);
-        }
-        if(engine->KeyIsPressed(SDLK_MINUS))
-        {
-            moveRect.MoveRel(1,1);
-            moveRect.ResizeRel(-2,-2);
-        }
 
-        engine->Clear();
-        moveRect.Draw(255,0,0,128);
-        stillRect.Draw(0,0,255,128);
-        moveRect.Intersection(stillRect).Draw(0,255,0);
-        engine->Update();
+        if(engine->IsActive())
+        {
+            if(engine->KeyIsPressed(SDLK_ESCAPE))
+                engine->RequestQuit();
+            //movement//
+            movDelta = static_cast<float>(engine->GetFrameTime()*30);
+            if(engine->KeyIsPressed(SDLK_LEFT))
+                moveRect.MoveRel(-movDelta,0);
+            if(engine->KeyIsPressed(SDLK_RIGHT))
+                moveRect.MoveRel(movDelta,0);
+            if(engine->KeyIsPressed(SDLK_UP))
+                moveRect.MoveRel(0,-movDelta);
+            if(engine->KeyIsPressed(SDLK_DOWN))
+                moveRect.MoveRel(0,movDelta);
+            if(engine->KeyIsPressed(SDLK_EQUALS))
+            {
+                moveRect.MoveRel(-1,-1);
+                moveRect.ResizeRel(2,2);
+            }
+            if(engine->KeyIsPressed(SDLK_MINUS))
+            {
+                moveRect.MoveRel(1,1);
+                moveRect.ResizeRel(-2,-2);
+            }
+
+            engine->Clear();
+            moveRect.Draw(255,0,0,128);
+            stillRect.Draw(0,0,255,128);
+            moveRect.Intersection(stillRect).Draw(0,255,0);
+            engine->Update();
+        }
 
     } while(!engine->QuitRequested());
 }
@@ -81,9 +85,11 @@ int main(int argc, char *argv[])
 {
     ZEngine *engine = ZEngine::GetInstance();
 
-    Initialize();
-    //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
-    Test();
+    if(Initialize())
+    {
+        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
+        Test();
+    }
 
     ZEngine::ReleaseInstance();    //release engine instance
     return 0;
