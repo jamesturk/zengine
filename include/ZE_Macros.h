@@ -13,7 +13,7 @@
 File: ZE_Macros.h <br>
 Description: Header file for ZEngine Macros. <br>
 Author(s): James Turk <br>
-$Id: ZE_Macros.h,v 1.1 2002/12/01 08:01:11 cozman Exp $<br>
+$Id: ZE_Macros.h,v 1.2 2002/12/03 04:11:41 cozman Exp $<br>
 
     \file ZE_Macros.h
     \brief Definition file for ZEngine Macros
@@ -44,3 +44,4 @@ namespace ZE
 }
 
 #endif //__ze_macros_h__
+
