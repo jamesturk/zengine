@@ -12,8 +12,8 @@
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
 
-    ZEngine Game Engine core Engine definition.
-    <br>$id:$<br>
+    ZEngine Game Engine core Engine definition.<br>
+    $ id: $<br>
     \author James Turk
 **/
 
