@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.29 2003/03/01 20:46:00 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.30 2003/03/01 20:47:00 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -294,15 +294,7 @@ void ZEngine::ToggleFullscreen()
 #else
     char *title,*icon;
 
-    if(!mPaused)
-    {
-        mUnpauseOnActive = true;
-        PauseTimer();
-    }
     SetupDisplay(mWidth,mHeight,mBPP,!mFullscreen);
-
-    if(mUnpauseOnActive)
-        UnpauseTimer();
 
     SDL_WM_GetCaption(&title,&icon);
     if(icon)
