@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.16 2003/01/18 21:53:14 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.17 2003/01/19 02:05:13 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -103,6 +103,8 @@ bool ZEngine::CreateDisplay(string title, string icon)
 {
     Uint32 flags=0;
     SDL_Surface *iconImg;
+    bool status=true;   //status of setup
+    int bpp;
 #ifdef USE_OPENGL
     int rgb_size[3];
 #endif //USE_OPENGL
@@ -110,16 +112,39 @@ bool ZEngine::CreateDisplay(string title, string icon)
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
     {
         ReportError(ZERR_SDL_INIT,SDL_GetError());
-        return false;
+        return false;   //return now, nothing else should be called
     }
     
 #ifdef USE_SDL_MIXER
     if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
     {
         ReportError(ZERR_MIX_INIT,SDL_GetError());
-        return false;
+        status = false; //continue setup without sound
     }
 #endif //USE_SDL_MIXER
+
+    //set flags and bpp//
+    if(mFullscreen)
+        flags |= SDL_FULLSCREEN;
+    if(mBPP != 8 && mBPP != 15 && mBPP != 16 && mBPP != 24 && mBPP !=32)
+    {
+        ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying desktop BPP.",mBPP));
+        mBPP = 0;
+    }
+    else
+    {
+        bpp = SDL_VideoModeOK(mWidth, mHeight, mBPP, flags);
+        if(!bpp)
+        {
+            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in any depth.",mWidth,mHeight));
+            return false;   //return now
+        }
+        else if(bpp != mBPP)
+        {
+            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in %dBPP, trying %dBPP.",mWidth,mHeight,mBPP,bpp));
+            mBPP = bpp;
+        }
+    }
 
 #ifdef USE_OPENGL
     switch (mBPP)
@@ -153,7 +178,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
     SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
-    flags = SDL_OPENGL;
+    flags |= SDL_OPENGL;
 #endif //USE_OPENGL
 
     //Window Manager settings//
@@ -169,25 +194,18 @@ bool ZEngine::CreateDisplay(string title, string icon)
     }
 
     //create SDL screen and update settings based on returned screen//
-    if(mFullscreen)
-        flags |= SDL_FULLSCREEN;
     mScreen = SDL_SetVideoMode(mWidth, mHeight, mBPP, flags);
 
-    if(!mScreen)    //try 0 for BPP if supplied bpp failed
+    if(!mScreen)
     {
-        ReportError(ZERR_VIDMODE,SDL_GetError());
-        mScreen = SDL_SetVideoMode(mWidth, mHeight, 0, flags);
+        ReportError(ZERR_VIDMODE,FormatStr("Unknown Error. (%s)",SDL_GetError()));
 
-        if(!mScreen)    //if safe screen setup fails
-        {
 #ifdef USE_SDL_MIXER
-            Mix_CloseAudio();
+        Mix_CloseAudio();
 #endif
-            SDL_Quit();
-            
-            ReportError(ZERR_VIDMODE,FormatStr("Desktop Depth failed: %s",SDL_GetError()));
-            return false;
-        }
+        SDL_Quit();
+
+        return false;   //bail if display fails
     }
     
     mWidth = mScreen->w;
@@ -204,14 +222,14 @@ bool ZEngine::CreateDisplay(string title, string icon)
     if(TTF_Init() < 0)
     {
         ReportError(ZERR_TTF_INIT,TTF_GetError());
-        return false;
+        status = false; //possible to go on without SDL_TTF
     }
 #endif  //USE_SDL_TTF
 
     mLastTime = mPausedTime = SDL_GetTicks();
     mActive = true;
 
-    return true;
+    return status;  //return true (false will be returned if TTF or Mixer fail)
 }
 
 void ZEngine::CloseDisplay()

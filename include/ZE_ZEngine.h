@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.12 2003/01/15 05:51:18 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.13 2003/01/19 02:05:13 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -143,7 +143,7 @@ class ZEngine
 
             \param title Window Title.
             \param icon Path to Icon File.
-
+            \return result of setting up the display, true if everything went ok, false if any setup failed (check GetLastError).
         **/
         bool CreateDisplay(string title, string icon="");
 
