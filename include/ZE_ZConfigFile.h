@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.3 2002/12/04 23:06:45 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.4 2002/12/04 23:08:17 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -86,7 +86,7 @@ class ZConfigFile : public ZObject
         **/
         string CleanString(string str);
         
-        /*
+        /*!
             \brief Check if a section exists.
 
             Find out if a section currently exists.
@@ -95,7 +95,7 @@ class ZConfigFile : public ZObject
         **/
         bool Exists(string sec);
 
-        /*
+        /*!
             \brief Check if a variable exists.
 
             Find out if a variable currently exists.
