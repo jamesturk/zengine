@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.7 2002/12/29 07:22:02 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.8 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -193,7 +193,7 @@ class ZImage : public ZObject
             OpenGL related bind call, only available in case you want to bind image in 3D.
             Draw uses this but the average user should never need to call this.
         **/
-        void Bind();
+        void Bind() const;
 
         /*!
             \brief Draw Image to Screen.
@@ -202,7 +202,7 @@ class ZImage : public ZObject
             \param x X coord to draw Image to.
             \param y Y coord to draw Image to.
         **/
-        void Draw(float x, float y);
+        void Draw(float x, float y) const;
 
         /*!
             \brief Draw Image rotated to screen.
@@ -212,7 +212,7 @@ class ZImage : public ZObject
             \param y Y coord to draw Image to.
             \param angle Angle in degrees to rotate image.
         **/
-        void DrawRotated(int x, int y, float angle);
+        void DrawRotated(int x, int y, float angle) const;
 
         /////////////
         //Accessors//
@@ -224,14 +224,14 @@ class ZImage : public ZObject
             Check if surface is a valid GL texture. (does not detect surface loss)
             \return Loaded or Unloaded state of data.
         **/
-        bool IsLoaded();
+        bool IsLoaded() const;
 
         /*!
             \brief Get SDL_Surface.
             Get SDL_Surface pointer to actual image data.
             \return SDL_Surface* of rImage.
         **/
-        SDL_Surface *Surface();
+        SDL_Surface *Surface() const;
 
         /*!
             \brief Get Width.
@@ -239,7 +239,7 @@ class ZImage : public ZObject
             Get Current Width of Image.
             \return Image Width.
         **/
-        int Width();
+        int Width() const;
 
         /*!
             \brief Get Height.
@@ -247,7 +247,7 @@ class ZImage : public ZObject
             Get Current Height of Image.
             \return Image Height.
         **/
-        int Height();
+        int Height() const;
 };
 
 }

@@ -13,7 +13,7 @@
 File: ZE_ZSound.h <br>
 Description: Header file for core ZEngine Sound Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.h,v 1.3 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZSound.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZSound.h
     \brief Definition file for ZSound.
@@ -108,14 +108,14 @@ class ZSound : public ZObject
 
             Pause currently playing sound.
         **/
-        void Pause();
+        void Pause() const;
 
         /*!
             \brief Unpause sound.
 
             Unpause currently playing sound.
         **/
-        void Unpause();
+        void Unpause() const;
 
         /*!
             \brief Stop sound.
@@ -123,7 +123,7 @@ class ZSound : public ZObject
             Stop currently playing sound, if fadeTime is not zero, fade out over specified time.
             \param fadeTime Milliseconds to fade out over, defaults to zero for immediate stop.
         **/
-        void Stop(int fadeTime=0);
+        void Stop(int fadeTime=0) const;
 
         /*!
             \brief Change Volume.
@@ -143,7 +143,7 @@ class ZSound : public ZObject
             Check if file is loaded and pointer to data is non-NULL.
             \return Loaded or Unloaded state of data.
         **/
-        bool IsLoaded();
+        bool IsLoaded() const;
 
         /*!
             \brief Check if sound is Playing.
@@ -151,7 +151,7 @@ class ZSound : public ZObject
             Check if sound is playing, specifically if it is not stopped. (Paused state should be checked for by IsPaused)
             \return Playing / Not Playing State of sound.
         **/
-        bool IsPlaying();
+        bool IsPlaying() const;
 
         /*!
             \brief Check if sound is Paused.
@@ -159,7 +159,7 @@ class ZSound : public ZObject
             Check if sound is "playing" but currently paused.
             \return Paused / Not Paused State of Sound.
         **/
-        bool IsPaused();
+        bool IsPaused() const;
 
         /*!
             \brief Find Current Volume of Sound Channel.
@@ -167,7 +167,7 @@ class ZSound : public ZObject
             Get current volume of sound channel represented as a value from 0-128.
             \return Volume of sound channel, 0-128.
         **/
-        int Volume();
+        int Volume() const;
 };
 
 

@@ -13,7 +13,7 @@
 File: ZE_ZMusic.cpp <br>
 Description: Implementation source file for core ZEngine Music Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.cpp,v 1.4 2003/01/13 06:00:38 cozman Exp $<br>
+$Id: ZE_ZMusic.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZMusic.cpp
     \brief Source file for ZMusic.
@@ -58,7 +58,7 @@ void ZMusic::Release()
     FreeMusic(rMusic);
 }
 
-void ZMusic::Play(int loopNum, int fadeTime)
+void ZMusic::Play(int loopNum, int fadeTime) const
 {
     if(Mix_PlayingMusic())    //stop currently playing music
         Mix_HaltMusic();
@@ -74,7 +74,7 @@ void ZMusic::Play(int loopNum, int fadeTime)
         rEngine->ReportError(ZERR_NOMUSIC, "Play");
 }
 
-void ZMusic::Pause()
+void ZMusic::Pause() const
 {
     if(rMusic)
         Mix_PauseMusic();
@@ -82,7 +82,7 @@ void ZMusic::Pause()
         rEngine->ReportError(ZERR_NOMUSIC, "Pause");
 }
 
-void ZMusic::Unpause()
+void ZMusic::Unpause() const
 {
     if(rMusic)
         Mix_ResumeMusic();
@@ -90,7 +90,7 @@ void ZMusic::Unpause()
         rEngine->ReportError(ZERR_NOMUSIC, "Unpause");
 }
 
-void ZMusic::Rewind()
+void ZMusic::Rewind() const
 {
     if(rMusic)
         Mix_RewindMusic();
@@ -98,7 +98,7 @@ void ZMusic::Rewind()
         rEngine->ReportError(ZERR_NOMUSIC, "Rewind");
 }
 
-void ZMusic::Stop(int fadeTime)
+void ZMusic::Stop(int fadeTime) const
 {
     if(rMusic)
     {
@@ -119,12 +119,12 @@ void ZMusic::SetVolume(int volume)
         rEngine->ReportError(ZERR_NOMUSIC, "SetVolume");
 }
 
-bool ZMusic::IsLoaded()
+bool ZMusic::IsLoaded() const
 {
     return rMusic != NULL;
 }
 
-bool ZMusic::IsPlaying()
+bool ZMusic::IsPlaying() const
 {
     if(rMusic)
         return Mix_PlayingMusic() > 0;
@@ -135,7 +135,7 @@ bool ZMusic::IsPlaying()
     }
 }
 
-bool ZMusic::IsPaused()
+bool ZMusic::IsPaused() const
 {
     if(rMusic)
         return Mix_PausedMusic() > 0;
@@ -146,7 +146,7 @@ bool ZMusic::IsPaused()
     }
 }
 
-int ZMusic::Volume()
+int ZMusic::Volume() const
 {
     if(rMusic)
         return Mix_VolumeMusic(-1);

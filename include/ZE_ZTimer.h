@@ -13,7 +13,7 @@
 File: ZE_ZTimer.h <br>
 Description: Header file for core ZEngine Timer Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZTimer.h,v 1.3 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZTimer.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZTimer.h
     \brief Definition file for ZTimer.
@@ -52,7 +52,7 @@ class ZTimer : public ZObject
             Protected method to get time from whichever timer is parent.
             \return Time on parent timer.
         **/
-        Uint32 GetParentTime();
+        Uint32 GetParentTime() const;
 
     public:
 
@@ -91,7 +91,7 @@ class ZTimer : public ZObject
             Get current time accounting for time paused.
             \return Current Timer Time.
         **/
-        Uint32 GetTime();
+        Uint32 GetTime() const;
 
         /*!
             \brief Get paused state.
@@ -99,7 +99,7 @@ class ZTimer : public ZObject
             Find out paused state of timer.
             \return Paused state for timer.
         **/
-        bool IsPaused();
+        bool IsPaused() const;
 };
 
 }

@@ -13,7 +13,7 @@
 File: ZE_ZError.h <br>
 Description: Header file for ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.3 2003/01/16 05:06:54 cozman Exp $<br>
+$Id: ZE_ZError.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZError.h
     \brief Definition file for ZError.
@@ -109,14 +109,14 @@ class ZError
             Access ZErrorCode of the ZError object.
             \return The error ZErrorCode.
         **/
-        ZErrorCode Code();
+        ZErrorCode Code() const;
 
         /*!
             \brief Get formatted string for log file.
 
             Return the string to be written to the logfile.  Called by ZEngine in LogError.
         **/
-        string LogString();
+        string LogString() const;
 };
 
 }

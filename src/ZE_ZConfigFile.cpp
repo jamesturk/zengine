@@ -13,7 +13,7 @@
 File: ZE_ZConfigFile.cpp <br>
 Description: Implementation source file for ZConfigFile, the ZEngine INI-Style Config File. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZConfigFile.cpp,v 1.4 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZConfigFile.cpp
     \brief Source file for ZConfigFile.
@@ -26,7 +26,7 @@ $Id: ZE_ZConfigFile.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
 namespace ZE
 {
 
-string ZConfigFile::CleanString(string str)
+string ZConfigFile::CleanString(string str)  const
 {
     string tmpStr;
     bool inQuotes = false;
@@ -46,9 +46,9 @@ string ZConfigFile::CleanString(string str)
     return tmpStr;
 }
 
-bool ZConfigFile::Exists(string sec)
+bool ZConfigFile::Exists(string sec) const
 {
-    list<ZCF_Section>::iterator secIter;
+    list<ZCF_Section>::const_iterator secIter;
 
     sec = CleanString(sec);
 
@@ -60,10 +60,10 @@ bool ZConfigFile::Exists(string sec)
     return false;
 }
 
-bool ZConfigFile::Exists(string sec, string var)
+bool ZConfigFile::Exists(string sec, string var) const
 {
-    list<ZCF_Section>::iterator secIter;
-    list<ZCF_Variable>::iterator varIter;
+    list<ZCF_Section>::const_iterator secIter;
+    list<ZCF_Variable>::const_iterator varIter;
 
     sec = CleanString(sec);
     var = CleanString(var);
@@ -126,10 +126,10 @@ void ZConfigFile::SetVariable(string sec, string var, string val)
     }
 }
 
-string ZConfigFile::GetVariable(string sec, string var, string defVal)
+string ZConfigFile::GetVariable(string sec, string var, string defVal) const
 {
-    list<ZCF_Section>::iterator secIter;
-    list<ZCF_Variable>::iterator varIter;
+    list<ZCF_Section>::const_iterator secIter;
+    list<ZCF_Variable>::const_iterator varIter;
 
     sec = CleanString(sec);
     var = CleanString(var);
@@ -199,7 +199,7 @@ void ZConfigFile::Process(string filename)
     cfile.close();
 }
 
-int ZConfigFile::GetInt(string section, string var, int defVal)
+int ZConfigFile::GetInt(string section, string var, int defVal) const
 {
     string val;
     char tmp[20];
@@ -218,7 +218,7 @@ int ZConfigFile::GetInt(string section, string var, int defVal)
         return atoi(val.c_str());
 }
 
-bool ZConfigFile::GetBool(string section, string var, bool defVal)
+bool ZConfigFile::GetBool(string section, string var, bool defVal) const
 {
     string val,tmp;
 
@@ -238,7 +238,7 @@ bool ZConfigFile::GetBool(string section, string var, bool defVal)
         return defVal;
 }
 
-string ZConfigFile::GetString(string section, string var, string defVal)
+string ZConfigFile::GetString(string section, string var, string defVal) const
 {
     string val;
 

@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.4 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.5 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -102,7 +102,7 @@ class ZRect
             \param blue Blue component of color (0-255).
             \param alpha Alpha component of color (0-255).
         **/
-        void Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha=255);
+        void Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha=255) const;
 
         /*!
             \brief Changes the location of the rectangle.

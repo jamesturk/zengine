@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.5 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.6 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -84,7 +84,7 @@ class ZConfigFile : public ZObject
             \param str The string to get a clean version of.
             \return Cleaned string.
         **/
-        string CleanString(string str);
+        string CleanString(string str)  const;
         
         /*!
             \brief Check if a section exists.
@@ -93,7 +93,7 @@ class ZConfigFile : public ZObject
             \param sec Section to check for.
             \return bool, true if section exists in file.
         **/
-        bool Exists(string sec);
+        bool Exists(string sec) const;
 
         /*!
             \brief Check if a variable exists.
@@ -103,7 +103,7 @@ class ZConfigFile : public ZObject
             \param var Variable to check for.
             \return bool, true if section exists in file.
         **/
-        bool Exists(string sec, string var);
+        bool Exists(string sec, string var) const;
 
         /*!
             \brief Internal function to set variables.
@@ -124,7 +124,7 @@ class ZConfigFile : public ZObject
             \param defVal Value to return if variable doesnt exist.
             \return Value of variable.
         **/
-        string GetVariable(string sec, string var, string defVal);
+        string GetVariable(string sec, string var, string defVal) const;
 
     public:
 
@@ -167,7 +167,7 @@ class ZConfigFile : public ZObject
             \param defVal Value to return if var does not exist within section.
             \return Contents of the variable in integer format.
         **/
-        int GetInt(string section, string var, int defVal);
+        int GetInt(string section, string var, int defVal) const;
 
         /*!
             \brief Get value in boolean format from file.
@@ -179,7 +179,7 @@ class ZConfigFile : public ZObject
             \param defVal Value to return if var does not exist within section.
             \return Contents of the variable in boolean format.
         **/
-        bool GetBool(string section, string var, bool defVal);
+        bool GetBool(string section, string var, bool defVal) const;
 
         /*!
             \brief Get value in string format from file.
@@ -190,7 +190,7 @@ class ZConfigFile : public ZObject
             \param defVal Value to return if var does not exist within section.
             \return Contents of the variable in string format.
         **/
-        string GetString(string section, string var, string defVal);
+        string GetString(string section, string var, string defVal) const;
 
         /*!
             \brief Set value in integer format in file.

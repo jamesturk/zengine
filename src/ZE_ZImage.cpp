@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.14 2003/01/13 06:00:38 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.15 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -189,7 +189,7 @@ void ZImage::Resize(unsigned int width, unsigned int height)
     rHeight = height;
 }
 
-void ZImage::Bind()
+void ZImage::Bind() const
 {
     if(!rTexID)
         rEngine->ReportError(ZERR_NOIMAGE,"Bind");
@@ -197,7 +197,7 @@ void ZImage::Bind()
         glBindTexture(GL_TEXTURE_2D, rTexID);
 }
 
-void ZImage::Draw(float x, float y)
+void ZImage::Draw(float x, float y) const
 {
     Bind();
 
@@ -209,7 +209,7 @@ void ZImage::Draw(float x, float y)
     glEnd();
 }
 
-void ZImage::DrawRotated(int x, int y, float angle)
+void ZImage::DrawRotated(int x, int y, float angle) const
 {
     float cX,cY; //center variables
 
@@ -229,22 +229,22 @@ void ZImage::DrawRotated(int x, int y, float angle)
     glPopMatrix();
 }
 
-bool ZImage::IsLoaded()
+bool ZImage::IsLoaded() const
 {
     return glIsTexture(rTexID) == GL_TRUE;
 }
 
-SDL_Surface* ZImage::Surface()
+SDL_Surface* ZImage::Surface() const
 {
     return rImage;
 }
 
-int ZImage::Width()
+int ZImage::Width() const
 {
     return rWidth;
 }
 
-int ZImage::Height()
+int ZImage::Height() const
 {
     return rHeight;
 }

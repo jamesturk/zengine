@@ -13,7 +13,7 @@
 File: ZE_ZRect.cpp <br>
 Description: Implementation source file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.6 2003/01/08 06:07:07 cozman Exp $<br>
+$Id: ZE_ZRect.cpp,v 1.7 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
@@ -86,7 +86,7 @@ bool ZRect::operator<(const ZRect &rhs) const
     }
 }
 
-void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
+void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) const
 {
     glBindTexture(GL_TEXTURE_2D,0); //reset to blank texture
     glColor4ub(red,green,blue,alpha);

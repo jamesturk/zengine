@@ -13,7 +13,7 @@
 File: ZE_ZFont.h <br>
 Description: Header file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.h,v 1.3 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZFont.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZFont.h
     \brief Definition file for ZFont.
@@ -105,7 +105,7 @@ class ZFont : public ZObject
             \param text String to write.
             \param image ZImage to draw to.
         **/
-        void DrawText(string text, ZImage &image);
+        void DrawText(string text, ZImage &image) const;
 
         /*!
             \brief Draws a string with a colored background to a ZImage.
@@ -114,7 +114,7 @@ class ZFont : public ZObject
             \param text String to write.
             \param image ZImage to draw to.
         **/
-        void DrawShadedText(string text, ZImage &image);
+        void DrawShadedText(string text, ZImage &image) const;
 
         /*!
             \brief Set Text rColor.
@@ -164,7 +164,7 @@ class ZFont : public ZObject
             Check if file is loaded and pointer to data is non-NULL.
             \return Loaded or Unloaded state of data.
         **/
-        bool IsLoaded();
+        bool IsLoaded() const;
 
         /*!
             \brief Get Bold Setting.
@@ -172,7 +172,7 @@ class ZFont : public ZObject
             Check if font output is currently bold.
             \return True or False state of bold.
         **/
-        bool IsBold();
+        bool IsBold() const;
 
         /*!
             \brief Get Italic Setting.
@@ -180,7 +180,7 @@ class ZFont : public ZObject
             Check if font output is currently italic.
             \return True or False state of italic.
         **/
-        bool IsItalic();
+        bool IsItalic() const;
 
         /*!
             \brief Get Underlined Setting.
@@ -188,7 +188,7 @@ class ZFont : public ZObject
             Check if font output is currently underline.
             \return True or False state of underline.
         **/
-        bool IsUnderlined();
+        bool IsUnderlined() const;
 
         /*!
             \brief Get Height of Font.
@@ -196,7 +196,7 @@ class ZFont : public ZObject
             Check font height as reported by SDL_ttf.
             \return Height of font.
         **/
-        int Height();
+        int Height() const;
 
         /*!
             \brief Get Line Skip for Font.
@@ -204,7 +204,7 @@ class ZFont : public ZObject
             Check font line skip as reported by SDL_ttf.
             \return Recommended Line Skip of font.
         **/
-        int LineSkip();
+        int LineSkip() const;
 
         /*!
             \brief Get String Width.
@@ -213,7 +213,7 @@ class ZFont : public ZObject
             \param text String to get width of.
             \return Width of String in Current font.
         **/
-        int StringWidth(string text);
+        int StringWidth(string text) const;
 
         /*!
             \brief Get String Height.
@@ -222,7 +222,7 @@ class ZFont : public ZObject
             \param text String to get height of.
             \return Height of String in Current font.
         **/
-        int StringHeight(string text);
+        int StringHeight(string text) const;
 };
 
 }

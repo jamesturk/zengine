@@ -13,7 +13,7 @@
 File: ZE_ZTimer.cpp <br>
 Description: Implementation source file for core ZEngine Timer Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZTimer.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZTimer.cpp,v 1.4 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZTimer.cpp
     \brief Source file for ZTimer.
@@ -26,7 +26,7 @@ $Id: ZE_ZTimer.cpp,v 1.3 2002/12/29 06:52:07 cozman Exp $<br>
 namespace ZE
 {
 
-Uint32 ZTimer::GetParentTime()
+Uint32 ZTimer::GetParentTime() const
 {
     if(rUseZEngine)
         return rEngine->GetTime();
@@ -65,7 +65,7 @@ void ZTimer::Unpause()
     }
 }
 
-Uint32 ZTimer::GetTime()
+Uint32 ZTimer::GetTime() const
 {
     if(rPaused)
         return GetParentTime() - (rPausedTime +  (GetParentTime() - rLastPause));
@@ -73,7 +73,7 @@ Uint32 ZTimer::GetTime()
         return GetParentTime() - rPausedTime;
 }
 
-bool ZTimer::IsPaused()
+bool ZTimer::IsPaused() const
 {
     return rPaused;
 }

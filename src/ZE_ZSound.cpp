@@ -13,7 +13,7 @@
 File: ZE_ZSound.cpp <br>
 Description: Implementation source file for core ZEngine Sound Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.cpp,v 1.4 2003/01/13 06:00:38 cozman Exp $<br>
+$Id: ZE_ZSound.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZSound.cpp
     \brief Source file for ZSound.
@@ -77,7 +77,7 @@ void ZSound::Play(int loopNum, int fadeTime)
         rEngine->ReportError(ZERR_NOSOUND, "Play");
 }
 
-void ZSound::Pause()
+void ZSound::Pause() const
 {
     if(rSound && rChannelID >= 0)
         Mix_Pause(rChannelID);
@@ -85,7 +85,7 @@ void ZSound::Pause()
         rEngine->ReportError(ZERR_NOSOUND, "Pause");
 }
 
-void ZSound::Unpause()
+void ZSound::Unpause() const
 {
     if(rSound && rChannelID >= 0)
         Mix_Resume(rChannelID);
@@ -93,7 +93,7 @@ void ZSound::Unpause()
         rEngine->ReportError(ZERR_NOSOUND, "Unpause");
 }
 
-void ZSound::Stop(int fadeTime)
+void ZSound::Stop(int fadeTime) const
 {
     if(rSound && rChannelID >= 0)
     {
@@ -114,12 +114,12 @@ void ZSound::SetVolume(int volume)
         rEngine->ReportError(ZERR_NOSOUND, "SetVolume");
 }
 
-bool ZSound::IsLoaded()
+bool ZSound::IsLoaded() const
 {
     return rSound != NULL;
 }
 
-bool ZSound::IsPlaying()
+bool ZSound::IsPlaying() const
 {
     if(rSound && rChannelID >= 0)
         return Mix_Playing(rChannelID) > 0;
@@ -131,7 +131,7 @@ bool ZSound::IsPlaying()
     }
 }
 
-bool ZSound::IsPaused()
+bool ZSound::IsPaused() const
 {
     if(rSound && rChannelID >= 0)
         return Mix_Paused(rChannelID) > 0;
@@ -142,7 +142,7 @@ bool ZSound::IsPaused()
     }
 }
 
-int ZSound::Volume()
+int ZSound::Volume() const
 {
     if(rSound)
         return Mix_VolumeChunk(rSound,-1);

@@ -13,7 +13,7 @@
 File: ZE_ZFont.cpp <br>
 Description: Implementation source file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.4 2003/01/13 06:00:38 cozman Exp $<br>
+$Id: ZE_ZFont.cpp,v 1.5 2003/01/16 05:45:58 cozman Exp $<br>
 
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
@@ -60,12 +60,12 @@ void ZFont::Release()
     FreeFont(rFont);
 }
 
-void ZFont::DrawText(string text, ZImage &image)
+void ZFont::DrawText(string text, ZImage &image) const
 {
     image.Attach(TTF_RenderText_Solid(rFont, text.c_str(), rColor));
 }
 
-void ZFont::DrawShadedText(string text, ZImage &image)
+void ZFont::DrawShadedText(string text, ZImage &image) const
 {
     image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
 }
@@ -108,12 +108,12 @@ void ZFont::Resize(int size)
     Open(rFilename,size);
 }
 
-bool ZFont::IsLoaded()
+bool ZFont::IsLoaded() const
 {
     return rFont != NULL;
 }
 
-bool ZFont::IsBold()
+bool ZFont::IsBold() const
 {
     if(rFont)
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_BOLD) > 0;
@@ -124,7 +124,7 @@ bool ZFont::IsBold()
     }
 }
 
-bool ZFont::IsItalic()
+bool ZFont::IsItalic() const
 {
     if(rFont)
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_ITALIC) > 0;
@@ -135,7 +135,7 @@ bool ZFont::IsItalic()
     }
 }
 
-bool ZFont::IsUnderlined()
+bool ZFont::IsUnderlined() const
 {
     if(rFont)
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_UNDERLINE) > 0;
@@ -146,7 +146,7 @@ bool ZFont::IsUnderlined()
     }
 }
 
-int ZFont::Height()
+int ZFont::Height() const
 {
     if(rFont)
         return TTF_FontHeight(rFont);
@@ -157,7 +157,7 @@ int ZFont::Height()
     }
 }
 
-int ZFont::LineSkip()
+int ZFont::LineSkip() const
 {
     if(rFont)
         return TTF_FontLineSkip(rFont);
@@ -168,7 +168,7 @@ int ZFont::LineSkip()
     }
 }
 
-int ZFont::StringWidth(string text)
+int ZFont::StringWidth(string text) const
 {
     int w,h;
 
@@ -184,7 +184,7 @@ int ZFont::StringWidth(string text)
     }
 }
 
-int ZFont::StringHeight(string text)
+int ZFont::StringHeight(string text) const
 {
     int w,h;
 

@@ -13,7 +13,7 @@
 File: ZE_ZMusic.h <br>
 Description: Header file for core ZEngine Music Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.h,v 1.3 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZMusic.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
 
     \file ZE_ZMusic.h
     \brief Definition file for ZMusic.
@@ -99,28 +99,28 @@ class ZMusic : public ZObject
             \param loopNum Number of times to loop song, defaults to zero.
             \param fadeTime Milliseconds to fade to full volume, defaults to zero for no fade.
         **/
-        void Play(int loopNum=0, int fadeTime=0);
+        void Play(int loopNum=0, int fadeTime=0) const;
 
         /*!
             \brief Pause music.
 
             Pause currently playing music.
         **/
-        void Pause();
+        void Pause() const;
 
         /*!
             \brief Unpause music.
 
             Unpause currently paused music.
         **/
-        void Unpause();
+        void Unpause() const;
 
         /*!
             \brief Rewind music.
 
             Rewind music to beginning.
         **/
-        void Rewind();
+        void Rewind() const;
 
         /*!
             \brief Stop music.
@@ -128,7 +128,7 @@ class ZMusic : public ZObject
             Stop currently playing music, if fadeTime is not zero, fade out over specified time.
             \param fadeTime Milliseconds to fade out over, defaults to zero for immediate stop.
         **/
-        void Stop(int fadeTime=0);
+        void Stop(int fadeTime=0) const;
 
         /*!
             \brief Change Volume.
@@ -148,7 +148,7 @@ class ZMusic : public ZObject
             Check if file is loaded and pointer to data is non-NULL.
             \return Loaded or Unloaded state of data.
         **/
-        bool IsLoaded();
+        bool IsLoaded() const;
 
         /*!
             \brief Check if music is Playing.
@@ -156,7 +156,7 @@ class ZMusic : public ZObject
             Check if music is playing, specifically if it is not stopped. (Paused state should be checked for by IsPaused)
             \return Playing / Not Playing State of Music.
         **/
-        bool IsPlaying();
+        bool IsPlaying() const;
 
         /*!
             \brief Check if music is Paused.
@@ -164,7 +164,7 @@ class ZMusic : public ZObject
             Check if music is "playing" but currently paused.
             \return Paused / Not Paused State of Music.
         **/
-        bool IsPaused();
+        bool IsPaused() const;
 
         /*!
             \brief Find Current Volume of Music.
@@ -172,7 +172,7 @@ class ZMusic : public ZObject
             Get current volume of music represented as a value from 0-128.
             \return Volume of music, 0-128.
         **/
-        int Volume();
+        int Volume() const;
 };
 
 
