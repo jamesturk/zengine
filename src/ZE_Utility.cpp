@@ -13,7 +13,7 @@
 File: ZE_Utility.cpp <br>
 Description: Implementation source file for ZEngine Utilities. <br>
 Author(s): James Turk <br>
-$Id: ZE_Utility.cpp,v 1.1 2003/01/15 05:38:57 cozman Exp $<br>
+$Id: ZE_Utility.cpp,v 1.2 2003/01/16 04:42:04 cozman Exp $<br>
 
     \file ZE_ZUtility.cpp
     \brief Source file for ZEngine utility functions.
@@ -35,4 +35,6 @@ string FormatStr(const char *fmtstr, ...)
     vsprintf(buf, fmtstr, args);
     va_end(args);
     return buf;
+}
+
 }
