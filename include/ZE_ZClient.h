@@ -13,7 +13,7 @@
 File: ZE_ZClient.h <br>
 Description: Header file for core ZEngine TCP Client Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZClient.h,v 1.3 2003/04/27 21:50:47 cozman Exp $<br>
+$Id: ZE_ZClient.h,v 1.4 2003/04/27 22:05:25 cozman Exp $<br>
 
     \file ZE_ZClient.h
     \brief Definition file for ZClient.
@@ -33,9 +33,9 @@ namespace ZE
 
 /*!
     \brief ZEngine class for a simplified TCP client.
-    \since 0.8.3
 
     ZClient net client class, used to create a simple TCP game client for use with ZServer.
+    \since 0.8.3
 **/
 class ZClient
 {

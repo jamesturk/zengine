@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.35 2003/04/27 21:50:48 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.36 2003/04/27 22:05:25 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -60,6 +60,8 @@ ZEngine::ZEngine()
     ZError::CreateStringTable();
     mLogAllErrors = true;
     mErrlog = stderr;
+
+    ZEngine::SeedRandom(static_cast<unsigned long>(time(NULL)));
 }
 
 ZEngine* ZEngine::GetInstance()
@@ -752,7 +754,7 @@ TTF_Font* ZEngine::LoadFont(string filename, int size)
 #ifdef USE_PHYSFS
     SDL_RWops *rw;
     rw = PHYSFSRWOPS_openRead(filename.c_str());
-    fnt.font = TTF_OpenFontRW(rw,0);
+    font = TTF_OpenFontRW(rw,0);
     SDL_FreeRW(rw);
 #else
     font = TTF_OpenFont(filename.c_str(),size);
