@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.14 2003/10/05 19:59:29 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.15 2003/10/12 04:09:46 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -85,18 +85,24 @@ void ZFont::Release()
 
 void ZFont::DrawText(std::string text, ZImage &image) const
 {
-    if(text.length() == 0)
-        text = " ";
-    image.Attach(TTF_RenderText_Blended(rFont, text.c_str(), rColor));
-    image.SetAlpha(rColor.unused);  //the images alpha comes from the SetColor a parameter
+    if(rFont)
+    {
+        if(text.length() == 0)
+            text = " ";
+        image.Attach(TTF_RenderText_Blended(rFont, text.c_str(), rColor));
+        image.SetAlpha(rColor.unused);  //the images alpha comes from the SetColor a parameter
+    }
 }
 
 void ZFont::DrawShadedText(std::string text, ZImage &image) const
 {
-    if(text.length() == 0)
-        text = " ";
-    image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
-    image.SetAlpha(rColor.unused);  
+    if(rFont)
+    {
+        if(text.length() == 0)
+            text = " ";
+        image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
+        image.SetAlpha(rColor.unused);
+    }
 }
 
 void ZFont::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
