@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.19 2003/07/10 20:45:39 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.20 2003/08/02 01:18:45 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -91,9 +91,13 @@ void Test()
             image1.SetAlpha(alpha);
             image1.Draw(0,0);
 
+#if (GFX_BACKEND == ZE_OGL)
             image2.DrawRotated(100,0,angle);
             if(++angle > 360)
                 angle = 0.0f;
+#elif (GFX_BACKEND == ZE_SDL)
+            image2.Draw(100,0);
+#endif
 
             image3.Draw(200,0);
             textImage.Draw(0,100);

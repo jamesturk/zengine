@@ -24,7 +24,7 @@
 #include "ZE_Defines.h"
 
 #include "SDL.h"
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
 #include "SDL_opengl.h"
 #include "external/SDLGL_Util.h"
 #endif

@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.38 2003/08/01 21:56:58 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.39 2003/08/02 01:18:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -116,7 +116,7 @@ void ZImage::OpenFromImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint
     OpenFromImage(img.Surface(),x,y,w,h);
 }
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
 
 //attach is really the core of ZImage, everything calls it, it converts SDL_Surface->OpenGL Texture->ZImage
 void ZImage::Attach(SDL_Surface *surface)
@@ -292,7 +292,7 @@ bool ZImage::IsLoaded() const
     return glIsTexture(rTexID) == GL_TRUE;
 }
 
-#elif GFX_BACKEND == SDL
+#elif (GFX_BACKEND == ZE_SDL)
 
 void ZImage::Attach(SDL_Surface *surface)
 {

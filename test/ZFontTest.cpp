@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZFontTest.cpp,v 1.13 2003/07/10 20:45:39 cozman Exp $*/
+/*$Id: ZFontTest.cpp,v 1.14 2003/08/02 01:18:45 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -70,7 +70,7 @@ void Test()
             engine->Clear();    //clear screen
             //draw the images//
             for(int i=0; i <= 5; i++)
-                text[i].Draw(10.0f*i,50.0f*i);
+                text[i].Draw(10*i,50*i);
             engine->Update();    //update the screen
         }
 

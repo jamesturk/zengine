@@ -4,7 +4,7 @@
 
 #include "external/SDLGL_Util.h"
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
 
 //finds nearest power of two (going up), needed for surfaces
 int power_of_two(int input)

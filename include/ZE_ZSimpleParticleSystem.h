@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine simple particle system, ZSimpleParticleSystem based on ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.3 2003/07/10 23:45:09 cozman Exp $<br>
+    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.4 2003/08/02 01:18:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -283,6 +283,8 @@ void ZSimpleParticleSystem<particleType>::UpdateParticle(int index, float elapse
         rParticles[index].energy = 0;
 }
 
+#if (GFX_BACKEND == ZE_OGL)
+
 template <class particleType>
 void ZSimpleParticleSystem<particleType>::Render()
 {
@@ -331,6 +333,36 @@ void ZSimpleParticleSystem<particleType>::Render()
             break;
     }
 }
+
+#elif (GFX_BACKEND == ZE_SDL)
+
+template <class particleType>
+void ZSimpleParticleSystem<particleType>::Render()
+{
+    switch(rStyle)
+    {
+        case DS_POINT:
+            for(unsigned int i=0; i < rCurParticles; i++)
+            {
+                //draw point
+            }            
+            break;
+        case DS_LINE:
+            for(unsigned int i=0; i < rCurParticles; i++)
+            {
+                //draw line 
+            }
+            break;
+        case DS_IMAGE:
+            for(unsigned int i=0; i < rCurParticles; i++)
+            {
+                //draw image
+            }
+            break;
+    }
+}
+
+#endif //GFX_BACKEND
 
 template <class particleType>
 void ZSimpleParticleSystem<particleType>::ReloadImage()

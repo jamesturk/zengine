@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.45 2003/08/01 21:57:32 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.46 2003/08/02 01:18:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -240,7 +240,7 @@ class ZEngine
         **/
         void Clear(Uint8 red=0, Uint8 green=0, Uint8 blue=0, Uint8 alpha=255);
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
     /////////////////////////////
     //OpenGL Specific Functions//
     /////////////////////////////

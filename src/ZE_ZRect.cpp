@@ -13,7 +13,7 @@
     \brief Source file for ZRect.
 
     Implementation of ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.cpp,v 1.13 2003/08/01 21:56:58 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.cpp,v 1.14 2003/08/02 01:18:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -100,7 +100,7 @@ bool ZRect::operator<(const ZRect &rhs) const
 
 void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) const
 {
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
     glBindTexture(GL_TEXTURE_2D,0); //reset to blank texture
     glColor4ub(red,green,blue,alpha);
     glBegin(GL_QUADS);
@@ -110,7 +110,7 @@ void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) const
         glVertex2f(rX, rY+rHeight);
     glEnd();
     glColor4ub(255,255,255,255);    //restore color setting
-#elif GFX_BACKEND == SDL
+#elif (GFX_BACKEND == ZE_SDL)
     SDL_Rect rect = SDLrect();
     SDL_FillRect(rEngine->Display(), &rect, SDL_MapRGBA(rEngine->Display()->format,red,green,blue,alpha));
 #endif //GFX_BACKEND

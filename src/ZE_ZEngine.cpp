@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.54 2003/08/01 21:56:58 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.55 2003/08/02 01:18:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -84,7 +84,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     SDL_Surface *iconImg;
     bool status=true;   //status of setup, only true if everything went flawless
     int bpp;
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
     int rgb_size[3];
 #endif
 
@@ -136,7 +136,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
         }
     }
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
     //buffer sizes
     switch (mBPP)
     {
@@ -171,7 +171,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
     flags |= SDL_OPENGL;
-#elif GFX_BACKEND == SDL
+#elif (GFX_BACKEND == ZE_SDL)
     flags |= SDL_DOUBLEBUF;
 #endif //GFX_BACKEND
 
@@ -208,7 +208,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     mHeight = mScreen->h;
     mBPP = mScreen->format->BitsPerPixel;
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
     SetGL2D();
 #endif 
 
@@ -304,9 +304,9 @@ SDL_Surface *ZEngine::Display()
 
 void ZEngine::Update()
 {
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
     SDL_GL_SwapBuffers();
-#elif GFX_BACKEND == SDL
+#elif (GFX_BACKEND == ZE_SDL)
     SDL_Flip(mScreen);
 #endif
 
@@ -323,7 +323,7 @@ void ZEngine::Update()
     }
 }
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
 
 void ZEngine::Clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
 {
@@ -359,7 +359,7 @@ void ZEngine::SetGL2D()
     glLoadIdentity();
 }
 
-#elif GFX_BACKEND == SDL
+#elif (GFX_BACKEND == ZE_SDL)
 
 void ZEngine::Clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
 {

@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.20 2003/08/01 21:57:32 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.21 2003/08/02 01:18:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -39,7 +39,7 @@ class ZImage
         SDL_Surface *rImage;
         //! Stored alpha value for drawing texture.
         Uint8 rAlpha;
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
         //! Texture lower X, used internally for flip.
         GLfloat rTexMinX;
         //! Texture lower Y, used internally for flip
@@ -214,7 +214,7 @@ class ZImage
         **/
         void Draw(int x, int y) const;
 
-#if GFX_BACKEND == OGL
+#if (GFX_BACKEND == ZE_OGL)
         /*!
             \brief Draw Image to Screen.
 
