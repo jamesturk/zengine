@@ -6,6 +6,13 @@ are designed to make game development easier and more organized.  As of 0.7.7
 ZEngine uses OpenGL to do the 2D display, so it is much faster and can take
 advantage of hardware accelerated features. 
 
+Getting ZEngine:
+
+The real home is at: http://conceptofzero.net/
+The sourceforge page: http://zengine.sourceforge.net/
+The project page: http://sourceforge.net/projects/zengine/
+The CVS page: http://sourceforge.net/cvs/?group_id=62098
+
 Building ZEngine:
 
 ZEngine can be built on any system that has SDL and OpenGL available.  It is
@@ -48,5 +55,5 @@ Adding to ZEngine:
     -This can currently be done with no restrictions, but we do ask that 
     you submit your changes back to the community.
 
-James Turk james@conceptofzero.net
+-James Turk james@conceptofzero.net
 
