@@ -1,11 +1,12 @@
 /* uncompr.c -- decompress a memory buffer
- * Copyright (C) 1995-2002 Jean-loup Gailly.
- * For conditions of distribution and use, see copyright notice in zlib.h 
+ * Copyright (C) 1995-2003 Jean-loup Gailly.
+ * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-/* @(#) $Id: uncompr.c,v 1.2 2003/10/13 21:07:33 cozman Exp $ */
+/* @(#) $Id: uncompr.c,v 1.3 2003/12/13 04:14:38 cozman Exp $ */
 
-#include "zlib/zlib.h"
+#define ZLIB_INTERNAL
+#include "zlib.h"
 
 /* ===========================================================================
      Decompresses the source buffer into the destination buffer.  sourceLen is
@@ -49,7 +50,9 @@ int ZEXPORT uncompress (dest, destLen, source, sourceLen)
     err = inflate(&stream, Z_FINISH);
     if (err != Z_STREAM_END) {
         inflateEnd(&stream);
-        return err == Z_OK ? Z_BUF_ERROR : err;
+        if (err == Z_NEED_DICT || (err == Z_BUF_ERROR && stream.avail_in == 0))
+            return Z_DATA_ERROR;
+        return err;
     }
     *destLen = stream.total_out;
 
