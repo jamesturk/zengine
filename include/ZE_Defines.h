@@ -13,7 +13,7 @@
 File: ZE_Defines.h <br>
 Description: Defines header file for ZEngine class, where all #define statements to control compilation options are placed. <br>
 Author(s): James Turk <br>
-$Id: ZE_Defines.h,v 1.8 2003/02/16 21:38:49 cozman Exp $<br>
+$Id: ZE_Defines.h,v 1.9 2003/02/16 22:22:23 cozman Exp $<br>
 
     \file ZE_Defines.h
     \brief Define file for ZEngine.
@@ -24,7 +24,11 @@ $Id: ZE_Defines.h,v 1.8 2003/02/16 21:38:49 cozman Exp $<br>
 #ifndef __ze_defines_h__
 #define __ze_defines_h__
 
-//defines- undefine any of these if you dont have the indicated SDL extension//
+//Defines- undefine any of these if you dont have the indicated SDL extension//
+
+//! Version number.
+#define VERSION "0.8.2"
+
 //! Define to include font support.
 #define USE_SDL_TTF
 //! Define to include non-bmp image file support.
@@ -35,7 +39,10 @@ $Id: ZE_Defines.h,v 1.8 2003/02/16 21:38:49 cozman Exp $<br>
 #define USE_SDL_NET
 //! Define to use the Physfs file system.
 //#define USE_PHYSFS
-//! Version number.
-#define VERSION "0.8.2"
+
+//! Maximum message length (for SDL_net). (10kb)
+#define MAX_MSG_LEN 10240
+//! Define a ZByte as a plain char (for SDL_net).
+typedef char ZByte;
 
 #endif //__ze_defines_h__
