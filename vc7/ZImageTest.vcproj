@@ -86,6 +86,7 @@ ZEngineSD.lib"
 				Name="VCLinkerTool"
 				AdditionalOptions="sdl.lib
 sdlmain.lib
+opengl32.lib
 sdl_ttf.lib
 sdl_mixer.lib
 sdl_image.lib
