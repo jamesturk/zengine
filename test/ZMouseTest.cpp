@@ -2,13 +2,14 @@
         This file is Part of the ZEngine Library for 2D game development.
                    Copyright (C) 2002, 2003 James Turk
 
-                     Licensed under a BSD-style license.
+              ZEngine is Licensed under a BSD-style license.
+This example file is in the public domain, it may be used with no restrictions.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.14 2003/07/05 00:40:45 cozman Exp $*/
+/*$Id: ZMouseTest.cpp,v 1.15 2003/07/10 20:45:39 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
