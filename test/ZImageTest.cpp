@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.20 2003/08/02 01:18:45 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.21 2003/09/01 03:30:39 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -39,13 +39,14 @@ bool Initialize()
 void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
-    float angle=0.0f;
+    float angle=0.0f,movDelta;
     Uint8 alpha=128,alphaDelta=1;
 
     //Open and Setup all the Images//
     SDL_Surface *temp;
-    ZImage image1, image2, image3, textImage;
+    ZImage image1,image2,image3,image4,textImage;
     ZFont font("data/almontew.ttf",30);
+    ZRect clipRect(400,300,30,30);
 
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
@@ -54,9 +55,11 @@ void Test()
     image1.Attach(temp);    //this attaches the surface into itself
     image2.Open("data/test01.bmp");
     image3.OpenFromImage(image2.Surface(),5,5,20,20);
+    image4.Open("data/rainbow.bmp");
     temp = NULL;    //and temp will now be controlled and freed by image1
     image1.SetColorKey(255,0,255);
     image2.SetColorKey(255,0,255);
+    image4.Resize(400,300);
     font.DrawShadedText("ZImage Test.",textImage);
 
     do
@@ -75,11 +78,29 @@ void Test()
                 engine->SetReloadNeed(false);   //very important for speed, without this you'd be reloading every frame
             }
 
-            if(engine->KeyIsPressed(SDLK_s))
+            //movement//
+            movDelta = static_cast<float>(engine->GetFrameTime()*30);
+            if(engine->KeyIsPressed(SDLK_LEFT))
+                clipRect.MoveRel(-movDelta,0);
+            if(engine->KeyIsPressed(SDLK_RIGHT))
+                clipRect.MoveRel(movDelta,0);
+            if(engine->KeyIsPressed(SDLK_UP))
+                clipRect.MoveRel(0,-movDelta);
+            if(engine->KeyIsPressed(SDLK_DOWN))
+                clipRect.MoveRel(0,movDelta);
+            if(engine->KeyIsPressed(SDLK_EQUALS))
             {
-                //code to toggle screen//
-                engine->ToggleFullscreen();
+                clipRect.MoveRel(-1,-1);
+                clipRect.ResizeRel(2,2);
             }
+            if(engine->KeyIsPressed(SDLK_MINUS))
+            {
+                clipRect.MoveRel(1,1);
+                clipRect.ResizeRel(-2,-2);
+            }
+
+            if(engine->KeyIsPressed(SDLK_s))
+                engine->ToggleFullscreen();
             if(engine->KeyIsPressed(SDLK_ESCAPE))
                 engine->RequestQuit();
 
@@ -100,6 +121,7 @@ void Test()
 #endif
 
             image3.Draw(200,0);
+            image4.DrawClipped(400,300,clipRect);
             textImage.Draw(0,100);
             engine->Update();    //update the screen
         }

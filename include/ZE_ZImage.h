@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.23 2003/09/01 00:22:27 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.24 2003/09/01 03:30:39 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -214,6 +214,17 @@ class ZImage
             \param y Y coord to draw Image to.
         **/
         void Draw(int x, int y) const;
+
+        /*!
+            \brief Draw Clipped Image to screen.
+
+            Image is drawn such that only portions of image which fall within a certain area appear.
+            \since 0.8.5
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param clipRect Rectangle to clip within.
+        **/
+        void DrawClipped(int x, int y, ZRect clipRect) const;
 
 #if (GFX_BACKEND == ZE_OGL)
         /*!
