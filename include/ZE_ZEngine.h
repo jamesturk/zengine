@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.38 2003/06/09 02:46:22 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.39 2003/06/10 23:24:47 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -26,6 +26,7 @@
 #include "ZE_Utility.h"
 #include "ZE_Includes.h"
 #include "ZE_ZError.h"
+#include "VersionInfo.h"
 
 /*!
     \brief ZEngine Namespace.
@@ -43,16 +44,11 @@ namespace ZE
 **/
 class ZEngine
 {
+    public:
+        //! Static version information.
+        static VersionInfo Version;
 
-    private:
-        //! Major version number.
-        static const int VersionMajor = 0;
-        //! Minor version number, changes upon signifigant releases.
-        static const int VersionMinor = 8;
-        //! Version release number, changes on every release.
-        static const int VersionRelease = 3;
-        //! Version string.
-        static const char* VersionStr;
+    private:        
         //! Static Pointer to Instance of ZEngine for Singleton.
         static ZEngine *sInstance;
         //! Width of Display
@@ -145,14 +141,6 @@ class ZEngine
             Release memory held by instance of engine and closes window.
         **/
         static void ReleaseInstance();
-
-        /*!
-            \brief Get Current Version.
-
-            Get Version Number of ZEngine. (Major.Minor.Extension#)
-            \return string containing version number
-        **/
-        static string GetVersion();
 
     //////////////////
     //Initialization//

@@ -6,9 +6,15 @@
 
     Implementation file for VersinInfo class, simple class for containing and comparing 
     version numbers.
-    <br>$Id: VersionInfo.cpp,v 1.1 2003/06/10 23:15:32 cozman Exp $<br>
+    <br>$Id: VersionInfo.cpp,v 1.2 2003/06/10 23:24:47 cozman Exp $<br>
     \author James Turk
 **/
+
+VersionInfo::VersionInfo(unsigned int maj, unsigned int min, unsigned int rel, string ext) :
+    major(maj), minor(min), release(rel), extra(ext)
+{
+}
+
 
 string VersionInfo::GetString() const
 {

@@ -14,7 +14,7 @@
 
     Definition file for VersinInfo class, simple class for containing and comparing 
     version numbers.
-    <br>$Id: VersionInfo.h,v 1.1 2003/06/10 23:15:31 cozman Exp $<br>
+    <br>$Id: VersionInfo.h,v 1.2 2003/06/10 23:24:47 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -39,6 +39,17 @@ class VersionInfo
         unsigned int release;
         //! String Description of release. (Often blank.)
         string extra;
+
+        /*!
+            \brief Constructor for VersionInfo.
+
+            Simple constructor for version info, with a parameter for each member.
+            \param maj Major version number.
+            \param min Minor version number.
+            \param rel Version release number.
+            \param ext Extra info string, optional (defaults to empty string).
+        **/
+        VersionInfo(unsigned int maj, unsigned int min, unsigned int rel, string ext="");
 
         /*!
             \brief Get string representing version number.
