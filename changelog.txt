@@ -1,7 +1,7 @@
-ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.63 2004/01/05 07:42:17 cozman Exp $
+ZEngine Version Log for Version freeze-0104
+$Id: changelog.txt,v 1.64 2004/01/14 00:26:31 cozman Exp $
 
-0.9.0-pre1
+freeze-0104
     # sample.ogg is now included, so people don't have to go hunt their own song to test ZMusic.
     # Added Audiere backend for audio in addition to SDL_mixer backend.
     # Changed Audio initialization, so that audio usage can be decided at runtime (InitAudio)
