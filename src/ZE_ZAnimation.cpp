@@ -13,7 +13,7 @@
     \brief Source file for ZAnimation.
 
     Implementation of ZAnimation, ZEngine's class for ZImage based animations.
-    <br>$Id: ZE_ZAnimation.cpp,v 1.1 2003/11/25 01:31:37 cozman Exp $<br>
+    <br>$Id: ZE_ZAnimation.cpp,v 1.2 2003/12/24 04:44:41 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -25,29 +25,26 @@ namespace ZE
 ZAnimation::ZAnimation() :
     rEngine(ZEngine::GetInstance()), 
     rAnimImages(NULL),
-    rAnimWidth(0),rAnimHeight(0),
     rCurFrame(0),rNumFrames(0),rFrameStep(0),
     rFrameDelay(0),rNextFrameTime(0),
-    rLoop(false), rBackwards(false)
+    rAnimType(ZANIM_NONE), rBackwards(false)
 {
 }
 
-ZAnimation::ZAnimation(ZImage *images, int numFrames, Uint32 frameDelay, bool loop, bool backwards, float width, float height)
+ZAnimation::ZAnimation(ZImage *images, int numFrames, Uint32 frameDelay, ZAnimType type, bool backwards)
 {
     rEngine = ZEngine::GetInstance();
-    Create(images,numFrames,frameDelay,loop,backwards,width,height);
+    Create(images,numFrames,frameDelay,type,backwards);
 }
 
-void ZAnimation::Create(ZImage *images, int numFrames, Uint32 frameDelay, bool loop, bool backwards, float width, float height)
+void ZAnimation::Create(ZImage *images, int numFrames, Uint32 frameDelay, ZAnimType type, bool backwards)
 {
     rAnimImages = images;
     rNumFrames = numFrames;
     rFrameDelay = frameDelay;
-    rLoop = loop;
+    rAnimType = type;
     rBackwards = backwards;
-    rAnimWidth = width;
-    rAnimHeight = height;
-    Stop();
+    Reset();
 }
 
 void ZAnimation::SetAnimImages(ZImage *images, int numFrames)
@@ -61,39 +58,30 @@ void ZAnimation::SetFrameDelay(Uint32 frameDelay)
     rFrameDelay = frameDelay;
 }
 
-void ZAnimation::SetAnimType(bool loop, bool backwards)
+void ZAnimation::SetAnimType(ZAnimType type, bool backwards)
 {
-    rLoop = loop;
+    rAnimType = type;
     rBackwards = backwards;
 }
 
-void ZAnimation::SetAnimSize(float width, float height)
+void ZAnimation::Reset()
 {
-    rAnimWidth = width;
-    rAnimHeight = height;
+    rFrameStep = 0;
+    rCurFrame = rBackwards ? rNumFrames-1 : 0;
 }
 
 void ZAnimation::Start()
 {
-    rCurFrame = rBackwards ? rNumFrames-1 : 0;
-    Unpause();
-}
-
-void ZAnimation::Stop()
-{
-    rCurFrame = rBackwards ? rNumFrames-1 : 0;
-    Pause();
+    if(rAnimType != ZANIM_NONE)
+        rFrameStep = rBackwards ? -1 : 1;
+    else
+        rFrameStep = 0;
+    rNextFrameTime = rEngine->GetTime()+rFrameDelay;
 }
 
 void ZAnimation::Pause()
 {
     rFrameStep = 0;
-}
-
-void ZAnimation::Unpause()
-{
-    rFrameStep = rBackwards ? -1 : 1;
-    rNextFrameTime = rEngine->GetTime()+rFrameDelay;
 }
 
 void ZAnimation::SetFrame(int frame)
@@ -110,40 +98,49 @@ void ZAnimation::SetFrame(int frame)
 
 void ZAnimation::Update()
 {
-    if(rEngine->GetTime() >= rNextFrameTime)
+    //if not paused/stopped and time to update has come
+    if(rFrameStep && rEngine->GetTime() >= rNextFrameTime)
     {
         rCurFrame += rFrameStep;
         
         if(rCurFrame < 0 || rCurFrame >= rNumFrames)
         {
-            if(rLoop)
-                rCurFrame = rBackwards ? rNumFrames-1 : 0;
-            else
+            switch(rAnimType)
             {
-                Stop();
-                SetFrame(-1); //set to last frame
+                case ZANIM_ONCE:
+                    Pause();
+                    rCurFrame = rBackwards ? 0 : rNumFrames-1;
+                    break;
+                case ZANIM_LOOP:
+                    rCurFrame = rBackwards ? rNumFrames-1 : 0;
+                    break;
+                case ZANIM_REVERSE:
+                    rBackwards = !rBackwards;
+                    rCurFrame = rBackwards ? rNumFrames-2 : 1;  //second to last or second frame
+                    rFrameStep *= -1;
+                    break;
+                case ZANIM_NONE:
+                default:
+                    Reset();
+                    //error?
+                    break;
             }
         }
         rNextFrameTime = rEngine->GetTime()+rFrameDelay;
     }
 }
 
-void ZAnimation::Draw(float x, float y)
+void ZAnimation::Draw(float x, float y) const
 {
     if(rAnimImages)
-    {
-#if (GFX_BACKEND == ZE_OGL)
-        rAnimImages[rCurFrame].Resize(rAnimWidth,rAnimHeight);
         rAnimImages[rCurFrame].Draw(x,y);
-#elif (GFX_BACKEND == ZE_SDL)
-       rAnimImages[rCurFrame].Draw(static_cast<int>(x),static_cast<int>(y));
-#endif
-    }
+    //else
+    //error: images not loaded
 }
 
-bool ZAnimation::Stopped()
+bool ZAnimation::Running() const
 {
-    return rFrameStep == 0;
+    return rFrameStep != 0;
 }
 
 }
