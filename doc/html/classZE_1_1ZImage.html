@@ -18,46 +18,48 @@ Inherits <a class="el" href="classZE_1_1ZObject.html">ZE::ZObject</a>.
 <tr><td colspan=2><br><h2>Public Methods</h2></td></tr>
 <tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a0">ZImage</a> ()</td></tr>
 <tr><td>&nbsp;</td><td><font size=-1><em>Default Constructor.</em> <a href="#a0"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a1">ZImage</a> (string filename)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Constructor to Construct from File.</em> <a href="#a1"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a2">ZImage</a> (SDL_Surface *surface)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Constructor to Construct from SDL_Surface*.</em> <a href="#a2"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a3">ZImage</a> (SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Constructor to Construct from part of an SDL_Surface*.</em> <a href="#a3"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a4">~ZImage</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Destructor, frees memory.</em> <a href="#a4"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a5">Open</a> (string filename)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Opens a file.</em> <a href="#a5"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a6">OpenFromImage</a> (SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Cuts part of an existing image to create the new image.</em> <a href="#a6"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a7">Attach</a> (SDL_Surface *surface)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Attach an existing surface to class.</em> <a href="#a7"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a8">Reload</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Reattach a preloaded texture that has been lost.</em> <a href="#a8"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a9">Release</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Releases image.</em> <a href="#a9"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a10">SetColorKey</a> (Uint8 red, Uint8 green, Uint8 blue)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Set Color Key (transparent color) of Image.</em> <a href="#a10"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a11">Flip</a> (bool horizontal, bool vertical)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Flip image over one or both axes.</em> <a href="#a11"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a12">Stretch</a> (float xFactor, float yFactor)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Stretch the image by a certain X and Y factor.</em> <a href="#a12"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a13">Resize</a> (unsigned int width, unsigned int height)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Resizes an image, stretching to new size.</em> <a href="#a13"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a14">Bind</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>OpenGL related bind call.</em> <a href="#a14"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a15">Draw</a> (float x, float y)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Draw Image to Screen.</em> <a href="#a15"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a16">DrawRotated</a> (int x, int y, float angle)</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Draw Image rotated to screen.</em> <a href="#a16"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>bool&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a17">IsLoaded</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Check if file is loaded.</em> <a href="#a17"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>SDL_Surface *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a18">Surface</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get SDL_Surface. Get SDL_Surface pointer to actual image data.</em> <a href="#a18"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a19">Width</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get Width.</em> <a href="#a19"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a20">Height</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Get Height.</em> <a href="#a20"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a1">ZImage::ZImage</a> (const ZImage &amp;rhs)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Copy constructor for <a class="el" href="classZE_1_1ZImage.html">ZImage</a>.</em> <a href="#a1"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a2">ZImage</a> (string filename)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Constructor to Construct from File.</em> <a href="#a2"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a3">ZImage</a> (SDL_Surface *surface)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Constructor to Construct from SDL_Surface*.</em> <a href="#a3"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a4">ZImage</a> (SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Constructor to Construct from part of an SDL_Surface*.</em> <a href="#a4"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a5">~ZImage</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Destructor, frees memory.</em> <a href="#a5"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a6">Open</a> (string filename)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Opens a file.</em> <a href="#a6"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a7">OpenFromImage</a> (SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Cuts part of an existing image to create the new image.</em> <a href="#a7"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a8">Attach</a> (SDL_Surface *surface)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Attach an existing surface to class.</em> <a href="#a8"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a9">Reload</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Reattach a preloaded texture that has been lost.</em> <a href="#a9"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a10">Release</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Releases image.</em> <a href="#a10"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a11">SetColorKey</a> (Uint8 red, Uint8 green, Uint8 blue)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Set Color Key (transparent color) of Image.</em> <a href="#a11"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a12">Flip</a> (bool horizontal, bool vertical)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Flip image over one or both axes.</em> <a href="#a12"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a13">Stretch</a> (float xFactor, float yFactor)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Stretch the image by a certain X and Y factor.</em> <a href="#a13"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a14">Resize</a> (unsigned int width, unsigned int height)</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Resizes an image, stretching to new size.</em> <a href="#a14"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a15">Bind</a> () const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>OpenGL related bind call.</em> <a href="#a15"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a16">Draw</a> (float x, float y) const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Draw Image to Screen.</em> <a href="#a16"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a17">DrawRotated</a> (int x, int y, float angle) const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Draw Image rotated to screen.</em> <a href="#a17"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>bool&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a18">IsLoaded</a> () const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Check if file is loaded.</em> <a href="#a18"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>SDL_Surface *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a19">Surface</a> () const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get SDL_Surface. Get SDL_Surface pointer to actual image data.</em> <a href="#a19"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a20">Width</a> () const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get Width.</em> <a href="#a20"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#a21">Height</a> () const</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Get Height.</em> <a href="#a21"></a><em></em></font><br><br></td></tr>
 <tr><td colspan=2><br><h2>Protected Attributes</h2></td></tr>
 <tr><td nowrap align=right valign=top><a name="n0" doxytag="ZE::ZImage::rTexMinX"></a>
 GLfloat&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.html#n0">rTexMinX</a></td></tr>
@@ -113,7 +115,7 @@ unsigned int&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZImage.h
 Default Constructor, initializes variables.     </td>
   </tr>
 </table>
-<a name="a1" doxytag="ZE::ZImage::ZImage"></a><p>
+<a name="a2" doxytag="ZE::ZImage::ZImage"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -139,7 +141,7 @@ Default Constructor, initializes variables.     </td>
     <td>
 
 <p>
-Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a5">ZImage::Open()</a> on passed filename. <dl compact><dt><b>Parameters:</b></dt><dd>
+Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a6">ZImage::Open()</a> on passed filename. <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign=top><em>filename</em>&nbsp;</td><td>File to open as rImage. </td></tr>
   </table>
@@ -147,7 +149,7 @@ Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a5">ZI
     </td>
   </tr>
 </table>
-<a name="a2" doxytag="ZE::ZImage::ZImage"></a><p>
+<a name="a3" doxytag="ZE::ZImage::ZImage"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -173,7 +175,7 @@ Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a5">ZI
     <td>
 
 <p>
-Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a7">ZImage::Attach()</a> on passed SDL_Surface*. <dl compact><dt><b>Parameters:</b></dt><dd>
+Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a8">ZImage::Attach()</a> on passed SDL_Surface*. <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign=top><em>surface</em>&nbsp;</td><td>SDL_Surface* to use as rImage. </td></tr>
   </table>
@@ -181,7 +183,7 @@ Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a7">ZI
     </td>
   </tr>
 </table>
-<a name="a3" doxytag="ZE::ZImage::ZImage"></a><p>
+<a name="a4" doxytag="ZE::ZImage::ZImage"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -234,7 +236,7 @@ Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a7">ZI
     <td>
 
 <p>
-Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a6">ZImage::OpenFromImage</a>.
+Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a7">ZImage::OpenFromImage</a>.
 <p>
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
@@ -248,7 +250,7 @@ Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a6">ZI
     </td>
   </tr>
 </table>
-<a name="a4" doxytag="ZE::ZImage::~ZImage"></a><p>
+<a name="a5" doxytag="ZE::ZImage::~ZImage"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -273,11 +275,45 @@ Constructor is same as calling <a class="el" href="classZE_1_1ZImage.html#a6">ZI
     <td>
 
 <p>
-Destructor calls <a class="el" href="classZE_1_1ZImage.html#a9">ZImage::Release()</a>.     </td>
+Destructor calls <a class="el" href="classZE_1_1ZImage.html#a10">ZImage::Release()</a>.     </td>
   </tr>
 </table>
 <hr><h2>Member Function Documentation</h2>
-<a name="a5" doxytag="ZE::ZImage::Open"></a><p>
+<a name="a1" doxytag="ZE::ZImage::ZImage::ZImage"></a><p>
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+  <tr>
+    <td class="md">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top"> ZE::ZImage::ZImage::ZImage </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const ZImage &amp;&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>&nbsp; <em>rhs</em>          </td>
+          <td class="md" valign="top">)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing=5 cellpadding=0 border=0>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Creates one <a class="el" href="classZE_1_1ZImage.html">ZImage</a> using another. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign=top><em>rhs</em>&nbsp;</td><td>A previously created <a class="el" href="classZE_1_1ZImage.html">ZImage</a> to copy. </td></tr>
+  </table>
+</dl>
+    </td>
+  </tr>
+</table>
+<a name="a6" doxytag="ZE::ZImage::Open"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -311,7 +347,7 @@ Open a file using <a class="el" href="classZE_1_1ZEngine.html">ZEngine</a>. Load
     </td>
   </tr>
 </table>
-<a name="a6" doxytag="ZE::ZImage::OpenFromImage"></a><p>
+<a name="a7" doxytag="ZE::ZImage::OpenFromImage"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -378,7 +414,7 @@ Cut part of an SDL_Surface to create a new Image.
     </td>
   </tr>
 </table>
-<a name="a7" doxytag="ZE::ZImage::Attach"></a><p>
+<a name="a8" doxytag="ZE::ZImage::Attach"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -412,7 +448,7 @@ Attach a pointer to instance of <a class="el" href="classZE_1_1ZImage.html">ZIma
     </td>
   </tr>
 </table>
-<a name="a8" doxytag="ZE::ZImage::Reload"></a><p>
+<a name="a9" doxytag="ZE::ZImage::Reload"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -437,10 +473,10 @@ Attach a pointer to instance of <a class="el" href="classZE_1_1ZImage.html">ZIma
     <td>
 
 <p>
-Attach loaded textures which have been lost due to loss of focus, should be called when <a class="el" href="classZE_1_1ZEngine.html#a18">ZEngine::ImagesNeedReload</a> is true.     </td>
+Attach loaded textures which have been lost due to loss of focus, should be called when <a class="el" href="classZE_1_1ZEngine.html#a21">ZEngine::ImagesNeedReload</a> is true.     </td>
   </tr>
 </table>
-<a name="a9" doxytag="ZE::ZImage::Release"></a><p>
+<a name="a10" doxytag="ZE::ZImage::Release"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -468,7 +504,7 @@ Attach loaded textures which have been lost due to loss of focus, should be call
 Frees memory via call to SDL_FreeSurface for the image.     </td>
   </tr>
 </table>
-<a name="a10" doxytag="ZE::ZImage::SetColorKey"></a><p>
+<a name="a11" doxytag="ZE::ZImage::SetColorKey"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -519,7 +555,7 @@ Set color which will not be drawn in image. <dl compact><dt><b>Parameters:</b></
     </td>
   </tr>
 </table>
-<a name="a11" doxytag="ZE::ZImage::Flip"></a><p>
+<a name="a12" doxytag="ZE::ZImage::Flip"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -563,7 +599,7 @@ Flip image vertical and/or horizontal. <dl compact><dt><b>Parameters:</b></dt><d
     </td>
   </tr>
 </table>
-<a name="a12" doxytag="ZE::ZImage::Stretch"></a><p>
+<a name="a13" doxytag="ZE::ZImage::Stretch"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -607,7 +643,7 @@ Stretch image using a factor to multiply width and height by. <dl compact><dt><b
     </td>
   </tr>
 </table>
-<a name="a13" doxytag="ZE::ZImage::Resize"></a><p>
+<a name="a14" doxytag="ZE::ZImage::Resize"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -651,7 +687,7 @@ Stretch image to new width and height. <dl compact><dt><b>Parameters:</b></dt><d
     </td>
   </tr>
 </table>
-<a name="a14" doxytag="ZE::ZImage::Bind"></a><p>
+<a name="a15" doxytag="ZE::ZImage::Bind"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -661,7 +697,7 @@ Stretch image to new width and height. <dl compact><dt><b>Parameters:</b></dt><d
           <td class="md" valign="top">(&nbsp;</td>
           <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
           <td class="md" valign="top">)&nbsp;</td>
-          <td class="md" nowrap></td>
+          <td class="md" nowrap> const</td>
         </tr>
 
       </table>
@@ -679,7 +715,7 @@ Stretch image to new width and height. <dl compact><dt><b>Parameters:</b></dt><d
 OpenGL related bind call, only available in case you want to bind image in 3D. Draw uses this but the average user should never need to call this.     </td>
   </tr>
 </table>
-<a name="a15" doxytag="ZE::ZImage::Draw"></a><p>
+<a name="a16" doxytag="ZE::ZImage::Draw"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -699,7 +735,7 @@ OpenGL related bind call, only available in case you want to bind image in 3D. D
         <tr>
           <td></td>
           <td class="md">)&nbsp;</td>
-          <td class="md" colspan="2"></td>
+          <td class="md" colspan="2"> const</td>
         </tr>
 
       </table>
@@ -723,7 +759,7 @@ Draw Image to screen at specified location. <dl compact><dt><b>Parameters:</b></
     </td>
   </tr>
 </table>
-<a name="a16" doxytag="ZE::ZImage::DrawRotated"></a><p>
+<a name="a17" doxytag="ZE::ZImage::DrawRotated"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -749,7 +785,7 @@ Draw Image to screen at specified location. <dl compact><dt><b>Parameters:</b></
         <tr>
           <td></td>
           <td class="md">)&nbsp;</td>
-          <td class="md" colspan="2"></td>
+          <td class="md" colspan="2"> const</td>
         </tr>
 
       </table>
@@ -774,7 +810,7 @@ Image is rotated about it's own center by specified angle, then drawn to screen.
     </td>
   </tr>
 </table>
-<a name="a17" doxytag="ZE::ZImage::IsLoaded"></a><p>
+<a name="a18" doxytag="ZE::ZImage::IsLoaded"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -784,7 +820,7 @@ Image is rotated about it's own center by specified angle, then drawn to screen.
           <td class="md" valign="top">(&nbsp;</td>
           <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
           <td class="md" valign="top">)&nbsp;</td>
-          <td class="md" nowrap></td>
+          <td class="md" nowrap> const</td>
         </tr>
 
       </table>
@@ -803,7 +839,7 @@ Check if surface is a valid GL texture. (does not detect surface loss) <dl compa
     </td>
   </tr>
 </table>
-<a name="a18" doxytag="ZE::ZImage::Surface"></a><p>
+<a name="a19" doxytag="ZE::ZImage::Surface"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -813,7 +849,7 @@ Check if surface is a valid GL texture. (does not detect surface loss) <dl compa
           <td class="md" valign="top">(&nbsp;</td>
           <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
           <td class="md" valign="top">)&nbsp;</td>
-          <td class="md" nowrap></td>
+          <td class="md" nowrap> const</td>
         </tr>
 
       </table>
@@ -832,7 +868,7 @@ Check if surface is a valid GL texture. (does not detect surface loss) <dl compa
     </td>
   </tr>
 </table>
-<a name="a19" doxytag="ZE::ZImage::Width"></a><p>
+<a name="a20" doxytag="ZE::ZImage::Width"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -842,7 +878,7 @@ Check if surface is a valid GL texture. (does not detect surface loss) <dl compa
           <td class="md" valign="top">(&nbsp;</td>
           <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
           <td class="md" valign="top">)&nbsp;</td>
-          <td class="md" nowrap></td>
+          <td class="md" nowrap> const</td>
         </tr>
 
       </table>
@@ -861,7 +897,7 @@ Get Current Width of Image. <dl compact><dt><b>Returns:</b></dt><dd>Image Width.
     </td>
   </tr>
 </table>
-<a name="a20" doxytag="ZE::ZImage::Height"></a><p>
+<a name="a21" doxytag="ZE::ZImage::Height"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
@@ -871,7 +907,7 @@ Get Current Width of Image. <dl compact><dt><b>Returns:</b></dt><dd>Image Width.
           <td class="md" valign="top">(&nbsp;</td>
           <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
           <td class="md" valign="top">)&nbsp;</td>
-          <td class="md" nowrap></td>
+          <td class="md" nowrap> const</td>
         </tr>
 
       </table>
@@ -892,7 +928,7 @@ Get Current Height of Image. <dl compact><dt><b>Returns:</b></dt><dd>Image Heigh
 </table>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/include/<a class="el" href="ZE__ZImage_8h-source.html">ZE_ZImage.h</a><li>/src/<a class="el" href="ZE__ZImage_8cpp.html">ZE_ZImage.cpp</a></ul>
-<hr><address style="align: right;"><small>Generated on Thu Jan 2 22:51:08 2003 for ZEngine by
+<hr><address style="align: right;"><small>Generated on Sat Jan 18 17:14:22 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>

@@ -49,15 +49,15 @@
 00076 
 <a name="l00078"></a><a class="code" href="classZE_1_1ZConfigFile.html#o1">00078</a>         string <a class="code" href="classZE_1_1ZConfigFile.html#o1">mFilename</a>;
 00079 
-00087         string <a class="code" href="classZE_1_1ZConfigFile.html#c0">CleanString</a>(string str);
+00087         string <a class="code" href="classZE_1_1ZConfigFile.html#c0">CleanString</a>(string str)  <span class="keyword">const</span>;
 00088         
-00096         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZConfigFile.html#c1">Exists</a>(string sec);
+00096         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZConfigFile.html#c1">Exists</a>(string sec) <span class="keyword">const</span>;
 00097 
-00106         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZConfigFile.html#c1">Exists</a>(string sec, string var);
+00106         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZConfigFile.html#c1">Exists</a>(string sec, string var) <span class="keyword">const</span>;
 00107 
 00116         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZConfigFile.html#c3">SetVariable</a>(string sec, string var, string val);
 00117 
-00127         string <a class="code" href="classZE_1_1ZConfigFile.html#c4">GetVariable</a>(string sec, string var, string defVal);
+00127         string <a class="code" href="classZE_1_1ZConfigFile.html#c4">GetVariable</a>(string sec, string var, string defVal) <span class="keyword">const</span>;
 00128 
 00129     <span class="keyword">public</span>:
 00130 
@@ -69,11 +69,11 @@
 00152 
 00159         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZConfigFile.html#a3">Process</a>(string filename);
 00160 
-00170         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZConfigFile.html#a4">GetInt</a>(string section, string var, <span class="keywordtype">int</span> defVal);
+00170         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZConfigFile.html#a4">GetInt</a>(string section, string var, <span class="keywordtype">int</span> defVal) <span class="keyword">const</span>;
 00171 
-00182         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZConfigFile.html#a5">GetBool</a>(string section, string var, <span class="keywordtype">bool</span> defVal);
+00182         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZConfigFile.html#a5">GetBool</a>(string section, string var, <span class="keywordtype">bool</span> defVal) <span class="keyword">const</span>;
 00183 
-00193         string <a class="code" href="classZE_1_1ZConfigFile.html#a6">GetString</a>(string section, string var, string defVal);
+00193         string <a class="code" href="classZE_1_1ZConfigFile.html#a6">GetString</a>(string section, string var, string defVal) <span class="keyword">const</span>;
 00194 
 00204         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZConfigFile.html#a7">SetInt</a>(string section, string var, <span class="keywordtype">int</span> val);
 00205 
@@ -89,7 +89,7 @@
 00243 }
 00244 
 00245 <span class="preprocessor">#endif //__ze_zconfigfile_h__</span>
-</pre></div><hr><address style="align: right;"><small>Generated on Thu Jan 2 22:51:08 2003 for ZEngine by
+</pre></div><hr><address style="align: right;"><small>Generated on Sat Jan 18 17:14:22 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>

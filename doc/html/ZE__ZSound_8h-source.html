@@ -51,23 +51,23 @@
 00095 <span class="comment"></span>
 00104 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a5">Play</a>(<span class="keywordtype">int</span> loopNum=0, <span class="keywordtype">int</span> fadeTime=0);
 00105 
-00111         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a6">Pause</a>();
+00111         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a6">Pause</a>() <span class="keyword">const</span>;
 00112 
-00118         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a7">Unpause</a>();
+00118         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a7">Unpause</a>() <span class="keyword">const</span>;
 00119 
-00126         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a8">Stop</a>(<span class="keywordtype">int</span> fadeTime=0);
+00126         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a8">Stop</a>(<span class="keywordtype">int</span> fadeTime=0) <span class="keyword">const</span>;
 00127 
 00134         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZSound.html#a9">SetVolume</a>(<span class="keywordtype">int</span> volume);
 00135 
 00137         <span class="comment">//Accessors//</span>
 00139 <span class="comment"></span>
-00146 <span class="comment"></span>        <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZSound.html#a10">IsLoaded</a>();
+00146 <span class="comment"></span>        <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZSound.html#a10">IsLoaded</a>() <span class="keyword">const</span>;
 00147 
-00154         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZSound.html#a11">IsPlaying</a>();
+00154         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZSound.html#a11">IsPlaying</a>() <span class="keyword">const</span>;
 00155 
-00162         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZSound.html#a12">IsPaused</a>();
+00162         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZSound.html#a12">IsPaused</a>() <span class="keyword">const</span>;
 00163 
-00170         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZSound.html#a13">Volume</a>();
+00170         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZSound.html#a13">Volume</a>() <span class="keyword">const</span>;
 00171 };
 00172 
 00173 
@@ -76,7 +76,7 @@
 00176 <span class="preprocessor">#endif //USE_SDL_MIXER</span>
 00177 <span class="preprocessor"></span>
 00178 <span class="preprocessor">#endif //__ze_zsound_h__</span>
-</pre></div><hr><address style="align: right;"><small>Generated on Thu Jan 2 22:51:08 2003 for ZEngine by
+</pre></div><hr><address style="align: right;"><small>Generated on Sat Jan 18 17:14:22 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>
