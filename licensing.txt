@@ -17,10 +17,10 @@ where they feel it should be, but I'd like to encourage everyone to try to give
 back to the community when possible.  Generally the people that violate open 
 source licenses aren't bright enough to have anything to contribute.
 
-Note: Files in the src/external and include/external directories are not part
-of ZEngine, but may be used by ZEngine to interface with external libraries.
-Such files are only modified to be compatible with ZEngine and marked where
-such modifcations occur.
+Note: Files in the src/external,src/zlib,include/external and include/zlib 
+directories are not part of ZEngine, but may be used by ZEngine to interface
+with external libraries. Such files are only modified to be compatible with 
+ZEngine and marked where such modifcations occur.
 
 Note2: The Test files are now public domain, you can use them as a starting
 point without concern.

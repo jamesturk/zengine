@@ -14,7 +14,7 @@
 
     ZE_*.h files should only include this file and any other ZE_*.h files that they need, External Library or C/C++ Standard Library
     files should be included from within this file.
-    $Id: ZE_Includes.h,v 1.18 2003/09/24 01:49:52 cozman Exp $<br>
+    $Id: ZE_Includes.h,v 1.19 2003/10/13 20:59:30 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -38,7 +38,7 @@
 #include "SDL_mixer.h"
 #endif
 
-#include "../zlib/unzip.h"
+#include "zlib/unzip.h"
 
 #include <string>   //used frequently
 #include <queue>    //used by ZEngine for ZErrors
