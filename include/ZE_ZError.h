@@ -13,7 +13,7 @@
 File: ZE_ZError.h <br>
 Description: Header file for ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
+$Id: ZE_ZError.h,v 1.7 2003/03/01 20:42:52 cozman Exp $<br>
 
     \file ZE_ZError.h
     \brief Definition file for ZError.
@@ -44,6 +44,7 @@ enum ZErrorCode
     ZERR_SDL_INIT,      /*!< Error Initializing SDL. */
     ZERR_MIX_INIT,      /*!< Error Initializing SDL_mixer. */
     ZERR_TTF_INIT,      /*!< Error Initializing SDL_ttf. */
+    ZERR_NET_INIT,      /*!< Error Initializing SDL_net. */
     ZERR_VIDMODE,       /*!< Error setting up the display. */
     ZERR_LOAD_IMAGE,    /*!< Error loading an image. */
     ZERR_LOAD_SOUND,    /*!< Error loading a sound sample. */
@@ -53,6 +54,9 @@ enum ZErrorCode
     ZERR_NOSOUND,       /*!< Error trying to use a ZSound without properly loading a sound. */
     ZERR_NOMUSIC,       /*!< Error trying to use a ZMusic without properly loading music. */
     ZERR_NOFONT,        /*!< Error trying to use a ZFont without properly loading a font. */
+    ZERR_NOSOCKET,      /*!< Error trying to use a ZClient without having an open socket. */
+    ZERR_NET_CLIENT,    /*!< Error using SDL_net in ZClient. */
+    ZERR_NET_SERVER,    /*!< Error using SDL_net in ZClient. */
     ZERR_LAST           /*!< Value used as range index, not a valid error code. */
 };
 

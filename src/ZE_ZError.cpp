@@ -13,7 +13,7 @@
 File: ZE_ZError.cpp <br>
 Description: Implementation source file for core ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.cpp,v 1.4 2003/02/10 04:40:30 cozman Exp $<br>
+$Id: ZE_ZError.cpp,v 1.5 2003/03/01 20:43:41 cozman Exp $<br>
 
     \file ZE_ZError.cpp
     \brief Source file for ZError.
@@ -39,6 +39,7 @@ void ZError::CreateStringTable()
         sErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
         sErrorDesc[ZERR_MIX_INIT] = "Error Initializing SDL_mixer: %s";
         sErrorDesc[ZERR_TTF_INIT] = "Error Initializing SDL_ttf: %s";
+        sErrorDesc[ZERR_NET_INIT] = "Error Initializing SDL_net: %s";
         sErrorDesc[ZERR_VIDMODE] = "Error Creating Display: %s";
         sErrorDesc[ZERR_LOAD_IMAGE] = "Failed to load Image: %s";
         sErrorDesc[ZERR_LOAD_SOUND] = "Failed to load Sound: %s"; 
@@ -48,6 +49,9 @@ void ZError::CreateStringTable()
         sErrorDesc[ZERR_NOSOUND] = "Called ZSound::%s with no Sound loaded.";
         sErrorDesc[ZERR_NOMUSIC] = "Called ZMusic::%s with no Music loaded.";
         sErrorDesc[ZERR_NOFONT] = "Called ZFont::%s with no Font loaded.";
+        sErrorDesc[ZERR_NOSOCKET] = "Called ZClient::%s with no open Socket.";
+        sErrorDesc[ZERR_NET_CLIENT] = "ZClient encountered a problem: %s";
+        sErrorDesc[ZERR_NET_SERVER] = "ZServer encountered a problem: %s";
     }
 }
 
