@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.64 2003/10/24 21:20:09 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.65 2003/11/24 02:21:20 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -33,12 +33,26 @@ ZEngine::ZEngine() :
     mSecPerFrame(0.0),
     mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
     mMouseX(0), mMouseY(0), mMouseB(0),
-    mLogAllErrors(true), mErrlog(stderr), mEventFilter(NULL)
+    mErrlog(stderr), mEventFilter(NULL)
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
     
-    ZError::CreateStringTable();
+    //create error strings
+    mErrorDesc[ZERR_NONE] = "No Error. [%s]";
+    mErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
+    mErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
+    mErrorDesc[ZERR_MIX_INIT] = "Error Initializing SDL_mixer: %s";
+    mErrorDesc[ZERR_TTF_INIT] = "Error Initializing SDL_ttf: %s";
+    mErrorDesc[ZERR_VIDMODE] = "Error Creating Display: %s";
+    mErrorDesc[ZERR_LOAD_IMAGE] = "Failed to load Image: %s";
+    mErrorDesc[ZERR_LOAD_SOUND] = "Failed to load Sound: %s"; 
+    mErrorDesc[ZERR_LOAD_MUSIC] = "Failed to load Music: %s";
+    mErrorDesc[ZERR_LOAD_FONT] = "Failed to load Font: %s";
+    mErrorDesc[ZERR_NOIMAGE] = "Called ZImage::%s with no Image loaded.";
+    mErrorDesc[ZERR_NOSOUND] = "Called ZSound::%s with no Sound loaded.";
+    mErrorDesc[ZERR_NOMUSIC] = "Called ZMusic::%s with no Music loaded.";
+    mErrorDesc[ZERR_NOFONT] = "Called ZFont::%s with no Font loaded.";
 }
 
 ZEngine* ZEngine::GetInstance()
@@ -102,7 +116,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     if(bpp != -1 && bpp != 8 && bpp != 15 && bpp != 16 && bpp != 24 && bpp !=32)
     {
-        ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",bpp));
+        ReportError(ZERR_VIDMODE,"%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",bpp);
         bpp = -1;
     }
     else    //this decides correcr BPP
@@ -113,12 +127,12 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
         okBPP = SDL_VideoModeOK(width, height, bpp, vidFlags);
         if(!okBPP)
         {
-            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in any depth.",width,height));
+            ReportError(ZERR_VIDMODE,"%dx%d not supported in any depth.",width,height);
             return false;   //return now
         }
         else if(okBPP != bpp)
         {
-            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in %dBPP, trying %dBPP.",width,height,bpp,okBPP));
+            ReportError(ZERR_VIDMODE,"%dx%d not supported in %dBPP, trying %dBPP.",width,height,bpp,okBPP);
             bpp = okBPP;
         }
     }
@@ -178,7 +192,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     if(!mScreen)
     {
-        ReportError(ZERR_VIDMODE,FormatStr("Unknown Error. %dx%d %dBPP (%s)", width, height, bpp, SDL_GetError()));
+        ReportError(ZERR_VIDMODE,"Unknown Error. %dx%d %dBPP (%s)", width, height, bpp, SDL_GetError());
 
 #ifdef USE_SDL_MIXER
         Mix_CloseAudio();
@@ -228,7 +242,7 @@ void ZEngine::CloseDisplay()
 
         SDL_Quit();
 
-        if(mErrlog != stderr && mErrlog != stdin)
+        if(mErrlog && mErrlog != stderr && mErrlog != stdin)
             fclose(mErrlog);
 
         mInitialized = false;
@@ -534,12 +548,11 @@ void ZEngine::SetEventFilter(SDL_EventFilter filter)
     mEventFilter = filter;
 }
 
-void ZEngine::SetErrorLog(bool logAll, std::string logFile)
+void ZEngine::SetErrorLog(std::string logFile)
 {
-    mLogAllErrors = logAll;
     if(logFile.length())
     {
-        //stderr & stdout are special cases, and should be directed to their appropriate streams
+        //stderr & stdout directed to their appropriate streams
         if(logFile == "stderr")
             mErrlog = stderr;
         else if(logFile == "stdout")
@@ -549,42 +562,27 @@ void ZEngine::SetErrorLog(bool logAll, std::string logFile)
     }
 }
 
-void ZEngine::ReportError(ZErrorCode code, std::string desc, std::string file, unsigned int line)
+void ZEngine::DisableErrorLog()
 {
-    mCurError.Create(code,desc,file,line);
-
-    if(mLogAllErrors)
-        LogError(mCurError);
-    else
-        mErrorQueue.push(mCurError);
+    mErrlog = NULL;
 }
 
-ZErrorCode ZEngine::GetLastError()
+void ZEngine::ReportError(ZErrorCode type, std::string desc, ...)
 {
-    ZErrorCode code = mCurError.Code();
-    mCurError.Create(ZERR_NONE);
-    return code;
-}
+    char buf[512];
+    va_list args;
+    std::string msg;
 
-void ZEngine::WriteLog(std::string str)
-{
-    std::fprintf(mErrlog,str.c_str());
-    std::fprintf(mErrlog,"\n");
-    std::fflush(mErrlog);
-}
+    va_start(args,desc);
+    vsprintf(buf,desc.c_str(),args);
+    va_end(args);
 
-void ZEngine::LogError(ZError error)
-{
-    std::fprintf(mErrlog,error.LogString().c_str());
-    std::fflush(mErrlog);
-}
+    msg = desc.length() ? FormatStr(mErrorDesc[type],buf) : mErrorDesc[type];
 
-void ZEngine::FlushErrors()
-{
-    while(!mErrorQueue.empty())
+    if(mErrlog)
     {
-        LogError(mErrorQueue.front());
-        mErrorQueue.pop();
+        std::fprintf(mErrlog,msg.c_str());
+        std::fflush(mErrlog);
     }
 }
 

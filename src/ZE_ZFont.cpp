@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.15 2003/10/12 04:09:46 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.16 2003/11/24 02:21:20 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -75,7 +75,7 @@ void ZFont::OpenFromZip(std::string zipname, std::string filename, int size)
     }
 
     if(!rFont)
-        rEngine->ReportError(ZERR_LOAD_FONT,FormatStr("%s in %s archive",filename.c_str(),zipname.c_str()));
+        rEngine->ReportError(ZERR_LOAD_FONT,"%s in %s archive",filename.c_str(),zipname.c_str());
 }
 
 void ZFont::Release()

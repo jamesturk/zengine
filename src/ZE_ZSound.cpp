@@ -13,7 +13,7 @@
     \brief Source file for ZSound.
 
     Implementation of ZSound, the basic Sound class for ZEngine.
-    <br>$Id: ZE_ZSound.cpp,v 1.13 2003/11/20 02:23:14 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.cpp,v 1.14 2003/11/24 02:21:20 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -69,7 +69,7 @@ void ZSound::OpenFromZip(std::string zipname, std::string filename)
     }
 
     if(!rSound)
-        rEngine->ReportError(ZERR_LOAD_SOUND,FormatStr("%s in %s archive",filename.c_str(),zipname.c_str()));
+        rEngine->ReportError(ZERR_LOAD_SOUND,"%s in %s archive",filename.c_str(),zipname.c_str());
 }
 
 void ZSound::Release()

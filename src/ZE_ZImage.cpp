@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.51 2003/11/14 02:11:50 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.52 2003/11/24 02:21:20 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -193,20 +193,16 @@ void ZImage::OpenFromZip(std::string zipname, std::string filename)
     }
 
     if(!image)
-        rEngine->ReportError(ZERR_LOAD_IMAGE,FormatStr("%s in %s archive",filename.c_str(),zipname.c_str()));
+        rEngine->ReportError(ZERR_LOAD_IMAGE,"%s in %s archive",filename.c_str(),zipname.c_str());
     else
         Attach(image);
 }
 
 void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
 {
-    SDL_Surface *screen = rEngine->Display();
     SDL_Surface *cutImg = NULL;
     SDL_Rect rect;
-    SDL_VideoInfo *videoInfo;
-
-    //either set hardware or software surface//
-    videoInfo = const_cast<SDL_VideoInfo*>(SDL_GetVideoInfo());
+    Uint8 oldAlpha;
 
     rect.x = x;
     rect.y = y;
@@ -216,13 +212,16 @@ void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sin
     if(!image)
         rEngine->ReportError(ZERR_NOIMAGE,"OpenFromImage");
 
-    cutImg = SDL_CreateRGBSurface(0, rect.w, rect.h, rEngine->DisplayDepth(),
-        screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
+    cutImg = SDL_CreateRGBSurface(0, rect.w, rect.h, image->format->BitsPerPixel, 
+        image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
 
     if(!cutImg)
-        rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_CreateRGBSurface failed in ZImage::OpenFromImage: %s.",SDL_GetError()));
+        rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_CreateRGBSurface failed in ZImage::OpenFromImage: %s.",SDL_GetError());
 
+    oldAlpha = image->format->alpha;    //store alpha
+    SDL_SetAlpha(image,0,SDL_ALPHA_OPAQUE); //turn off alpha for RGBA->RGBA copy
     SDL_BlitSurface(image,&rect,cutImg,NULL);
+    SDL_SetAlpha(image,oldAlpha == SDL_ALPHA_OPAQUE ? 0 : SDL_SRCALPHA, oldAlpha); //turn alpha back on iff alpha was not opaque to start
     Attach(cutImg);
 }
 
@@ -250,7 +249,7 @@ void ZImage::Attach(SDL_Surface *surface)
         }
         else    //can't convert, leave surface as is
         {
-            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
+            rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError());
         }
     
         rWidth = static_cast<float>(surface->w);
@@ -298,7 +297,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
     {
         color = SDL_MapRGB(rImage->format,red,green,blue);
         if(SDL_SetColorKey(rImage, SDL_SRCCOLORKEY, color) < 0)
-            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
+            rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError());
         else
             Reload(); //do the reattach hack, this gets a new OpenGL surface for the same image
     }
@@ -318,7 +317,7 @@ void ZImage::DrawClipped(int x, int y, ZRect clipRect) const
 
 void ZImage::Draw(float x, float y) const
 {
-    glColor4ub(255,255,255,rAlpha); //sets the color correctly
+    //glColor4ub(255,255,255,rAlpha); //sets the color correctly
     Bind();
     glBegin(GL_TRIANGLE_STRIP); //triangle strips, speedier?
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(x,y);
@@ -513,7 +512,7 @@ bool ZImage::IsLoaded() const
 void ZImage::Attach(SDL_Surface *surface)
 {
     Release();
-    
+
     if(surface)
     {
         SDL_Surface *temp = SDL_DisplayFormatAlpha(surface); //TTF_RenderTextBlended relys on this
@@ -524,7 +523,7 @@ void ZImage::Attach(SDL_Surface *surface)
         }
         else    //can't convert, leave surface as is
         {
-            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
+            rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
         }
 
         rImage = surface;
@@ -548,8 +547,8 @@ void ZImage::SetAlpha(Uint8 alpha)
     rAlpha = alpha;
     if(rImage)
     {
-        if(SDL_SetAlpha(rImage, SDL_SRCALPHA, alpha) < 0)
-            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetAlpha failed in ZImage::SetAlpha: %s",SDL_GetError()));
+        if(SDL_SetAlpha(rImage, rAlpha == SDL_ALPHA_OPAQUE ? 0 : SDL_SRCALPHA, alpha) < 0)
+            rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_SetAlpha failed in ZImage::SetAlpha: %s",SDL_GetError()));
     }
     else
         rEngine->ReportError(ZERR_NOIMAGE,"SetAlpha");
@@ -563,7 +562,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
     {
         color = SDL_MapRGBA(rImage->format,red,green,blue,255);
         if(SDL_SetColorKey(rImage, SDL_RLEACCEL|SDL_SRCCOLORKEY, color) < 0)
-            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
+            rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
         //surface conversion//
         SDL_Surface *temp = rImage;
         rImage = SDL_DisplayFormatAlpha(temp); //TTF_RenderTextBlended relys on this
@@ -573,7 +572,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
         }
         else    //can't convert
         {
-            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::SetColorKey: %s",SDL_GetError()));
+            rEngine->ReportError(ZERR_SDL_INTERNAL,"SDL_DisplayFormatAlpha failed in ZImage::SetColorKey: %s",SDL_GetError()));
             rImage = temp;
         }
     }
