@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZParticleTest.cpp,v 1.7 2003/10/21 01:17:35 cozman Exp $*/
+/*$Id: ZParticleTest.cpp,v 1.8 2003/11/24 01:58:23 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -75,7 +75,7 @@ void Test()
 
     bg.Open("data/rainbow.bmp");
 #if (GFX_BACKEND == ZE_OGL)
-    bg.Resize(engine->DisplayWidth()/2,engine->DisplayHeight());  //gives perspective on alpha on half of screen
+    bg.Resize(engine->DisplayWidth()/2.0f,static_cast<float>(engine->DisplayHeight()));  //gives perspective on alpha on half of screen
 #endif
 
     font.DrawText("(P)ause    (U)npause    (C)lear",text[0]);
