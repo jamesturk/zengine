@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.15 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.16 2003/01/24 02:47:06 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -30,6 +30,12 @@ ZImage::ZImage()
 {
     rImage = NULL;
     Release();
+}
+
+ZImage::ZImage(const ZImage &rhs)
+{
+    rImage = NULL;
+    OpenFromImage(rhs.Surface(),0,0,(Sint16)rhs.Width(),(Sint16)rhs.Height());
 }
 
 ZImage::ZImage(string filename)
@@ -101,7 +107,7 @@ void ZImage::Attach(SDL_Surface *surface)
     {
         rWidth = surface->w;
         rHeight = surface->h;
-        rTexID = SDL_GL_LoadTexture(surface,coord);
+        rTexID = SDL_GL_LoadTexture(SDL_DisplayFormat(surface),coord);
         rTexMinX = coord[0];
         rTexMinY = coord[1];
         rTexMaxX = coord[2];
