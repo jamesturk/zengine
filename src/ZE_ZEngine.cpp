@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.19 2003/01/19 05:43:40 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.20 2003/01/24 10:31:39 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -143,11 +143,6 @@ bool ZEngine::CreateDisplay(string title, string icon)
             mBPP = bpp;
         }
     }
-    
-#ifdef linux	//fix for GLX visual
-    if(mBPP == 32)
-        mBPP = 24;
-#endif
 
     switch (mBPP)
     {
@@ -172,8 +167,8 @@ bool ZEngine::CreateDisplay(string title, string icon)
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, rgb_size[0]);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, rgb_size[1]);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, rgb_size[2]);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, mBPP);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, mBPP==32 ? 24 : mBPP);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
