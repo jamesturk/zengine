@@ -8,9 +8,11 @@ BUILD_NAME=ZEngine-0.8.4
 #GL_LIB_NAME=OpenGL32
 #GL_INC_PATH=-I/usr/include/w32api/GL
 #GL_LIB_PATH=-L/lib/w32api
+#EXTRA_OPTIONS=-mno-cygwin -O2
 
     ###Linux###
 GL_LIB_NAME=GL
+EXTRA_OPTIONS=-O2
 
 ##Define compiler commands:
 CC=g++

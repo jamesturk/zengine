@@ -1,8 +1,10 @@
 #Makefile for ZEngine
 
-#defines the user shouldn't change#
 include ./config
-CFLAGS = -O2 $(WARN_LEVEL) -I./include $(SDL_INC_PATH) $(GL_INC_PATH) -L./lib $(SDL_LIB_PATH) $(GL_LIB_PATH)
+#defines the user shouldn't change#
+INCLUDES = -I./include $(SDL_INC_PATH) $(GL_INC_PATH)
+LIBRARIES = -L./lib $(SDL_LIB_PATH) $(GL_LIB_PATH)
+CFLAGS = $(EXTRA_OPTIONS) $(WARN_LEVEL) $(INCLUDES) $(LIBRARIES)
 LIB_OUT = ./lib/libZEngineS.a
 ALL_TESTS = ZFontTest ZMouseTest ZMusicTest ZSoundTest ZTimerTest ZImageTest ZRectTest ZParticleTest
 
