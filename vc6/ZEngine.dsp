@@ -93,7 +93,7 @@ SOURCE=..\src\external\SDLGL_Util.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\ZE_Error.cpp
+SOURCE=..\src\ZE_ZError.cpp
 # End Source File
 # Begin Source File
 
@@ -121,6 +121,10 @@ SOURCE=..\src\ZE_ZRect.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\ZE_Utility.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\ZE_ZSound.cpp
 # End Source File
 # Begin Source File
@@ -145,7 +149,7 @@ SOURCE=..\include\ZE_Defines.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\include\ZE_Error.h
+SOURCE=..\include\ZE_ZError.h
 # End Source File
 # Begin Source File
 
@@ -153,7 +157,7 @@ SOURCE=..\include\ZE_Includes.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\include\ZE_Macros.h
+SOURCE=..\include\ZE_Utility.h
 # End Source File
 # Begin Source File
 
