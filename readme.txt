@@ -15,7 +15,7 @@ are designed to make game development easier and more organized.  As of 0.7.7
 ZEngine uses OpenGL to do the 2D display, so it is much faster and can take
 advantage of hardware accelerated features.   This file provides a simple
 overview of using it, more on the subject can be found in the docs and at
-http://conceptofzero.net/tutorials/zengine/.
+http://zengine.sourceforge.net/tutorials/.
 ------------------------------------------------------------
 II. Getting ZEngine:
 
