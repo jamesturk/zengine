@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.22 2003/01/28 21:33:02 cozman Exp $<br>
+$Id: ZEngine.h,v 1.23 2003/03/15 03:34:08 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -66,6 +66,10 @@ $Id: ZEngine.h,v 1.22 2003/01/28 21:33:02 cozman Exp $<br>
 #ifdef USE_SDL_MIXER
 #include "ZE_ZSound.h"
 #include "ZE_ZMusic.h"
+#endif
+#ifdef USE_SDL_NET
+#include "ZE_ZClient.h"
+#include "ZE_ZServer.h"
 #endif
 
 #endif //__zengine_h__
