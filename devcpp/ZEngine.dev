@@ -1,7 +1,7 @@
 [Project]
 FileName=ZEngine.dev
 Name=ZEngine
-UnitCount=59
+UnitCount=57
 Type=2
 Ver=1
 ObjFiles=
@@ -25,7 +25,9 @@ CommandLine=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=000000000000100000
+CompilerSettings=0010000000001000000
+UseCustomMakefile=0
+CustomMakefile=
 
 [Unit1]
 FileName=..\src\VersionInfo.cpp
@@ -68,16 +70,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=..\src\ZE_ZError.cpp
-CompileCpp=1
-Folder=Source
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit6]
 FileName=..\src\ZE_ZFont.cpp
 CompileCpp=1
 Folder=Source
@@ -87,7 +79,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit7]
+[Unit6]
 FileName=..\src\ZE_ZImage.cpp
 CompileCpp=1
 Folder=Source
@@ -97,7 +89,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
+[Unit7]
 FileName=..\src\ZE_ZMusic.cpp
 CompileCpp=1
 Folder=Source
@@ -107,7 +99,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit9]
+[Unit8]
 FileName=..\src\ZE_ZRandGen.cpp
 CompileCpp=1
 Folder=Source
@@ -117,7 +109,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit10]
+[Unit9]
 FileName=..\src\ZE_ZRect.cpp
 CompileCpp=1
 Folder=Source
@@ -127,7 +119,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit11]
+[Unit10]
 FileName=..\src\ZE_ZSound.cpp
 CompileCpp=1
 Folder=Source
@@ -137,7 +129,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit12]
+[Unit11]
 FileName=..\src\ZE_ZTimer.cpp
 CompileCpp=1
 Folder=Source
@@ -147,17 +139,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit13]
-FileName=..\src\external\SDLGL_Util.cpp
-CompileCpp=1
-Folder=Source
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit14]
+[Unit12]
 FileName=..\include\ZE_ZTimer.h
 CompileCpp=1
 Folder=Includes
@@ -167,7 +149,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit15]
+[Unit13]
 FileName=..\include\ZEngine.h
 CompileCpp=1
 Folder=Includes
@@ -177,7 +159,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit16]
+[Unit14]
 FileName=..\include\VersionInfo.h
 CompileCpp=1
 Folder=Includes
@@ -187,7 +169,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit17]
+[Unit15]
 FileName=..\include\ZE_Defines.h
 CompileCpp=1
 Folder=Includes
@@ -197,7 +179,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit18]
+[Unit16]
 FileName=..\include\ZE_Includes.h
 CompileCpp=1
 Folder=Includes
@@ -207,7 +189,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit19]
+[Unit17]
 FileName=..\include\ZE_Utility.h
 CompileCpp=1
 Folder=Includes
@@ -217,7 +199,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit20]
+[Unit18]
 FileName=..\include\ZE_ZBaseParticleSystem.h
 CompileCpp=1
 Folder=Includes
@@ -227,7 +209,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit21]
+[Unit19]
 FileName=..\include\ZE_ZConfigFile.h
 CompileCpp=1
 Folder=Includes
@@ -237,7 +219,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit22]
+[Unit20]
 FileName=..\include\ZE_ZEngine.h
 CompileCpp=1
 Folder=Includes
@@ -247,17 +229,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit23]
-FileName=..\include\ZE_ZError.h
-CompileCpp=1
-Folder=Includes
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit24]
+[Unit21]
 FileName=..\include\ZE_ZFont.h
 CompileCpp=1
 Folder=Includes
@@ -267,7 +239,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit25]
+[Unit22]
 FileName=..\include\ZE_ZImage.h
 CompileCpp=1
 Folder=Includes
@@ -277,7 +249,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit26]
+[Unit23]
 FileName=..\include\ZE_ZMusic.h
 CompileCpp=1
 Folder=Includes
@@ -287,7 +259,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit27]
+[Unit24]
 FileName=..\include\ZE_ZRandGen.h
 CompileCpp=1
 Folder=Includes
@@ -297,7 +269,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit28]
+[Unit25]
 FileName=..\include\ZE_ZRect.h
 CompileCpp=1
 Folder=Includes
@@ -307,7 +279,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit29]
+[Unit26]
 FileName=..\include\ZE_ZSimpleParticleSystem.h
 CompileCpp=1
 Folder=Includes
@@ -317,7 +289,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit30]
+[Unit27]
 FileName=..\include\ZE_ZSound.h
 CompileCpp=1
 Folder=Includes
@@ -327,10 +299,40 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit28]
+FileName=..\src\zlib\adler32.c
+CompileCpp=0
+Folder=Zlib
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit29]
+FileName=..\src\zlib\compress.c
+CompileCpp=0
+Folder=Zlib
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit30]
+FileName=..\src\zlib\crc32.c
+CompileCpp=0
+Folder=Zlib
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=$(CC) -c crc32.c -o ./crc32.o $(CFLAGS)
+
 [Unit31]
-FileName=..\include\external\SDLGL_Util.h
-CompileCpp=1
-Folder=Includes
+FileName=..\src\zlib\deflate.c
+CompileCpp=0
+Folder=Zlib
 Compile=1
 Link=1
 Priority=1000
@@ -338,7 +340,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit32]
-FileName=..\zlib\infutil.c
+FileName=..\src\zlib\gzio.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -348,7 +350,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit33]
-FileName=..\zlib\infutil.h
+FileName=..\src\zlib\infblock.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -376,7 +378,7 @@ ProductVersion=
 AutoIncBuildNr=0
 
 [Unit34]
-FileName=..\zlib\maketree.c
+FileName=..\src\zlib\infcodes.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -386,7 +388,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit35]
-FileName=..\zlib\trees.c
+FileName=..\src\zlib\inffast.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -396,7 +398,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit36]
-FileName=..\zlib\trees.h
+FileName=..\src\zlib\inflate.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -406,7 +408,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit37]
-FileName=..\zlib\uncompr.c
+FileName=..\src\zlib\inftrees.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -416,7 +418,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit38]
-FileName=..\zlib\unzip.c
+FileName=..\src\zlib\infutil.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -426,7 +428,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit39]
-FileName=..\zlib\unzip.h
+FileName=..\src\zlib\maketree.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -436,7 +438,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit40]
-FileName=..\zlib\zconf.h
+FileName=..\src\zlib\trees.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -446,7 +448,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit41]
-FileName=..\zlib\zlib.h
+FileName=..\src\zlib\uncompr.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -456,7 +458,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit42]
-FileName=..\zlib\zutil.c
+FileName=..\src\zlib\unzip.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -466,7 +468,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit43]
-FileName=..\zlib\zutil.h
+FileName=..\src\zlib\zutil.c
 CompileCpp=0
 Folder=Zlib
 Compile=1
@@ -476,9 +478,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit44]
-FileName=..\zlib\adler32.c
-CompileCpp=0
-Folder=Zlib
+FileName=..\include\ZE_ZAnimation.h
+CompileCpp=1
+Folder=Includes
 Compile=1
 Link=1
 Priority=1000
@@ -486,9 +488,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit45]
-FileName=..\zlib\compress.c
-CompileCpp=0
-Folder=Zlib
+FileName=..\src\ZAnimation.cpp
+CompileCpp=1
+Folder=Source
 Compile=1
 Link=1
 Priority=1000
@@ -496,8 +498,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit46]
-FileName=..\zlib\crc32.c
-CompileCpp=0
+FileName=..\include\zlib\deflate.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -506,8 +508,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit47]
-FileName=..\zlib\deflate.c
-CompileCpp=0
+FileName=..\include\zlib\infblock.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -516,8 +518,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit48]
-FileName=..\zlib\deflate.h
-CompileCpp=0
+FileName=..\include\zlib\infcodes.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -526,8 +528,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit49]
-FileName=..\zlib\gzio.c
-CompileCpp=0
+FileName=..\include\zlib\inffast.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -536,8 +538,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit50]
-FileName=..\zlib\infblock.c
-CompileCpp=0
+FileName=..\include\zlib\inffixed.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -546,8 +548,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit51]
-FileName=..\zlib\infblock.h
-CompileCpp=0
+FileName=..\include\zlib\inftrees.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -556,8 +558,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit52]
-FileName=..\zlib\infcodes.c
-CompileCpp=0
+FileName=..\include\zlib\infutil.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -566,8 +568,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit53]
-FileName=..\zlib\infcodes.h
-CompileCpp=0
+FileName=..\include\zlib\trees.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -576,8 +578,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit54]
-FileName=..\zlib\inffast.c
-CompileCpp=0
+FileName=..\include\zlib\unzip.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -586,8 +588,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit55]
-FileName=..\zlib\inffast.h
-CompileCpp=0
+FileName=..\include\zlib\zconf.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -596,8 +598,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit56]
-FileName=..\zlib\inffixed.h
-CompileCpp=0
+FileName=..\include\zlib\zlib.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
@@ -606,8 +608,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit57]
-FileName=..\zlib\inflate.c
-CompileCpp=0
+FileName=..\include\zlib\zutil.h
+CompileCpp=1
 Folder=Zlib
 Compile=1
 Link=1
