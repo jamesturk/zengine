@@ -7,6 +7,7 @@
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
+
 #include <ZEngine.h>
 #include <string> 
 using namespace std;

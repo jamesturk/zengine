@@ -7,12 +7,13 @@
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
+
 /*!
 \par File Header: 
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.10 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.11 2002/12/29 07:09:44 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
