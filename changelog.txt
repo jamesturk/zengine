@@ -1,5 +1,11 @@
 ZEngine Version Log for Version 0.8.2
-$Id: changelog.txt,v 1.27 2003/01/28 20:51:37 cozman Exp $
+$Id: changelog.txt,v 1.28 2003/02/10 05:28:19 cozman Exp $
+
+0.8.3
+    -Fixed ZImage::SetColorKey. (thanks to Kevin Watters)
+    -Added floats to ZConfigFile.
+    -Removed ZObject inheritance hierarchy and made classes inheritance-safe.
+    -Added ZImage::Draw(int,int) and ZImage::DrawRotated(float,float,float).
 
 0.8.2
     -Added ZImage::SetAlpha and example in ZImageTest.
