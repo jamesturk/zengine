@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.8 2002/12/22 04:31:15 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.9 2002/12/27 18:56:17 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -110,6 +110,13 @@ void ZImage::Attach(SDL_Surface *surface)
     }
     else
         LogError("Invalid surface passed to ZImage::Attach.");
+}
+
+void ZImage::Reload()
+{
+    SDL_Surface *temp = rImage;
+    rImage = NULL;
+    Attach(temp);
 }
 
 void ZImage::Release()

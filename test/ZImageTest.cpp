@@ -41,10 +41,17 @@ void Test()
     ZImage image1, image2, image3, textImage;
     ZFont font("data/almontew.ttf",30);
 
-    engine->SetReloadNeed(true);    //start off needing the reload
-
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
+
+    temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
+    image1.Attach(temp);    //this attaches the surface into itself
+    image2.Open("data/test01.bmp");
+    image3.OpenFromImage(image2.Surface(),5,5,20,20);
+    temp = NULL;    //and temp will now be controlled and freed by image1
+    image1.SetColorKey(255,0,255);
+    image2.SetColorKey(255,0,255);
+    font.DrawShadedText("ZImage Test.",textImage);
 
     do
     {
@@ -53,14 +60,10 @@ void Test()
 
         if(engine->ImagesNeedReload())
         {
-            temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
-            image1.Attach(temp);    //this attaches the surface into itself
-            image2.Open("data/test01.bmp");
-            image3.OpenFromImage(image2.Surface(),5,5,20,20);
-            temp = NULL;    //and temp will now be controlled and freed by image1
-            image1.SetColorKey(255,0,255);
-            image2.SetColorKey(255,0,255);
-            font.DrawShadedText("ZImage Test.",textImage);
+            image1.Reload();
+            image2.Reload();
+            image3.Reload();
+            textImage.Reload();
             engine->SetReloadNeed(false);   //very important for speed, without this you'd be reloading every frame
         }
 
