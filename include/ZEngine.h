@@ -3,7 +3,7 @@
     \brief Header file for ZEngine.
 
     Public header file for ZEngine, this is the file that programs that wish to utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.37 2003/11/23 19:34:02 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.38 2003/11/25 01:02:17 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -24,8 +24,9 @@
     &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine now uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
     and making the engine much faster in all test cases, and the engine was tested for memory leaks with MSVC and is known
     to have no leaks.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website : http://zengine.sourceforge.net/.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine tutorials : http://zengine.sourceforge.net/tutorials/.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine homepage : http://zengine.sourceforge.net/. <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine tutorials : http://zengine.sourceforge.net/tutorials/. <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine forums : http://sourceforge.net/forum/?group_id=62098. <br>
     
     \section Licensing Licensing
     <br>

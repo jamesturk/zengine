@@ -19,10 +19,10 @@ http://zengine.sourceforge.net/tutorials/.
 ------------------------------------------------------------
 II. Getting ZEngine:
 
-Support comes from: http://conceptofzero.net/
-The sourceforge page: http://zengine.sourceforge.net/
-The project page: http://sourceforge.net/projects/zengine/
-The CVS page: http://sourceforge.net/cvs/?group_id=62098
+Home page: http://zengine.sourceforge.net/
+Forums: http://sourceforge.net/forum/?group_id=62098
+Project page: http://sourceforge.net/projects/zengine/
+CVS page: http://sourceforge.net/cvs/?group_id=62098
 ------------------------------------------------------------
 III. Building ZEngine:
 
@@ -36,7 +36,7 @@ and others) as well as the path to ZEngine before building.
 See dependencies.txt for information on obtaining the dependencies.
 
 If you are having a problem building ask at the ZEngine forum.
-(Click forum link at http://zengine.sourceforge.net)
+(http://sourceforge.net/forum/?group_id=62098)
 ------------------------------------------------------------
 IV. Using ZEngine:
 

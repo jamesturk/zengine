@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.57 2003/11/23 19:32:55 cozman Exp $
+$Id: changelog.txt,v 1.58 2003/11/25 01:02:17 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -13,6 +13,7 @@ Changes are marked with symbols that describe them:
 0.8.6
     ! Removed SetupDisplay/SetupSound and integrated them into CreateDisplay.
     ! Removed bulk of old error logging system and added new simpler system.
+    # Changed forums to http://sourceforge.net/forum/?group_id=62098
     # OpenFromImage Alpha Fix (thanks to Stinus Petersen)
     # ZImage copy constructor width/height fix.
     # Fixed ZImage crash on missing image.  ZFont crash fix relys on SDL_ttf 2.0.7
