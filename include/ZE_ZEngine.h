@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.47 2003/08/08 03:54:34 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.48 2003/09/09 02:49:10 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -137,9 +137,10 @@ class ZEngine
         static ZEngine* GetInstance();
 
         /*!
-            \brief Release Instance.
+            \brief Release Instance (obsolete as of 0.8.5).
 
-            Release memory held by instance of engine and closes window.
+            Release memory held by instance of engine and closes window.  
+            If you are using ZE_main (new in 0.8.5) this needs not ever be called.
         **/
         static void ReleaseInstance();
 
