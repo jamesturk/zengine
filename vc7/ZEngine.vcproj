@@ -339,6 +339,40 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="tinyxml"
+			Filter="">
+			<File
+				RelativePath="..\src\tinyxml\tinyxml.cpp">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						WarnAsError="FALSE"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\include\tinyxml\tinyxml.h">
+			</File>
+			<File
+				RelativePath="..\src\tinyxml\tinyxmlerror.cpp">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						WarnAsError="FALSE"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\tinyxml\tinyxmlparser.cpp">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						WarnAsError="FALSE"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
