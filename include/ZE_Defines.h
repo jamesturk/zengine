@@ -33,12 +33,17 @@
 //! Define to use the Physfs file system.
 //#define USE_PHYSFS
 
-#ifdef USE_SDL_MIXER
+#ifdef USE_SDL_NET
+
+namespace ZE
+{
 
 //! Maximum message length (for SDL_net). (10kb [10240] default)
-#define MAX_MSG_LEN 10240
+const int MAX_MSG_LEN = 10240;
 //! Define a ZByte as a plain char (for SDL_net).
 typedef char ZByte;
+
+}
 
 #endif
 
