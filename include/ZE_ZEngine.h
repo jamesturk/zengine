@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.9 2003/01/04 05:16:02 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.10 2003/01/12 07:09:04 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -138,12 +138,14 @@ class ZEngine
             \brief Create Display with predefined settings.
 
             SetupDisplay and SetupSound should be called prior to this to change settings, settings from those do not go into effect 
-            until this function is called.  Specify no icon file to use default OS icon.
+            until this function is called.  Specify no icon file to use default icon.  Returns result of setting up ZEngine, and logs 
+            error if false is returned (returns bool in versions >= 0.8.2).
 
             \param title Window Title.
             \param icon Path to Icon File.
+
         **/
-        void CreateDisplay(string title, string icon="");
+        bool CreateDisplay(string title, string icon="");
 
         /*!
             \brief Quit SDL and any Subsystems.

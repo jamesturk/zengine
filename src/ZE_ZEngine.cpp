@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.10 2003/01/04 05:16:01 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.11 2003/01/12 07:09:04 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -96,22 +96,29 @@ void ZEngine::SetupSound(int rate, bool stereo)
 }
 #endif
 
-void ZEngine::CreateDisplay(string title, string icon)
+bool ZEngine::CreateDisplay(string title, string icon)
 {
-    Uint32 flags;
+    Uint32 flags=0;
     SDL_Surface *iconImg;
+#ifdef USE_OPENGL
     int rgb_size[3];
+#endif //USE_OPENGL
 
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
     {
-        LogError(FormatStr("SDL could not be Initialized: %s", SDL_GetError()));
-        CloseDisplay();
+        LogError(FormatStr("SDL could not be initialized: %s", mWidth, mHeight, mBPP, SDL_GetError()));
+        return false;
     }
     
 #ifdef USE_SDL_MIXER
-    Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096);    //Open Audio Stream (Stereo?2:1 is conditional for number of channels)
-#endif 
+    if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
+    {
+        LogError(FormatStr("SDL_mixer could not be initialized: %s", Mix_GetError()));
+        return false;
+    }
+#endif //USE_SDL_MIXER
 
+#ifdef USE_OPENGL
     switch (mBPP)
     {
         case 8:
@@ -131,6 +138,7 @@ void ZEngine::CreateDisplay(string title, string icon)
             rgb_size[2] = 8;
             break;
     }
+
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, rgb_size[0]);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, rgb_size[1]);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, rgb_size[2]);
@@ -143,6 +151,7 @@ void ZEngine::CreateDisplay(string title, string icon)
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
     flags = SDL_OPENGL;
+#endif //USE_OPENGL
 
     //Window Manager settings//
     SDL_EnableKeyRepeat(30,30);
@@ -161,26 +170,44 @@ void ZEngine::CreateDisplay(string title, string icon)
         flags |= SDL_FULLSCREEN;
     mScreen = SDL_SetVideoMode(mWidth, mHeight, mBPP, flags);
 
-    if(!mScreen)
+    if(!mScreen)    //try 0 for BPP if supplied bpp failed
     {
         LogError(FormatStr("Unable to set video mode %dx%d (%dBpp): %s",mWidth,mHeight,mBPP,SDL_GetError()));
-        CloseDisplay();
+        mScreen = SDL_SetVideoMode(mWidth, mHeight, 0, flags);
+    }
+
+    if(!mScreen)    //if safe screen setup fails
+    {
+#ifdef USE_SDL_MIXER
+        Mix_CloseAudio();
+#endif
+
+        SDL_Quit();
+        return false;
     }
     
     mWidth = mScreen->w;
     mHeight = mScreen->h;
     mBPP = mScreen->format->BitsPerPixel;
 
+#ifdef USE_OPENGL
     SetGL2D();
+#endif //USE_OPENGL
 
     mKeyIsPressed = SDL_GetKeyState(NULL);
 
 #ifdef USE_SDL_TTF
-    TTF_Init();
-#endif
+    if(TTF_Init() < 0)
+    {
+        LogError(FormatStr("SDL could not be initialized: %s", mWidth, mHeight, mBPP, SDL_GetError()));
+        return false;
+    }
+#endif  //USE_SDL_TTF
 
     mLastTime = mPausedTime = SDL_GetTicks();
     mActive = true;
+
+    return true;
 }
 
 void ZEngine::CloseDisplay()
