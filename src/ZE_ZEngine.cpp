@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.49 2003/07/05 01:02:05 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.50 2003/07/11 00:27:26 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -588,10 +588,7 @@ void ZEngine::ReportError(ZErrorCode code, std::string desc, std::string file, u
     mCurError.Create(code,desc,file,line);
 
     if(mLogAllErrors)
-    {
         LogError(mCurError);
-        std::fflush(mErrlog);
-    }
     else
         mErrorQueue.push(mCurError);
 }
@@ -607,11 +604,13 @@ void ZEngine::WriteLog(std::string str)
 {
     std::fprintf(mErrlog,str.c_str());
     std::fprintf(mErrlog,"\n");
+    std::fflush(mErrlog);
 }
 
 void ZEngine::LogError(ZError error)
 {
     std::fprintf(mErrlog,error.LogString().c_str());
+    std::fflush(mErrlog);
 }
 
 void ZEngine::FlushErrors()
