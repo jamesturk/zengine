@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.17 2003/09/24 02:05:56 cozman Exp $*/
+/*$Id: ZMouseTest.cpp,v 1.18 2003/10/05 19:46:04 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -71,6 +71,8 @@ void Test()
                 font.DrawText(FormatStr("Right button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
             else if(engine->LButtonPressed())
                 font.DrawText(FormatStr("Left button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
+            else if(engine->MButtonPressed())
+                font.DrawText(FormatStr("Middle button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
             else
                 font.DrawText(FormatStr("Mouse at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
                 
