@@ -1,4 +1,4 @@
-Index
+ZEngine Readme File
 ------------------------------------------------------------
 I.   About ZEngine
 II.  Getting ZEngine
@@ -72,7 +72,7 @@ Adding to ZEngine:
     -This can currently be done with no restrictions, but I do ask that 
     you submit your changes back to the community if possible.
 ------------------------------------------------------------
-History of ZEngine:
+VI. History of ZEngine:
     The changelog may not show it but 0.1 to 0.6 were some of the biggest 
 changes, often I'd rewrite massive portions of code, I wasn't keeping the 
 changelog, and I wasn't testing for compatibility. ZEngine was still 
