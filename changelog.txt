@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.50 2003/09/24 05:11:32 cozman Exp $
+$Id: changelog.txt,v 1.51 2003/10/03 21:54:42 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -13,6 +13,7 @@ Changes are marked with symbols that describe them:
 0.8.5
     + OpenFromZip code added for ZImage,ZFont and ZSound.
     + Zlib/Unzip code added directly into ZEngine.
+    + ZEngine::MButtonPressed added in addition to L & R button.
     + ZRect overload for ZEngine::MouseInRect.
     + ZE_main as new entrypoint instead of main, ZE_main entrypoint allows ZEngine to initialize PhysFS and release itself.
     + New Draw,DrawRotated, and DrawClipped overloads with vertex coloring parameter for advanced needs.

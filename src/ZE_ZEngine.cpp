@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.59 2003/09/24 02:03:18 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.60 2003/10/03 21:54:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -486,6 +486,11 @@ bool ZEngine::LButtonPressed()
 bool ZEngine::RButtonPressed()
 {
     return (mMouseB & SDL_BUTTON_RMASK) > 0;
+}
+
+bool ZEngine::MButtonPressed()
+{
+    return (mMouseB & SDL_BUTTON_MMASK) > 0;
 }
 
 bool ZEngine::MouseInRect(SDL_Rect *rect)

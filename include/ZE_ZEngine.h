@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.50 2003/09/24 01:49:52 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.51 2003/10/03 21:54:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -139,10 +139,9 @@ class ZEngine
         static ZEngine* GetInstance();
 
         /*!
-            \brief Release Instance (obsolete as of 0.8.5).
+            \brief Release Instance.
 
             Release memory held by instance of engine and closes window.
-            If you are using ZE_main (new in 0.8.5) this needs not ever be called.
         **/
         static void ReleaseInstance();
 
@@ -394,6 +393,8 @@ class ZEngine
             \brief Find the state of a key.
 
             Function returns true/false based on if key is currently pressed or not.
+            This is used when using keys as buttons, and you need to check if the button/key
+            is currently pressed (ex. arrow keys).
             \param key Code of key to find status of.
             \return State of requested key.
         **/
@@ -403,6 +404,8 @@ class ZEngine
             \brief Find if key has been pressed since last check.
 
             Function returns true/false based on if key has been pressed since last check.
+            This is what is good to use if you are trying to get user input where a key is only 
+            counted once per press. (ex. typing in a name for a high scores list)
             \param key Code of key to find status of.
             \return State of requested key.
         **/
@@ -453,6 +456,15 @@ class ZEngine
             \return true if right button is pressed, false otherwise.
         **/
         bool RButtonPressed();
+
+        /*!
+            \brief Get status of Middle Button.
+
+            Get pressed status of middle button if available.
+            \return true if middle button is pressed, false if it is not or if it does not exist.
+            \since 0.8.5
+        **/
+        bool MButtonPressed();
 
         /*!
             \brief Check if mouse is in given rectangle.
