@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.4
-$Id: changelog.txt,v 1.41 2003/08/01 22:00:17 cozman Exp $
+$Id: changelog.txt,v 1.42 2003/08/08 04:05:22 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -10,6 +10,7 @@ Changes are marked with symbols that describe them:
 
 0.8.5
     + Addition of limited SDL graphics backend.
+    # Changed ZImage stretching to floating-point.
     # New linux build system (by Atani)
 
 0.8.4
