@@ -12,6 +12,7 @@ The people at the Kahvi Collective - Providing tons of free Ogg music.
     http://www.kahvi.org
 Sourceforge.net - Providing hosting for the project and CVS.
     http://sourceforge.net
-
+Some people at GameDev.net for helping out in OpenGL.
+    http://gamedev.net
 
 Also see the test/bin/Readme.txt file for credits on the data used in the demos.
