@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.32 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.33 2003/06/02 02:16:57 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -145,7 +145,6 @@ void ZImage::Attach(SDL_Surface *surface)
         rTexMaxX = coord[2];
         rTexMaxY = coord[3];
         rImage = surface;
-        //rEngine->WriteLog(FormatStr("Attached %d with ID %d",this,rTexID));   //log added for bug 723910 - ZImage Draws Wrong Image
     }
     else
         rEngine->ReportError(ZERR_NOIMAGE,"Attach");
@@ -162,7 +161,6 @@ void ZImage::Release()
 {
     if(glIsTexture(rTexID))
     {
-        //rEngine->WriteLog(FormatStr("Releasing %d with ID %d",this,rTexID));  //log added for bug 723910 - ZImage Draws Wrong Image
         glDeleteTextures(1,&rTexID);
     }
     rTexMinX = rTexMinY = rTexMaxX = rTexMaxY = 0.0f;

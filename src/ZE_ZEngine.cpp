@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.40 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.41 2003/06/02 02:16:57 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -81,7 +81,7 @@ void ZEngine::ReleaseInstance()
 
 string ZEngine::GetVersion()
 {
-    return VERSION;
+    return VERSION_STR;
 }
 
 void ZEngine::SetupDisplay(int width, int height, int bpp, bool fullscreen)
