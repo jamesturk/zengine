@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.11 2003/01/12 19:00:22 cozman Exp $*/
+/*$Id: ZSoundTest.cpp,v 1.12 2003/02/10 05:16:30 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -91,7 +91,7 @@ void Test()
 
             engine->Clear();    //clear screen
             for(int i=0; i < 6; i++)
-                text[i].Draw(0,i*50.0f);
+                text[i].Draw(0,i*50);
             engine->Update();    //update the screen
         }
 

@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.25 2003/02/10 04:55:48 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.26 2003/02/10 05:15:33 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -235,6 +235,11 @@ void ZImage::Bind() const
     }
 }
 
+void ZImage::Draw(int x, int y) const
+{
+    Draw(static_cast<float>(x),static_cast<float>(y));
+}
+
 void ZImage::Draw(float x, float y) const
 {
     Bind();
@@ -248,6 +253,11 @@ void ZImage::Draw(float x, float y) const
 }
 
 void ZImage::DrawRotated(int x, int y, float angle) const
+{
+    DrawRotated(static_cast<float>(x),static_cast<float>(y),angle);
+}
+
+void ZImage::DrawRotated(float x, float y, float angle) const
 {
     float cX,cY; //center variables
 
