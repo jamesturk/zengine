@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.16 2003/11/24 02:21:20 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.17 2003/12/24 04:43:36 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -54,7 +54,7 @@ void ZFont::Open(std::string filename, int size)
     rFont = TTF_OpenFont(filename.c_str(),size);
 
     if(!rFont)
-        rEngine->ReportError(ZERR_LOAD_FONT,filename);
+        rEngine->ReportError(ZERR_WARNING,"Could not load %s",filename.c_str());
 }
 
 void ZFont::OpenFromZip(std::string zipname, std::string filename, int size)
@@ -70,12 +70,24 @@ void ZFont::OpenFromZip(std::string zipname, std::string filename, int size)
     if(rw)
     {
         rFont = TTF_OpenFontRW(rw,0,size);
+        //dont free buffer on ZFont?
         //delete []rw->hidden.mem.base;   //must free buffer
         //SDL_FreeRW(rw);
     }
 
     if(!rFont)
-        rEngine->ReportError(ZERR_LOAD_FONT,"%s in %s archive",filename.c_str(),zipname.c_str());
+        rEngine->ReportError(ZERR_WARNING,"Could not load %s from %s",filename.c_str(),zipname.c_str());
+}
+
+void ZFont::OpenFromZRF(std::string resourceId)
+{
+    std::string filename = rEngine->GetStringResource("font",resourceId,"filename");
+    int size = rEngine->GetIntResource("font",resourceId,"size");
+
+    if(filename.length() && size)
+        Open(filename,size);
+    else
+        ;//error
 }
 
 void ZFont::Release()
@@ -136,7 +148,7 @@ void ZFont::SetStyle(bool bold, bool italic, bool underline)
     if(rFont)
         TTF_SetFontStyle(rFont,flags);
     else
-        rEngine->ReportError(ZERR_NOFONT,"SetStyle");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::SetStyle with no font loaded.");
 }
 
 void ZFont::Resize(int size)
@@ -158,7 +170,7 @@ bool ZFont::IsBold() const
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_BOLD) > 0;
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "IsBold");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::IsBold with no font loaded.");
         return false;
     }
 }
@@ -169,7 +181,7 @@ bool ZFont::IsItalic() const
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_ITALIC) > 0;
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "IsItalic");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::IsItalic with no font loaded.");
         return false;
     }
 }
@@ -180,7 +192,7 @@ bool ZFont::IsUnderlined() const
         return (TTF_GetFontStyle(rFont) & TTF_STYLE_UNDERLINE) > 0;
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "IsUnderlined");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::IsUnderlined with no font loaded.");
         return false;
     }
 }
@@ -191,7 +203,7 @@ int ZFont::Height() const
         return TTF_FontHeight(rFont);
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "GetHeight");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::Height with no font loaded.");
         return 0;
     }
 }
@@ -202,7 +214,7 @@ int ZFont::LineSkip() const
         return TTF_FontLineSkip(rFont);
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "GetLineSkip");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::LineSkip with no font loaded.");
         return 0;
     }
 }
@@ -218,7 +230,7 @@ int ZFont::StringWidth(std::string text) const
     }
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "GetStringWidth");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::StringWidth with no font loaded.");
         return 0;
     }
 }
@@ -234,7 +246,7 @@ int ZFont::StringHeight(std::string text) const
     }
     else
     {
-        rEngine->ReportError(ZERR_NOFONT, "GetStringHeight");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::StringHeight with no font loaded.");
         return 0;
     }
 }

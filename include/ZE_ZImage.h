@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.29 2003/11/24 22:22:07 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.30 2003/12/24 04:46:48 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -65,7 +65,7 @@ class ZImage
             \return num rounded up to closest power of two.
             \since 0.8.6
         **/
-        int PowerOfTwo(int num);
+        int PowerOfTwo(int num) const;
 
         /*!
             \brief Converts an SDL_Surface to an OpenGL texture ID.
@@ -79,7 +79,7 @@ class ZImage
             \return OpenGL texture ID for SDL_Surface, 0 if an error occurs.
             \since 0.8.6
         **/
-        GLuint SurfaceToTexture(SDL_Surface *surface, GLfloat *texcoord);
+        GLuint SurfaceToTexture(SDL_Surface *surface, GLfloat *texcoord) const;
 #endif //GFX_BACKEND == OGL
     
     public:
@@ -108,14 +108,6 @@ class ZImage
         ZImage(std::string filename);
 
         /*!
-            \brief Constructor to Construct from SDL_Surface*.
-
-            Constructor is same as calling ZImage::Attach() on passed SDL_Surface*.
-            \param surface SDL_Surface* to use as rImage.
-        **/
-        ZImage(SDL_Surface *surface);
-
-        /*!
             \brief Constructor to Construct from part of an SDL_Surface*.
 
             Constructor is same as calling ZImage::OpenFromImage with an SDL_Surface*.
@@ -140,6 +132,14 @@ class ZImage
             \param h Height of new image.
         **/
         ZImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h);
+
+        /*!
+            \brief Constructor to Construct from SDL_Surface*.
+
+            Constructor is same as calling ZImage::Attach() on passed SDL_Surface*.
+            \param surface SDL_Surface* to use as rImage.
+        **/
+        ZImage(SDL_Surface *surface);
 
         /*!
             \brief Destructor, frees memory.
@@ -168,6 +168,13 @@ class ZImage
             \param filename File to open as new image.
         **/
         void OpenFromZip(std::string zipname, std::string filename);
+
+        /*!
+            \brief Opens an image file from the current ZEngine Resource File.
+
+            Open image file from the current ZEngine Resource File, the XML resource file set via ZEngine::SetResourceFile.
+        **/
+        void OpenFromZRF(std::string resourceId);
 
         /*!
             \brief Cuts part of an existing image to create a new image.

@@ -13,7 +13,7 @@
     \brief Source file for ZMusic.
 
     Implementation of ZMusic, the basic Music class for ZEngine.
-    <br>$Id: ZE_ZMusic.cpp,v 1.12 2003/11/24 02:21:20 cozman Exp $<br>
+    <br>$Id: ZE_ZMusic.cpp,v 1.13 2003/12/24 04:43:36 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -52,7 +52,16 @@ void ZMusic::Open(std::string filename)
     rMusic = Mix_LoadMUS(filename.c_str());
 
     if(!rMusic)
-        rEngine->ReportError(ZERR_LOAD_MUSIC,filename);
+        rEngine->ReportError(ZERR_WARNING,"Could not load %s",filename.c_str());
+}
+
+void ZMusic::OpenFromZRF(std::string resourceId)
+{
+    std::string filename = rEngine->GetStringResource("music",resourceId,"filename");
+    if(filename.length())
+        Open(filename);
+    //else
+    //error
 }
 
 void ZMusic::Release()
@@ -74,7 +83,7 @@ void ZMusic::Play(int loopNum, int fadeTime) const
             Mix_PlayMusic(rMusic, loopNum);
     }
     else
-        rEngine->ReportError(ZERR_NOMUSIC, "Play");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::Play with no music loaded.");
 }
 
 void ZMusic::Pause() const
@@ -82,7 +91,7 @@ void ZMusic::Pause() const
     if(rMusic)
         Mix_PauseMusic();
     else
-        rEngine->ReportError(ZERR_NOMUSIC, "Pause");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::Pause with no music loaded.");
 }
 
 void ZMusic::Unpause() const
@@ -90,7 +99,7 @@ void ZMusic::Unpause() const
     if(rMusic)
         Mix_ResumeMusic();
     else
-        rEngine->ReportError(ZERR_NOMUSIC, "Unpause");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::Unpause with no music loaded.");
 }
 
 void ZMusic::Rewind() const
@@ -98,7 +107,7 @@ void ZMusic::Rewind() const
     if(rMusic)
         Mix_RewindMusic();
     else
-        rEngine->ReportError(ZERR_NOMUSIC, "Rewind");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::Rewind with no music loaded.");
 }
 
 void ZMusic::Stop(int fadeTime) const
@@ -111,7 +120,7 @@ void ZMusic::Stop(int fadeTime) const
             Mix_HaltMusic();
     }
     else
-        rEngine->ReportError(ZERR_NOMUSIC, "Stop");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::Stop with no music loaded.");
 }
 
 void ZMusic::SetVolume(int volume)
@@ -119,7 +128,7 @@ void ZMusic::SetVolume(int volume)
     if(rMusic)
         Mix_VolumeMusic(volume);
     else
-        rEngine->ReportError(ZERR_NOMUSIC, "SetVolume");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::SetVolume with no music loaded.");
 }
 
 bool ZMusic::IsLoaded() const
@@ -133,7 +142,7 @@ bool ZMusic::IsPlaying() const
         return Mix_PlayingMusic() > 0;
     else
     {
-        rEngine->ReportError(ZERR_NOMUSIC, "IsPlaying");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::IsPlaying with no music loaded.");
         return false;
     }
 }
@@ -144,7 +153,7 @@ bool ZMusic::IsPaused() const
         return Mix_PausedMusic() > 0;
     else
     {
-        rEngine->ReportError(ZERR_NOMUSIC, "IsPaused");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::IsPaused with no music loaded.");
         return false;
     }
 }
@@ -155,7 +164,7 @@ int ZMusic::Volume() const
         return Mix_VolumeMusic(-1);
     else
     {
-        rEngine->ReportError(ZERR_NOMUSIC, "GetVolume");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZMusic::GetVolume with no music loaded.");
         return false;
     }
 }

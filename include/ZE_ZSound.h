@@ -13,7 +13,7 @@
     \brief Definition file for ZSound.
 
     Definition file for ZSound, the Sound Effect wrapper for ZEngine.
-    <br>$Id: ZE_ZSound.h,v 1.11 2003/11/23 19:27:41 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.h,v 1.12 2003/12/24 04:46:48 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -88,6 +88,13 @@ class ZSound
             \param filename File to open as new sound effect.
         **/
         void OpenFromZip(std::string zipname, std::string filename);
+
+        /*!
+            \brief Opens a sound effect file from the current ZEngine Resource File.
+
+            Open sound effect file from the current ZEngine Resource File, the XML resource file set via ZEngine::SetResourceFile.
+        **/
+        void OpenFromZRF(std::string resourceId);
 
         /*!
             \brief Release sound effect.

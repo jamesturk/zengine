@@ -13,7 +13,7 @@
     \brief Definition file for ZMusic.
 
     Definition file for ZMusic, the Music file wrapper for ZEngine.
-    <br>$Id: ZE_ZMusic.h,v 1.10 2003/11/24 22:22:07 cozman Exp $<br>
+    <br>$Id: ZE_ZMusic.h,v 1.11 2003/12/24 04:46:48 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -77,6 +77,13 @@ class ZMusic
             \param filename Music to open.
         **/
         void Open(std::string filename);
+
+        /*!
+            \brief Opens a music file from the current ZEngine Resource File.
+
+            Open music file from the current ZEngine Resource File, the XML resource file set via ZEngine::SetResourceFile.
+        **/
+        void OpenFromZRF(std::string resourceId);
 
         /*!
             \brief Release music.

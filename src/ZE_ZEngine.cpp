@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.66 2003/12/14 22:36:50 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.67 2003/12/24 04:43:36 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -36,26 +36,29 @@ ZEngine::ZEngine() :
     mSecPerFrame(0.0),
     mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
     mMouseX(0), mMouseY(0), mMouseB(0),
-    mErrlog(stderr), mEventFilter(NULL)
+    mLogStyle(ZLOG_TEXT), mErrlog(stderr), mEventFilter(NULL)
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
-    
-    //create error strings
-    mErrorDesc[ZERR_NONE] = "No Error. [%s]";
-    mErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
-    mErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
-    mErrorDesc[ZERR_MIX_INIT] = "Error Initializing SDL_mixer: %s";
-    mErrorDesc[ZERR_TTF_INIT] = "Error Initializing SDL_ttf: %s";
-    mErrorDesc[ZERR_VIDMODE] = "Error Creating Display: %s";
-    mErrorDesc[ZERR_LOAD_IMAGE] = "Failed to load Image: %s";
-    mErrorDesc[ZERR_LOAD_SOUND] = "Failed to load Sound: %s"; 
-    mErrorDesc[ZERR_LOAD_MUSIC] = "Failed to load Music: %s";
-    mErrorDesc[ZERR_LOAD_FONT] = "Failed to load Font: %s";
-    mErrorDesc[ZERR_NOIMAGE] = "Called ZImage::%s with no Image loaded.";
-    mErrorDesc[ZERR_NOSOUND] = "Called ZSound::%s with no Sound loaded.";
-    mErrorDesc[ZERR_NOMUSIC] = "Called ZMusic::%s with no Music loaded.";
-    mErrorDesc[ZERR_NOFONT] = "Called ZFont::%s with no Font loaded.";
+}
+
+TiXmlElement* ZEngine::FindElement(std::string type, std::string id)
+{
+    if(rZRF.RootElement())
+    {
+        TiXmlElement *elem = rZRF.RootElement()->FirstChildElement();
+
+        //while element exists
+        while(elem)
+        {
+            if(strcmpi(elem->Value(),type.c_str()) == 0 && strcmpi(elem->Attribute("id"),id.c_str()) == 0)
+                return elem;
+            else
+                elem = elem->NextSiblingElement();
+        }
+    }
+
+    return NULL;    //if it gets this far, problem
 }
 
 ZEngine* ZEngine::GetInstance()
@@ -97,7 +100,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
             sdlFlags |= SDL_INIT_AUDIO;
         if(SDL_Init(sdlFlags) < 0) 
         {
-            ReportError(ZERR_SDL_INIT,SDL_GetError());
+            ReportError(ZERR_CRITICAL,"Error initializing SDL: %s",SDL_GetError());
             return false;   //return now, nothing else should be called
         }
     }
@@ -107,7 +110,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
     {
         if(Mix_OpenAudio(soundRate, AUDIO_S16SYS, stereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
         {
-            ReportError(ZERR_MIX_INIT,SDL_GetError());
+            ReportError(ZERR_ERROR,"Error initializing SDL_mixer: %s",SDL_GetError());
             status = false;
         }
     }
@@ -119,7 +122,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     if(bpp != -1 && bpp != 8 && bpp != 15 && bpp != 16 && bpp != 24 && bpp !=32)
     {
-        ReportError(ZERR_VIDMODE,"%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",bpp);
+        ReportError(ZERR_WARNING,"Error creating display: %d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",bpp);
         bpp = -1;
     }
     else    //this decides correcr BPP
@@ -130,12 +133,12 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
         okBPP = SDL_VideoModeOK(width, height, bpp, vidFlags);
         if(!okBPP)
         {
-            ReportError(ZERR_VIDMODE,"%dx%d not supported in any depth.",width,height);
+            ReportError(ZERR_ERROR,"Error creating display: %dx%d not supported in any depth.",width,height);
             return false;   //return now
         }
         else if(okBPP != bpp)
         {
-            ReportError(ZERR_VIDMODE,"%dx%d not supported in %dBPP, trying %dBPP.",width,height,bpp,okBPP);
+            ReportError(ZERR_WARNING,"Error creating display: %dx%d not supported in %dBPP, trying %dBPP.",width,height,bpp,okBPP);
             bpp = okBPP;
         }
     }
@@ -195,7 +198,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     if(!mScreen)
     {
-        ReportError(ZERR_VIDMODE,"Unknown Error. %dx%d %dBPP (%s)", width, height, bpp, SDL_GetError());
+        ReportError(ZERR_CRITICAL,"Error creating display: Unknown Error. %dx%d %dBPP (%s)", width, height, bpp, SDL_GetError());
 
 #ifdef USE_SDL_MIXER
         Mix_CloseAudio();
@@ -216,7 +219,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
     {
         if(TTF_Init() < 0)
         {
-            ReportError(ZERR_TTF_INIT,TTF_GetError());
+            ReportError(ZERR_ERROR,"Error initializing SDL_ttf: %s",TTF_GetError());
             status = false; //possible to go on without SDL_TTF
         }
     }
@@ -257,7 +260,7 @@ void ZEngine::ToggleFullscreen()
 #ifdef linux    //SDL_WM_TF only works on Linux
     SDL_WM_ToggleFullScreen(mScreen);
 #else
-    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen,""); //title, soundRate, stereo, and icon not used
+    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen);
 #endif
     SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
@@ -478,11 +481,11 @@ bool ZEngine::MButtonPressed()
     return (mMouseB & SDL_BUTTON_MMASK) > 0;
 }
 
-bool ZEngine::MouseInRect(SDL_Rect *rect)
+bool ZEngine::MouseInRect(const SDL_Rect &rect)
 {
     //useful function, needed so much it made it into ZEngine
-    return (mMouseX >= rect->x && mMouseX <= rect->x+rect->w && 
-        mMouseY >= rect->y && mMouseY <= rect->y+rect->h);
+    return (mMouseX >= rect.x && mMouseX <= rect.x+rect.w && 
+        mMouseY >= rect.y && mMouseY <= rect.y+rect.h);
 }
 
 bool ZEngine::MouseInRect(ZRect rect)
@@ -557,9 +560,9 @@ void ZEngine::SetEventFilter(SDL_EventFilter filter)
     mEventFilter = filter;
 }
 
-void ZEngine::SetErrorLog(std::string logFile)
+void ZEngine::SetErrorLog(ZErrorLogStyle logStyle, std::string logFile)
 {
-    if(logFile.length())
+    if(logStyle != ZLOG_NONE && logFile.length())
     {
         //stderr & stdout directed to their appropriate streams
         if(logFile == "stderr")
@@ -568,6 +571,20 @@ void ZEngine::SetErrorLog(std::string logFile)
             mErrlog = stdout;
         else
             mErrlog = std::fopen(logFile.c_str(),"w");
+
+        if(logStyle == ZLOG_HTML)
+        {
+            fprintf(mErrlog,
+                "<html><head><title>ZEngine Error Log</title>\n<style type="text/css">\n<!--\n"
+                "p.note { }\n"
+                "p.verbose { }\n"
+                "p.depr { }\n"
+                "p.warning { }\n"
+                "p.error { }\n"
+                "p.critical { }\n"
+                "-->\n</style>\n</head>\n<body>\n");
+            fflush(mErrlog);
+        }
     }
 }
 
@@ -576,22 +593,61 @@ void ZEngine::DisableErrorLog()
     mErrlog = NULL;
 }
 
-void ZEngine::ReportError(ZErrorCode type, std::string desc, ...)
+void ZEngine::ReportError(ZErrorSeverity severity, std::string desc, ...)
 {
-    char buf[512];
-    va_list args;
-    std::string msg;
+    static std::string prefix[] = { 
+        " ",
+        "VERBOSE: ",
+        "DEPRECIATED: ",
+        "WARNING: ",
+        "ERROR: ",
+        "CRITICAL: "
+    };
 
-    va_start(args,desc);
-    vsprintf(buf,desc.c_str(),args);
-    va_end(args);
+    static std::string style[] = { 
+        "note",
+        "verbose",
+        "depr",
+        "warning",
+        "error",
+        "critical"
+    };
 
-    msg = desc.length() ? FormatStr(mErrorDesc[type],buf) : mErrorDesc[type];
-
-    if(mErrlog)
+    if(mLogStyle != ZLOG_NONE)
     {
-        std::fprintf(mErrlog,msg.c_str());
+        char buf[1024];
+        va_list args;
+        std::string msg;
+
+        va_start(args,desc);
+        vsprintf(buf,desc.c_str(),args);
+        va_end(args);
+
+        if(mLogStyle == ZLOG_TEXT)
+        {
+            fprintf(mErrlog,"%s%s\n",prefix[static_cast<int>(severity)].c_str(),buf);
+        }
+        else if(mLogStyle == ZLOG_HTML)
+        {
+            fprintf(mErrlog,"<p style=\"%s\">%s%s</p>\n",style[static_cast<int>(severity)].c_str(),prefix[static_cast<int>(severity)].c_str(),buf);
+        }
+
         std::fflush(mErrlog);
+    }
+}
+
+void ZEngine::WriteLog(std::string str, ...)
+{
+    if(mLogStyle != ZLOG_NONE)
+    {
+        char buf[1024];
+        va_list args;
+
+        va_start(args,str);
+        vsprintf(buf,str.c_str(),args);
+        va_end(args);
+
+
     }
 }
 
@@ -633,6 +689,58 @@ double ZEngine::Rand(double min, double max)
 double ZEngine::RandDouble()
 {
     return mRandGen.RandDouble();
+}
+
+void ZEngine::SetResourceFile(std::string filename)
+{
+    rZRF.LoadFile(filename);
+    //if(rZRF.Error())
+        //log an error
+}
+
+std::string ZEngine::GetStringResource(std::string type, std::string id, std::string element)
+{
+    TiXmlElement *elem = FindElement(type,id);
+    if(elem)
+        return elem->Attribute(element.c_str());
+    else
+    {
+        //error
+        return "";  //empty string
+    }
+}
+
+int ZEngine::GetIntResource(std::string type, std::string id, std::string element)
+{
+    TiXmlElement *elem = FindElement(type,id);
+    int ret;
+
+    if(elem && (elem->QueryIntAttribute(element.c_str(),&ret) == TIXML_SUCCESS))
+        return ret;
+    else
+    {
+        if(!elem)
+            WriteLog("no elem");
+        else if(elem->QueryIntAttribute(element.c_str(),&ret) == TIXML_NO_ATTRIBUTE)
+            WriteLog("no attribute");
+        else if(elem->QueryIntAttribute(element.c_str(),&ret) == TIXML_WRONG_TYPE)
+            WriteLog("wrong type");
+        return 0;
+    }
+}
+
+double ZEngine::GetDoubleResource(std::string type, std::string id, std::string element)
+{
+    TiXmlElement *elem = FindElement(type,id);
+    double ret;
+
+    if(elem && elem->QueryDoubleAttribute(element.c_str(),&ret) == TIXML_SUCCESS)
+        return ret;
+    else
+    {
+        //error
+        return 0;
+    }
 }
 
 int ZEngine::DisplayWidth()

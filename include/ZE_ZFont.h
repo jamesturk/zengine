@@ -13,7 +13,7 @@
     \brief Definition file for ZFont.
 
     Definition file for ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.h,v 1.16 2003/11/24 22:22:07 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.h,v 1.17 2003/12/24 04:46:48 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -96,6 +96,13 @@ class ZFont
             \param size Size to use for font.
         **/
         void OpenFromZip(std::string zipname, std::string filename, int size);
+
+        /*!
+            \brief Opens a font file from the current ZEngine Resource File.
+
+            Open font file from the current ZEngine Resource File, the XML resource file set via ZEngine::SetResourceFile.
+        **/
+        void OpenFromZRF(std::string resourceId);
 
         /*!
             \brief Release font.

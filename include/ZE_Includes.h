@@ -14,7 +14,7 @@
 
     ZE_*.h files should only include this file and any other ZE_*.h files that they need, External Library or C/C++ Standard Library
     files should be included from within this file.
-    $Id: ZE_Includes.h,v 1.20 2003/10/13 21:40:05 cozman Exp $<br>
+    $Id: ZE_Includes.h,v 1.21 2003/12/24 04:46:48 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -38,6 +38,7 @@
 #endif
 
 #include "zlib/unzip.h"
+#include "tinyxml/tinyxml.h"
 
 #include <string>   //used frequently
 #include <queue>    //used by ZEngine for ZErrors

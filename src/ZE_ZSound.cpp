@@ -13,7 +13,7 @@
     \brief Source file for ZSound.
 
     Implementation of ZSound, the basic Sound class for ZEngine.
-    <br>$Id: ZE_ZSound.cpp,v 1.14 2003/11/24 02:21:20 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.cpp,v 1.15 2003/12/24 04:43:36 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -55,7 +55,7 @@ void ZSound::Open(std::string filename)
     rSound = Mix_LoadWAV(filename.c_str());
 
     if(!rSound)
-        rEngine->ReportError(ZERR_LOAD_SOUND,filename);
+        rEngine->ReportError(ZERR_ERROR,"Could not load %s",filename.c_str());
 }
 
 void ZSound::OpenFromZip(std::string zipname, std::string filename)
@@ -69,7 +69,16 @@ void ZSound::OpenFromZip(std::string zipname, std::string filename)
     }
 
     if(!rSound)
-        rEngine->ReportError(ZERR_LOAD_SOUND,"%s in %s archive",filename.c_str(),zipname.c_str());
+        rEngine->ReportError(ZERR_WARNING,"Could not load %s from %s",filename.c_str(),zipname.c_str());
+}
+
+void ZSound::OpenFromZRF(std::string resourceId)
+{
+    std::string filename = rEngine->GetStringResource("sound",resourceId,"filename");
+    if(filename.length())
+        Open(filename);
+    //else
+    //error
 }
 
 void ZSound::Release()
@@ -92,7 +101,7 @@ void ZSound::Play(int loopNum, int fadeTime)
             rChannelID = Mix_PlayChannel(rChannelID, rSound, loopNum);
     }
     else if(!rSound)
-        rEngine->ReportError(ZERR_NOSOUND, "Play");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::Play with no sound effect loaded.");
 }
 
 void ZSound::Pause() const
@@ -100,7 +109,7 @@ void ZSound::Pause() const
     if(rSound && rChannelID >= 0)
         Mix_Pause(rChannelID);
     else if(!rSound)
-        rEngine->ReportError(ZERR_NOSOUND, "Pause");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::Pause with no sound effect loaded.");
 }
 
 void ZSound::Unpause() const
@@ -108,7 +117,7 @@ void ZSound::Unpause() const
     if(rSound && rChannelID >= 0)
         Mix_Resume(rChannelID);
     else if(!rSound)
-        rEngine->ReportError(ZERR_NOSOUND, "Unpause");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::Unpause with no sound effect loaded.");
 
 }
 
@@ -122,7 +131,7 @@ void ZSound::Stop(int fadeTime) const
             Mix_HaltChannel(rChannelID);
     }
     else if(!rSound)
-        rEngine->ReportError(ZERR_NOSOUND, "Stop");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::Stop with no sound effect loaded.");
 }
 
 void ZSound::SetVolume(int volume)
@@ -130,7 +139,7 @@ void ZSound::SetVolume(int volume)
     if(rSound)
         Mix_VolumeChunk(rSound,volume);
     else
-        rEngine->ReportError(ZERR_NOSOUND, "SetVolume");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::SetVolume with no sound effect loaded.");
 }
 
 bool ZSound::IsLoaded() const
@@ -145,7 +154,7 @@ bool ZSound::IsPlaying() const
     else
     {
         if(rChannelID >= 0)
-            rEngine->ReportError(ZERR_NOSOUND, "IsPlaying");
+            rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::IsPlaying with no sound effect loaded.");
         return false;
     }
 }
@@ -156,7 +165,7 @@ bool ZSound::IsPaused() const
         return Mix_Paused(rChannelID) > 0;
     else
     {
-        rEngine->ReportError(ZERR_NOSOUND, "IsPaused");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::IsPaused with no sound effect loaded.");
         return false;
     }
 }
@@ -167,7 +176,7 @@ int ZSound::Volume() const
         return Mix_VolumeChunk(rSound,-1);
     else
     {
-        rEngine->ReportError(ZERR_NOSOUND, "GetVolume");
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZSound::GetVolume with no sound effect loaded.");
         return -1;
     }
 }

@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.56 2003/12/14 22:36:09 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.57 2003/12/24 04:46:48 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -36,30 +36,23 @@ namespace ZE
 
 class ZRect;
 
-/*!
-    \brief Enumeration of ZEngine error codes.
-
-    All the error codes currently possibly by ZEngine, note that ZERR_LAST is not used as an error code, but instead
-    as a range check on the others.
-**/
-enum ZErrorCode 
+enum ZErrorSeverity
 {
-    ZERR_NONE,          /*!< No error has occured.  */
-    ZERR_SDL_INTERNAL,  /*!< Error internal to SDL has occured, usually more detail is given by SDL. */
-    ZERR_SDL_INIT,      /*!< Error Initializing SDL. */
-    ZERR_MIX_INIT,      /*!< Error Initializing SDL_mixer. */
-    ZERR_TTF_INIT,      /*!< Error Initializing SDL_ttf. */
-    ZERR_VIDMODE,       /*!< Error setting up the display. */
-    ZERR_LOAD_IMAGE,    /*!< Error loading an image. */
-    ZERR_LOAD_SOUND,    /*!< Error loading a sound sample. */
-    ZERR_LOAD_MUSIC,    /*!< Error loading music. */
-    ZERR_LOAD_FONT,     /*!< Error loading a font. */
-    ZERR_NOIMAGE,       /*!< Error trying to use a ZImage without properly loading an image. */
-    ZERR_NOSOUND,       /*!< Error trying to use a ZSound without properly loading a sound. */
-    ZERR_NOMUSIC,       /*!< Error trying to use a ZMusic without properly loading music. */
-    ZERR_NOFONT,        /*!< Error trying to use a ZFont without properly loading a font. */
-    ZERR_LAST           /*!< Value used as range index, not a valid error code. */
+    ZERR_NOTE,
+    ZERR_VERBOSE,
+    ZERR_DEPRECIATED,
+    ZERR_WARNING,
+    ZERR_ERROR,
+    ZERR_CRITICAL
 };
+
+enum ZErrorLogStyle
+{
+    ZLOG_NONE,
+    ZLOG_TEXT,
+    ZLOG_HTML
+};
+
 
 /*!
     \brief Main ZEngine Singleton Class
@@ -88,7 +81,6 @@ class ZEngine
         bool mUnpauseOnActive;
 
 #ifdef DEPRECIATED
-        //! Value framerate strives to be at, set by SetDesiredFramerate.
         Uint8 mDesiredFramerate;
 #endif //DEPRECIATED
 
@@ -118,14 +110,16 @@ class ZEngine
         int mMouseY;
         //! Mouse Button Information
         Uint8 mMouseB;
+        //! Error log style.
+        ZErrorLogStyle mLogStyle;
         //! C-style FILE* for error logging.
         std::FILE *mErrlog;
-        //! Static Array of Error Identifiers
-        std::string mErrorDesc[ZERR_LAST];
         //! Event filter, for users who need to process their own events.
         SDL_EventFilter mEventFilter;
         //! Random Generator for general use.
         ZRandGen mRandGen;
+        //! TinyXML XML Document for ZRF (ZEngine Resource File).
+        TiXmlDocument rZRF;
 
 #ifdef USE_SDL_MIXER 
         //! Sound Initialized
@@ -140,13 +134,18 @@ class ZEngine
     //Singleton + Memory Management//
     /////////////////////////////////
 
-    private:
         /*!
             \brief Constructor for ZEngine.
             
             Initialize ZEngine values to defaults. (Private so that only one instance may be created.)
         **/
         ZEngine();
+
+    //////////////////////
+    //Resource Internals//
+    //////////////////////
+
+        TiXmlElement* FindElement(std::string type, std::string id);
 
     public:
 
@@ -184,7 +183,7 @@ class ZEngine
             \param icon Path to Icon File.
             \return result of setting up the display, true if everything went ok, false if any setup failed (check GetLastError).
         **/
-        bool CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, 
+        bool CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title="ZEngine Application", 
             int soundRate=22050, bool stereo=false, std::string icon="");
 
         /*!
@@ -309,24 +308,7 @@ class ZEngine
         double GetFramerate();
 
 #ifdef DEPRECIATED
-        /*!
-            \brief Set Desired Framerate.
-
-            Sets desired framerate, if engine gets ahead of desired rate during a frame it will stall in Update until
-            current framerate is closer to that desired.  Acceptable values are 1-255, setting this value to 0 will disable this
-            feature.  (Desired framerate is disabled upon initialization of ZEngine.)
-            \since 0.8.2
-            \param rate Desired framerate 1-255, or 0 to disable.
-        **/
         void SetDesiredFramerate(Uint8 rate);
-
-        /*!
-            \brief Get Desired Framerate.
-
-            Get desired framerate set by SetDesiredFramerate.
-            \since 0.8.2
-            \return Current setting for desired framerate.
-        **/
         Uint8 GetDesiredFramerate();
 #endif //DEPRECIATED
 
@@ -476,7 +458,7 @@ class ZEngine
             \param rect Rectangle to check if mouse is in.
             \return true if mouse is in rectangle, false otherwise
         **/
-        bool MouseInRect(SDL_Rect *rect);
+        bool MouseInRect(const SDL_Rect &rect);
 
         /*!
             \brief Check if mouse is in given rectangle.
@@ -522,7 +504,7 @@ class ZEngine
             \param logFile Name of file to use as log, passing in stderr or stdio will set the log to the respective C stream.
             Passing in nothing will not change the current error log file, which defaults to stderr.
         **/
-        void SetErrorLog(std::string logFile);
+        void SetErrorLog(ZErrorLogStyle logStyle, std::string logFile);
 
         void DisableErrorLog();
 
@@ -533,16 +515,7 @@ class ZEngine
             Adds the error to the the error queue, and sets the current error to this error.
             \since 0.8.2
         **/
-        void ReportError(ZErrorCode type, std::string desc="", ...);
-
-        /*!
-            \brief Get the last error.
-
-            Get the last error reported.
-            \since 0.8.2
-            \return ZErrorCode of last error reported.
-        **/
-        ZErrorCode GetLastError();
+        void ReportError(ZErrorSeverity type, std::string desc="", ...);
 
         /*!
             \brief Write to the log.
@@ -551,15 +524,7 @@ class ZEngine
             \since 0.8.2
             \param str String to write to log file.
         **/
-        void WriteLog(std::string str);
-
-        /*!
-            \brief Flush Stack of Errors to file.
-
-            Write the error stack to the error log.
-            \since 0.8.2
-        **/
-        void FlushErrors();
+        void WriteLog(std::string str, ...);
 
     ////////////////////////////
     //Random Number Generation//
@@ -638,57 +603,71 @@ class ZEngine
         **/
         double RandDouble();
 
+    //////////////////
+    //Resource Files//
+    //////////////////
+
+        /*!
+            \brief Set resource file.
+
+            Set active XML ZEngine Resource File (ZRF).
+            \param filename Filename of XML format resource file.
+        **/
+        void SetResourceFile(std::string filename);
+
+        /*!
+            \brief Get string data from resource file.
+
+            Get string data from active ZRF resource file set in SetResourceFile.
+        **/
+        std::string GetStringResource(std::string type, std::string id, std::string element);
+
+        /*!
+            \brief Get numeric data from resource file.
+
+            Get numeric data from active ZRF resource file set in SetResourceFile, in integer format.
+        **/
+        int GetIntResource(std::string type, std::string id, std::string element);
+
+        /*!
+            \brief Get numeric data from resource file.
+
+            Get numeric data from active ZRF resource file set in SetResourceFile, in double format.
+        **/
+        double GetDoubleResource(std::string type, std::string id, std::string element);
+
+
     /////////////
     //Accessors//
     /////////////
 
         /*!
-            \brief Get Current Display Width.
+            \brief Get current display width.
 
             Get Width of Window or Fullscreen mode.
-            \return Width of Display.
+            \return Width of display.
         **/
         int DisplayWidth();
 
         /*!
-            \brief Get Current Display Height.
+            \brief Get current display height.
 
-            Get Height of Window or Fullscreen mode.
-            \return Height of Display.
+            Get height of window or fullscreen mode.
+            \return Height of display.
         **/
         int DisplayHeight();
 
         /*!
-            \brief Get Current Display BPP.
+            \brief Get current display depth.
 
-            Get color depth of Window or Fullscreen mode. BPP means bits per pixel.
-            \return BPP or depth of Display.
+            Get color depth of window or fullscreen mode.
+            \return Color depth (bpp) of display.
         **/
         int DisplayDepth();
 
 #ifdef DEPRECIATED
-        /*!
-            \brief Get Current Display Width.
-
-            Get Width of Window or Fullscreen mode.
-            \return Width of Display.
-        **/
         int Width();
-
-        /*!
-            \brief Get Current Display Height.
-
-            Get Height of Window or Fullscreen mode.
-            \return Height of Display.
-        **/
         int Height();
-
-        /*!
-            \brief Get Current Display BPP.
-
-            Get BPP of Window or Fullscreen mode.
-            \return BPP of Display.
-        **/
         int BPP();
 #endif //DEPRECIATED
 
