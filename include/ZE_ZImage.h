@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.27 2003/09/24 01:49:52 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.28 2003/10/13 21:48:13 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -55,6 +55,31 @@ class ZImage
         GLfloat rWidth;
         //! Current draw height of Texture.
         GLfloat rHeight;
+
+        /*!
+            \brief Rounds a number up to the nearest power of two.
+
+            Rounds a number up to the next highest power of two, used for OpenGL textures. (From testgl.c)
+            Used internally, generally shouldn't be called by users.
+            \param in Number to round up.
+            \return num rounded up to closest power of two.
+            \since 0.8.6
+        **/
+        int PowerOfTwo(int num);
+
+        /*!
+            \brief Converts an SDL_Surface to an OpenGL texture ID.
+
+            Given an SDL_Surface returns a texture ID representing the OpenGL
+            texture assigned to that surface.  Also returns texture coordinates
+            via texcoord parameter. (From SDL_GL_LoadTexture in testgl.c)
+            Used internally, generally shouldn't be called by users.
+            \param surface SDL_Surface to assign an OpenGL ID, returns unmodified.
+            \param texcoord Should be an array of 4 GLfloat, assigned texture coordinates for OpenGL use.
+            \return OpenGL texture ID for SDL_Surface, 0 if an error occurs.
+            \since 0.8.6
+        **/
+        GLuint SurfaceToTexture(SDL_Surface *surface, GLfloat *texcoord);
 #endif //GFX_BACKEND == OGL
     
     public:
