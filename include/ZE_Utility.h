@@ -14,7 +14,7 @@
 
     Definition file for ZEngine Utilities which are used throughout the engine and can be used in
     conjunction with ZEngine.
-    <br>$Id: ZE_Utility.h,v 1.6 2003/09/24 01:49:52 cozman Exp $<br>
+    <br>$Id: ZE_Utility.h,v 1.7 2003/10/05 19:42:34 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -38,6 +38,17 @@ namespace ZE
 **/
 std::string FormatStr(const char *fmtstr, ...);
 
+/*!
+    \brief Extracts a SDL_RWops memory structure from a zip archive.
+
+    Attempts to open a file from within a zipfile and return a SDL_RWops which can be used
+    to load a resource from memory.  Used by 'LoadFromZip' members of ZImage/ZSound/ZFont
+    so generally not called.
+    \param zipname Name of zip-format archive to open.
+    \param filename Name of file within archive to access.
+    \return On success, pointer to SDL_RWops, on failure, NULL.  
+    \since 0.8.5
+**/
 SDL_RWops* RWFromZip(std::string zipname, std::string filename);
 
 /*!
