@@ -1,0 +1,1 @@
+This directory is empty on purpose, it simply holds the place of the directory where the library files will be placed.  If you are on windows there is a precompiled package available from http://sourceforge.net/project/showfiles.php?group_id=62098  (get the latest package from zengine-vclibs)
