@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.15 2003/02/10 05:15:33 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.16 2003/02/10 05:26:18 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -275,6 +275,7 @@ class ZImage
             \brief Draw Image rotated to screen.
 
             Image is rotated about it's own center by specified angle, then drawn to screen.
+            \since 0.8.3
             \param x X coord to draw Image to.
             \param y Y coord to draw Image to.
             \param angle Angle in degrees to rotate image.
