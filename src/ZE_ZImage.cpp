@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.7 2002/12/21 08:40:15 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.8 2002/12/22 04:31:15 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -138,7 +138,9 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
             if(rImage)
             {
                 FreeImage(temp);
-                Attach(rImage); //Rebind new image.
+                temp = rImage;
+                rImage = NULL;
+                Attach(temp); //Rebind new image.
             }
             else    //can't convert
             {

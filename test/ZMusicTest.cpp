@@ -41,6 +41,7 @@ void Test()
 
     if(!song.IsLoaded())    //this executes if there is no music.ogg file
     {
+        engine->Clear();
         engine->SetupDisplay(800,70,32,false);
         engine->CreateDisplay("ZMusic Test");
         font.DrawText("Music.ogg does not exist, please read music.txt.",text[0]);
@@ -48,6 +49,7 @@ void Test()
         engine->Update();
         do
         {
+            
             engine->CheckEvents();
         } while(!engine->QuitRequested());
     }
