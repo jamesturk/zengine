@@ -1,0 +1,4 @@
+
+Where have the VC6 project files gone?
+
+Visual C++ 6 is now an outdated program, and I apologize but I can no longer support it.  It's STL support as well as it's support of newer features of C++ made compiling ZEngine properly in it an extremely difficult thing for me to officially support.  As of 0.8.4 some people could get it to compile, but they had to use STLPort (http://www.stlport.org) due to the problems in the STL shipped with VC6.  If you have the money I'd recommend upgrading to Visual C++ 7 (aka .net) Standard which should cost you less than 100$.  If you're short on cash Bloodshed makes their GCC based windows IDE available for free at http://bloodshed.net/dev/devcpp.html.  I apologize for the inconvenience but keeping VC6 support is getting increasingly hard as all my VC6 contacts have switched and I have been notified several times that the VC6 project files are becoming more and more broken with every release.
