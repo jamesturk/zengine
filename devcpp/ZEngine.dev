@@ -11,7 +11,7 @@ PrivateResource=
 ResourceIncludes=
 MakeIncludes=
 Compiler=
-CppCompiler=
+CppCompiler=-Wall_@@_
 Linker=
 IsCpp=1
 Icon=
@@ -35,7 +35,7 @@ Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
-BuildCmd=
+BuildCmd=$(CPP) -c VersionInfo.cpp -o ./VersionInfo.o $(CXXFLAGS)
 
 [Unit2]
 FileName=..\src\ZE_Utility.cpp
