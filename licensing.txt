@@ -9,6 +9,11 @@ won't and I dont think the people that follow the rule follow it simply
 because they have to and the people that violate open source licenses
 aren't bright enough to have anything to contribute anyway.
 
+Note: Files in the src/external and include/external directories are not part
+of ZEngine, but may be used by ZEngine to interface with external libraries.
+Such files are only modified to be compatible with ZEngine and marked where
+such modifcations occur.
+
 ----------------------------------(begin license)
 
 Copyright (C) 2002, 2003 James Turk
