@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.0-rc1
-$Id: changelog.txt,v 1.8 2002/12/04 22:47:06 cozman Exp $
+$Id: changelog.txt,v 1.9 2002/12/05 00:20:10 cozman Exp $
 
 
 0.8.0-rc1
@@ -8,6 +8,7 @@ $Id: changelog.txt,v 1.8 2002/12/04 22:47:06 cozman Exp $
     -Changed behavior of 0 as bpp argument in ZEngine.
     -Added readme.
     -Updated rationale in licensing.txt. (fixed)
+    -Fixed loads of doxygen errors and documented all undocumented members.
     
 0.7.8
     -Added ZRect::Draw using OpenGL.
