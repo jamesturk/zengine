@@ -1,4 +1,13 @@
 ZEngine Todo List
+    -Proofread, update, clarify documentation.
+    -Add Support for PhysicsFS with SDL_ttf and SDL_mixer music.  (Waiting on those libraries.)
+    -ZSprite class (need community input)
+    -Entirely New ZFont class, using display lists
+    -Net classes
+    -FreeBSD support / OSX support
+    -Possible Scripting Integration
 
--Proofread, update, clarify documentation.
--Add Support for PhysicsFS with SDL_ttf and SDL_mixer music.  (Waiting on other libraries.)
+Things to add outside ZEngine:
+    external widget library
+    man/chm/LaTEX docs
+    Examples + Tutorials
