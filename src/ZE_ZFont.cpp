@@ -13,7 +13,7 @@
 File: ZE_ZFont.cpp <br>
 Description: Implementation source file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.7 2003/04/08 03:33:29 cozman Exp $<br>
+$Id: ZE_ZFont.cpp,v 1.8 2003/04/08 03:34:25 cozman Exp $<br>
 
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
@@ -89,11 +89,11 @@ void ZFont::SetStyle(bool bold, bool italic, bool underline)
 {
     int flags=0;
 
-    if(Bold)
+    if(bold)
         flags |= TTF_STYLE_BOLD;
-    if(Italic)
+    if(italic)
         flags |= TTF_STYLE_ITALIC;
-    if(Underline)
+    if(underline)
         flags |= TTF_STYLE_UNDERLINE;
     if(!flags)
         flags = TTF_STYLE_NORMAL;
