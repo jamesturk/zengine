@@ -1,0 +1,63 @@
+BETSY.TTF
+
+Here's how you can access the control keys in Betsy Flanagan
+
+Hold 'ALT' type a 4 digit number on your number pad and voila!
+
+0161 blank key
+0162 blank key
+0163 blank key
+0164 blank key
+0165 Alt
+0166 Ctrl
+0167 Shift with arrow
+0168 Shift
+0169 Enter with arrow
+0170 Enter
+0171 Space
+0172 F1
+0173 F2
+0174 F3
+0175 F4
+0176 F5
+0177 F6
+0178 F7
+0179 F8
+0180 F9
+0181 F10
+0182 F11
+0183 F12
+0184 Esc Wide
+0185 Esc
+0186 Tab
+0187 Caps
+0188 Caps Lock
+0189 Num Lock
+0190 Print Screen
+0191 Scroll Lock
+0192 Pause
+0193 Ins
+0194 Del
+0195 Home
+0196 End
+0197 Page Up
+0198 Page Down
+0199 left arrow
+0200 up arrow
+0201 right arrow
+0202 down arrow
+0203 Bksp
+0204 Back
+0205 Space
+0206 Spacebar
+0207 Windows Key
+0208 Properties Key
+
+Ray Larabie
+Larabie Fonts
+
+rlarabie@hotmail.com
+http://www.larabiefonts.com
+http://come.to/larabiefonts
+http://www.goldenapplecomics.com/larabiefonts
+http://www.swnakarmy.net/larabiefonts
