@@ -1,5 +1,6 @@
 These are the test programs for ZEngine, all have the basic controls:
 ALT-F4 or ESC- Quit Program
+S - Switch Modes (currently ZImageTest only)
 
 The ZEngine Config File (tests.zcf) file may be manually edited using a text editor to change certain settings.
 
