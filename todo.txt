@@ -1,10 +1,14 @@
-ZEngine Todo List
+Next Release
+    -Error logging in ZAudioBase
     -NaturalDoc documentation
-    -'ZDisplayList' class or similar solution.
-    -Add Support for ZLib in ZMusic.  (Waiting on SDL_mixer.)
-    -ZSprite class
-    -Entirely New ZFont class, using display lists (possible)
-    -Lua Scripting Integration
 
-Things to add outside ZEngine:
+0.9.0
+    -'ZDisplayList' class or similar solution.
+    -ZSprite class
+
+1.0
+    -Entirely New ZFont class, using display lists
+    -Lua or other Scripting Language Integration
+
+Outside ZEngine
     Examples + Tutorials
