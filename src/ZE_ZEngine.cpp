@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.15 2003/01/13 06:31:09 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.16 2003/01/18 21:53:14 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -524,7 +524,9 @@ void ZEngine::ReportError(ZErrorCode code, string desc, string file, unsigned in
 
 ZErrorCode ZEngine::GetLastError()
 {
-    return mCurError.Code();
+    ZErrorCode code = mCurError.Code();
+    mCurError.Create(ZERR_NONE);
+    return code;
 }
 
 void ZEngine::WriteLog(string str)
@@ -539,6 +541,7 @@ void ZEngine::LogError(ZError error)
 
 void ZEngine::FlushErrors()
 {
+    mCurError.Create(ZERR_NONE);
     while(!mErrorQueue.empty())
     {
         LogError(mErrorQueue.front());
