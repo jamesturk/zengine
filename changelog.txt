@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.54 2003/10/12 04:09:46 cozman Exp $
+$Id: changelog.txt,v 1.55 2003/10/13 21:20:18 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -12,6 +12,9 @@ Changes are marked with symbols that describe them:
 
 0.8.6
     # Fixed ZImage crash on missing image.  ZFont crash fix relys on SDL_ttf 2.0.7
+    # Switched ZImage stretch code to GL_LINEAR.
+    # Moved ZLib for convinience of non-MSVC build processes. (fixing #include "../zlib/unzip.h")
+
 
 0.8.5
     + OpenFromZip code added for ZImage,ZFont and ZSound.
