@@ -117,8 +117,8 @@ void ZImage::OpenFromZRF(std::string resourceId)
     std::string filename = rEngine->GetStringResource("image",resourceId,"filename");
     if(filename.length())
         Open(filename);
-    //else
-    //error
+    else
+        rEngine->ReportError(ZERR_WARNING,"Failed to load image resource '%s'",resourceId.c_str());
 }
 
 void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sint16 h)

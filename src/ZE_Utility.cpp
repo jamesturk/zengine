@@ -9,6 +9,7 @@
 *******************************************************************************/
 
 #include "ZE_Utility.h"
+#include "ZE_ZEngine.h" //needed for error log, can't be in ZE_Utility.h (circular dependency)
 
 namespace ZE
 {
@@ -33,7 +34,7 @@ SDL_RWops* RWFromZip(std::string zipname, std::string filename)
 
     if(!zip)    //failed to open zip
     {
-        //log error
+        ZEngine::GetInstance()->ReportError(ZERR_WARNING,"Could not open zipfile %s",zipname.c_str());
         return NULL;
     }
 
@@ -41,7 +42,7 @@ SDL_RWops* RWFromZip(std::string zipname, std::string filename)
     unzLocateFile(zip,filename.c_str(),0);
     if(unzOpenCurrentFile(zip) != UNZ_OK)   //failed to open file within zip
     {
-        return NULL;
+        return NULL;    //error should reported in calling function
     }
 
     //find current file info (we are looking for uncompressed file size)
@@ -53,7 +54,7 @@ SDL_RWops* RWFromZip(std::string zipname, std::string filename)
     {
         unzCloseCurrentFile(zip);
         unzClose(zip);
-        //log error (failed to allocate memory?!)
+        ZEngine::GetInstance()->ReportError(ZERR_ERROR,"RWFromZip failed to allocate enough memory for buffer while loading %s from %s.",filename.c_str(),zipname.c_str());
         return NULL;
     }
 

@@ -68,8 +68,8 @@ void ZSound::OpenFromZRF(std::string resourceId)
     std::string filename = rEngine->GetStringResource("sound",resourceId,"filename");
     if(filename.length())
         Open(filename);
-    //else
-    //error
+    else
+        rEngine->ReportError(ZERR_WARNING,"Failed to load sound resource '%s'",resourceId.c_str());
 }
 
 void ZSound::Release()

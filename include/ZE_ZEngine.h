@@ -130,7 +130,7 @@ class ZEngine
         void SetEventFilter(SDL_EventFilter filter);
         
         void SetErrorLog(ZErrorLogStyle logStyle, std::string logFile);
-        void ReportError(ZErrorSeverity type, std::string desc="", ...);        
+        void ReportError(ZErrorSeverity type, std::string desc, ...);        
         void WriteLog(std::string str, ...);
 
         void SeedRandGen(unsigned long seed);

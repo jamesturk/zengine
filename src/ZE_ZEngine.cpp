@@ -20,9 +20,6 @@ ZEngine *ZEngine::sInstance=NULL;
 ZEngine::ZEngine() :
     mScreen(NULL), mFullscreen(true), mInitialized(false),
     mPaused(false), mUnpauseOnActive(false),
-#ifdef DEPRECIATED
-    mDesiredFramerate(0), 
-#endif DEPRECIATED
     mNextUpdate(0), mLastPause(0), mPausedTime(0), mLastTime(0),
     mSecPerFrame(0.0),
     mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
@@ -31,32 +28,42 @@ ZEngine::ZEngine() :
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
+    atexit(ZEngine::ReleaseInstance);
 }
 
 TiXmlElement* ZEngine::FindElement(std::string type, std::string id)
 {
+    TiXmlElement *elem=NULL;
+
     if(rZRF.RootElement())
     {
-        TiXmlElement *elem = rZRF.RootElement()->FirstChildElement();
+        elem = rZRF.RootElement()->FirstChildElement();
 
         //while element exists
         while(elem)
         {
             if(strcmpi(elem->Value(),type.c_str()) == 0 && strcmpi(elem->Attribute("id"),id.c_str()) == 0)
-                return elem;
+                break;  //found our guy
             else
                 elem = elem->NextSiblingElement();
         }
+
+        //if it gets here, element not found
+        ReportError(ZERR_WARNING,"No '%s' resource found with id '%s'",type.c_str(),id.c_str());
+        elem = NULL;
+    }
+    else
+    {
+        ReportError(ZERR_WARNING,"No root element in ZRF file.");
     }
 
-    return NULL;    //if it gets this far, problem
+    return elem;
 }
 
 ZEngine* ZEngine::GetInstance()
 {
     if(!sInstance)  //first time through, gets new instance, each time after returns same one
         sInstance = new ZEngine;
-    atexit(ZEngine::ReleaseInstance);
     return sInstance;
 }
 
@@ -257,7 +264,7 @@ void ZEngine::ToggleFullscreen()
 #ifdef linux    //SDL_WM_TF only works on Linux
     SDL_WM_ToggleFullScreen(mScreen);
 #else
-    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen);
+    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen);    //replacement for WM_TF on Windows
 #endif
     SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
@@ -277,17 +284,7 @@ void ZEngine::Update()
 
     //keeps track of spf//
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
-    mLastTime = GetTime();  
-
-#ifdef DEPRECIATED
-    //framerate limiting//
-    if(mDesiredFramerate)   
-    {
-        if(mLastTime < mNextUpdate)
-            SDL_Delay(mNextUpdate-mLastTime);
-        mNextUpdate = GetTime()+(1000/mDesiredFramerate);
-    }
-#endif //DEPRECIATED
+    mLastTime = GetTime();
 }
 
 #if (GFX_BACKEND == ZE_OGL)
@@ -477,7 +474,9 @@ void ZEngine::CheckEvents()
 
     while(SDL_PollEvent(&event))
     {
-        if(!mEventFilter || mEventFilter(&event))    //if the filter returns 0 it is removing the event, it will not be processed
+        //only process event if filter doesn't exist or if filter returns a nonzero value
+        //the SDL spec says that filters return 0 when they wish to remove an item from the event queue
+        if(!mEventFilter || mEventFilter(&event))
         {
             switch(event.type)  //only certain events are handled, mEventFilter can handle user requests
             {
@@ -666,8 +665,8 @@ double ZEngine::RandDouble()
 void ZEngine::SetResourceFile(std::string filename)
 {
     rZRF.LoadFile(filename);
-    //if(rZRF.Error())
-        //log an error
+    if(rZRF.Error())
+        ReportError(ZERR_ERROR,"Error loading resource file %s.",filename.c_str());
 }
 
 std::string ZEngine::GetStringResource(std::string type, std::string id, std::string element)
@@ -677,7 +676,7 @@ std::string ZEngine::GetStringResource(std::string type, std::string id, std::st
         return elem->Attribute(element.c_str());
     else
     {
-        //error
+        ReportError(ZERR_WARNING,"GetStringResource(%s,%s,%s) failed.",type.c_str(),id.c_str(),element.c_str());
         return "";  //empty string
     }
 }
@@ -685,34 +684,35 @@ std::string ZEngine::GetStringResource(std::string type, std::string id, std::st
 int ZEngine::GetIntResource(std::string type, std::string id, std::string element)
 {
     TiXmlElement *elem = FindElement(type,id);
-    int ret;
+    int ret=0;
 
-    if(elem && (elem->QueryIntAttribute(element.c_str(),&ret) == TIXML_SUCCESS))
-        return ret;
-    else
+    if(!elem || (elem->QueryIntAttribute(element.c_str(),&ret) != TIXML_SUCCESS))
     {
         if(!elem)
-            WriteLog("no elem");
+            ReportError(ZERR_WARNING,"GetIntResource(%s,%s,%s) failed, no tags of that type.",type.c_str(),id.c_str(),element.c_str());
         else if(elem->QueryIntAttribute(element.c_str(),&ret) == TIXML_NO_ATTRIBUTE)
-            WriteLog("no attribute");
+            ReportError(ZERR_WARNING,"GetIntResource(%s,%s,%s) failed, no tag with that ID.",type.c_str(),id.c_str(),element.c_str());
         else if(elem->QueryIntAttribute(element.c_str(),&ret) == TIXML_WRONG_TYPE)
-            WriteLog("wrong type");
-        return 0;
+            ReportError(ZERR_WARNING,"GetIntResource(%s,%s,%s) failed, not an integer.",type.c_str(),id.c_str(),element.c_str());
     }
+    return ret;
 }
 
 double ZEngine::GetDoubleResource(std::string type, std::string id, std::string element)
 {
     TiXmlElement *elem = FindElement(type,id);
-    double ret;
+    double ret=0;
 
-    if(elem && elem->QueryDoubleAttribute(element.c_str(),&ret) == TIXML_SUCCESS)
-        return ret;
-    else
+    if(!elem || (elem->QueryDoubleAttribute(element.c_str(),&ret) != TIXML_SUCCESS))
     {
-        //error
-        return 0;
+        if(!elem)
+            ReportError(ZERR_WARNING,"GetDoubleResource(%s,%s,%s) failed, no tags of that type.",type.c_str(),id.c_str(),element.c_str());
+        else if(elem->QueryDoubleAttribute(element.c_str(),&ret) == TIXML_NO_ATTRIBUTE)
+            ReportError(ZERR_WARNING,"GetDoubleResource(%s,%s,%s) failed, no tag with that ID.",type.c_str(),id.c_str(),element.c_str());
+        else if(elem->QueryDoubleAttribute(element.c_str(),&ret) == TIXML_WRONG_TYPE)
+            ReportError(ZERR_WARNING,"GetDoubleResource(%s,%s,%s) failed, not a double.",type.c_str(),id.c_str(),element.c_str());
     }
+    return ret;
 }
 
 bool ZEngine::DisplayCreated()

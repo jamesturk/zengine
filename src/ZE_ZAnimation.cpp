@@ -34,6 +34,8 @@ ZAnimation::~ZAnimation()
 
 void ZAnimation::Create(ZImage *images, int numFrames, Uint32 frameDelay, ZAnimType type, bool backwards)
 {
+    if(!images)
+        rEngine->ReportError(ZERR_WARNING,"Called ZAnimation::Create with NULL images parameter.");
     rAnimImages = images;
     rNumFrames = numFrames;
     rFrameDelay = frameDelay;
@@ -44,6 +46,8 @@ void ZAnimation::Create(ZImage *images, int numFrames, Uint32 frameDelay, ZAnimT
 
 void ZAnimation::SetAnimImages(ZImage *images, int numFrames)
 {
+    if(!images)
+        rEngine->ReportError(ZERR_WARNING,"Called ZAnimation::SetAnimImages with NULL images parameter.");
     rAnimImages = images;
     rNumFrames = numFrames;
 }
@@ -67,11 +71,18 @@ void ZAnimation::Reset()
 
 void ZAnimation::Start()
 {
-    if(rAnimType != ZANIM_NONE)
-        rFrameStep = rBackwards ? -1 : 1;
+    if(rAnimImages)
+    {
+        if(rAnimType != ZANIM_NONE)
+            rFrameStep = rBackwards ? -1 : 1;
+        else
+            rFrameStep = 0;
+        rNextFrameTime = rEngine->GetTime()+rFrameDelay;
+    }
     else
-        rFrameStep = 0;
-    rNextFrameTime = rEngine->GetTime()+rFrameDelay;
+    {
+        rEngine->ReportError(ZERR_WARNING,"Called ZAnimation::Start with no images loaded.");
+    }
 }
 
 void ZAnimation::Pause()
@@ -87,7 +98,7 @@ void ZAnimation::SetFrame(int frame)
         SetFrame(rNumFrames+frame);
     else
     {
-        //invalid frame
+        rEngine->ReportError(ZERR_WARNING,"Attempt to set frame to %d in ZAnimation::SetFrame, valid range is %d to %d.",frame,-rNumFrames,rNumFrames-1);
     }
 }
 
@@ -117,7 +128,7 @@ void ZAnimation::Update()
                 case ZANIM_NONE:
                 default:
                     Reset();
-                    //error?
+                    rEngine->ReportError(ZERR_ERROR,"Unknown error: Invalid Enum [%d] in ZAnimation::Update",static_cast<int>(rAnimType));
                     break;
             }
         }
@@ -129,8 +140,8 @@ void ZAnimation::Draw(float x, float y) const
 {
     if(rAnimImages)
         rAnimImages[rCurFrame].Draw(x,y);
-    //else
-    //error: images not loaded
+    else
+        rEngine->ReportError(ZERR_WARNING,"Called ZAnimation::Draw with no images loaded.");
 }
 
 bool ZAnimation::IsRunning() const

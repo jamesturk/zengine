@@ -78,7 +78,7 @@ void ZFont::OpenFromZRF(std::string resourceId)
     if(filename.length() && size)
         Open(filename,size);
     else
-        ;//error
+        rEngine->ReportError(ZERR_WARNING,"Failed to load font resource '%s'",resourceId.c_str());
 }
 
 void ZFont::Release()
@@ -95,6 +95,8 @@ void ZFont::DrawText(std::string text, ZImage &image) const
         image.Attach(TTF_RenderText_Blended(rFont, text.c_str(), rColor));
         image.SetAlpha(rColor.unused);  //the images alpha comes from the SetColor a parameter
     }
+    else
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::DrawText with no font loaded.");
 }
 
 void ZFont::DrawShadedText(std::string text, ZImage &image) const
@@ -106,6 +108,8 @@ void ZFont::DrawShadedText(std::string text, ZImage &image) const
         image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
         image.SetAlpha(rColor.unused);
     }
+    else
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::DrawShadedText with no font loaded.");
 }
 
 void ZFont::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
@@ -144,10 +148,15 @@ void ZFont::SetStyle(bool bold, bool italic, bool underline)
 
 void ZFont::Resize(int size)
 {
-    if(rZipname.length())
-        OpenFromZip(rZipname,rFilename,size);
+    if(rFilename.length())
+    {
+        if(rZipname.length())
+            OpenFromZip(rZipname,rFilename,size);
+        else
+            Open(rFilename,size);
+    }
     else
-        Open(rFilename,size);
+        rEngine->ReportError(ZERR_VERBOSE,"Called ZFont::Resize with no font loaded.");
 }
 
 bool ZFont::IsLoaded() const

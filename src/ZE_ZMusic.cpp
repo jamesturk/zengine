@@ -51,8 +51,8 @@ void ZMusic::OpenFromZRF(std::string resourceId)
     std::string filename = rEngine->GetStringResource("music",resourceId,"filename");
     if(filename.length())
         Open(filename);
-    //else
-    //error
+    else
+        rEngine->ReportError(ZERR_WARNING,"Failed to load music resource '%s'",resourceId.c_str());
 }
 
 void ZMusic::Release()
