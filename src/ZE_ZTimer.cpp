@@ -1,21 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZTimer.cpp
-    \brief Source file for ZTimer.
-
-    Implementation of ZTimer, the basic Timer class for ZEngine.
-    <br>$Id: ZE_ZTimer.cpp,v 1.12 2003/11/24 22:20:49 cozman Exp $<br>
-    \author James Turk
-**/
 
 #include "ZE_ZTimer.h"
 

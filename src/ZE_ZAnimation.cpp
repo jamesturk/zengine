@@ -1,21 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZAnimation.cpp
-    \brief Source file for ZAnimation.
-
-    Implementation of ZAnimation, ZEngine's class for ZImage based animations.
-    <br>$Id: ZE_ZAnimation.cpp,v 1.2 2003/12/24 04:44:41 cozman Exp $<br>
-    \author James Turk
-**/
 
 #include "ZE_ZAnimation.h"
 
@@ -35,6 +26,10 @@ ZAnimation::ZAnimation(ZImage *images, int numFrames, Uint32 frameDelay, ZAnimTy
 {
     rEngine = ZEngine::GetInstance();
     Create(images,numFrames,frameDelay,type,backwards);
+}
+
+ZAnimation::~ZAnimation()
+{
 }
 
 void ZAnimation::Create(ZImage *images, int numFrames, Uint32 frameDelay, ZAnimType type, bool backwards)
@@ -138,7 +133,7 @@ void ZAnimation::Draw(float x, float y) const
     //error: images not loaded
 }
 
-bool ZAnimation::Running() const
+bool ZAnimation::IsRunning() const
 {
     return rFrameStep != 0;
 }

@@ -1,22 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/*!
-    \file ZE_ZBaseParticleSystem.h
-    \brief Definition and implementation file for the base of the ZEngine Particle System.
-
-    Definition and implementation file for ZEngine particle system class ZBaseParticleSystem.
-    Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.5 2003/07/12 01:25:42 cozman Exp $<br>
-    \author James Turk
-**/
 
 #ifndef __ze_zbaseparticlesystem_h__
 #define __ze_zbaseparticlesystem_h__
@@ -26,172 +16,50 @@
 namespace ZE
 {
 
-/*!
-    \brief Basic particle class for ZEngine particle systems.
-
-    Basic particle class, all particles used should derive from this class so that needed members are available.
-    (No default constructor is needed because NewParticle should initialize members.)
-**/
 class ZBaseParticle
 {
-    public:
-        /*!
-            \brief Virtual destructor.
-
-            Empty virtual destructor to make inheritance safe.
-        **/
+    public:      
         virtual ~ZBaseParticle() 
         {}  // empty definition here, since ZBaseParticleSystem has no cpp file and this would be all that would be in it
 
-        //! X Position of particle.
         float xPos;
-        //! Y Position of particle.
         float yPos;
-        //! Energy of particle (particles die if energy is 0).
         float energy;
 };
 
-/*!
-    \brief Base particle system, a virtual class defining an outline for a fully functional particle system.
-
-    Virtual class providing outline of basic particle system, designed so that a working particle system can be
-    derived with minimal waste.  Uses templated system to allow particle systems to work with their own types of 
-    particles, the particleType template parameter must be a type that has the members of ZBaseParticle.
-    (Note: If you need a very specific particle system it's probably best to write your own fit to your needs.)
-**/
 template <class particleType>
 class ZBaseParticleSystem
 {
     protected:
-        //! Pointer to ZEngine singleton.
         ZEngine *rEngine;
-        //! Pointer to array of particles.
         particleType *rParticles;
-        //! Maximum number of particles, and size of rParticles array.
         unsigned int rMaxParticles;
-        //! Current number of particles.
         unsigned int rCurParticles;
-        //! Number of particles to release per second.
         unsigned int rNumParticlesPerSec;
-        //! Millisecond format time of last update.
         Uint32 rLastUpdate;
-        //! Boolean value indicating if system is paused.
         bool rPaused;
 
-        /*!
-            \brief Adds a new particle.
-
-            Finds room in array with dead particle, and adds new particle using NewParticle, called by Emit.
-        **/
         void AddParticle();
-
-        /*!
-            \brief Pure virtual function to initialize and return a new particle.
-
-            Pure virtual function, overload should set up a new particle with desired traits, called by AddParticle.
-        **/
         virtual particleType NewParticle()=0;
-
-        /*!
-            \brief Pure virtual function to update a particle.
-
-            Pure virtual function, overload should update the particle `rParticles[index]`, called by Update.
-            \param index Index of particle in rParticles array to update.
-            \param elapsedTime Decimal portion of a second since last call.
-        **/
         virtual void UpdateParticle(int index, float elapsedTime)=0;
 
     public:
-        /*!
-            \brief Basic constructor for ZBaseParticleSystem.
-
-            Basic constructor for ZBaseParticle system, initializes all values to 0.
-        **/
         ZBaseParticleSystem();
-
-        /*!
-            \brief Virtual destructor for ZBaseParticleSystem.
-
-            Virtual destructor for ZBaseParticleSystem, destroys all particles, virtual to make class inheritance-safe.
-        **/
         virtual ~ZBaseParticleSystem();
 
-        /*!
-            \brief Pure virtual function, renders the particles.
-            
-            Pure virtual so that each particle system can render it's member particles in it's own way.
-        **/
         virtual void Render()=0;
-
-        /*!
-            \brief Emit a given number of particles.
-
-            Emits a given number of particles, will not emit particles if system is full.
-            \param numParticles Number of particles to emit.
-        **/
-        void Emit(int numParticles);
-
-        /*!
-            \brief Updates status of particle system.
-            
-            Updates entire particle system, calling update on every particle, emitting necessary new
-            particles, removing particles which have an energy <= 0 or are off the screen. Virtual for
-            special cases, but generally should not be overridden.
-        **/
+        void Emit(int numParticles);       
         virtual void Update();
 
-        /*!
-            \brief Empties particle system of all particles.
-
-            Empties particle system of all particles, does not alter paused state.
-        **/
         void Clear();
-
-        /*!
-            \brief Pauses particle system.
-            
-            Pauses particle system, particles may still be drawn but particles are not updated.
-        **/
         void Pause();
-
-        /*!
-            \brief Unpauses particle system.
-
-            Returns particle system to active state, system starts unpaused.
-        **/
         void Unpause();
-
-        /*!
-            \brief Clears system and pauses it.
-
-            Same as calling Clear() and then Pause(), use unpause to restart system.
-        **/
         void Stop();
 
-        /*!
-            \brief Detect if particle system is currently paused.
-
-            Returns bool indicating if the particle system is currently paused.
-            \return true if paused, false if active
-        **/
-        bool Paused();
-                
-        /*!
-            \brief Sets max particles allowed in system.
-
-            Set maximum number of particles allowed in system, particles are not emitted when system is full.
-            When this resizes the array contents are moved to the new array, if it shrinks the array particles may be lost.
-            \param max Maximum number of particles for system.
-        **/
-        void SetMaxParticles(unsigned int max);
-
-        /*!
-            \brief Sets release rate of particles.
-
-            Set number of particles to release per second.
-            \param rate Number of particles to release over the duration of one second.
-        **/
+        void SetMaxParticles(unsigned int max);     
         void SetRate(unsigned int rate);
+
+        bool IsPaused();
 };
 
 //implementation//
@@ -292,7 +160,7 @@ void ZBaseParticleSystem<particleType>::Stop()
 }
 
 template <class particleType>
-bool ZBaseParticleSystem<particleType>::Paused()
+bool ZBaseParticleSystem<particleType>::IsPaused()
 {
     return rPaused;
 }

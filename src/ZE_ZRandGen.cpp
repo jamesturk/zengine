@@ -1,23 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZRandGen.cpp
-    \brief Source file for ZRandGen.
-
-    Implementation file for ZRandGen, an OO encapsulated version of the Mersenne Twister.
-    This implementation is derived from the original mt19937ar.c source from
-    http://www.math.keio.ac.jp/matumoto/emt.html. See source for MT license.
-    <br>$Id: ZE_ZRandGen.cpp,v 1.2 2003/07/12 01:25:42 cozman Exp $<br>
-    \author James Turk, some code from Mersenne Twister.
-**/
 
 #include "ZE_ZRandGen.h"
 

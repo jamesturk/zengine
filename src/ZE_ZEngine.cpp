@@ -1,21 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZEngine.cpp
-    \brief Central source file for ZEngine.
-
-    Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.67 2003/12/24 04:43:36 cozman Exp $<br>
-    \author James Turk
-**/
 
 #include "ZE_ZEngine.h"
 #include "ZE_ZRect.h"
@@ -65,7 +56,7 @@ ZEngine* ZEngine::GetInstance()
 {
     if(!sInstance)  //first time through, gets new instance, each time after returns same one
         sInstance = new ZEngine;
-
+    atexit(ZEngine::ReleaseInstance);
     return sInstance;
 }
 
@@ -73,7 +64,13 @@ void ZEngine::ReleaseInstance()
 {
     if(sInstance)
     {
-        sInstance->CloseDisplay();  
+        if(sInstance->mErrlog && sInstance->mLogStyle == ZLOG_HTML)
+        {
+            fprintf(sInstance->mErrlog,"</body>\n</html>");
+            fclose(sInstance->mErrlog);
+        }
+
+        sInstance->CloseDisplay();
         delete sInstance;
     }
     sInstance = NULL;
@@ -265,11 +262,6 @@ void ZEngine::ToggleFullscreen()
     SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
 
-bool ZEngine::Initialized()
-{
-    return mInitialized;
-}
-
 SDL_Surface *ZEngine::Display()
 {
     return mScreen;
@@ -375,6 +367,11 @@ void ZEngine::UnpauseTimer()
     }
 }
 
+bool ZEngine::TimerIsPaused()
+{
+    return mPaused;
+}
+
 double ZEngine::GetFrameTime()
 {
     return mSecPerFrame;
@@ -383,25 +380,6 @@ double ZEngine::GetFrameTime()
 double ZEngine::GetFramerate()
 {
     return mSecPerFrame ? 1/mSecPerFrame : 0;   //avoid /0
-}
-
-#ifdef DEPRECIATED
-
-void ZEngine::SetDesiredFramerate(Uint8 rate)
-{
-    mDesiredFramerate = rate;
-}
-
-Uint8 ZEngine::GetDesiredFramerate()
-{
-    return mDesiredFramerate;
-}
-
-#endif //DEPRECIATED
-
-bool ZEngine::IsPaused()
-{
-    return mPaused;
 }
 
 bool ZEngine::IsActive()
@@ -488,7 +466,7 @@ bool ZEngine::MouseInRect(const SDL_Rect &rect)
         mMouseY >= rect.y && mMouseY <= rect.y+rect.h);
 }
 
-bool ZEngine::MouseInRect(ZRect rect)
+bool ZEngine::MouseInRect(const ZRect &rect)
 {
     return rect.Contains(static_cast<float>(mMouseX),static_cast<float>(mMouseY));
 }
@@ -562,6 +540,8 @@ void ZEngine::SetEventFilter(SDL_EventFilter filter)
 
 void ZEngine::SetErrorLog(ZErrorLogStyle logStyle, std::string logFile)
 {
+    mLogStyle = logStyle;
+
     if(logStyle != ZLOG_NONE && logFile.length())
     {
         //stderr & stdout directed to their appropriate streams
@@ -575,22 +555,18 @@ void ZEngine::SetErrorLog(ZErrorLogStyle logStyle, std::string logFile)
         if(logStyle == ZLOG_HTML)
         {
             fprintf(mErrlog,
-                "<html><head><title>ZEngine Error Log</title>\n<style type="text/css">\n<!--\n"
-                "p.note { }\n"
-                "p.verbose { }\n"
-                "p.depr { }\n"
-                "p.warning { }\n"
-                "p.error { }\n"
-                "p.critical { }\n"
+                "<html><head><title>ZEngine Error Log</title>\n<style type=\"text/css\">\n<!--\n"
+                "p { margin: 0 }\n"
+                ".note { font-style:italic color:gray }\n"
+                ".verbose { font-style:italic; background:yellow; font-size:small }\n"
+                ".depr { font-weight:bold; background:blue; color:white }\n"
+                ".warning { font-weight:bold; background:yellow }\n"
+                ".error { font-weight:bold; background:orange }\n"
+                ".critical { font-weight:bold; background:red; color:white }\n"
                 "-->\n</style>\n</head>\n<body>\n");
             fflush(mErrlog);
         }
     }
-}
-
-void ZEngine::DisableErrorLog()
-{
-    mErrlog = NULL;
 }
 
 void ZEngine::ReportError(ZErrorSeverity severity, std::string desc, ...)
@@ -616,11 +592,10 @@ void ZEngine::ReportError(ZErrorSeverity severity, std::string desc, ...)
     if(mLogStyle != ZLOG_NONE)
     {
         char buf[1024];
-        va_list args;
-        std::string msg;
+        std::va_list args;
 
         va_start(args,desc);
-        vsprintf(buf,desc.c_str(),args);
+        std::vsprintf(buf,desc.c_str(),args);
         va_end(args);
 
         if(mLogStyle == ZLOG_TEXT)
@@ -629,7 +604,7 @@ void ZEngine::ReportError(ZErrorSeverity severity, std::string desc, ...)
         }
         else if(mLogStyle == ZLOG_HTML)
         {
-            fprintf(mErrlog,"<p style=\"%s\">%s%s</p>\n",style[static_cast<int>(severity)].c_str(),prefix[static_cast<int>(severity)].c_str(),buf);
+            fprintf(mErrlog,"<p class=\"%s\">%s%s</p>\n",style[static_cast<int>(severity)].c_str(),prefix[static_cast<int>(severity)].c_str(),buf);
         }
 
         std::fflush(mErrlog);
@@ -638,17 +613,14 @@ void ZEngine::ReportError(ZErrorSeverity severity, std::string desc, ...)
 
 void ZEngine::WriteLog(std::string str, ...)
 {
-    if(mLogStyle != ZLOG_NONE)
-    {
-        char buf[1024];
-        va_list args;
+    std::va_list args;
+    char buf[1024];
 
-        va_start(args,str);
-        vsprintf(buf,str.c_str(),args);
-        va_end(args);
+    va_start(args,str);
+    std::vsprintf(buf,str.c_str(),args);
+    va_end(args);
 
-
-    }
+    ReportError(ZERR_NOTE, buf);
 }
 
 void ZEngine::SeedRandGen(unsigned long seed)
@@ -743,6 +715,11 @@ double ZEngine::GetDoubleResource(std::string type, std::string id, std::string 
     }
 }
 
+bool ZEngine::DisplayCreated()
+{
+    return mInitialized;
+}
+
 int ZEngine::DisplayWidth()
 {
     return mScreen->w;
@@ -757,25 +734,6 @@ int ZEngine::DisplayDepth()
 {
     return mScreen->format->BitsPerPixel;
 }
-
-#ifdef DEPRECIATED
-
-int ZEngine::Width()
-{
-    return mScreen->w;
-}
-
-int ZEngine::Height()
-{
-    return mScreen->h;
-}
-
-int ZEngine::BPP()
-{
-    return mScreen->format->BitsPerPixel;
-}
-
-#endif //DEPRECIATED
 
 bool ZEngine::IsFullscreen()
 {

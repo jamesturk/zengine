@@ -1,26 +1,30 @@
+/*******************************************************************************
+        This file is Part of the ZEngine Library for 2D game development.
+                  Copyright (C) 2002-2004 James Turk
+
+                     Licensed under a BSD-style license.
+
+    The maintainer of this library is James Turk (james@conceptofzero.net) 
+     and the home of this Library is http://www.zengine.sourceforge.net
+*******************************************************************************/
+
 #include "VersionInfo.h"
-
-/*!
-    \file VersionInfo.cpp
-    \brief Implementation file for VersionInfo class.
-
-    Implementation file for VersinInfo class, simple class for containing and comparing 
-    version numbers.
-    <br>$Id: VersionInfo.cpp,v 1.6 2003/07/12 09:22:13 cozman Exp $<br>
-    \author James Turk
-**/
 
 VersionInfo::VersionInfo(unsigned int maj, unsigned int min, unsigned int rel, std::string ext) :
     Major(maj), Minor(min), Release(rel), Extra(ext)
 {
 }
 
-std::string VersionInfo::GetString() const
+char* VersionInfo::GetString() const
 {
+    static char verStr[100];
+
     if(Extra.length())
-        return ZE::FormatStr("%d.%d.%d [%s]",Major,Minor,Release,Extra.c_str());
+        sprintf(verStr,"%d.%d.%d [%s]",Major,Minor,Release,Extra.c_str());
     else
-        return ZE::FormatStr("%d.%d.%d",Major,Minor,Release);
+        sprintf(verStr,"%d.%d.%d",Major,Minor,Release);
+
+    return verStr;
 }
 
 bool VersionInfo::operator<(const VersionInfo &rhs) const

@@ -1,21 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZFont.cpp
-    \brief Source file for ZFont.
-
-    Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.17 2003/12/24 04:43:36 cozman Exp $<br>
-    \author James Turk
-**/
 
 #include "ZE_ZFont.h"
 
@@ -197,7 +188,7 @@ bool ZFont::IsUnderlined() const
     }
 }
 
-int ZFont::Height() const
+int ZFont::GetHeight() const
 {
     if(rFont)
         return TTF_FontHeight(rFont);
@@ -208,7 +199,7 @@ int ZFont::Height() const
     }
 }
 
-int ZFont::LineSkip() const
+int ZFont::GetLineSkip() const
 {
     if(rFont)
         return TTF_FontLineSkip(rFont);
@@ -219,7 +210,7 @@ int ZFont::LineSkip() const
     }
 }
 
-int ZFont::StringWidth(std::string text) const
+int ZFont::CalcStringWidth(std::string text) const
 {
     int w,h;
 
@@ -235,7 +226,7 @@ int ZFont::StringWidth(std::string text) const
     }
 }
 
-int ZFont::StringHeight(std::string text) const
+int ZFont::CalcStringHeight(std::string text) const
 {
     int w,h;
 

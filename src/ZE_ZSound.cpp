@@ -1,21 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZSound.cpp
-    \brief Source file for ZSound.
-
-    Implementation of ZSound, the basic Sound class for ZEngine.
-    <br>$Id: ZE_ZSound.cpp,v 1.15 2003/12/24 04:43:36 cozman Exp $<br>
-    \author James Turk
-**/
 
 #include "ZE_ZSound.h"
 
@@ -170,7 +161,7 @@ bool ZSound::IsPaused() const
     }
 }
 
-int ZSound::Volume() const
+int ZSound::GetVolume() const
 {
     if(rSound)
         return Mix_VolumeChunk(rSound,-1);

@@ -1,21 +1,12 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
-
-/**
-    \file ZE_ZConfigFile.cpp
-    \brief Source file for ZConfigFile.
-
-    Implementation of ZConfigFile, the ZEngine INI-Style Config File.
-    <br>$Id: ZE_ZConfigFile.cpp,v 1.15 2003/11/24 22:20:49 cozman Exp $<br>
-    \author James Turk
-**/
 
 #include "ZE_ZConfigFile.h"
 
@@ -177,11 +168,12 @@ ZConfigFile::~ZConfigFile()
 void ZConfigFile::Process(std::string filename)
 {
     rFilename = filename;
-    int commentNum=0;
-    int newlineNum=0;
-
-    std::ifstream cfile(rFilename.c_str()); 
+    int commentNum,newlineNum;
+    char commentStr[15],newlineStr[15];
     std::string section, str, var, tmp;
+    std::ifstream cfile(rFilename.c_str()); 
+
+    commentNum = newlineNum = 0;    //comment/newline support is a bit of a hack
 
     rFileLayout.clear();    //layout must be cleared, in case variable is being used multiple times
 
@@ -200,12 +192,14 @@ void ZConfigFile::Process(std::string filename)
         }
         else if(tmp[0] == '#' || tmp[0] == ';') //acceptable comment characters
         {
-            SetVariable(section,FormatStr("__comment%d",commentNum),str);
+            sprintf(commentStr,"__comment%d",commentNum);
+            SetVariable(section,commentStr,str);
             ++commentNum;
         }
-        else if(tmp.length() == 0 && !cfile.eof())  //prevent writing a new newline with every write to disk
+        else if(tmp.length() == 0 && !cfile.eof())  //avoid adding a line to end of file each time
         {
-            SetVariable(section,FormatStr("__newline%d",newlineNum),"");
+            sprintf(newlineStr,"__newline%d",newlineNum);
+            SetVariable(section,newlineStr,str);
             ++newlineNum;
         }
 
