@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.60 2003/10/03 21:54:42 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.61 2003/10/05 19:31:03 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -23,7 +23,7 @@
 namespace ZE
 {
 
-VersionInfo ZEngine::Version(0,8,4);
+VersionInfo ZEngine::Version(0,8,5);
 ZEngine *ZEngine::sInstance=NULL;
 
 ZEngine::ZEngine() :
