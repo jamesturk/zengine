@@ -3,7 +3,5 @@ ZEngine Todo List
 -Proofread, update, clarify documentation.
 -Add Support for PhysicsFS with SDL_ttf and SDL_mixer music.  (Waiting on other libraries.)
 -Write simple games using the library as examples
--Possibly add 3D extensions (Xenicor?)
 -Add common game objects, particle system, basic sprites, etc.
 -Add rotation-zooming support (SDL_rotozoom?)
--Look into scripting options and networking options. 
