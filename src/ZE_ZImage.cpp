@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.45 2003/09/05 19:44:13 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.46 2003/09/07 20:59:20 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -215,6 +215,18 @@ void ZImage::Draw(float x, float y) const
     glColor4ub(255,255,255,255);    //be responsible, return to standard color state
 }
 
+void ZImage::Draw(float x, float y, Uint8 vc[]) const
+{
+    Bind();
+    glBegin(GL_TRIANGLE_STRIP); //triangle strips, speedier?
+        glTexCoord2f(rTexMinX,rTexMinY); glColor4ub(vc[0],vc[1],vc[2],vc[3]); glVertex2f(x,y);
+        glTexCoord2f(rTexMaxX,rTexMinY); glColor4ub(vc[4],vc[5],vc[6],vc[7]); glVertex2f(x+rWidth,y);
+        glTexCoord2f(rTexMinX,rTexMaxY); glColor4ub(vc[12],vc[13],vc[14],vc[15]); glVertex2f(x,y+rHeight);  //12-15 here to keep counterclockwise
+        glTexCoord2f(rTexMaxX,rTexMaxY); glColor4ub(vc[8],vc[9],vc[10],vc[11]); glVertex2f(x+rWidth,y+rHeight);
+    glEnd();
+    glColor4ub(255,255,255,255);    //be responsible, return to standard color state
+}
+
 void ZImage::DrawRotated(int x, int y, float angle) const
 {
     DrawRotated(static_cast<float>(x),static_cast<float>(y),angle);
@@ -238,6 +250,27 @@ void ZImage::DrawRotated(float x, float y, float angle) const
         glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2f(-cX+rWidth,-cY);
         glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2f(-cX,-cY+rHeight);
         glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(-cX+rWidth,-cY+rHeight);
+    glEnd();
+    glPopMatrix();
+}
+
+void ZImage::DrawRotated(float x, float y, float angle, Uint8 vc[]) const
+{
+    //center point
+    float cX,cY; 
+    cX = rWidth/2.0f;
+    cY = rHeight/2.0f;
+
+    glPushMatrix();
+    glTranslatef(x+cX,y+cY,0);  //translate to center
+    glRotatef(angle,0,0,1.0f);  //rotate on z axis, to keep x&y parallel to 2D plane
+    Bind(); 
+    //draw is modified to be based around center//
+    glBegin(GL_TRIANGLE_STRIP);
+        glTexCoord2f(rTexMinX,rTexMinY); glColor4ub(vc[0],vc[1],vc[2],vc[3]); glVertex2f(-cX,-cY);
+        glTexCoord2f(rTexMaxX,rTexMinY); glColor4ub(vc[4],vc[6],vc[6],vc[7]); glVertex2f(-cX+rWidth,-cY);
+        glTexCoord2f(rTexMinX,rTexMaxY); glColor4ub(vc[12],vc[13],vc[14],vc[15]); glVertex2f(-cX,-cY+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY); glColor4ub(vc[8],vc[9],vc[10],vc[11]); glVertex2f(-cX+rWidth,-cY+rHeight);
     glEnd();
     glPopMatrix();
 }
@@ -276,6 +309,48 @@ void ZImage::DrawClipped(float x, float y, ZRect clipRect) const
             glTexCoord2d(nw,ny);  glVertex2f(inRect.Right(),inRect.Top());
             glTexCoord2d(nx,nh);  glVertex2f(inRect.Left(),inRect.Bottom());
             glTexCoord2d(nw,nh);  glVertex2f(inRect.Right(),inRect.Bottom());
+        glEnd();
+        glColor4ub(255,255,255,255);    //be responsible, return to standard color state
+    }
+    else    //doesn't contain nor intersect
+    {
+        //draw nothing
+    }
+}
+
+void ZImage::DrawClipped(float x, float y, ZRect clipRect, Uint8 vc[]) const
+{
+    ZRect imgRect(x,y,rWidth,rHeight);
+
+    if(clipRect.Contains(imgRect))
+    {
+        Draw(x,y);
+    }
+    else if(clipRect.Intersects(imgRect))
+    {
+        //This is some pretty complex code, it is broken down in 4 steps. 
+
+        //Step 1: The intersection rectangle (inRect) is compared to the image rectangle and the overlapping area is found. 
+        ZRect inRect = clipRect.Intersection(imgRect); 
+
+        //Step 2: The portion of the image that needs to be drawn is being mapped to triangle strips the same size as the intersection
+        //        of the clipping and image rectangles and then transformed to texture coordinates via xScale and yScale.
+        //        (double is used for needed precision when dealing with the scaling)
+        double xScale = (rTexMaxX - rTexMinX)*rWidth;   //texCoordWidth/imgWidth
+        double yScale = (rTexMaxY - rTexMinY)*rHeight;  //texCoordHeight/imgHeight
+        double nx = rTexMinX + (inRect.X()-x)/xScale;    //cut off left side
+        double ny = rTexMinY + (inRect.Y()-y)/yScale;    //cut off top
+        double nw = nx + inRect.Width()/xScale;      //cut off right side
+        double nh = ny + inRect.Height()/yScale;     //cut off bottom
+
+        Bind();
+        glBegin(GL_TRIANGLE_STRIP);
+            //Step 3: The texture coords are modified to only specify the portion of the texture which falls within the clipping rect.
+            //Step 4: The vertices are changed to the sides of the clipping rectangle in glVertex2f.
+            glTexCoord2d(nx,ny); glColor4ub(vc[0],vc[1],vc[2],vc[3]); glVertex2f(inRect.Left(),inRect.Top());
+            glTexCoord2d(nw,ny); glColor4ub(vc[4],vc[5],vc[6],vc[7]); glVertex2f(inRect.Right(),inRect.Top());
+            glTexCoord2d(nx,nh); glColor4ub(vc[12],vc[13],vc[14],vc[15]); glVertex2f(inRect.Left(),inRect.Bottom());
+            glTexCoord2d(nw,nh); glColor4ub(vc[8],vc[9],vc[10],vc[11]); glVertex2f(inRect.Right(),inRect.Bottom());
         glEnd();
         glColor4ub(255,255,255,255);    //be responsible, return to standard color state
     }

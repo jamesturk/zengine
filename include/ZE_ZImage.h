@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.25 2003/09/05 19:44:13 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.26 2003/09/07 20:59:20 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -240,6 +240,19 @@ class ZImage
         void Draw(float x, float y) const;
 
         /*!
+            \brief Draw Image to screen with shaded/colored vertices.
+
+            Draw Image to screen using OpenGL to shade and color vertices.
+            \since 0.8.5
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param vc Uint8 vcolor[16] - Vertex colors for the four vertices.  
+                Arranged so that vcolor[0],vcolor[1],vcolor[2],vcolor[3] - R,G,B,A (respectively) 
+                of top left corner (after top-left corner goes around clockwise).
+        **/
+        void Draw(float x, float y, Uint8 vc[]) const;
+
+        /*!
             \brief Draw Image rotated to screen.
 
             Image is rotated about it's own center by specified angle, then drawn to screen.
@@ -261,6 +274,20 @@ class ZImage
         void DrawRotated(float x, float y, float angle) const;
 
         /*!
+            \brief Draw Image rotated to screen with shaded/colored vertices.
+
+            Image is rotated about it's own center by specified angle, then drawn to screen with shaded or colored vertices.
+            \since 0.8.5
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param angle Angle in degrees to rotate image.
+            \param vc Uint8 vcolor[16] - Vertex colors for the four vertices.  
+                Arranged so that vcolor[0],vcolor[1],vcolor[2],vcolor[3] - R,G,B,A (respectively) 
+                of top left corner (after top-left corner goes around clockwise).
+        **/
+        void DrawRotated(float x, float y, float angle, Uint8 vc[]) const;
+
+        /*!
             \brief Draw Image, clipped within a given rectangle to the screen.
 
             Image is drawn such that only portions of image which fall within a certain area appear.  This clipping rectangle
@@ -272,6 +299,22 @@ class ZImage
             \param clipRect Rectangle to clip within.
         **/
         void DrawClipped(float x, float y, ZRect clipRect) const;
+
+        /*!
+            \brief Draw Image, clipped within a given rectangle to the screen with colored/shaded vertices.
+
+            Image is drawn such that only portions of image which fall within a certain area appear.  This clipping rectangle
+            can be used for areas of the screen which are separated from others such as a splitscreen mode in a game or a 
+            map on a HUD.  Image is drawn with colored/shaded vertices.
+            \since 0.8.5
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param clipRect Rectangle to clip within.
+            \param vc Uint8 vcolor[16] - Vertex colors for the four vertices.  
+                Arranged so that vcolor[0],vcolor[1],vcolor[2],vcolor[3] - R,G,B,A (respectively) 
+                of top left corner (after top-left corner goes around clockwise).
+        **/
+        void DrawClipped(float x, float y, ZRect clipRect, Uint8 vc[]) const;
 
         /*!
             \brief Flip image over one or both axes.
