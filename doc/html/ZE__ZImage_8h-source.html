@@ -7,13 +7,13 @@
 <center>
 <a class="qindex" href="index.html">Main Page</a> &nbsp; <a class="qindex" href="namespaces.html">Namespace List</a> &nbsp; <a class="qindex" href="hierarchy.html">Class Hierarchy</a> &nbsp; <a class="qindex" href="annotated.html">Compound List</a> &nbsp; <a class="qindex" href="files.html">File List</a> &nbsp; <a class="qindex" href="namespacemembers.html">Namespace Members</a> &nbsp; <a class="qindex" href="functions.html">Compound Members</a> &nbsp; <a class="qindex" href="globals.html">File Members</a> &nbsp; </center>
 <hr><h1>/include/ZE_ZImage.h</h1><a href="ZE__ZImage_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre>00001 <span class="comment">/*******************************************************************************</span>
-00002 <span class="comment">         This file is Part of the ZEngine Library for SDL Game Development.</span>
-00003 <span class="comment">                      Copyright (C) 2002 ConceptOfZero.net</span>
+00002 <span class="comment">        This file is Part of the ZEngine Library for 2D game development.</span>
+00003 <span class="comment">                   Copyright (C) 2002, 2003 James Turk</span>
 00004 <span class="comment"></span>
-00005 <span class="comment">             Licensed under the BSD License, see licensing.txt.</span>
+00005 <span class="comment">                     Licensed under a BSD-style license.</span>
 00006 <span class="comment"></span>
-00007 <span class="comment">    The maintainer of this library is James Turk (jturk@conceptofzero.net) </span>
-00008 <span class="comment">         and the home of this Library is http://www.conceptofzero.net/</span>
+00007 <span class="comment">    The maintainer of this library is James Turk (james@conceptofzero.net) </span>
+00008 <span class="comment">     and the home of this Library is http://www.zengine.sourceforge.net</span>
 00009 <span class="comment">*******************************************************************************/</span>
 00010 
 00024 <span class="preprocessor">#ifndef __ze_zimage_h__</span>
@@ -56,39 +56,41 @@
 00126 
 00133         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a7">Attach</a>(SDL_Surface *surface);
 00134 
-00140         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a8">Release</a>();
+00140         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a8">Reload</a>();
 00141 
-00143         <span class="comment">//Graphics//</span>
-00145 <span class="comment"></span>
-00154 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a9">SetColorKey</a>(Uint8 red, Uint8 green, Uint8 blue);
-00155 
-00163         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a10">Flip</a>(<span class="keywordtype">bool</span> horizontal, <span class="keywordtype">bool</span> vertical);
-00164 
-00172         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a11">Stretch</a>(<span class="keywordtype">float</span> xFactor, <span class="keywordtype">float</span> yFactor);
-00173 
-00181         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a12">Resize</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> width, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> height);
-00182 
-00189         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a13">Bind</a>();
-00190 
-00198         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a14">Draw</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);
-00199 
-00208         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a15">DrawRotated</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">float</span> angle);
-00209 
-00211         <span class="comment">//Accessors//</span>
-00213 <span class="comment"></span>
-00220 <span class="comment"></span>        <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZImage.html#a16">IsLoaded</a>();
-00221 
-00227         SDL_Surface *<a class="code" href="classZE_1_1ZImage.html#a17">Surface</a>();
+00147         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a9">Release</a>();
+00148 
+00150         <span class="comment">//Graphics//</span>
+00152 <span class="comment"></span>
+00161 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a10">SetColorKey</a>(Uint8 red, Uint8 green, Uint8 blue);
+00162 
+00170         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a11">Flip</a>(<span class="keywordtype">bool</span> horizontal, <span class="keywordtype">bool</span> vertical);
+00171 
+00179         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a12">Stretch</a>(<span class="keywordtype">float</span> xFactor, <span class="keywordtype">float</span> yFactor);
+00180 
+00188         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a13">Resize</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> width, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> height);
+00189 
+00196         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a14">Bind</a>();
+00197 
+00205         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a15">Draw</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);
+00206 
+00215         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZImage.html#a16">DrawRotated</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">float</span> angle);
+00216 
+00218         <span class="comment">//Accessors//</span>
+00220 <span class="comment"></span>
+00227 <span class="comment"></span>        <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZImage.html#a17">IsLoaded</a>();
 00228 
-00235         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZImage.html#a18">Width</a>();
-00236 
-00243         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZImage.html#a19">Height</a>();
-00244 };
-00245 
-00246 }
-00247 
-00248 <span class="preprocessor">#endif</span>
-</pre></div><hr><address style="align: right;"><small>Generated on Sat Dec 21 23:20:23 2002 for ZEngine by
+00234         SDL_Surface *<a class="code" href="classZE_1_1ZImage.html#a18">Surface</a>();
+00235 
+00242         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZImage.html#a19">Width</a>();
+00243 
+00250         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZImage.html#a20">Height</a>();
+00251 };
+00252 
+00253 }
+00254 
+00255 <span class="preprocessor">#endif</span>
+</pre></div><hr><address style="align: right;"><small>Generated on Sun Dec 29 02:21:35 2002 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>
