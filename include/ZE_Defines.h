@@ -13,7 +13,7 @@
 File: ZE_Defines.h <br>
 Description: Defines header file for ZEngine class, where all #define statements to control compilation options are placed. <br>
 Author(s): James Turk <br>
-$Id: ZE_Defines.h,v 1.2 2002/11/28 23:18:54 cozman Exp $<br>
+$Id: ZE_Defines.h,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_Defines.h
     \brief Define file for ZEngine.
@@ -33,11 +33,9 @@ $Id: ZE_Defines.h,v 1.2 2002/11/28 23:18:54 cozman Exp $<br>
 #define USE_SDL_MIXER
 //! Define to use the Physfs file system.
 //#define USE_PHYSFS
-//! Define to use OpenGL for 2D blits.
-#define USE_OPENGL_2D
 //! Undefine to disable debug streams for Error Handler.
 #define DEBUG_STREAM
 //! Version number.
-#define VERSION "0.7.3"
+#define VERSION "0.7.6"
 
 #endif //__ze_defines_h__

@@ -1,3 +1,16 @@
+A Note From James:
+    I chose to license ZEngine under the most liberal license I could find.
+I really didn't want to think that anybody would steal all the work put into
+this engine and call it their own.  I'd like to know if you're using it, but
+I didn't choose a license that required it, and I'd also like to know what
+you add to it or any problems you find in it, but I'm not going to require
+any of that because there are people that will do that and people that
+won't and I dont think the people that follow the rule follow it simply
+because they have to and the people that violate open source licenses
+aren't bright enough to have anything to contribute anyway.
+
+----------------------------------(begin license)
+
 Copyright (c) James Turk, 2002
 All rights reserved.
 
@@ -23,6 +36,8 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
 ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+--------------------------------------------(end license)
 
 In this distribution all files which fall under the license are marked as such with 
 the following notice:

@@ -13,7 +13,7 @@
 File: ZE_ZFont.cpp <br>
 Description: Implementation source file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.1 2002/11/21 05:41:13 cozman Exp $<br>
+$Id: ZE_ZFont.cpp,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
@@ -31,12 +31,14 @@ namespace ZE
 
 ZFont::ZFont()
 {
+    rFont = NULL;
     rColor.r = rColor.g = rColor.b = rColor.unused = 255;
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;
 }
 
 ZFont::ZFont(string filename, int size)
 {
+    rFont = NULL;
     rColor.r = rColor.g = rColor.b = rColor.unused = 255;
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;
     Open(filename,size);
@@ -55,17 +57,17 @@ void ZFont::Open(string filename, int size)
 
 void ZFont::Release()
 {
-    rEngine->FreeFont(rFont);
+    FreeFont(rFont);
 }
 
 void ZFont::DrawText(string text, ZImage &image)
 {
-    image.Attach(TTF_RenderText_Solid(rFont.font, text.c_str(), rColor));
+    image.Attach(TTF_RenderText_Solid(rFont, text.c_str(), rColor));
 }
 
 void ZFont::DrawShadedText(string text, ZImage &image)
 {
-    image.Attach(TTF_RenderText_Shaded(rFont.font, text.c_str(), rColor, rBGColor));
+    image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
 }
 
 void ZFont::SetColor(Uint8 r, Uint8 g, Uint8 b)
@@ -95,105 +97,105 @@ void ZFont::SetStyle(bool Bold, bool Italic, bool Underline)
     if(!flags)
         flags = TTF_STYLE_NORMAL;
 
-    if(rFont.font)
-        TTF_SetFontStyle(rFont.font,flags);
+    if(rFont)
+        TTF_SetFontStyle(rFont,flags);
     else
-        LogError(FormatStr("ZFont not initialized in ZFont::SetStyle(), filename: %s.",rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::SetStyle.");
 }
 
 void ZFont::Resize(int size)
 {
-    Open(rFont.filename,size);
+    Open(rFilename,size);
 }
 
 bool ZFont::IsLoaded()
 {
-    return rFont.font != NULL;
+    return rFont != NULL;
 }
 
 bool ZFont::IsBold()
 {
-    if(rFont.font)
-        return (TTF_GetFontStyle(rFont.font) & TTF_STYLE_BOLD) > 0;
+    if(rFont)
+        return (TTF_GetFontStyle(rFont) & TTF_STYLE_BOLD) > 0;
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::IsBold(), filename: %s.",rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::IsBold.");
         return false;
     }
 }
 
 bool ZFont::IsItalic()
 {
-    if(rFont.font)
-        return (TTF_GetFontStyle(rFont.font) & TTF_STYLE_ITALIC) > 0;
+    if(rFont)
+        return (TTF_GetFontStyle(rFont) & TTF_STYLE_ITALIC) > 0;
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::IsItalic(), filename: %s.",rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::IsItalic.");
         return false;
     }
 }
 
 bool ZFont::IsUnderlined()
 {
-    if(rFont.font)
-        return (TTF_GetFontStyle(rFont.font) & TTF_STYLE_UNDERLINE) > 0;
+    if(rFont)
+        return (TTF_GetFontStyle(rFont) & TTF_STYLE_UNDERLINE) > 0;
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::IsUnderlined(), filename: %s.",rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::IsUnderlined.");
         return false;
     }
 }
 
-int ZFont::GetHeight()
+int ZFont::Height()
 {
-    if(rFont.font)
-        return TTF_FontHeight(rFont.font);
+    if(rFont)
+        return TTF_FontHeight(rFont);
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::GetHeight(), filename: %s.",rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::GetHeight.");
         return 0;
     }
 }
 
-int ZFont::GetLineSkip()
+int ZFont::LineSkip()
 {
-    if(rFont.font)
-        return TTF_FontLineSkip(rFont.font);
+    if(rFont)
+        return TTF_FontLineSkip(rFont);
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::GetLineSkip(), filename: %s.",rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::GetLineSkip.");
         return 0;
     }
 }
 
-int ZFont::GetStringWidth(string text)
+int ZFont::StringWidth(string text)
 {
     int w,h;
 
-    if(rFont.font)
+    if(rFont)
     {
-        TTF_SizeText(rFont.font,text.c_str(),&w,&h);
+        TTF_SizeText(rFont,text.c_str(),&w,&h);
         return w;
     }
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::GetStringWidth(%s), filename: %s.",text.c_str(),rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::GetStringWidth.");
         return 0;
     }
 }
 
-int ZFont::GetStringHeight(string text)
+int ZFont::StringHeight(string text)
 {
     int w,h;
 
-    if(rFont.font)
+    if(rFont)
     {
-        TTF_SizeText(rFont.font,text.c_str(),&w,&h);
+        TTF_SizeText(rFont,text.c_str(),&w,&h);
         return h;
     }
     else
     {
-        LogError(FormatStr("ZFont not initialized in ZFont::GetStringHeight(%s), filename: %s.",text.c_str(),rFont.filename.c_str()));
+        LogError("ZFont not initialized in ZFont::GetStringHeight.");
         return 0;
     }
 }

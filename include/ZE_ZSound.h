@@ -13,7 +13,7 @@
 File: ZE_ZSound.h <br>
 Description: Header file for core ZEngine Sound Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.h,v 1.1 2002/11/21 05:41:12 cozman Exp $<br>
+$Id: ZE_ZSound.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZSound.h
     \brief Definition file for ZSound.
@@ -39,8 +39,8 @@ namespace ZE
 class ZSound : public ZObject 
 {
     protected:
-        //! Class containing music data and music filename.
-        SoundData rSound;
+        //! Pointer to music data.
+        Mix_Chunk* rSound;
         //! Channel ID Number from SDL_Mixer.
         int rChannelID;
 
@@ -167,7 +167,7 @@ class ZSound : public ZObject
             Get current volume of sound channel represented as a value from 0-128.
             \return Volume of sound channel, 0-128.
         **/
-        int GetVolume();
+        int Volume();
 };
 
 

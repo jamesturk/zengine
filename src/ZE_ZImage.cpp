@@ -11,14 +11,14 @@
 /*!
 \par File Header: 
 File: ZE_ZImage.cpp <br>
-Description: Implementation source file for core ZEngine Image Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZImage.cpp,v 1.2 2002/11/28 23:19:55 cozman Exp $<br>
+Description: Implementation source file for core ZEngine Image or Texture Object. <br>
+Author(s): James Turk, Gamer Tazar <br>
+$Id: ZE_ZImage.cpp,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
 
-    Implementation of ZImage, the basic Image class for ZEngine.
+    Implementation of ZImage, the Image class for ZEngine.
 **/
 
 #include "ZE_ZImage.h"
@@ -28,20 +28,25 @@ namespace ZE
 
 ZImage::ZImage()
 {
+    rImage = NULL;
+    Release();
 }
 
 ZImage::ZImage(string filename)
 {
+    rImage = NULL;
     Open(filename);
 }
 
 ZImage::ZImage(SDL_Surface *surface)
 {
+    rImage = NULL;
     Attach(surface);
 }
 
 ZImage::ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
 {
+    rImage = NULL;
     OpenFromImage(img,x,y,w,h);
 }
 
@@ -52,108 +57,93 @@ ZImage::~ZImage()
 
 void ZImage::Open(string filename)
 {
+    SDL_Surface *image;
+
     Release();
-    rImage = rEngine->LoadImage(filename);
+    image = rEngine->LoadImage(filename.c_str());
+    Attach(image);
 }
 
-void ZImage::OpenFromImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
+void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
 {
-    Uint32 flags;
     SDL_Surface *screen = rEngine->Display();
+    SDL_Surface *cutImg = NULL;
     SDL_Rect rect;
     SDL_VideoInfo *videoInfo;
 
     Release();
-    rImage.filename = "cut from image";
 
     //either set hardware or software surface//
     videoInfo = const_cast<SDL_VideoInfo*>(SDL_GetVideoInfo());
-
-    if(videoInfo->hw_available)
-        flags = SDL_HWSURFACE;
-    else
-        flags = SDL_SWSURFACE;
 
     rect.x = x;
     rect.y = y;
     rect.w = w;
     rect.h = h;
 
-    if(!img)
-        LogError("Invalid Parameter to ZImage::OpenFromImage: img==NULL");
+    if(!image)
+        LogError("Invalid Parameter to ZImage::OpenFromImage.");
 
-    rImage.image = SDL_CreateRGBSurface(flags, rect.w, rect.h, rEngine->BPP(),
+    cutImg = SDL_CreateRGBSurface(0, rect.w, rect.h, rEngine->BPP(),
         screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
 
-    if(!rImage.image)
-        LogError(FormatStr("SDL_CreateRGBSurface failed in ZImage::OpenFromImage: %s",SDL_GetError()));
+    if(!cutImg)
+        LogError(FormatStr("SDL_CreateRGBSurface failed in ZImage::OpenFromImage."));
 
-    SDL_BlitSurface(img,&rect,rImage.image,NULL);
+    SDL_BlitSurface(image,&rect,cutImg,NULL);
+    Attach(cutImg);
 }
 
 void ZImage::Attach(SDL_Surface *surface)
 {
-    Release();
-    rImage.filename = "attached";
-    rImage.image = surface;
+    GLfloat coord[4];
+
+    //Release();
+    if(surface)
+    {
+        rWidth = surface->w;
+        rHeight = surface->h;
+        rTexID = SDL_GL_LoadTexture(surface,coord);
+        rTexMaxX = coord[2];    //ignore first coords because they are always 0.0f
+        rTexMaxY = coord[3];
+        rImage = surface;
+    }
+    else
+        LogError("Invalid surface passed to ZImage::Attach.");
 }
 
 void ZImage::Release()
 {
-    rEngine->FreeImage(rImage);
+    if(glIsTexture(rTexID))
+        glDeleteTextures(1,&rTexID);
+    rTexMaxX = rTexMaxY = 0.0f;
+    rTexID = rWidth = rHeight = 0;
+    FreeImage(rImage);
 }
 
-void ZImage::SetAlpha(Uint8 alpha)
+void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 {
     SDL_Surface *temp=NULL;
+    Uint32 color = SDL_MapRGB(rEngine->Display()->format,red,green,blue);
 
-    if(rImage.image)
+    if(rImage)
     {
-        if(SDL_SetAlpha(rImage.image, SDL_RLEACCEL|SDL_SRCALPHA, alpha) < 0)
-            LogError("Invalid Call to SDL_SetAlpha.");
-        else
-        {
-            //surface conversion//
-            temp = rImage.image;
-            rImage.image  = SDL_DisplayFormat(temp);
-            if(rImage.image)
-            {
-                SDL_FreeSurface(temp);
-                temp = NULL;
-            }
-            else    //can't convert (add error warning here?)
-            {
-                LogError("Alpha surface conversion failed.");
-                rImage.image = temp;
-            }
-        }
-    }
-    else
-        LogError("ZImage not initialized in ZImage::SetAlpha.");
-}
-
-void ZImage::SetColorKey(Uint32 color)
-{
-    SDL_Surface *temp=NULL;
-
-    if(rImage.image)
-    {
-        if(SDL_SetColorKey(rImage.image, SDL_RLEACCEL|SDL_SRCCOLORKEY, color) < 0)
+        if(SDL_SetColorKey(rImage, SDL_SRCCOLORKEY, color) < 0)
             LogError("Invalid Call to SDL_SetColorKey.");
         else
         {
             //surface conversion//
-            temp = rImage.image;
-            rImage.image = SDL_DisplayFormat(temp);
-            if(rImage.image)
+            temp = rImage;
+            rImage = SDL_DisplayFormatAlpha(temp);
+            if(rImage)
             {
-                SDL_FreeSurface(temp);
-                temp = NULL;
+                FreeImage(temp);
+                Attach(rImage); //Rebind new image.
             }
-            else    //can't convert (add error warning here?)
+            else    //can't convert
             {
                 LogError("Surface conversion failed.");
-                rImage.image = temp;
+                rImage = temp;
             }
         }
     }
@@ -161,54 +151,41 @@ void ZImage::SetColorKey(Uint32 color)
         LogError("ZImage not initialized in ZImage::SetColorKey.");
 }
 
-void ZImage::Draw(Sint16 x, Sint16 y)
+void ZImage::Bind()
 {
-    SDL_Rect rect;
+    glBindTexture(GL_TEXTURE_2D, rTexID);
+}
 
-    rect.x = x;
-    rect.y = y;
+void ZImage::Draw(int x, int y)
+{
+    Bind(); 
 
-    if(rImage.image)
-        SDL_BlitSurface(rImage.image,NULL,rEngine->Display(),&rect);
-    else
-        LogError("ZImage not initialized in ZImage::Draw.");
+    glBegin(GL_TRIANGLE_STRIP);
+        glTexCoord2f(0.0f,0.0f);            glVertex2i(x, y);
+        glTexCoord2f(rTexMaxX,0.0f);        glVertex2i(x+rWidth, y);
+        glTexCoord2f(0.0f,rTexMaxY);        glVertex2i(x, y+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2i(x+rWidth, y+rHeight);
+    glEnd();
 }
 
 bool ZImage::IsLoaded()
 {
-    return rImage.image != NULL;
+    return glIsTexture(rTexID) == GL_TRUE;
 }
 
-SDL_Surface *ZImage::GetImage()
+SDL_Surface* ZImage::Surface()
 {
-    return rImage.image;
+    return rImage;
 }
 
-int ZImage::GetWidth()
+int ZImage::Width()
 {
-    if(rImage.image)
-        return rImage.image->w;
-    else
-    {
-        LogError("ZImage not initialized in ZImage::GetWidth.");
-        return 0;
-    }
+    return rWidth;
 }
 
-int ZImage::GetHeight()
+int ZImage::Height()
 {
-    if(rImage.image)
-        return rImage.image->h;
-    else
-    {
-        LogError("ZImage not initialized in ZImage::GetHeight.");
-        return 0;
-    }
-}
-
-string ZImage::GetFilename()
-{
-    return rImage.filename.c_str();
+    return rHeight;
 }
 
 }

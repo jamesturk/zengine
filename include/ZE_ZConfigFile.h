@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -39,17 +39,35 @@ class ZConfigFile : public ZObject
 {
     private:
 
-        /*Private Types*/
+        //Private Types//
+
+
+        /*!
+            \brief ZConfigFile Variable class.
+            
+            ZConfigFile class for mapping a variable name to it's value, stored in string form (later converted to 
+            bool or int if needed).
+        **/
         class ZCF_Variable
         {
             public:
+                //! Variable name.
                 string var;
+                //! Value associated with variable.
                 string val;
         };
+
+        /*!
+            \brief ZConfigFile Section class.
+
+            ZConfigFile class for mapping a section name to a list of variables in that section.
+        **/
         class ZCF_Section
         {
             public:
+                //! Section name.
                 string section;
+                //! STL list of variables.
                 list<ZCF_Variable> varList;
         };
 

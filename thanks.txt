@@ -9,7 +9,7 @@ Everybody Associated with ConceptOfZero.net - Keeping Me Working on ZEngine.
 People on the Opensource.org Mailing list - Helping me figure out what license to use.
     http://opensource.org
 The people at the Kahvi Collective - Providing tons of free Ogg music.
-    http://www.kahvi.org/
+    http://www.kahvi.org
 Sourceforge.net - Providing hosting for the project and CVS.
     http://sourceforge.net
 

@@ -11,14 +11,14 @@
 /*!
 \par File Header:
 File: ZE_ZImage.h <br>
-Description: Header file for core ZEngine Image Object. <br>
-Author(s): James Turk <br>
-$Id: ZE_ZImage.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+Description: Header file for core ZEngine Image and Texture Object. <br>
+Author(s): James Turk, Gamer Tazar <br>
+$Id: ZE_ZImage.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
 
-    Definition file for ZImage, the basic Image class for ZEngine.
+    Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
 **/
 
 #ifndef __ze_zimage_h__
@@ -37,14 +37,25 @@ namespace ZE
 class ZImage : public ZObject
 {
     protected:
-        //!    Class containing image and filename.
-        ImageData rImage;
+        //! Texture X width ratio, used internally by OpenGL.
+        GLfloat rTexMaxX;
+        //! Texture Y width ratio, used internally by OpenGL.
+        GLfloat rTexMaxY;
+        //! Stored texture for future use.
+        SDL_Surface *rImage;
+        //! Texture ID for OpenGL.
+        unsigned int rTexID;
+        //! Current draw width of Texture.
+        unsigned int rWidth;
+        //! Current draw height of Texture.
+        unsigned int rHeight;
+    
     public:
 
         /*!
             \brief Default Constructor.
 
-            Default Constructor, does nothing.
+            Default Constructor, initializes variables.
         **/
         ZImage();
 
@@ -129,20 +140,22 @@ class ZImage : public ZObject
         ////////////
 
         /*!
-            \brief Sets Alpha (transparency) value of Image.
-
-            Set Alpha channel of an Image, only used in 32 bit mode.
-            \param alpha Number 0-255 describing translucency of image. (0 = transparent, 255 = opaque)
-        **/
-        void SetAlpha(Uint8 alpha);
-
-        /*!
             \brief Set Color Key (transparent color) of Image.
 
             Set color which will not be drawn in image.
-            \param color Uint32 color describing color to use as transparent.
+            \param red Red component of colorkey (0-255).
+            \param green Green component of colorkey (0-255).
+            \param blue Blue component of colorkey (0-255).
         **/
-        void SetColorKey(Uint32 color);
+        void SetColorKey(Uint8 red, Uint8 green, Uint8 blue);
+
+        /*!
+            \brief OpenGL related bind call.
+
+            OpenGL related bind call, only available in case you want to bind image in 3D.
+            Draw uses this but the average user should never need to call this.
+        **/
+        void Bind();
 
         /*!
             \brief Draw Image to Screen.
@@ -151,7 +164,7 @@ class ZImage : public ZObject
             \param x X coord to draw Image to.
             \param y Y coord to draw Image to.
         **/
-        void Draw(Sint16 x, Sint16 y);
+        void Draw(int x, int y);
 
         /////////////
         //Accessors//
@@ -170,32 +183,25 @@ class ZImage : public ZObject
             Get SDL_Surface pointer to actual image data.
             \return SDL_Surface* of rImage.
         **/
-        SDL_Surface *GetImage();
+        SDL_Surface *Surface();
 
         /*!
             \brief Get Width.
 
-            Get Width of Image.
+            Get Current Width of Image.
             \return Image Width.
         **/
-        int GetWidth();
+        int Width();
 
         /*!
             \brief Get Height.
 
-            Get Height of Image.
+            Get Current Height of Image.
             \return Image Height.
         **/
-        int GetHeight();
-
-        /*!
-            \brief Get filename of image.
-
-            Get filename of image or if Image doesn't have a specific filename string describing origin of image.
-            \return Image Filename.
-        **/
-        string GetFilename();
+        int Height();
 };
+
 }
 
-#endif //__ze_zimage_h__
+#endif

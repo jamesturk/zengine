@@ -37,15 +37,15 @@ void Test()
 
     //Open and Setup all the Images//
     SDL_Surface *temp;
-    ZImage image1, image2("data/test01.bmp"), image3(image2.GetImage(),20,20,20,20), textImage;
+    ZImage image1, image2("data/test01.bmp"), image3(image2.Surface(),20,20,20,20), textImage;
     ZFont font("data/almontew.ttf",30);
-    
+
     temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
     image1.Attach(temp);    //this attaches the surface into itself
     temp = NULL;    //and temp will now be controlled and freed by image1
-    image1.SetColorKey(engine->MapColor(255,0,255));
-    image2.SetAlpha(75);
-    image2.SetColorKey(engine->MapColor(255,0,255));
+    image1.SetColorKey(255,0,255);
+//    image2.SetAlpha(75);
+    image2.SetColorKey(255,0,255);
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
     font.DrawShadedText("ZImage Test.",textImage);

@@ -1,12 +1,32 @@
-ZEngine Version Log for Version 0.7.5
-$Id: changelog.txt,v 1.2 2002/11/28 23:15:52 cozman Exp $
+ZEngine Version Log for Version 0.7.7
+$Id: changelog.txt,v 1.3 2002/12/01 07:56:17 cozman Exp $
+
+
+0.7.7
+    -Changed behavior of core ZEngine class methods to reflect new OpenGL behavior.
+    -Eliminated certain SDL specific functions, no longer needed with OpenGL render target.
+    -Completely removed old SDL_Image.h and replaced with what had been SDL_ImageGL.h.
+    -Documented new ZImage class as well as ZConfigFile's ZCF_Variable and ZCF_Section.
+    -Fixed memory leak and general failure in new ZImage::OpenFromImage.
+    -Simplified SDL_GL Initialization.
+    -Shortened most lines to reasonable screen width.
+    -Added notice to licensing explaining license choice.
+
+0.7.6
+    -Added ZImageGL, still in testing phase.
+    -Followed up major API changes from 0.7.5 with whole new series of changes:
+        (API from 0.7.x at least 25% rewritten)
+    -Added new /external files for SDL_GL* extensions
+    -Added Macros in ZE_Macros.h
+    -Removed ZE_DataPtr.h
+    -Rewrote warnings in Sound,Music,Font and Image classes.
 
 0.7.5
     -Converted all tabs to spaces.
     -Added CVS lines to files for date tracking.
     -Fixed file layout for CVS and reuploaded files to CVS.
-	-Major API changes (removed "Get" before accessors and changed some functions in ZEngine)
-	-Added Beginnings of OpenGL Render targets
+    -Major API changes (removed "Get" before accessors and changed some functions in ZEngine)
+    -Added Beginnings of OpenGL Render target
 
 0.7.4
     -Modified behavior of ZImage::Attach and changed ZImageTest to use it.

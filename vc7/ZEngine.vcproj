@@ -90,14 +90,14 @@
 		<Filter
 			Name="Source Implementations"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm">
-			<File
-				RelativePath="..\src\ZE_ZEngine.cpp">
-			</File>
 			<Filter
 				Name="Types"
 				Filter="">
 				<File
 					RelativePath="..\src\ZE_ZConfigFile.cpp">
+				</File>
+				<File
+					RelativePath="..\src\ZE_ZEngine.cpp">
 				</File>
 				<File
 					RelativePath="..\src\ZE_ZFont.cpp">
@@ -140,6 +140,9 @@
 			<Filter
 				Name="External">
 				<File
+					RelativePath="..\src\external\SDLGL_Util.cpp">
+				</File>
+				<File
 					RelativePath="..\src\external\physfsrwops.cpp">
 				</File>
 			</Filter>
@@ -162,9 +165,6 @@
 			<Filter
 				Name="Types"
 				Filter="">
-				<File
-					RelativePath="..\include\ZE_DataPtr.h">
-				</File>
 				<File
 					RelativePath="..\include\ZE_ZConfigFile.h">
 				</File>
@@ -196,10 +196,16 @@
 				<File
 					RelativePath="..\include\ZE_Error.h">
 				</File>
+				<File
+					RelativePath="..\include\ZE_Macros.h">
+				</File>
 			</Filter>
 			<Filter
 				Name="External"
 				Filter="">
+				<File
+					RelativePath="..\include\external\SDLGL_Util.h">
+				</File>
 				<File
 					RelativePath="..\include\external\physfsrwops.h">
 				</File>

@@ -81,12 +81,12 @@ void Test()
         if(engine->KeyIsPressed(SDLK_SPACE))
             sample[sampleNum].Play();
         if(engine->KeyIsPressed(SDLK_UP))
-            sample[sampleNum].SetVolume(sample[sampleNum].GetVolume()+1);
+            sample[sampleNum].SetVolume(sample[sampleNum].Volume()+1);
         if(engine->KeyIsPressed(SDLK_DOWN))
-            sample[sampleNum].SetVolume(sample[sampleNum].GetVolume()-1);
+            sample[sampleNum].SetVolume(sample[sampleNum].Volume()-1);
 
 
-        font.DrawText(FormatStr("Volume: %d",sample[sampleNum].GetVolume()),text[4]);
+        font.DrawText(FormatStr("Volume: %d",sample[sampleNum].Volume()),text[4]);
         font.DrawText(FormatStr("Sample: %s",name[sampleNum].c_str()),text[5]);
 
         engine->Clear();    //clear screen

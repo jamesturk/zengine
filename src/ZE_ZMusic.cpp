@@ -13,7 +13,7 @@
 File: ZE_ZMusic.cpp <br>
 Description: Implementation source file for core ZEngine Music Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.cpp,v 1.1 2002/11/21 05:41:13 cozman Exp $<br>
+$Id: ZE_ZMusic.cpp,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZMusic.cpp
     \brief Source file for ZMusic.
@@ -32,10 +32,12 @@ const int ZMusic::LoopInfinite = -1;
 
 ZMusic::ZMusic()
 {
+    rMusic = NULL;
 }
 
 ZMusic::ZMusic(string filename)
 {
+    rMusic = NULL;
     Open(filename);
 }
 
@@ -53,7 +55,7 @@ void ZMusic::Open(string filename)
 void ZMusic::Release()
 {
     Mix_HaltMusic();
-    rEngine->FreeMusic(rMusic);
+    FreeMusic(rMusic);
 }
 
 void ZMusic::Play(int loopNum, int fadeTime)
@@ -61,44 +63,44 @@ void ZMusic::Play(int loopNum, int fadeTime)
     if(Mix_PlayingMusic())    //stop currently playing music
         Mix_HaltMusic();
 
-    if(rMusic.music)
+    if(rMusic)
     {
         if(fadeTime)
-            Mix_FadeInMusic(rMusic.music, loopNum, fadeTime);
+            Mix_FadeInMusic(rMusic, loopNum, fadeTime);
         else
-            Mix_PlayMusic(rMusic.music, loopNum);
+            Mix_PlayMusic(rMusic, loopNum);
     }
     else
-        LogError(FormatStr("ZMusic not initialized in ZMusic::Play(%d,%d), filename: %s.",loopNum,fadeTime,rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::Play.");
 }
 
 void ZMusic::Pause()
 {
-    if(rMusic.music)
+    if(rMusic)
         Mix_PauseMusic();
     else
-        LogError(FormatStr("ZMusic not initialized in ZMusic::Pause(), filename: %s.",rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::Pause.");
 }
 
 void ZMusic::Unpause()
 {
-    if(rMusic.music)
+    if(rMusic)
         Mix_ResumeMusic();
     else
-        LogError(FormatStr("ZMusic not initialized in ZMusic::Unpause(), filename: %s.",rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::Unpause.");
 }
 
 void ZMusic::Rewind()
 {
-    if(rMusic.music)
+    if(rMusic)
         Mix_RewindMusic();
     else
-        LogError(FormatStr("ZMusic not initialized in ZMusic::Rewind(), filename: %s.",rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::Rewind.");
 }
 
 void ZMusic::Stop(int fadeTime)
 {
-    if(rMusic.music)
+    if(rMusic)
     {
         if(fadeTime)
             Mix_FadeOutMusic(fadeTime);
@@ -106,51 +108,51 @@ void ZMusic::Stop(int fadeTime)
             Mix_HaltMusic();
     }
     else
-        LogError(FormatStr("ZMusic not initialized in ZMusic::Stop(%d), filename: %s.",fadeTime,rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::Stop.");
 }
 
 void ZMusic::SetVolume(int volume)
 {
-    if(rMusic.music)
+    if(rMusic)
         Mix_VolumeMusic(volume);
     else
-        LogError(FormatStr("ZMusic not initialized in ZMusic::SetVolume(%d), filename: %s.",volume,rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::SetVolume.");
 }
 
 bool ZMusic::IsLoaded()
 {
-    return rMusic.music != NULL;
+    return rMusic != NULL;
 }
 
 bool ZMusic::IsPlaying()
 {
-    if(rMusic.music)
+    if(rMusic)
         return Mix_PlayingMusic() > 0;
     else
     {
-        LogError(FormatStr("ZMusic not initialized in ZMusic::IsPlaying(), filename: %s.",rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::IsPlaying.");
         return false;
     }
 }
 
 bool ZMusic::IsPaused()
 {
-    if(rMusic.music)
+    if(rMusic)
         return Mix_PausedMusic() > 0;
     else
     {
-        LogError(FormatStr("ZMusic not initialized in ZMusic::IsPaused(), filename: %s.",rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::IsPaused.");
         return false;
     }
 }
 
-int ZMusic::GetVolume()
+int ZMusic::Volume()
 {
-    if(rMusic.music)
+    if(rMusic)
         return Mix_VolumeMusic(-1);
     else
     {
-        LogError(FormatStr("ZMusic not initialized in ZMusic::GetVolume(), filename: %s.",rMusic.filename.c_str()));
+        LogError("ZMusic not initialized in ZMusic::GetVolume.");
         return false;
     }
 }

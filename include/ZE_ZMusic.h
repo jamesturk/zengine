@@ -13,7 +13,7 @@
 File: ZE_ZMusic.h <br>
 Description: Header file for core ZEngine Music Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.h,v 1.1 2002/11/21 05:41:11 cozman Exp $<br>
+$Id: ZE_ZMusic.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZMusic.h
     \brief Definition file for ZMusic.
@@ -39,8 +39,8 @@ namespace ZE
 class ZMusic : public ZObject 
 {
     protected:
-        //! Class containing music data and music filename.
-        MusicData rMusic;
+        //! Pointer to music data.
+        Mix_Music *rMusic;
 
     public:
         //! Static Variable For Infinite loop of sound. (Defined as -1)
@@ -172,7 +172,7 @@ class ZMusic : public ZObject
             Get current volume of music represented as a value from 0-128.
             \return Volume of music, 0-128.
         **/
-        int GetVolume();
+        int Volume();
 };
 
 

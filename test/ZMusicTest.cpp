@@ -83,12 +83,12 @@ void Test()
             if(engine->KeyIsPressed(SDLK_SPACE))
                 song.Play();
             if(engine->KeyIsPressed(SDLK_UP))
-                song.SetVolume(song.GetVolume()+1);
+                song.SetVolume(song.Volume()+1);
             if(engine->KeyIsPressed(SDLK_DOWN))
-                song.SetVolume(song.GetVolume()-1);
+                song.SetVolume(song.Volume()-1);
 
 
-            font.DrawText(FormatStr("Volume: %d",song.GetVolume()),text[3]);
+            font.DrawText(FormatStr("Volume: %d",song.Volume()),text[3]);
 
             engine->Clear();    //clear screen
             for(int i=0; i < 4; i++)

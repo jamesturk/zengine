@@ -13,7 +13,7 @@
 File: ZE_ZTimer.h <br>
 Description: Header file for core ZEngine Timer Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZTimer.h,v 1.1 2002/11/21 05:41:12 cozman Exp $<br>
+$Id: ZE_ZTimer.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZTimer.h
     \brief Definition file for ZTimer.

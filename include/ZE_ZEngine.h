@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.2 2002/11/28 23:18:54 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -24,9 +24,9 @@ $Id: ZE_ZEngine.h,v 1.2 2002/11/28 23:18:54 cozman Exp $<br>
 #ifndef __ze_zengine_h__
 #define __ze_zengine_h__
 
-#include "ZE_DataPtr.h"
 #include "ZE_Error.h"
 #include "ZE_Defines.h"
+#include "ZE_Macros.h"
 #include "ZE_Includes.h"
 
 /*!
@@ -177,26 +177,28 @@ class ZEngine
         void UpdateScreen();
 
         /*!
-            \brief Create Color in SDL Uint32 Format
+            \brief Clear screen to a certain color (Black by default).
 
-            Turn RGBA values into SDL Uint32 color. (Alpha value will be ignored if not in use)
-
-            \param r Red component of color (0-255).
-            \param g Green component of color (0-255).
-            \param b Blue component of color (0-255).
-            \param a Alpha (translucency) component of color (0-255). [Default 255]
-            \return Uint32 of color requested.
+            Clears a rectangle on screen to a color, defaults to solid black.
+            \param red Red component (0.0-1.0) of new color.
+            \param green Green component (0.0-1.0) of new color.
+            \param blue Blue component (0.0-1.0) of new color.
+            \param alpha Alpha component (0.0-1.0) of new color.
         **/
-        Uint32 MapColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a=255);
+        void Clear(float red=0.0f, float green=0.0f, float blue=0.0f, float alpha=1.0f);
+
+    /////////////////////////////
+    //OpenGL Specific Functions//
+    /////////////////////////////
+    public:
 
         /*!
-            \brief Clear screen or portion of screen to a color.
+            \brief Setup OpenGL ortho mode.
 
-            Clears a rectangle on screen to a color.
-            \param color Color to clear surface to, defaults to black.
-            \param rect Rectangle of screen to clear or NULL for entire surface.
+            Sets the OpenGL scaled orthographic mode, called once at beginning, no need to call
+            unless you change the OpenGL mode manually.
         **/
-        void Clear(Uint32 color=0, SDL_Rect *rect=NULL);
+        void SetGL2D();
 
     ////////////////////////////////////////////
     //Timer and Framerate Independent Movement//
@@ -411,17 +413,9 @@ class ZEngine
 
             Loads an Image to an ImageData class which keeps vital information on the Image.
             \param filename path to file to load.
-            \return A ImageData class containing filename and pointer to data.
+            \return A SDL_Surface pointer to data.
         **/
-        ImageData LoadImage(string filename);
-
-        /*!
-            \brief Free an Image.
-
-            Free memory of an Image in an ImageData class.
-            \param image ImageData structure of image to free.
-        **/
-        void FreeImage(ImageData &image);
+        SDL_Surface* LoadImage(string filename);
 
 #ifdef USE_SDL_MIXER
         /*!
@@ -429,34 +423,18 @@ class ZEngine
 
             Loads a Sound to a SoundData class which keeps vital information on the Sound
             \param filename path to file to load.
-            \return A SoundData class containing filename and pointer to data.
+            \return A Mix_Chunk pointer to data.
         **/
-        SoundData LoadSound(string filename);
-
-        /*!
-            \brief Free a Sound.
-
-            Free memory of a Sound in a SoundData class.
-            \param sound SoundData structure of sound to free.
-        **/
-        void FreeSound(SoundData &sound);
+        Mix_Chunk* LoadSound(string filename);
 
         /*!
             \brief Load a Music File
 
             Loads a Music Clip to a MusicData class which keeps vital information on the Music Data
             \param filename path to file to load.
-            \return A MusicData class containing filename and pointer to data.
+            \return A Mix_Music pointer to data.
         **/
-        MusicData LoadMusic(string filename);
-
-        /*!
-            \brief Free a Music Sample.
-
-            Free memory of Music in a MusicData class.
-            \param music MusicData structure of music to free.
-        **/
-        void FreeMusic(MusicData &music);
+        Mix_Music* LoadMusic(string filename);
 #endif
 
 #ifdef USE_SDL_TTF
@@ -466,23 +444,15 @@ class ZEngine
             Loads a Font to a FontData class which keeps vital information on the Font
             \param filename path to file to load.
             \param size point size of font
-            \return A FontData class containing filename and pointer to data.
+            \return A TTF_Font pointer to data.
         **/
-        FontData LoadFont(string filename, int size);
-
-        /*!
-            \brief Free a Font.
-
-            Free memory of a Font in a FontData class.
-            \param font FontData structure of font to free.
-        **/
-        void FreeFont(FontData &font);
+        TTF_Font* LoadFont(string filename, int size);
 #endif 
 
     /////////////
     //Accessors//
     /////////////
-    
+
     public:    
         /*!
             \brief Get Current Display Width.

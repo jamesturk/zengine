@@ -41,15 +41,15 @@ void Test()
     SDL_Rect textRect;
     
     engine->HideCursor();
-    cursor.SetColorKey(engine->MapColor(255,0,255));
+    cursor.SetColorKey(255,0,255);
 
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
     font.DrawText("Mouse Test",text[0]);
     font.DrawShadedText("Mouse Test",text[1]);
     textRect.x = textRect.y = 100;
-    textRect.w = font.GetStringWidth("Mouse Test");
-    textRect.h = font.GetStringHeight("Mouse Test");
+    textRect.w = font.StringWidth("Mouse Test");
+    textRect.h = font.StringHeight("Mouse Test");
 
     do
     {

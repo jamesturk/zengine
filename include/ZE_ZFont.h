@@ -13,7 +13,7 @@
 File: ZE_ZFont.h <br>
 Description: Header file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_ZFont.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
 
     \file ZE_ZFont.h
     \brief Definition file for ZFont.
@@ -40,8 +40,10 @@ namespace ZE
 class ZFont : public ZObject
 {
     protected:
-        //! Class containing font and filename.
-        FontData rFont;
+        //! Pointer to font data.
+        TTF_Font *rFont;
+        //! Filename, for resizing.
+        string rFilename;
         //! SDL_Color for current text color.
         SDL_Color rColor;
         //! SDL_Color for background color to be used in shaded draws. 
@@ -194,7 +196,7 @@ class ZFont : public ZObject
             Check font height as reported by SDL_ttf.
             \return Height of font.
         **/
-        int GetHeight();
+        int Height();
 
         /*!
             \brief Get Line Skip for Font.
@@ -202,7 +204,7 @@ class ZFont : public ZObject
             Check font line skip as reported by SDL_ttf.
             \return Recommended Line Skip of font.
         **/
-        int GetLineSkip();
+        int LineSkip();
 
         /*!
             \brief Get String Width.
@@ -211,7 +213,7 @@ class ZFont : public ZObject
             \param text String to get width of.
             \return Width of String in Current font.
         **/
-        int GetStringWidth(string text);
+        int StringWidth(string text);
 
         /*!
             \brief Get String Height.
@@ -220,7 +222,7 @@ class ZFont : public ZObject
             \param text String to get height of.
             \return Height of String in Current font.
         **/
-        int GetStringHeight(string text);
+        int StringHeight(string text);
 };
 
 }
