@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.44 2003/07/12 01:25:42 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.45 2003/08/01 21:57:32 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -233,13 +233,14 @@ class ZEngine
             \brief Clear screen to a certain color (Black by default).
 
             Clears a rectangle on screen to a color, defaults to solid black.
-            \param red Red component (0.0-1.0) of new color.
-            \param green Green component (0.0-1.0) of new color.
-            \param blue Blue component (0.0-1.0) of new color.
-            \param alpha Alpha component (0.0-1.0) of new color.
+            \param red Red component (0-255) of new color.
+            \param green Green component (0-255) of new color.
+            \param blue Blue component (0-255) of new color.
+            \param alpha Alpha component (0-255) of new color.
         **/
-        void Clear(float red=0.0f, float green=0.0f, float blue=0.0f, float alpha=1.0f);
+        void Clear(Uint8 red=0, Uint8 green=0, Uint8 blue=0, Uint8 alpha=255);
 
+#if GFX_BACKEND == OGL
     /////////////////////////////
     //OpenGL Specific Functions//
     /////////////////////////////
@@ -251,6 +252,7 @@ class ZEngine
             unless you change the OpenGL mode manually.
         **/
         void SetGL2D();
+#endif //GFX_BACKEND
 
     ////////////////////////////////////////////
     //Timer and Framerate Independent Movement//

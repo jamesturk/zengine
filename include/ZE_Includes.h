@@ -24,8 +24,10 @@
 #include "ZE_Defines.h"
 
 #include "SDL.h"
+#if GFX_BACKEND == OGL
 #include "SDL_opengl.h"
 #include "external/SDLGL_Util.h"
+#endif
 #ifdef USE_SDL_IMAGE
 #include "SDL_image.h"
 #endif

@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.19 2003/06/11 00:15:26 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.20 2003/08/01 21:57:32 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -35,6 +35,11 @@ class ZImage
     protected:
         //! Pointer to ZEngine Object
         ZEngine* rEngine;
+        //! Stored texture.
+        SDL_Surface *rImage;
+        //! Stored alpha value for drawing texture.
+        Uint8 rAlpha;
+#if GFX_BACKEND == OGL
         //! Texture lower X, used internally for flip.
         GLfloat rTexMinX;
         //! Texture lower Y, used internally for flip
@@ -43,16 +48,13 @@ class ZImage
         GLfloat rTexMaxX;
         //! Texture Y width ratio, used internally by OpenGL.
         GLfloat rTexMaxY;
-        //! Stored texture for future use.
-        SDL_Surface *rImage;
         //! Texture ID for OpenGL.
         unsigned int rTexID;
         //! Current draw width of Texture.
         unsigned int rWidth;
         //! Current draw height of Texture.
         unsigned int rHeight;
-        //! Stored alpha value for drawing texture.
-        Uint8 rAlpha;
+#endif //GFX_BACKEND == OGL
     
     public:
 
@@ -204,6 +206,47 @@ class ZImage
         void SetColorKey(Uint8 red, Uint8 green, Uint8 blue);
 
         /*!
+            \brief Draw Image to Screen.
+
+            Draw Image to screen at specified location.
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+        **/
+        void Draw(int x, int y) const;
+
+#if GFX_BACKEND == OGL
+        /*!
+            \brief Draw Image to Screen.
+
+            Draw Image to screen at specified location.
+            \since 0.8.3
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+        **/
+        void Draw(float x, float y) const;
+
+        /*!
+            \brief Draw Image rotated to screen.
+
+            Image is rotated about it's own center by specified angle, then drawn to screen.
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param angle Angle in degrees to rotate image.
+        **/
+        void DrawRotated(int x, int y, float angle) const;
+
+        /*!
+            \brief Draw Image rotated to screen.
+
+            Image is rotated about it's own center by specified angle, then drawn to screen.
+            \since 0.8.3
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param angle Angle in degrees to rotate image.
+        **/
+        void DrawRotated(float x, float y, float angle) const;
+
+        /*!
             \brief Flip image over one or both axes.
 
             Flip image vertical and/or horizontal.
@@ -237,46 +280,7 @@ class ZImage
             Draw uses this but the average user should never need to call this.
         **/
         void Bind() const;
-
-        /*!
-            \brief Draw Image to Screen.
-
-            Draw Image to screen at specified location.
-            \param x X coord to draw Image to.
-            \param y Y coord to draw Image to.
-        **/
-        void Draw(int x, int y) const;
-
-        /*!
-            \brief Draw Image to Screen.
-
-            Draw Image to screen at specified location.
-            \since 0.8.3
-            \param x X coord to draw Image to.
-            \param y Y coord to draw Image to.
-        **/
-        void Draw(float x, float y) const;
-
-        /*!
-            \brief Draw Image rotated to screen.
-
-            Image is rotated about it's own center by specified angle, then drawn to screen.
-            \param x X coord to draw Image to.
-            \param y Y coord to draw Image to.
-            \param angle Angle in degrees to rotate image.
-        **/
-        void DrawRotated(int x, int y, float angle) const;
-
-        /*!
-            \brief Draw Image rotated to screen.
-
-            Image is rotated about it's own center by specified angle, then drawn to screen.
-            \since 0.8.3
-            \param x X coord to draw Image to.
-            \param y Y coord to draw Image to.
-            \param angle Angle in degrees to rotate image.
-        **/
-        void DrawRotated(float x, float y, float angle) const;
+#endif //GFX_BACKEND == OGL
 
         /////////////
         //Accessors//

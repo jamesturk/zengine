@@ -22,6 +22,20 @@
 
 //Defines- undefine any of these if you dont have the indicated SDL extension//
 
+/*!
+    \brief Defines for graphics backend selection.
+
+    Various graphics backends, default is OpenGL, but to port to systems with SDL but no OpenGL
+    use of SDL is possible. .
+**/
+enum GFXBackend 
+{ 
+    OGL, /*!< OpenGL 2D Rendering Target.  */
+    SDL  /*!< SDL Rendering Target.  */
+};
+
+//! Define the graphics backend for ZEngine to use. (Options are OGL,SDL,DX)
+#define GFX_BACKEND OGL
 //! Define to include font support.
 #define USE_SDL_TTF
 //! Define to include non-bmp image file support.

@@ -6,7 +6,9 @@
 
 #include "ZE_Includes.h"
 
+#if GFX_BACKEND == OGL
 int power_of_two(int input);
 GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord);
+#endif
 
 #endif //__sdlgl_h__

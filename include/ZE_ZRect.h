@@ -13,7 +13,7 @@
     \brief Definition file for ZRect.
 
     Definition file for ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.h,v 1.11 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.h,v 1.12 2003/08/01 21:57:32 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -32,7 +32,9 @@ namespace ZE
 **/
 class ZRect
 {
-    protected:  
+    protected:
+        //! Pointer to ZEngine Object
+        ZEngine* rEngine;
         //! X Position of top left corner of rectangle.
         float rX;
         //! Y Position of top left corner of rectangle.
