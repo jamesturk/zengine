@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.13 2003/09/24 02:03:18 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.14 2003/10/05 19:59:29 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -85,12 +85,16 @@ void ZFont::Release()
 
 void ZFont::DrawText(std::string text, ZImage &image) const
 {
+    if(text.length() == 0)
+        text = " ";
     image.Attach(TTF_RenderText_Blended(rFont, text.c_str(), rColor));
     image.SetAlpha(rColor.unused);  //the images alpha comes from the SetColor a parameter
 }
 
 void ZFont::DrawShadedText(std::string text, ZImage &image) const
 {
+    if(text.length() == 0)
+        text = " ";
     image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
     image.SetAlpha(rColor.unused);  
 }
