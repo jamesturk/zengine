@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.24 2003/02/10 04:02:38 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.25 2003/02/10 04:55:48 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -66,6 +66,14 @@ ZImage::ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
     OpenFromImage(img,x,y,w,h);
 }
 
+ZImage::ZImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
+{
+    rEngine = ZEngine::GetInstance();
+    rImage = NULL;
+    rAlpha = 255;
+    OpenFromImage(img.Surface(),x,y,w,h);   //call SDL_Surface* version instead of taking the long way
+}
+
 ZImage::~ZImage()
 {
     Release();
@@ -105,6 +113,11 @@ void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sin
 
     SDL_BlitSurface(image,&rect,cutImg,NULL);
     Attach(cutImg);
+}
+
+void ZImage::OpenFromImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
+{
+    OpenFromImage(img.Surface(),x,y,w,h);
 }
 
 void ZImage::Attach(SDL_Surface *surface)

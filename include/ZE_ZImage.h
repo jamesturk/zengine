@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.13 2003/02/10 04:40:16 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.14 2003/02/10 04:55:48 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -94,7 +94,7 @@ class ZImage
         /*!
             \brief Constructor to Construct from part of an SDL_Surface*.
 
-            Constructor is same as calling ZImage::OpenFromImage.
+            Constructor is same as calling ZImage::OpenFromImage with an SDL_Surface*.
     
             \param img Image to take new image from.
             \param x X Coordinate in source of top left corner.
@@ -103,6 +103,19 @@ class ZImage
             \param h Height of new image.
         **/
         ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h);
+
+        /*!
+            \brief Constructor to Construct from part of another ZImage.
+
+            Constructor is same as calling ZImage::OpenFromImage with a ZImage.
+    
+            \param img Image to take new image from.
+            \param x X Coordinate in source of top left corner.
+            \param y Y Coordinate in source of top left corner.
+            \param w Width of new image.
+            \param h Height of new image.
+        **/
+        ZImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h);
 
         /*!
             \brief Destructor, frees memory.
@@ -124,17 +137,30 @@ class ZImage
         void Open(string filename);
 
         /*!
-            \brief Cuts part of an existing image to create the new image.
+            \brief Cuts part of an existing image to create a new image.
 
             Cut part of an SDL_Surface to create a new Image.
     
-            \param img Image to take new image from.
+            \param img SDL_Surface* to take new image from.
             \param x X Coordinate in source of top left corner.
             \param y Y Coordinate in source of top left corner.
             \param w Width of new image.
             \param h Height of new image.
         **/
         void OpenFromImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h);
+
+        /*!
+            \brief Cuts part of an existing ZImage to create a new image.
+
+            Cut part of another ZImage to create a new Image.
+    
+            \param img ZImage to take new image from.
+            \param x X Coordinate in source of top left corner.
+            \param y Y Coordinate in source of top left corner.
+            \param w Width of new image.
+            \param h Height of new image.
+        **/
+        void OpenFromImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint16 h);
 
         /*!
             \brief Attach an existing surface to class.
