@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.52 2003/11/24 02:21:20 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.53 2003/12/14 22:40:00 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -317,7 +317,7 @@ void ZImage::DrawClipped(int x, int y, ZRect clipRect) const
 
 void ZImage::Draw(float x, float y) const
 {
-    //glColor4ub(255,255,255,rAlpha); //sets the color correctly
+    glColor4ub(255,255,255,rAlpha); //sets the color correctly
     Bind();
     glBegin(GL_TRIANGLE_STRIP); //triangle strips, speedier?
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(x,y);
