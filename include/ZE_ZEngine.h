@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.55 2003/11/23 19:30:26 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.56 2003/12/14 22:36:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -86,8 +86,12 @@ class ZEngine
         bool mPaused;
         //! Keep track of if ZEngine should unpause on active event.
         bool mUnpauseOnActive;
+
+#ifdef DEPRECIATED
         //! Value framerate strives to be at, set by SetDesiredFramerate.
         Uint8 mDesiredFramerate;
+#endif //DEPRECIATED
+
         //! Time scheduled for next update (used for framerate locked movement).
         Uint32 mNextUpdate;
         //! Keep track of time game was last paused.
@@ -304,6 +308,7 @@ class ZEngine
         **/
         double GetFramerate();
 
+#ifdef DEPRECIATED
         /*!
             \brief Set Desired Framerate.
 
@@ -323,6 +328,7 @@ class ZEngine
             \return Current setting for desired framerate.
         **/
         Uint8 GetDesiredFramerate();
+#endif //DEPRECIATED
 
         /*!
             \brief Check Engine Paused State.

@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.28 2003/11/24 22:59:18 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.29 2003/12/14 22:35:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -20,7 +20,7 @@ bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
-    int w,h,bpp,rate;
+    int w,h,bpp;
     bool fs;
     std::string title;
 
@@ -29,9 +29,7 @@ bool Initialize()
     bpp = cfg.GetInt("ZImageTest","bpp",32);
     fs = cfg.GetBool("ZImageTest","fullscreen",true);
     title = cfg.GetString("ZImageTest","title","ZImage Test");
-    rate = cfg.GetInt("ZImageTest","framerate",60);
 
-    engine->SetDesiredFramerate(rate);
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -109,7 +107,7 @@ void Test()
 
             engine->Clear();    //clear screen
             //draw the images//
-            alpha += alphaDelta*engine->GetFrameTime();
+            alpha += static_cast<float>(alphaDelta*engine->GetFrameTime());
             if(alpha >= 255 || alpha <= 0)
                 alphaDelta *= -1.0f;
             image1.SetAlpha(static_cast<Uint8>(alpha));
@@ -117,7 +115,7 @@ void Test()
 
 #if (GFX_BACKEND == ZE_OGL)
             image2.DrawRotated(100,0,angle);
-            angle+=(150*engine->GetFrameTime());
+            angle += static_cast<float>(150*engine->GetFrameTime());
             if(angle > 360)
                 angle = 0.0f;
 #elif (GFX_BACKEND == ZE_SDL)

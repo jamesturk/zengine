@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.65 2003/11/24 02:21:20 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.66 2003/12/14 22:36:50 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -29,7 +29,10 @@ ZEngine *ZEngine::sInstance=NULL;
 ZEngine::ZEngine() :
     mScreen(NULL), mFullscreen(true), mInitialized(false),
     mPaused(false), mUnpauseOnActive(false),
-    mDesiredFramerate(0), mNextUpdate(0), mLastPause(0), mPausedTime(0), mLastTime(0),
+#ifdef DEPRECIATED
+    mDesiredFramerate(0), 
+#endif DEPRECIATED
+    mNextUpdate(0), mLastPause(0), mPausedTime(0), mLastTime(0),
     mSecPerFrame(0.0),
     mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
     mMouseX(0), mMouseY(0), mMouseB(0),
@@ -281,6 +284,7 @@ void ZEngine::Update()
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
     mLastTime = GetTime();  
 
+#ifdef DEPRECIATED
     //framerate limiting//
     if(mDesiredFramerate)   
     {
@@ -288,6 +292,7 @@ void ZEngine::Update()
             SDL_Delay(mNextUpdate-mLastTime);
         mNextUpdate = GetTime()+(1000/mDesiredFramerate);
     }
+#endif //DEPRECIATED
 }
 
 #if (GFX_BACKEND == ZE_OGL)
@@ -377,6 +382,8 @@ double ZEngine::GetFramerate()
     return mSecPerFrame ? 1/mSecPerFrame : 0;   //avoid /0
 }
 
+#ifdef DEPRECIATED
+
 void ZEngine::SetDesiredFramerate(Uint8 rate)
 {
     mDesiredFramerate = rate;
@@ -386,6 +393,8 @@ Uint8 ZEngine::GetDesiredFramerate()
 {
     return mDesiredFramerate;
 }
+
+#endif //DEPRECIATED
 
 bool ZEngine::IsPaused()
 {

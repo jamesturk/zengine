@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZParticleTest.cpp,v 1.8 2003/11/24 01:58:23 cozman Exp $*/
+/*$Id: ZParticleTest.cpp,v 1.9 2003/12/14 22:35:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -20,7 +20,7 @@ bool Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
-    int w,h,bpp,rate;
+    int w,h,bpp;
     bool fs;
     std::string title;
 
@@ -29,7 +29,6 @@ bool Initialize()
     bpp = cfg.GetInt("ZParticleTest","bpp",32);
     fs = cfg.GetBool("ZParticleTest","fullscreen",false);
     title = cfg.GetString("ZParticleTest","title","ZParticle Test");
-    rate = cfg.GetInt("ZParticleTest","framerate",60);
 
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
