@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZParticleTest.cpp,v 1.3 2003/08/02 01:18:45 cozman Exp $*/
+/*$Id: ZParticleTest.cpp,v 1.4 2003/08/02 01:32:46 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -76,7 +76,9 @@ void Test()
     effect[2].SetImage("data/particle2.tga");
 
     bg.Open("data/rainbow.bmp");
-    //bg.Resize(engine->DisplayWidth()/2,engine->DisplayHeight());  //gives perspective on alpha on half of screen
+#if (GFX_BACKEND == ZE_OGL)
+    bg.Resize(engine->DisplayWidth()/2,engine->DisplayHeight());  //gives perspective on alpha on half of screen
+#endif
 
     font.DrawText("(P)ause    (U)npause    (C)lear",text[0]);
     font.DrawText("1-3 : Change System Being Controlled",text[1]);
