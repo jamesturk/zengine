@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.31 2003/03/17 04:23:20 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.32 2003/03/17 04:32:21 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -725,15 +725,15 @@ TTF_Font* ZEngine::LoadFont(string filename, int size)
 {
     TTF_Font *font;
 
-//Currently SDL_ttf doesn't support Fonts from a RW
-//#ifdef USE_PHYSFS
-//    SDL_RWops *rw;
-//    rw = PHYSFSRWOPS_openRead(filename.c_str());
-//    fnt.font = TTF_OpenFontRW(rw,0);
-//    SDL_FreeRW(rw);
-//#else
+//As of SDL_ttf 2.0.6 fonts can be loaded from an RWops
+#ifdef USE_PHYSFS
+    SDL_RWops *rw;
+    rw = PHYSFSRWOPS_openRead(filename.c_str());
+    fnt.font = TTF_OpenFontRW(rw,0);
+    SDL_FreeRW(rw);
+#else
     font = TTF_OpenFont(filename.c_str(),size);
-//#endif //USE_PHYSFS
+#endif //USE_PHYSFS
 
     if(!font)
     {
