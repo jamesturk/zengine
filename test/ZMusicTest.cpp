@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMusicTest.cpp,v 1.18 2003/09/24 02:05:56 cozman Exp $*/
+/*$Id: ZMusicTest.cpp,v 1.19 2003/10/21 01:17:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,9 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZMusicTest","title","ZMusic Test");
     rate = cfg.GetInt("ZMusicTest","framerate",60);
 
-    engine->SetupDisplay(w,h,bpp,fs);
-    engine->SetDesiredFramerate(rate);
-    return engine->CreateDisplay(title);
+    return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
 void Test()
@@ -47,8 +45,7 @@ void Test()
     if(!song.IsLoaded())    //this executes if there is no music.ogg file
     {
         engine->Clear();
-        engine->SetupDisplay(800,70,32,false);
-        engine->CreateDisplay("ZMusic Test");
+        engine->CreateDisplay(800,70,32,false,"ZMusic Test");
         font.DrawText("Music.ogg does not exist, please read music.txt.",text[0]);
         text[0].Draw(0,0);
         engine->Update();

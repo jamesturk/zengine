@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.18 2003/10/05 19:20:52 cozman Exp $*/
+/*$Id: ZSoundTest.cpp,v 1.19 2003/10/21 01:17:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,9 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZSoundTest","title","ZSound Test");
     rate = cfg.GetInt("ZSoundTest","framerate",60);
 
-    engine->SetupDisplay(w,h,bpp,fs);
-    engine->SetDesiredFramerate(rate);
-    return engine->CreateDisplay(title);
+    return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
 void Test()

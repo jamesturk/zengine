@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZRectTest.cpp,v 1.19 2003/09/24 02:05:56 cozman Exp $*/
+/*$Id: ZRectTest.cpp,v 1.20 2003/10/21 01:17:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,9 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZRectTest","title","ZRect Test");
     rate = cfg.GetInt("ZRectTest","framerate",60);
 
-    engine->SetupDisplay(w,h,bpp,fs);
-    engine->SetDesiredFramerate(rate);
-    return engine->CreateDisplay(title);
+    return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
 void Test()

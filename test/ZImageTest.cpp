@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.25 2003/09/24 02:05:56 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.26 2003/10/21 01:17:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,16 +31,15 @@ bool Initialize()
     title = cfg.GetString("ZImageTest","title","ZImage Test");
     rate = cfg.GetInt("ZImageTest","framerate",60);
 
-    engine->SetupDisplay(w,h,bpp,fs);
     engine->SetDesiredFramerate(rate);
-    return engine->CreateDisplay(title);
+    return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
 void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
     float angle=0.0f,movDelta;
-    Uint8 alpha=128,alphaDelta=1;
+    float alpha=128.0f,alphaDelta=15.0f;
     SDL_Surface *temp;
 
     //Open and Setup all the Images//
@@ -77,6 +76,7 @@ void Test()
                 image1.Reload();
                 image2.Reload();
                 image3.Reload();
+                image4.Reload();
                 textImage.Reload();
                 engine->SetReloadNeed(false);   //very important for speed, without this you'd be reloading every frame
             }
@@ -109,15 +109,16 @@ void Test()
 
             engine->Clear();    //clear screen
             //draw the images//
-            alpha += alphaDelta;
-            if(alpha == 255 || alpha == 0)
-                alphaDelta *= -1;
-            image1.SetAlpha(alpha);
+            alpha += alphaDelta*engine->GetFrameTime();
+            if(alpha >= 255 || alpha <= 0)
+                alphaDelta *= -1.0f;
+            image1.SetAlpha(static_cast<Uint8>(alpha));
             image1.Draw(0,0);
 
 #if (GFX_BACKEND == ZE_OGL)
             image2.DrawRotated(100,0,angle);
-            if(++angle > 360)
+            angle+=(150*engine->GetFrameTime());
+            if(angle > 360)
                 angle = 0.0f;
 #elif (GFX_BACKEND == ZE_SDL)
             image2.Draw(100,0);

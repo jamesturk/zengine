@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.18 2003/10/05 19:46:04 cozman Exp $*/
+/*$Id: ZMouseTest.cpp,v 1.19 2003/10/21 01:17:35 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -31,9 +31,7 @@ bool Initialize()
     title = cfg.GetString("ZMouseTest","title","ZMouse Test");
     rate = cfg.GetInt("ZMouseTest","framerate",60);
 
-    engine->SetupDisplay(w,h,bpp,fs);
-    engine->SetDesiredFramerate(rate);
-    return engine->CreateDisplay(title);
+    return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
 void Test()
