@@ -13,7 +13,7 @@
 File: ZE_Defines.h <br>
 Description: Defines header file for ZEngine class, where all #define statements to control compilation options are placed. <br>
 Author(s): James Turk <br>
-$Id: ZE_Defines.h,v 1.7 2003/01/19 05:43:40 cozman Exp $<br>
+$Id: ZE_Defines.h,v 1.8 2003/02/16 21:38:49 cozman Exp $<br>
 
     \file ZE_Defines.h
     \brief Define file for ZEngine.
@@ -31,6 +31,8 @@ $Id: ZE_Defines.h,v 1.7 2003/01/19 05:43:40 cozman Exp $<br>
 #define USE_SDL_IMAGE
 //! Define to include sound support.
 #define USE_SDL_MIXER
+//! Define to include net support.
+#define USE_SDL_NET
 //! Define to use the Physfs file system.
 //#define USE_PHYSFS
 //! Version number.

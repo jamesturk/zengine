@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.27 2003/02/02 23:30:15 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.28 2003/02/16 21:38:50 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -238,18 +238,34 @@ bool ZEngine::CreateDisplay(string title, string icon)
     }
 #endif  //USE_SDL_TTF
 
+#ifdef USE_SDL_NET
+    if(!mInitialized)
+    {
+        if(SDLNet_Init() < 0)
+        {
+            ReportError(ZERR_NET_INIT,SDLNet_GetError());
+            status = false; //possible to go on without SDL_Net
+        }
+    }
+#endif //USE_SDL_NET
+
     if(!mInitialized)
         mLastTime = mPausedTime = SDL_GetTicks();
     mActive = true;
     mInitialized = true;    //if it makes it to the end it has been initialized
 
-    return status;  //return true (false will be returned if TTF or Mixer fail)
+    return status;  //return true (false will be returned if TTF or Mixer or Net fail)
 }
 
 void ZEngine::CloseDisplay()
 {
     if(mInitialized)
     {
+
+#ifdef USE_SDL_NET
+        SDLNet_Quit();
+#endif
+
 #ifdef USE_SDL_TTF
         TTF_Quit();
 #endif
@@ -595,6 +611,7 @@ ZErrorCode ZEngine::GetLastError()
 void ZEngine::WriteLog(string str)
 {
     fprintf(mErrlog,str.c_str());
+    fprintf(mErrlog,"\n");
 }
 
 void ZEngine::LogError(ZError error)
