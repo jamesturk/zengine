@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.24 2003/01/26 00:55:52 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.25 2003/01/27 04:33:34 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -30,6 +30,7 @@ ZEngine *ZEngine::sInstance=NULL;
 
 ZEngine::ZEngine()
 {
+    mInitialized = false;
     mWidth = 640;
     mHeight = 480;
     mBPP = 16;
@@ -105,27 +106,34 @@ bool ZEngine::CreateDisplay(string title, string icon)
 {
     Uint32 flags=0;
     SDL_Surface *iconImg;
-    bool status=true;   //status of setup
+    bool status=true;   //status of setup, only true if everything went flawless
     int bpp;
     int rgb_size[3];
 
-    if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
+    if(!mInitialized)
     {
-        ReportError(ZERR_SDL_INIT,SDL_GetError());
-        return false;   //return now, nothing else should be called
+        if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
+        {
+            ReportError(ZERR_SDL_INIT,SDL_GetError());
+            return false;   //return now, nothing else should be called
+        }
     }
     
 #ifdef USE_SDL_MIXER
-    if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
+    if(!mInitialized)
     {
-        ReportError(ZERR_MIX_INIT,SDL_GetError());
-        status = false; //continue setup without sound
+        if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
+        {
+            ReportError(ZERR_MIX_INIT,SDL_GetError());
+            status = false; //continue setup without sound
+        }
     }
 #endif //USE_SDL_MIXER
 
     //set flags and bpp//
     if(mFullscreen)
         flags |= SDL_FULLSCREEN;
+
     if(mBPP != -1 && mBPP != 8 && mBPP != 15 && mBPP != 16 && mBPP != 24 && mBPP !=32)
     {
         ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",mBPP));
@@ -173,7 +181,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, rgb_size[1]);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, rgb_size[2]);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, mBPP==32 ? 24 : mBPP);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, mBPP==32 ? 24 : mBPP);   //use 24 if BPP is 32
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
@@ -182,16 +190,19 @@ bool ZEngine::CreateDisplay(string title, string icon)
 
     flags |= SDL_OPENGL;
 
-    //Window Manager settings//
-    SDL_EnableKeyRepeat(30,30);
-    if(!icon.length())
-        SDL_WM_SetCaption(title.c_str(),NULL);
-    else
+    if(!mInitialized)    //only set these settings the first time
     {
-        SDL_WM_SetCaption(title.c_str(),title.c_str());
-        iconImg = LoadImage(icon);
-        SDL_WM_SetIcon(iconImg,NULL);
-        FreeImage(iconImg);
+        //Default window manager settings//
+        SDL_EnableKeyRepeat(30,30);
+        if(!icon.length())
+            SDL_WM_SetCaption(title.c_str(),NULL);
+        else
+        {
+            SDL_WM_SetCaption(title.c_str(),title.c_str());
+            iconImg = LoadImage(icon);
+            SDL_WM_SetIcon(iconImg,NULL);
+            FreeImage(iconImg);
+        }
     }
 
     //create SDL screen and update settings based on returned screen//
@@ -218,37 +229,47 @@ bool ZEngine::CreateDisplay(string title, string icon)
     mKeyIsPressed = SDL_GetKeyState(NULL);
 
 #ifdef USE_SDL_TTF
-    if(TTF_Init() < 0)
+    if(!mInitialized)
     {
-        ReportError(ZERR_TTF_INIT,TTF_GetError());
-        status = false; //possible to go on without SDL_TTF
+        if(TTF_Init() < 0)
+        {
+            ReportError(ZERR_TTF_INIT,TTF_GetError());
+            status = false; //possible to go on without SDL_TTF
+        }
     }
 #endif  //USE_SDL_TTF
 
-    mLastTime = mPausedTime = SDL_GetTicks();
+    if(!mInitialized)
+        mLastTime = mPausedTime = SDL_GetTicks();
     mActive = true;
+    mInitialized = true;    //if it makes it to the end it has been initialized
 
     return status;  //return true (false will be returned if TTF or Mixer fail)
 }
 
 void ZEngine::CloseDisplay()
 {
+    if(mInitialized)
+    {
 #ifdef USE_SDL_TTF
-    TTF_Quit();
+        TTF_Quit();
 #endif
 
 #ifdef USE_SDL_MIXER
-    Mix_CloseAudio();
+        Mix_CloseAudio();
 #endif
 
 #ifdef USE_PHYSFS
-    PHYSFS_deinit();
+        PHYSFS_deinit();
 #endif
 
-    SDL_Quit();
+        SDL_Quit();
 
-    if(mErrlog != stderr && mErrlog != stdin)
-        fclose(mErrlog);
+        if(mErrlog != stderr && mErrlog != stdin)
+            fclose(mErrlog);
+
+        mInitialized = false;
+    }
 }
 
 void ZEngine::ToggleFullscreen()
@@ -259,10 +280,17 @@ void ZEngine::ToggleFullscreen()
 #else
     SetupDisplay(mWidth,mHeight,mBPP,!mFullscreen);
     SDL_WM_GetCaption(&title,&icon);
-    CreateDisplay(title);
+    if(icon)
+        CreateDisplay(title,icon);
+    else
+        CreateDisplay(title);
 #endif
     SetReloadNeed(true);
-    mActive = true;
+}
+
+bool ZEngine::Initialized()
+{
+    return mInitialized;
 }
 
 SDL_Surface *ZEngine::Display()

@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.17 2003/01/25 19:55:13 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.18 2003/01/27 04:33:34 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -98,6 +98,8 @@ class ZEngine
         int mBPP;
         //! Fullscreen setting of Display
         bool mFullscreen;
+        //! If ZEngine display has been setup.
+        bool mInitialized;
 
 #ifdef USE_SDL_MIXER 
         //! Sound Bitrate
@@ -162,6 +164,15 @@ class ZEngine
             \since 0.8.2
         **/
         void ToggleFullscreen();
+
+        /*!
+            \brief Check state of ZEngine.
+
+            Checks if ZEngine display has been properly setup.
+            \since 0.8.2
+            \return Boolean status of ZEngine, true if CreateDisplay has been successfully called, false if ZEngine has no display.
+        **/
+        bool Initialized();
 
     /////////////////
     //Screen Access//
