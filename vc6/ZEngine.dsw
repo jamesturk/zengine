@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "ZEngine"=".\ZEngine.dsp" - Package Owner=<4>
+Project: "ZEngine"=ZEngine.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -15,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ZFontTest"=".\ZFontTest.dsp" - Package Owner=<4>
+Project: "ZImageTest"=ZImageTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -23,11 +23,14 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "ZImageTest"=".\ZImageTest.dsp" - Package Owner=<4>
+Project: "ZFontTest"=ZFontTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -35,11 +38,14 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "ZMouseTest"=".\ZMouseTest.dsp" - Package Owner=<4>
+Project: "ZTimerTest"=ZTimerTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -47,11 +53,14 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "ZMusicTest"=".\ZMusicTest.dsp" - Package Owner=<4>
+Project: "ZMusicTest"=ZMusicTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -59,11 +68,14 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "ZRectTest"=".\ZRectTest.dsp" - Package Owner=<4>
+Project: "ZSoundTest"=ZSoundTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -71,11 +83,14 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "ZSoundTest"=".\ZSoundTest.dsp" - Package Owner=<4>
+Project: "ZMouseTest"=ZMouseTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -83,11 +98,14 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "ZTimerTest"=".\ZTimerTest.dsp" - Package Owner=<4>
+Project: "ZRectTest"=ZRectTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -95,6 +113,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ZEngine
+    End Project Dependency
 }}}
 
 ###############################################################################

@@ -4,7 +4,7 @@
 
 # TARGTYPE "Win32 (x86) Application" 0x0101
 
-CFG=ZSoundTest - Win32 Debug
+CFG=ZSoundTest - Win32 Release
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,11 +13,10 @@ CFG=ZSoundTest - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "ZSoundTest.mak" CFG="ZSoundTest - Win32 Debug"
+!MESSAGE NMAKE /f "ZSoundTest.mak" CFG="ZSoundTest - Win32 Release"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "ZSoundTest - Win32 Debug" (based on "Win32 (x86) Application")
 !MESSAGE "ZSoundTest - Win32 Release" (based on "Win32 (x86) Application")
 !MESSAGE 
 
@@ -29,35 +28,7 @@ CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "ZSoundTest - Win32 Debug"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "Debug"
-# PROP BASE Intermediate_Dir "Debug"
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 1
-# PROP Output_Dir "Debug"
-# PROP Intermediate_Dir "Debug"
-# PROP Ignore_Export_Lib 0
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /GZ PRECOMP_VC7_TOBEREMOVED /c
-# ADD CPP /nologo /MD /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /GZ PRECOMP_VC7_TOBEREMOVED /c
-# ADD BASE MTL /nologo /win32
-# ADD MTL /nologo /win32
-# ADD BASE RSC /l 0x409
-# ADD RSC /l 0x409
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib sdl.lib sdlmain.lib opengl32.lib sdl_ttf.lib sdl_mixer.lib sdl_image.lib physfs.lib ZEngineSD.lib /nologo /subsystem:windows /pdb:"Debug\ZSoundTest.pdb" /debug /machine:IX86 /out:"..\test\bin\ZSoundTestD.exe" /pdbtype:sept
-# SUBTRACT BASE LINK32 /pdb:none
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib sdl.lib sdlmain.lib opengl32.lib sdl_ttf.lib sdl_mixer.lib sdl_image.lib ZEngineSD.lib /nologo /subsystem:windows /pdb:"Debug\ZSoundTest.pdb" /debug /machine:IX86 /out:"..\test\bin\ZSoundTestD.exe" /pdbtype:sept
-# SUBTRACT LINK32 /pdb:none
-
-!ELSEIF  "$(CFG)" == "ZSoundTest - Win32 Release"
+!IF  "$(CFG)" == "ZSoundTest - Win32 Release"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -68,26 +39,36 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 0
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
-# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /W3 /GX /Zi /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF PRECOMP_VC7_TOBEREMOVED /c
-# ADD CPP /nologo /MD /W3 /GX /Zi /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF PRECOMP_VC7_TOBEREMOVED /c
-# ADD BASE MTL /nologo /win32
-# ADD MTL /nologo /win32
-# ADD BASE RSC /l 0x409
-# ADD RSC /l 0x409
+# ADD BASE CPP /nologo /MD /I "../include" /Zi /W3 /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
+# ADD CPP /nologo /MD /I "../include" /Zi /W3 /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
+# ADD BASE MTL /nologo /win32 
+# ADD MTL /nologo /win32 
+# ADD BASE RSC /l 1033 
+# ADD RSC /l 1033 
 BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
+# ADD BASE BSC32 /nologo 
+# ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib sdl.lib sdlmain.lib opengl32.lib sdl_ttf.lib sdl_mixer.lib sdl_image.lib physfs.lib ZEngineS.lib /nologo /subsystem:windows /debug /machine:IX86 /out:"..\test\bin\ZSoundTest.exe" /pdbtype:sept /opt:ref /opt:icf
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib sdl.lib sdlmain.lib opengl32.lib sdl_ttf.lib sdl_mixer.lib sdl_image.lib ZEngineS.lib /nologo /subsystem:windows /debug /machine:IX86 /out:"..\test\bin\ZSoundTest.exe" /pdbtype:sept /opt:ref /opt:icf
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /out:"..\test\bin\ZSoundTest.exe" /incremental:no /libpath:"../lib" /debug /pdbtype:sept /subsystem:windows /opt:ref /opt:icf /machine:ix86 sdl.lib
+sdlmain.lib
+opengl32.lib
+sdl_ttf.lib
+sdl_mixer.lib
+sdl_image.lib
+ZEngineS.lib
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /out:"..\test\bin\ZSoundTest.exe" /incremental:no /libpath:"../lib" /debug /pdbtype:sept /subsystem:windows /opt:ref /opt:icf /machine:ix86 sdl.lib
+sdlmain.lib
+opengl32.lib
+sdl_ttf.lib
+sdl_mixer.lib
+sdl_image.lib
+ZEngineS.lib
 
-!ENDIF 
+!ENDIF
 
 # Begin Target
 
-# Name "ZSoundTest - Win32 Debug"
 # Name "ZSoundTest - Win32 Release"
 # Begin Source File
 
@@ -95,3 +76,4 @@ SOURCE=..\test\ZSoundTest.cpp
 # End Source File
 # End Target
 # End Project
+

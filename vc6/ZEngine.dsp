@@ -4,7 +4,7 @@
 
 # TARGTYPE "Win32 (x86) Static Library" 0x0104
 
-CFG=ZEngine - Win32 Debug
+CFG=ZEngine - Win32 Release
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,12 +13,11 @@ CFG=ZEngine - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "ZEngine.mak" CFG="ZEngine - Win32 Debug"
+!MESSAGE NMAKE /f "ZEngine.mak" CFG="ZEngine - Win32 Release"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
 !MESSAGE "ZEngine - Win32 Release" (based on "Win32 (x86) Static Library")
-!MESSAGE "ZEngine - Win32 Debug" (based on "Win32 (x86) Static Library")
 !MESSAGE 
 
 # Begin Project
@@ -26,6 +25,7 @@ CFG=ZEngine - Win32 Debug
 # PROP Scc_ProjName ""
 # PROP Scc_LocalPath ""
 CPP=cl.exe
+MTL=midl.exe
 RSC=rc.exe
 
 !IF  "$(CFG)" == "ZEngine - Win32 Release"
@@ -40,60 +40,38 @@ RSC=rc.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD BASE RSC /l 0x409 /d "NDEBUG"
-# ADD RSC /l 0x409 /d "NDEBUG"
+# ADD BASE CPP /nologo /MD /I "../include" /Zi /W4 /WX /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
+# ADD CPP /nologo /MD /I "../include" /Zi /W4 /WX /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
+# ADD BASE MTL /nologo /win32 
+# ADD MTL /nologo /win32 
+# ADD BASE RSC /l 1033 
+# ADD RSC /l 1033 
 BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
+# ADD BASE BSC32 /nologo 
+# ADD BSC32 /nologo 
 LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"../lib\ZEngineS.lib"
+# ADD BASE LIB32 /nologo /out:"..\lib\ZEngineS.lib" 
+# ADD LIB32 /nologo /out:"..\lib\ZEngineS.lib" 
 
-!ELSEIF  "$(CFG)" == "ZEngine - Win32 Debug"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "Debug"
-# PROP BASE Intermediate_Dir "Debug"
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 1
-# PROP Output_Dir "Debug"
-# PROP Intermediate_Dir "Debug"
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD CPP /nologo /MD /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD BASE RSC /l 0x409 /d "_DEBUG"
-# ADD RSC /l 0x409 /d "_DEBUG"
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo /o"../lib/ZEngine.bsc"
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"../lib\ZEngineSD.lib"
-
-!ENDIF 
+!ENDIF
 
 # Begin Target
 
 # Name "ZEngine - Win32 Release"
-# Name "ZEngine - Win32 Debug"
-# Begin Group "Source Files"
+# Begin Group "Source Implementations"
 
-# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
-# Begin Source File
-
-SOURCE=..\src\external\physfsrwops.cpp
-# End Source File
+# PROP Default_Filter "cpp;c;cxx;def;odl;idl;hpj;bat;asm"
 # Begin Source File
 
 SOURCE=..\src\external\SDLGL_Util.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\ZE_ZError.cpp
+SOURCE=..\src\ZE_Utility.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ZE_ZClient.cpp
 # End Source File
 # Begin Source File
 
@@ -102,6 +80,10 @@ SOURCE=..\src\ZE_ZConfigFile.cpp
 # Begin Source File
 
 SOURCE=..\src\ZE_ZEngine.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ZE_ZError.cpp
 # End Source File
 # Begin Source File
 
@@ -118,10 +100,17 @@ SOURCE=..\src\ZE_ZMusic.cpp
 # Begin Source File
 
 SOURCE=..\src\ZE_ZRect.cpp
+
+!IF  "$(CFG)" == "ZEngine - Win32 Release"
+
+# PROP Intermediate_Dir "$(IntDir)/$(InputName)1.obj"
+# ADD CPP /nologo /Fo"$(IntDir)/$(InputName)1.obj" /GX 
+!ENDIF
+
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\ZE_Utility.cpp
+SOURCE=..\src\ZE_ZServer.cpp
 # End Source File
 # Begin Source File
 
@@ -131,14 +120,14 @@ SOURCE=..\src\ZE_ZSound.cpp
 
 SOURCE=..\src\ZE_ZTimer.cpp
 # End Source File
-# End Group
-# Begin Group "Header Files"
-
-# PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=..\include\external\physfsrwops.h
+SOURCE=..\src\external\physfsrwops.cpp
 # End Source File
+# End Group
+# Begin Group "Source Headers"
+
+# PROP Default_Filter "h;hpp;hxx;hm;inl;inc"
 # Begin Source File
 
 SOURCE=..\include\external\SDLGL_Util.h
@@ -146,10 +135,6 @@ SOURCE=..\include\external\SDLGL_Util.h
 # Begin Source File
 
 SOURCE=..\include\ZE_Defines.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\include\ZE_ZError.h
 # End Source File
 # Begin Source File
 
@@ -161,11 +146,19 @@ SOURCE=..\include\ZE_Utility.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\ZE_ZClient.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\ZE_ZConfigFile.h
 # End Source File
 # Begin Source File
 
 SOURCE=..\include\ZE_ZEngine.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\ZE_ZError.h
 # End Source File
 # Begin Source File
 
@@ -181,11 +174,11 @@ SOURCE=..\include\ZE_ZMusic.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\include\ZE_ZObject.h
+SOURCE=..\include\ZE_ZRect.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\include\ZE_ZRect.h
+SOURCE=..\include\ZE_ZServer.h
 # End Source File
 # Begin Source File
 
@@ -199,6 +192,11 @@ SOURCE=..\include\ZE_ZTimer.h
 
 SOURCE=..\include\ZEngine.h
 # End Source File
+# Begin Source File
+
+SOURCE=..\include\external\physfsrwops.h
+# End Source File
 # End Group
 # End Target
 # End Project
+
