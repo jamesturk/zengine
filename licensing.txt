@@ -1,3 +1,7 @@
+This file describes licensing for ZEngine, libs which ZEngine is dependent upon
+upon have their own licenses, see readme.txt,lgpl.txt and dependencies.txt for
+more info.
+
 A Note From James:
     I chose to license ZEngine under the most liberal license I could find.
 I really didn't want to think that anybody would steal all the work put into

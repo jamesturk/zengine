@@ -34,8 +34,11 @@ in mingw or cygwin you can change the linux makefile to suit your needs.
 and others) as well as the path to ZEngine before building.
 -If you are using gcc on any OS you need to change configure (not the
 makefile) to meet your needs then run make.
+
+See dependencies.txt for information on obtaining the dependencies.
+
 If you are having a problem building ask at 
-http://www.conceptofzero.net/forums/index.php?act=SF&f=15
+http://www.conceptofzero.net/index.php?name=PNphpBB2&file=viewforum&f=4
 ------------------------------------------------------------
 IV. Using ZEngine:
 
@@ -51,9 +54,10 @@ V. Legal Overview:
 
 The world of open source licenses can be confusing, if you are not familiar 
 with the LGPL I recommend reading it, as most libraries ZEngine makes use of
-are licensed under it.  ZEngine itself has no real restrictions on use, and is
-under the OSI-certified BSD license (see licensing.txt). Below are quick
-guides of how you would distribute various packages making use of ZEngine.
+are licensed under it. (LGPL.txt is included) ZEngine itself has no real 
+restrictions on use, and is under the OSI-certified BSD license 
+(see licensing.txt). Below is a quick guide to how you would distribute 
+a package making use of ZEngine.
 
 Closed-Source Application using ZEngine:
     (see licensing-template.txt)
@@ -61,14 +65,14 @@ Closed-Source Application using ZEngine:
     -Include notice of which libraries you used, and have a place for user to
     dowload them from your website.
     -If you are using non-LGPL libraries there may be other requirements.
-    (Open-Source applications do not need to have a link to a download for
-    LGPL-licensed libraries.)
 
 (licensing-template.txt is included to help you comply with the LGPL)
 
+See dependencies.txt for information on source to the dependencies.
+
 Adding to ZEngine:
-    -This can currently be done with no restrictions, but we do ask that 
-    you submit your changes back to the community.
+    -This can currently be done with no restrictions, but I do ask that 
+    you submit your changes back to the community if possible.
 ------------------------------------------------------------
 History of ZEngine:
     The changelog may not show it but 0.1 to 0.6 were some of the biggest 

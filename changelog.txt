@@ -1,9 +1,9 @@
 ZEngine Version Log for Version 0.8.4
-$Id: changelog.txt,v 1.39 2003/07/12 02:47:44 cozman Exp $
+$Id: changelog.txt,v 1.40 2003/07/12 09:22:13 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
-* is code that breaks backwards compatibility but defining DEPRECIATED preserves compatibility for.
+* is code that breaks backwards compatibility but for which defining DEPRECIATED preserves compatibility.
 + is added features
 - is removed features
 # is changed features
@@ -12,6 +12,7 @@ Changes are marked with symbols that describe them:
     ! Removed Rand* functions from ZEngine and replaced with overloaded Rand.
     ! Moved versioning information and changed format.
     * Changed ZEngine members Width-->DisplayWidth, Height-->DisplayHeight, and BPP-->DisplayDepth.
+    + Added more information on dependencies and obtaining them.
     + Added comment & newline support to ZConfigFile.
     + Added particle system example program.
     + Added simple particle system implemented on top of base.
