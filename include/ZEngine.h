@@ -4,7 +4,7 @@
 
     Header file for ZEngine Game Engine from Concept of Zero, this is the file that programs that wish to 
     utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.26 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.27 2003/07/10 19:19:19 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -27,7 +27,7 @@
     to have no leaks.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website : http://zengine.sourceforge.net/.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine tutorials : http://conceptofzero.net/tutorials/zengine/.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine forums : http://www.conceptofzero.net/forums/index.php?act=SF&f=15
+    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine forums : http://www.conceptofzero.net/index.php?name=PNphpBB2&file=viewforum&f=4
     
     \section Licensing Licensing
     <br>
@@ -57,6 +57,9 @@
 #include "ZE_ZTimer.h"
 #include "ZE_ZConfigFile.h"
 #include "ZE_ZRect.h"
+#include "ZE_ZRandGen.h"
+#include "ZE_ZBaseParticleSystem.h"
+#include "ZE_ZSimpleParticleSystem.h"
 #ifdef USE_SDL_TTF
 #include "ZE_ZFont.h"
 #endif
