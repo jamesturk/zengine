@@ -1,11 +1,12 @@
 ZEngine Version Log for Version 0.8.0-rc3
-$Id: changelog.txt,v 1.13 2002/12/21 09:10:09 cozman Exp $
+$Id: changelog.txt,v 1.14 2002/12/21 20:36:24 cozman Exp $
 
 0.8.0-rc3
     -Fixed MAJOR memory leak when using ZImage::Attach, and in ZFont.
     -Updated ZEngine web info. (mostly in rc2)
     -Fixed time based movement and some compile time warnings in ZRectTest.cpp.
     -Added gamedev.net to thanks.txt.
+    -Fixed documentation in ZE_ZImage.h
 
 0.8.0-rc2
     -Added path stripping to ZEngine.linux.doxygen.
