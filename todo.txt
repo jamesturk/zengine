@@ -1,5 +1,5 @@
 ZEngine Todo List
-    -Net Example (waiting on finalized net classes)
+    -DevC++ project files
     -Add Support for PhysFS in ZMusic.  (Waiting on SDL_mixer.)
     -ZSprite class (using XML layout?)
     -Entirely New ZFont class, using display lists (possible)
