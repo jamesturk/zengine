@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.4 2002/12/03 06:19:43 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.5 2002/12/04 23:58:54 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -325,7 +325,7 @@ class ZEngine
         /*!
             \brief Find the state of a key.
 
-            Function returns true/false based on if key is <u>currently</u> pressed or not.
+            Function returns true/false based on if key is currently pressed or not.
             \param key Code of key to find status of.
             \return State of requested key.
         **/
