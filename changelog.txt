@@ -1,13 +1,19 @@
 ZEngine Version Log for Version 0.8.2
-$Id: changelog.txt,v 1.29 2003/02/10 05:44:52 cozman Exp $
+$Id: changelog.txt,v 1.30 2003/04/27 18:37:39 cozman Exp $
 
-0.8.3
+0.8.3 
+    -Fixed minor bugs in ZImage, allowing Gewi to work properly.
+    -Added loading of fonts from withen an archive via PhysFS (needs SDL_ttf 2.0.6)
+    -Changed behavior of ZImage::Bind to work with blending.
+    -Fixed timer problems when used before ZEngine::Update.
+    -Updated ZError for ZServer & ZClient.
+    -Simple ZServer and ZClient classes using SDL_net.
     -Fixed ZImage::SetColorKey. (thanks to Kevin Watters)
     -Added floats to ZConfigFile.
     -Removed ZObject inheritance hierarchy and made classes inheritance-safe.
     -Added ZImage<-->ZImage drawing in OpenFromImage.
     -Added ZImage::Draw(int,int) and ZImage::DrawRotated(float,float,float).
-    -New ZRect constructor (from SDL_Rect).
+    -New ZRect constructor (construct from SDL_Rect).
 
 0.8.2
     -Added ZImage::SetAlpha and example in ZImageTest.
