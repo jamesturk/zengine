@@ -13,7 +13,7 @@
 File: ZE_ZError.h <br>
 Description: Header file for ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.4 2003/01/16 05:46:39 cozman Exp $<br>
+$Id: ZE_ZError.h,v 1.5 2003/01/26 00:55:52 cozman Exp $<br>
 
     \file ZE_ZError.h
     \brief Definition file for ZError.
@@ -66,7 +66,7 @@ class ZError
 {
     protected:
         //! Static Array of Error Identifiers
-        static string sErrorDesc[ZERR_LAST];
+        static string *sErrorDesc;
         //! Error ID.
         ZErrorCode rCode;
         //! Error Description.
@@ -77,6 +77,20 @@ class ZError
         unsigned int rLine;
 
     public:
+        /*!
+            \brief Construct string table for error strings.
+
+            Constructs a string table for errors, enabling ZEngine to properly delete the table on exit.
+        **/
+        static void CreateStringTable();
+
+        /*!
+            \brief Destroy string table of error strings.
+
+            Properly delete the string table, freeing all memory used by the strings.
+        **/
+        static void DestroyStringTable();
+
         /*!
             \brief Default constructor for ZError.
 

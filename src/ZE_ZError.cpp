@@ -13,7 +13,7 @@
 File: ZE_ZError.cpp <br>
 Description: Implementation source file for core ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.cpp,v 1.2 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZError.cpp,v 1.3 2003/01/26 00:55:52 cozman Exp $<br>
 
     \file ZE_ZError.cpp
     \brief Source file for ZError.
@@ -26,16 +26,39 @@ $Id: ZE_ZError.cpp,v 1.2 2003/01/16 05:45:58 cozman Exp $<br>
 namespace ZE
 {
 
-string ZError::sErrorDesc[] = 
+string *ZError::sErrorDesc = NULL; 
+
+
+void ZError::CreateStringTable()
 {
-    "No Error. [%s]",
-    "SDL Error. [%s]",
-    "Error Initializing SDL: %s", "Error Initializing SDL_mixer: %s", "Error Initializing SDL_ttf: %s",
-    "Error Creating Display: %s",
-    "Failed to load Image: %s", "Failed to load Sound: %s", "Failed to load Music: %s", "Failed to load Font: %s", 
-    "Called ZImage::%s with no Image loaded.", "Called ZSound::%s with no Sound loaded.", 
-    "Called ZMusic::%s with no Music loaded.", "Called ZFont::%s with no Font loaded."
-};
+    if(!sErrorDesc)
+    {
+        sErrorDesc = new string[ZERR_LAST]; 
+        sErrorDesc[ZERR_NONE] = "No Error. [%s]";
+        sErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
+        sErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
+        sErrorDesc[ZERR_MIX_INIT] = "Error Initializing SDL_mixer: %s";
+        sErrorDesc[ZERR_TTF_INIT] = "Error Initializing SDL_ttf: %s";
+        sErrorDesc[ZERR_VIDMODE] = "Error Creating Display: %s";
+        sErrorDesc[ZERR_LOAD_IMAGE] = "Failed to load Image: %s";
+        sErrorDesc[ZERR_LOAD_SOUND] = "Failed to load Sound: %s"; 
+        sErrorDesc[ZERR_LOAD_MUSIC] = "Failed to load Music: %s";
+        sErrorDesc[ZERR_LOAD_FONT] = "Failed to load Font: %s";
+        sErrorDesc[ZERR_NOIMAGE] = "Called ZImage::%s with no Image loaded.";
+        sErrorDesc[ZERR_NOSOUND] = "Called ZSound::%s with no Sound loaded.";
+        sErrorDesc[ZERR_NOMUSIC] = "Called ZMusic::%s with no Music loaded.";
+        sErrorDesc[ZERR_NOFONT] = "Called ZFont::%s with no Font loaded.";
+    }
+}
+
+void ZError::DestroyStringTable()
+{
+    if(sErrorDesc)
+    {
+        delete []sErrorDesc;
+        sErrorDesc = NULL;
+    }
+}
 
 ZError::ZError(ZErrorCode code, string desc, string file, int line)
 {

@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.23 2003/01/25 19:55:13 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.24 2003/01/26 00:55:52 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -56,6 +56,7 @@ ZEngine::ZEngine()
     mNextUpdate = mLastPause = mPausedTime = mLastTime = 0;
     mSecPerFrame = 0.0;
 
+    ZError::CreateStringTable();
     mLogAllErrors = true;
     mErrlog = stderr;
 }
@@ -72,6 +73,7 @@ void ZEngine::ReleaseInstance()
 {
     if(sInstance)
     {
+        ZError::DestroyStringTable();
         sInstance->CloseDisplay();
         delete sInstance;
     }
