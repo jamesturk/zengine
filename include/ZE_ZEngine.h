@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.36 2003/06/06 18:55:58 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.37 2003/06/07 00:34:43 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -39,7 +39,7 @@ namespace ZE
     \brief Main ZEngine Singleton Class
 
     ZEngine Singleton Class, accessible from anywhere in a ZEngine-based program by nature.  Controls core elements of program and does 
-    majority of SDL wrapping.  Also keeps track of loaded data and helps programs avoid memory leaks and dangling pointers.
+    majority of SDL and OpenGL wrapping.
 **/
 class ZEngine
 {
