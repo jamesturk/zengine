@@ -37,7 +37,6 @@ opengl32.lib
 sdl_ttf.lib
 sdl_mixer.lib
 sdl_image.lib
-physfs.lib
 ZEngineSD.lib"
 				OutputFile="../test/bin/ZFontTestD.exe"
 				LinkIncremental="2"
@@ -90,7 +89,6 @@ opengl32.lib
 sdl_ttf.lib
 sdl_mixer.lib
 sdl_image.lib
-physfs.lib
 ZEngineS.lib"
 				OutputFile="../test/bin/ZFontTest.exe"
 				LinkIncremental="1"

@@ -37,7 +37,6 @@ opengl32.lib
 sdl_ttf.lib
 sdl_mixer.lib
 sdl_image.lib
-physfs.lib
 ZEngineSD.lib"
 				OutputFile="../test/bin/ZTimerTestD.exe"
 				LinkIncremental="2"
@@ -89,7 +88,6 @@ opengl32.lib
 sdl_ttf.lib
 sdl_mixer.lib
 sdl_image.lib
-physfs.lib
 ZEngineS.lib"
 				OutputFile="../test/bin/ZTimerTest.exe"
 				LinkIncremental="1"
