@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.32 2003/03/17 04:32:21 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.33 2003/03/17 19:04:47 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -319,7 +319,6 @@ void ZEngine::Update()
 {
     SDL_GL_SwapBuffers();
 
-    WriteLog(FormatStr("mSec = %f \t mLastTime=%d",mSecPerFrame,mLastTime));
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
     mLastTime = GetTime();
 
@@ -725,7 +724,6 @@ TTF_Font* ZEngine::LoadFont(string filename, int size)
 {
     TTF_Font *font;
 
-//As of SDL_ttf 2.0.6 fonts can be loaded from an RWops
 #ifdef USE_PHYSFS
     SDL_RWops *rw;
     rw = PHYSFSRWOPS_openRead(filename.c_str());
