@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.6 2002/12/12 02:50:35 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.7 2002/12/27 03:15:33 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -268,8 +268,9 @@ class ZEngine
     ////////////////////////////
     //Event and Input Handling//
     ////////////////////////////
-
     private:
+        //! bool which is only set to true if the engine thinks the images need to be reloaded (loss of focus in fullscreen).
+        bool mNeedReload;
         //! bool describing Active or Inactive State of Game
         bool mActive;
         //! bool for checking if a Quit event has been detected
@@ -310,6 +311,21 @@ class ZEngine
             \return bool telling if quit has been requested.
         **/
         bool QuitRequested();
+
+        /*!
+            \brief Set State of ImagesNeedReload.
+            \param state False if images need to be reloaded, True if images have been reloaded.
+        **/
+        void SetReloadNeed(bool state);
+
+        /*!
+            \brief Find out if images should be reloaded.
+
+            Function that is good to call every frame to check if images should be reloaded, usually only caused by loss of focus in 
+            fullscreen.
+            \return bool, True if images should be reloaded, false otherwise.
+        **/
+        bool ImagesNeedReload();
         
         /*!
             \brief Set Key repeat rate.

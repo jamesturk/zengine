@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.7 2002/12/12 02:50:35 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.8 2002/12/27 03:15:33 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -39,6 +39,7 @@ ZEngine::ZEngine()
     mRate = 22050;
     mStereo = false;
 #endif
+    mNeedReload = false;
 
     mScreen = NULL;
 
@@ -298,6 +299,16 @@ bool ZEngine::QuitRequested()
     return mQuit;
 }
 
+void ZEngine::SetReloadNeed(bool state)
+{
+    mNeedReload = state;
+}
+
+bool ZEngine::ImagesNeedReload()
+{
+    return mNeedReload;
+}
+
 void ZEngine::SetKeyRepeatRate(int rate)
 {
     SDL_EnableKeyRepeat(rate,rate);
@@ -368,6 +379,8 @@ void ZEngine::CheckEvents()
                         mActive = true;
                         if(mUnpauseOnActive)
                             UnpauseTimer();
+                        if(mFullscreen)
+                            mNeedReload = true;
                     }
                     else
                     {

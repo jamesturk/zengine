@@ -24,7 +24,7 @@ void Initialize()
     w = cfg.GetInt("ZImageTest","width",800);
     h = cfg.GetInt("ZImageTest","height",600);
     bpp = cfg.GetInt("ZImageTest","bpp",32);
-    fs = cfg.GetBool("ZImageTest","fullscreen",false);
+    fs = cfg.GetBool("ZImageTest","fullscreen",true);
     title = cfg.GetString("ZImageTest","title","ZImage Test");
 
     engine->SetupDisplay(w,h,bpp,fs);
@@ -38,22 +38,39 @@ void Test()
 
     //Open and Setup all the Images//
     SDL_Surface *temp;
-    ZImage image1, image2("data/test01.bmp"), image3(image2.Surface(),5,5,20,20), textImage;
+    ZImage image1, image2, image3, textImage;
     ZFont font("data/almontew.ttf",30);
 
-    temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
-    image1.Attach(temp);    //this attaches the surface into itself
-    temp = NULL;    //and temp will now be controlled and freed by image1
-    image1.SetColorKey(255,0,255);
-    image2.SetColorKey(255,0,255);
+    engine->SetReloadNeed(true);    //start off needing the reload
+
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
-    font.DrawShadedText("ZImage Test.",textImage);
 
     do
     {
         //In the active loop, check events first//
         engine->CheckEvents();
+
+        if(engine->ImagesNeedReload())
+        {
+            temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
+            image1.Attach(temp);    //this attaches the surface into itself
+            image2.Open("data/test01.bmp");
+            image3.OpenFromImage(image2.Surface(),5,5,20,20);
+            temp = NULL;    //and temp will now be controlled and freed by image1
+            image1.SetColorKey(255,0,255);
+            image2.SetColorKey(255,0,255);
+            font.DrawShadedText("ZImage Test.",textImage);
+            engine->SetReloadNeed(false);   //very important for speed, without this you'd be reloading every frame
+        }
+
+        if(engine->KeyIsPressed(SDLK_s))
+        {
+            //code to toggle screen//
+            engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
+            engine->CreateDisplay("ZImage Test");
+            engine->SetReloadNeed(true);
+        }
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();
 
