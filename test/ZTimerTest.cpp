@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZTimerTest.cpp,v 1.20 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZTimerTest.cpp,v 1.21 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -29,6 +29,8 @@ bool Initialize()
     bpp = cfg.GetInt("ZTimerTest","bpp",32);
     fs = cfg.GetBool("ZTimerTest","fullscreen",false);
     title = cfg.GetString("ZTimerTest","title","ZTimer Test");
+
+    engine->SetResourceFile("resources.zrf");
 
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
@@ -118,6 +120,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }

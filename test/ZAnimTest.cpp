@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZAnimTest.cpp,v 1.1 2003/12/16 00:30:36 cozman Exp $*/
+// $Id: ZAnimTest.cpp,v 1.2 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -36,10 +36,12 @@ bool Initialize()
 void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
-    ZFont font("data/axaxax.ttf",20);
+    ZFont font;
     ZImage srcImg,tankImg[8],text[2];
     ZAnimation tank[8];
     int i;
+
+    font.OpenFromZRF("default");
 
     srcImg.OpenFromZip("data/data.zip","tank.bmp");
     for(i=0; i < 8; ++i)
@@ -87,6 +89,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }

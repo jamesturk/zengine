@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZFontTest.cpp,v 1.19 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZFontTest.cpp,v 1.20 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -30,6 +30,8 @@ bool Initialize()
     fs = cfg.GetBool("ZFontTest","fullscreen",false);
     title = cfg.GetString("ZFontTest","title","ZFont Test");
 
+    engine->SetResourceFile("resources.zrf");
+
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -39,9 +41,10 @@ void Test()
 
     //Open and Setup all the Fonts and Create Images//
     ZImage text[6];
-    ZFont almonte("data/almontew.ttf",48), axaxax("data/axaxax.ttf",32), betsy;//("data/betsy.ttf",64);
+    ZFont almonte, axaxax("data/axaxax.ttf",32), betsy;
+    almonte.OpenFromZRF("default");
+    almonte.Resize(48);
     betsy.OpenFromZip("data/data.zip","betsy.ttf",20);
-    betsy.Resize(64);
     almonte.SetColor(255,0,0,128);
     almonte.DrawText("This is the font test.",text[0]);
     axaxax.SetColor(0,255,255);
@@ -80,6 +83,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }

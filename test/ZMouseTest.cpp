@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMouseTest.cpp,v 1.21 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZMouseTest.cpp,v 1.22 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -30,6 +30,8 @@ bool Initialize()
     fs = cfg.GetBool("ZMouseTest","fullscreen",false);
     title = cfg.GetString("ZMouseTest","title","ZMouse Test");
 
+    engine->SetResourceFile("resources.zrf");
+
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -39,9 +41,11 @@ void Test()
 
     //Open and Setup all the Images//
     ZImage text[3], cursor("data/cursor.bmp");
-    ZFont font("data/almontew.ttf",30);
+    ZFont font;
     SDL_Rect textRect;
     
+    font.OpenFromZRF("default");
+
     engine->HideCursor();
     cursor.SetColorKey(255,0,255);
 
@@ -50,8 +54,8 @@ void Test()
     font.DrawText("Mouse Test",text[0]);
     font.DrawShadedText("Mouse Test",text[1]);
     textRect.x = textRect.y = 100;
-    textRect.w = font.StringWidth("Mouse Test");
-    textRect.h = font.StringHeight("Mouse Test");
+    textRect.w = font.CalcStringWidth("Mouse Test");
+    textRect.h = font.CalcStringHeight("Mouse Test");
 
     do
     {
@@ -76,7 +80,7 @@ void Test()
 
             engine->Clear();    //clear screen
             //draw the images//
-            text[engine->MouseInRect(&textRect)].Draw(100,100);
+            text[engine->MouseInRect(textRect)].Draw(100,100);
             text[2].Draw(0,0);
             cursor.Draw(engine->MouseX()-8,engine->MouseY()-8);
 
@@ -90,6 +94,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMusicTest.cpp,v 1.21 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZMusicTest.cpp,v 1.22 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -43,8 +43,8 @@ void Test()
 
     if(!song.IsLoaded())    //this executes if there is no music.ogg file
     {
-        engine->Clear();
         engine->CreateDisplay(800,70,32,false,"ZMusic Test");
+        engine->Clear();
         font.DrawText("Music.ogg does not exist, please read music.txt.",text[0]);
         text[0].Draw(0,0);
         engine->Update();
@@ -83,12 +83,12 @@ void Test()
                 if(engine->KeyIsPressed(SDLK_SPACE))
                     song.Play();
                 if(engine->KeyIsPressed(SDLK_UP))
-                    song.SetVolume(song.Volume()+1);
+                    song.SetVolume(song.GetVolume()+1);
                 if(engine->KeyIsPressed(SDLK_DOWN))
-                    song.SetVolume(song.Volume()-1);
+                    song.SetVolume(song.GetVolume()-1);
 
 
-                font.DrawText(FormatStr("Volume: %d",song.Volume()),text[3]);
+                font.DrawText(FormatStr("Volume: %d",song.GetVolume()),text[3]);
 
                 engine->Clear();    //clear screen
                 for(int i=0; i < 4; i++)
@@ -103,6 +103,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }

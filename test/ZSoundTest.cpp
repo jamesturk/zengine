@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.21 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZSoundTest.cpp,v 1.22 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -30,6 +30,8 @@ bool Initialize()
     fs = cfg.GetBool("ZSoundTest","fullscreen",false);
     title = cfg.GetString("ZSoundTest","title","ZSound Test");
 
+    engine->SetResourceFile("resources.zrf");
+
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -45,7 +47,7 @@ void Test()
 
     for(int i=0; i < 4; i++)
         sample[i].OpenFromZip("data/data.zip",FormatStr("%s.wav",name[i].c_str()));
-    sample[4].Open("data/whip.wav");
+    sample[4].OpenFromZRF("whip");
 
 
     font.DrawText("(P)ause\t(U)npause",text[0]);
@@ -82,11 +84,11 @@ void Test()
             if(engine->KeyIsPressed(SDLK_SPACE))
                 sample[sampleNum].Play();
             if(engine->KeyIsPressed(SDLK_UP))
-                sample[sampleNum].SetVolume(sample[sampleNum].Volume()+1);
+                sample[sampleNum].SetVolume(sample[sampleNum].GetVolume()+1);
             if(engine->KeyIsPressed(SDLK_DOWN))
-                sample[sampleNum].SetVolume(sample[sampleNum].Volume()-1);
+                sample[sampleNum].SetVolume(sample[sampleNum].GetVolume()-1);
 
-            font.DrawText(FormatStr("Volume: %d",sample[sampleNum].Volume()),text[4]);
+            font.DrawText(FormatStr("Volume: %d",sample[sampleNum].GetVolume()),text[4]);
             font.DrawText(FormatStr("Sample: %s",name[sampleNum].c_str()),text[5]);
 
             engine->Clear();    //clear screen
@@ -102,6 +104,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }

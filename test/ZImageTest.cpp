@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.29 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZImageTest.cpp,v 1.30 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -30,6 +30,8 @@ bool Initialize()
     fs = cfg.GetBool("ZImageTest","fullscreen",true);
     title = cfg.GetString("ZImageTest","title","ZImage Test");
 
+    engine->SetResourceFile("resources.zrf");
+
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
 
@@ -38,7 +40,6 @@ void Test()
     ZEngine *engine = ZEngine::GetInstance();
     float angle=0.0f,movDelta;
     float alpha=128.0f,alphaDelta=15.0f;
-    SDL_Surface *temp;
 
     //Open and Setup all the Images//
     ZImage image1,image2,image3,image4,textImage;
@@ -48,13 +49,20 @@ void Test()
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
 
-    temp = SDL_LoadBMP("data/rainbow.bmp");    //this is a separate surface
+    engine->SetErrorLog(ZLOG_HTML,"err.html");
+    engine->ReportError(ZERR_CRITICAL,"This is a critical test error!!! Something has gone seriously wrong!");
+    engine->ReportError(ZERR_DEPRECIATED,"This is a test of a depreciated feature.");
+    engine->ReportError(ZERR_ERROR,"This is a normal error, but only a test.");
+    engine->ReportError(ZERR_NOTE,"Relax, this is just a test note.");
+    engine->ReportError(ZERR_VERBOSE,"This test wouldn't show up if verbose was off.");
+    engine->ReportError(ZERR_WARNING,"This is a test warning, not critical but not verbose either.");
+    
     image1.OpenFromZip("data/data.zip","test02.bmp");
     image1.SetColorKey(255,0,255);
     image2.Open("data/test01.bmp");
     image2.SetColorKey(255,0,255);
     image3.OpenFromImage(image2.Surface(),5,5,20,20);
-    image4.Attach(temp);    //this attaches the surface into itself
+    image4.OpenFromZRF("rainbow");
 
 #if (GFX_BACKEND == ZE_OGL)
     image4.Resize(400,300);

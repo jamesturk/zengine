@@ -1,6 +1,6 @@
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                  Copyright (C) 2002-2004 James Turk
 
               ZEngine is Licensed under a BSD-style license.
 This example file is in the public domain, it may be used with no restrictions.
@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZParticleTest.cpp,v 1.9 2003/12/14 22:35:35 cozman Exp $*/
+// $Id: ZParticleTest.cpp,v 1.10 2003/12/31 12:27:58 cozman Exp $
 
 #include <ZEngine.h>
 #include <string> 
@@ -29,6 +29,8 @@ bool Initialize()
     bpp = cfg.GetInt("ZParticleTest","bpp",32);
     fs = cfg.GetBool("ZParticleTest","fullscreen",false);
     title = cfg.GetString("ZParticleTest","title","ZParticle Test");
+
+    engine->SetResourceFile("resources.zrf");
 
     return engine->CreateDisplay(w,h,bpp,fs,title);
 }
@@ -72,7 +74,7 @@ void Test()
     effect[2].SetRate(30);
     effect[2].SetImage("data/particle2.tga");
 
-    bg.Open("data/rainbow.bmp");
+    bg.OpenFromZRF("rainbow");
 #if (GFX_BACKEND == ZE_OGL)
     bg.Resize(engine->DisplayWidth()/2.0f,static_cast<float>(engine->DisplayHeight()));  //gives perspective on alpha on half of screen
 #endif
@@ -148,6 +150,5 @@ int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
-    ZEngine::ReleaseInstance();
     return 0;
 }
