@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.16 2003/01/24 02:47:06 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.17 2003/01/24 02:49:24 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -101,7 +101,7 @@ void ZImage::Attach(SDL_Surface *surface)
 {
     GLfloat coord[4];
 
-	Release();		//avoid most memory leaks
+	Release();		//avoid most user inflicted memory leaks
 
     if(surface)
     {

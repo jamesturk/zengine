@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.9 2003/01/18 22:22:37 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.10 2003/01/24 02:47:06 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -69,7 +69,7 @@ class ZImage : public ZObject
             Creates one ZImage using another.
             \param rhs A previously created ZImage to copy.
         **/
-        ZImage::ZImage(const ZImage &rhs);
+        ZImage(const ZImage &rhs);
 
         /*!
             \brief Constructor to Construct from File.
