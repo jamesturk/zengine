@@ -13,7 +13,7 @@
     \brief Source file for ZTimer.
 
     Implementation of ZTimer, the basic Timer class for ZEngine.
-    <br>$Id: ZE_ZTimer.cpp,v 1.9 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZTimer.cpp,v 1.10 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -30,12 +30,11 @@ Uint32 ZTimer::GetParentTime() const
         return SDL_GetTicks();
 }
 
-ZTimer::ZTimer(bool useZEngine) : 
+ZTimer::ZTimer(bool useZEngine) :
     rEngine(ZEngine::GetInstance()),
-    rUseZEngine(useZEngine),
-    rPaused(false)
+    rUseZEngine(useZEngine)
 {
-    Reset();
+    Reset();	//initializes other members
 }
 
 ZTimer::~ZTimer()

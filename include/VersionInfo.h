@@ -14,7 +14,7 @@
 
     Definition file for VersinInfo class, simple class for containing and comparing 
     version numbers.
-    <br>$Id: VersionInfo.h,v 1.3 2003/06/11 00:15:24 cozman Exp $<br>
+    <br>$Id: VersionInfo.h,v 1.4 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -26,19 +26,20 @@
 /*!
     \brief Class for holding version information.
 
-    Class for holding version information on a library.
+    Class for holding version information on a library.  (Members capitalized because
+    g++ has issues with members named major and minor.)
 **/
 class VersionInfo
 {
     public:
         //! Major version number.
-        unsigned int major;
+        unsigned int Major;
         //! Minor version number, changes upon signifigant releases. (Often upon compatibility breaks.)
-        unsigned int minor;
+        unsigned int Minor;
         //! Version release number, changes on every release.
-        unsigned int release;
+        unsigned int Release;
         //! String Description of release. (Often blank.)
-        std::string extra;
+        std::string Extra;
 
         /*!
             \brief Constructor for VersionInfo.

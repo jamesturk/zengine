@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.51 2003/07/11 20:51:44 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.52 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -25,18 +25,18 @@ namespace ZE
 VersionInfo ZEngine::Version(0,8,4);
 ZEngine *ZEngine::sInstance=NULL;
 
-ZEngine::ZEngine() : 
-    mInitialized(false), mWidth(800), mHeight(600), mBPP(-1), mFullscreen(true),
-#ifdef USE_SDL_MIXER 
-    mRate(22050), mStereo(false),
-#endif
-    mNeedReload(false),mScreen(NULL),
-    mEventFilter(NULL), mActive(false), mQuit(false), mKeyIsPressed(NULL), 
-    mMouseX(0), mMouseY(0), mMouseB(0),
-    mUnpauseOnActive(false), mPaused(false),
+ZEngine::ZEngine() :
+    mWidth(800), mHeight(600), mBPP(-1), mFullscreen(true), mInitialized(false),
+    mScreen(NULL),
+    mPaused(false), mUnpauseOnActive(false),
     mDesiredFramerate(0), mNextUpdate(0), mLastPause(0), mPausedTime(0), mLastTime(0),
     mSecPerFrame(0.0),
-    mLogAllErrors(true), mErrlog(stderr)
+    mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
+    mMouseX(0), mMouseY(0), mMouseB(0),
+    mLogAllErrors(true), mErrlog(stderr), mEventFilter(NULL)
+#ifdef USE_SDL_MIXER
+    , mRate(22050), mStereo(false)
+#endif
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;

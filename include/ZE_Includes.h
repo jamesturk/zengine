@@ -48,5 +48,6 @@
 #include <list>     //used by ZConfigFile
 #include <fstream>  //used by ZConfigFile
 #include <cctype>   //used in parsing
+#include <cstdarg>  //used in FormatStr
 
 #endif //__ze_includes_h__

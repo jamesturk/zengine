@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZTimerTest.cpp,v 1.14 2003/07/10 20:45:39 cozman Exp $*/
+/*$Id: ZTimerTest.cpp,v 1.15 2003/07/12 01:25:42 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -45,7 +45,7 @@ void Test()
 
     //Open and Setup Font and Create Images and Timers//
     ZImage text[5];
-    ZFont font("data/almontew.ttf",48);
+    ZFont font("data/almontew.ttf",24);
     ZTimer TimerOne, TimerTwo(false);    //Timer Two is on the SDL Timer.
 
     //do this only once//
@@ -109,8 +109,8 @@ void Test()
             engine->Clear();    //clear screen
 
             for(int i=0; i <= 4; i++)
-                text[i].Draw(0,i*50);
-            
+                text[i].Draw(0,i*30);
+
             engine->Update();    //update the screen
         }
 

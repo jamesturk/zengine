@@ -15,7 +15,7 @@
     Implementation file for ZRandGen, an OO encapsulated version of the Mersenne Twister.
     This implementation is derived from the original mt19937ar.c source from
     http://www.math.keio.ac.jp/matumoto/emt.html. See source for MT license.
-    <br>$Id: ZE_ZRandGen.cpp,v 1.1 2003/07/05 00:58:08 cozman Exp $<br>
+    <br>$Id: ZE_ZRandGen.cpp,v 1.2 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk, some code from Mersenne Twister.
 **/
 
@@ -30,15 +30,15 @@ namespace ZE
     for that file is below.
                             -James
 
- 
+
    A C-program for MT19937, with initialization improved 2002/1/26.
    Coded by Takuji Nishimura and Makoto Matsumoto.
 
-   Before using, initialize the state by using init_genrand(seed)  
+   Before using, initialize the state by using init_genrand(seed)
    or init_by_array(init_key, key_length).
 
    Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura,
-   All rights reserved.                          
+   All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
@@ -81,7 +81,7 @@ unsigned long ZRandGen::genrand_int32()
     /* mag01[x] = x * MATRIX_A  for x=0,1 */
 
     if (rStateVectorIndex >= N) { /* generate N words at one time */
-        int kk;
+        unsigned int kk;
 
         //removed uninitialized check, class initializes in constructor
 
@@ -98,7 +98,7 @@ unsigned long ZRandGen::genrand_int32()
 
         rStateVectorIndex = 0;
     }
-  
+
     y = rStateVector[rStateVectorIndex++];
 
     /* Tempering */

@@ -17,7 +17,7 @@
     should suffice unless you want objects to have their ownrandom streams.  This 
     implementation is derived from the original mt19937ar.c source from
     http://www.math.keio.ac.jp/matumoto/emt.html. See source of ZE_ZRandGen.cpp for license.
-    <br>$Id: ZE_ZRandGen.h,v 1.1 2003/07/05 01:05:47 cozman Exp $<br>
+    <br>$Id: ZE_ZRandGen.h,v 1.2 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -56,7 +56,7 @@ class ZRandGen
         //! Each instance of the algorithm requires a state vector.
         unsigned long rStateVector[N];
         //! Used internally to traversing the rStateVector.
-        int rStateVectorIndex;
+        unsigned long rStateVectorIndex;
 
         /*!
             \brief Workhorse of random generator, only used internally.
@@ -160,3 +160,4 @@ class ZRandGen
 }
 
 #endif //__ze_zrandgen_h__
+

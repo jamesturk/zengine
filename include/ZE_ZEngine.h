@@ -13,11 +13,9 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.43 2003/07/11 20:51:44 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.44 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
-
-//revision on this is so high.. can this be lowered?
 
 #ifndef __ze_zengine_h__
 #define __ze_zengine_h__

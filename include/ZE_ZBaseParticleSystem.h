@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine particle system class ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.4 2003/07/11 20:51:44 cozman Exp $<br>
+    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.5 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -183,7 +183,7 @@ class ZBaseParticleSystem
             When this resizes the array contents are moved to the new array, if it shrinks the array particles may be lost.
             \param max Maximum number of particles for system.
         **/
-        void SetMaxParticles(int max);
+        void SetMaxParticles(unsigned int max);
 
         /*!
             \brief Sets release rate of particles.
@@ -191,7 +191,7 @@ class ZBaseParticleSystem
             Set number of particles to release per second.
             \param rate Number of particles to release over the duration of one second.
         **/
-        void SetRate(int rate);    
+        void SetRate(unsigned int rate);
 };
 
 //implementation//
@@ -271,7 +271,7 @@ void ZBaseParticleSystem<particleType>::Clear()
 {
     rCurParticles = 0;
 }
-    
+
 template <class particleType>
 void ZBaseParticleSystem<particleType>::Pause()
 {
@@ -298,7 +298,7 @@ bool ZBaseParticleSystem<particleType>::Paused()
 }
 
 template <class particleType>
-void ZBaseParticleSystem<particleType>::SetMaxParticles(int max)
+void ZBaseParticleSystem<particleType>::SetMaxParticles(unsigned int max)
 {
     particleType *temp;
     unsigned int i;
@@ -318,7 +318,7 @@ void ZBaseParticleSystem<particleType>::SetMaxParticles(int max)
 
             //change size of rParticles
             if(rParticles)
-                delete []rParticles; 
+                delete []rParticles;
             rParticles = new particleType[max];
             rMaxParticles = max;
 
@@ -341,7 +341,7 @@ void ZBaseParticleSystem<particleType>::SetMaxParticles(int max)
 }
 
 template <class particleType>
-void ZBaseParticleSystem<particleType>::SetRate(int rate)
+void ZBaseParticleSystem<particleType>::SetRate(unsigned int rate)
 {
     rNumParticlesPerSec = rate;
 }

@@ -6,40 +6,40 @@
 
     Implementation file for VersinInfo class, simple class for containing and comparing 
     version numbers.
-    <br>$Id: VersionInfo.cpp,v 1.4 2003/06/11 05:51:15 cozman Exp $<br>
+    <br>$Id: VersionInfo.cpp,v 1.5 2003/07/12 01:25:42 cozman Exp $<br>
     \author James Turk
 **/
 
 VersionInfo::VersionInfo(unsigned int maj, unsigned int min, unsigned int rel, std::string ext) :
-    major(maj), minor(min), release(rel), extra(ext)
+    Major(maj), Minor(min), Release(rel), Extra(ext)
 {
 }
 
 
 std::string VersionInfo::GetString() const
 {
-    if(extra.length())
-        return ZE::FormatStr("%d.%d.%d [%s]",major,minor,release,extra.c_str());
+    if(Extra.length())
+        return ZE::FormatStr("%d.%d.%d [%s]",Major,Minor,Release,Extra.c_str());
     else
-        return ZE::FormatStr("%d.%d.%d",major,minor,release);
+        return ZE::FormatStr("%d.%d.%d",Major,Minor,Release);
 }
 
 bool VersionInfo::operator<(const VersionInfo &rhs) const
 {
     //chained compares, compare numbers in order of importance
-    if(this->major < rhs.major)
+    if(this->Major < rhs.Major)
         return true;
-    else if(this->major == rhs.major)
+    else if(this->Major == rhs.Major)
     {
-        if(this->minor < rhs.minor)
+        if(this->Minor < rhs.Minor)
             return true;
-        else if(this->minor == rhs.minor)
+        else if(this->Minor == rhs.Minor)
         {
-            if(this->release < rhs.release)
+            if(this->Release < rhs.Release)
                 return true;
-            else if(this->release == rhs.release)
+            else if(this->Release == rhs.Release)
             {
-                return this->extra < rhs.extra; //just compare the strings at the end
+                return this->Extra < rhs.Extra; //just compare the strings at the end
             }
         }
     }
