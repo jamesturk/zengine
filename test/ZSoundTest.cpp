@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.19 2003/10/21 01:17:35 cozman Exp $*/
+/*$Id: ZSoundTest.cpp,v 1.20 2003/11/24 22:59:18 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 

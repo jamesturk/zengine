@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.27 2003/11/14 21:39:51 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.28 2003/11/24 22:59:18 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
