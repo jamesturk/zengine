@@ -90,12 +90,6 @@
 			</File>
 			<File
 				RelativePath="..\src\ZE_ZRect.cpp">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\src\ZE_ZServer.cpp">
