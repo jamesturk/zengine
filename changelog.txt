@@ -1,11 +1,12 @@
 ZEngine Version Log for Version 0.7.8
-$Id: changelog.txt,v 1.5 2002/12/02 00:42:20 cozman Exp $
+$Id: changelog.txt,v 1.6 2002/12/02 05:18:52 cozman Exp $
 
 0.7.8
     -Added ZRect::Draw using OpenGL.
     -Fixed ZRectTest to use new ZRect.
     -Added ZImage rotation and 2 forms of stretching using OpenGL.
     -Added some testing to ZImageTest of new stretching.
+    -Added ZImage::Flip.
 
 0.7.7
     -Changed behavior of core ZEngine class methods to reflect new OpenGL behavior.

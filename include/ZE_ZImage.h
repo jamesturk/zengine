@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.3 2002/12/02 00:36:35 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.4 2002/12/02 05:18:52 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -37,6 +37,10 @@ namespace ZE
 class ZImage : public ZObject
 {
     protected:
+        //! Texture lower X, used internally for flip.
+        GLfloat rTexMinX;
+        //! Texture lower Y, used internally for flip
+        GLfloat rTexMinY;
         //! Texture X width ratio, used internally by OpenGL.
         GLfloat rTexMaxX;
         //! Texture Y width ratio, used internally by OpenGL.
@@ -148,6 +152,15 @@ class ZImage : public ZObject
             \param blue Blue component of colorkey (0-255).
         **/
         void SetColorKey(Uint8 red, Uint8 green, Uint8 blue);
+
+        /*!
+            \brief Flip image over one or both axes.
+
+            Flip image vertical and/or horizontal.
+            \param horizontal Boolean, true will flip image horizontally.
+            \param vertical Boolean, true will flip image vertically.
+        **/
+        void Flip(bool horizontal, bool vertical);
 
         /*!
             \brief Stretch the image by a certain X and Y factor.

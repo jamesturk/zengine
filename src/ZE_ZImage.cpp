@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.4 2002/12/02 00:36:35 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.5 2002/12/02 05:18:52 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -98,13 +98,14 @@ void ZImage::Attach(SDL_Surface *surface)
 {
     GLfloat coord[4];
 
-    //Release();
     if(surface)
     {
         rWidth = surface->w;
         rHeight = surface->h;
         rTexID = SDL_GL_LoadTexture(surface,coord);
-        rTexMaxX = coord[2];    //ignore first coords because they are always 0.0f
+        rTexMinX = coord[0];
+        rTexMinY = coord[1];
+        rTexMaxX = coord[2];
         rTexMaxY = coord[3];
         rImage = surface;
     }
@@ -116,7 +117,7 @@ void ZImage::Release()
 {
     if(glIsTexture(rTexID))
         glDeleteTextures(1,&rTexID);
-    rTexMaxX = rTexMaxY = 0.0f;
+    rTexMinX = rTexMinY = rTexMaxX = rTexMaxY = 0.0f;
     rTexID = rWidth = rHeight = 0;
     FreeImage(rImage);
 }
@@ -151,6 +152,23 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
         LogError("ZImage not initialized in ZImage::SetColorKey.");
 }
 
+void ZImage::Flip(bool horizontal, bool vertical)
+{
+    GLfloat temp;
+    if(horizontal)
+    {
+        temp = rTexMinX;
+        rTexMinX = rTexMaxX;
+        rTexMaxX = temp;
+    }
+    if(vertical)
+    {
+        temp = rTexMinY;
+        rTexMinY = rTexMaxY;
+        rTexMaxY = temp;
+    }
+}
+
 void ZImage::Stretch(float xFactor, float yFactor)
 {
     rWidth = static_cast<unsigned int>(xFactor*rWidth);
@@ -173,10 +191,10 @@ void ZImage::Draw(float x, float y)
     Bind(); 
 
     glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2f(0.0f,0.0f);            glVertex2f(x, y);
-        glTexCoord2f(rTexMaxX,0.0f);        glVertex2f(x+rWidth, y);
-        glTexCoord2f(0.0f,rTexMaxY);        glVertex2f(x, y+rHeight);
-        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(x+rWidth, y+rHeight);
+        glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(x,y);
+        glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2f(x+rWidth,y);
+        glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2f(x,y+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(x+rWidth,y+rHeight);
     glEnd();
 }
 
