@@ -1,7 +1,8 @@
 ZEngine Version Log for Version 0.8.3
-$Id: changelog.txt,v 1.32 2003/04/27 21:50:43 cozman Exp $
+$Id: changelog.txt,v 1.33 2003/04/27 22:49:14 cozman Exp $
 
 0.8.3 
+    -Added Random Number generation to the ZEngine singleton.
     -Fixed project files for people who don't want to add ZEngine to their path.
     -Altered layout of some of the header files to hopefully be more readable.
     -Fixed minor bugs in ZImage, allowing Gewi to work properly.

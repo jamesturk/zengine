@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.22 2003/04/27 21:50:47 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.23 2003/04/27 22:49:14 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -565,60 +565,6 @@ class ZEngine
             \since 0.8.2
         **/
         void FlushErrors();
-
-    ////////////////////////////
-    //Random Number Generation//
-    ////////////////////////////
-        /*!
-            \brief Seed random number generator. 
-
-            Reseed Mersenne Twister (MT19937) random number generator.  NOTE: Generator is initialized upon creation of ZEngine using time.
-            (Faster and more random than rand(), see src/external/mt19937ar.c)
-            \since 0.8.3
-            \param seed Seed for random sequence.
-        **/
-        void SeedRandom(unsigned long seed);
-
-        /*!
-            \brief Obtain random integer [0,max).
-
-            Obtain random long l where 0 <= l < max.
-            \since 0.8.3
-            \param max Limit for random number.
-            \return Random unsigned long.
-        **/
-        unsigned long RandLong(unsigned long max);
-
-        /*!
-            \brief Obtain random integer [min,max].
-
-            Obtain random long l where min <= l <= max.
-            \since 0.8.3
-            \param min Lower limit for random number.
-            \param max Upper limit for random number.
-            \return Random long.
-        **/
-        long RandLong(long min, long max);
-
-        /*!
-            \brief Obtain random double [0,1).
-
-            Obtain random double d where 0 <= d < 1.
-            \since 0.8.3
-            \return Random double [0,1).
-        **/
-        double RandDouble();
-
-        /*!
-            \brief Obtain random double [min,max].
-
-            Obtain random double d where min <= d <= max.
-            \since 0.8.3
-            \param min Lower limit for random number.
-            \param max Upper limit for random number.
-            \return Random double [min,max].
-        **/
-        double RandDouble(double min, double max);
 
     ////////////////////////////
     //Data Loading + Unloading//

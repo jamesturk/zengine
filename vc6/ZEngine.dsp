@@ -122,6 +122,10 @@ SOURCE=..\src\ZE_ZTimer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\external\mt19937ar.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\external\physfsrwops.cpp
 # End Source File
 # End Group
@@ -191,6 +195,10 @@ SOURCE=..\include\ZE_ZTimer.h
 # Begin Source File
 
 SOURCE=..\include\ZEngine.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\external\mt19937ar.h
 # End Source File
 # Begin Source File
 

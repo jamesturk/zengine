@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.36 2003/04/27 22:05:25 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.37 2003/04/27 22:49:14 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -645,7 +645,7 @@ unsigned long ZEngine::RandLong(unsigned long max)
 
 long ZEngine::RandLong(long min, long max)
 {
-    return min + genrand_int32()%(max-min);
+    return min + genrand_int32()%(max-min+1);
 }
 
 double ZEngine::RandDouble()
