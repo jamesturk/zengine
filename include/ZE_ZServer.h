@@ -13,7 +13,7 @@
 File: ZE_ZServer.h <br>
 Description: Header file for core ZEngine TCP Server Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZServer.h,v 1.2 2003/03/15 03:27:19 cozman Exp $<br>
+$Id: ZE_ZServer.h,v 1.3 2003/03/19 04:12:52 cozman Exp $<br>
 
     \file ZE_ZServer.h
     \brief Definition file for ZServer.
@@ -59,7 +59,7 @@ class ZServer
             \brief Closes a socket.
 
             Close a socket given by it's number.
-            \param Socket number to close.
+            \param num Socket number to close.
         **/
         void CloseSocket(int num);
 
