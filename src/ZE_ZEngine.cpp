@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.22 2003/01/24 19:41:54 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.23 2003/01/25 19:55:13 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -186,7 +186,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
         SDL_WM_SetCaption(title.c_str(),NULL);
     else
     {
-        SDL_WM_SetCaption(title.c_str(),icon.c_str());
+        SDL_WM_SetCaption(title.c_str(),title.c_str());
         iconImg = LoadImage(icon);
         SDL_WM_SetIcon(iconImg,NULL);
         FreeImage(iconImg);
@@ -247,6 +247,20 @@ void ZEngine::CloseDisplay()
 
     if(mErrlog != stderr && mErrlog != stdin)
         fclose(mErrlog);
+}
+
+void ZEngine::ToggleFullscreen()
+{
+    char *title,*icon;
+#ifdef linux    //SDL_WM_TF only works on Linux
+    SDL_WM_ToggleFullscreen(mScreen);
+#else
+    SetupDisplay(mWidth,mHeight,mBPP,!mFullscreen);
+    SDL_WM_GetCaption(&title,&icon);
+    CreateDisplay(title);
+#endif
+    SetReloadNeed(true);
+    mActive = true;
 }
 
 SDL_Surface *ZEngine::Display()

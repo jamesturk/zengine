@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.16 2003/01/24 19:43:59 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.17 2003/01/25 19:55:13 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -153,6 +153,15 @@ class ZEngine
             Shut down SDL (and SDL_ttf,SDL_mixer if necessary) You shouldn't ever have to call this, ReleaseInstance calls this for you.
         **/
         void CloseDisplay();
+
+        /*!
+            \brief Toggle fullscreen/windowed mode.
+
+            Safely toggles fullscreen/windowed mode, generally toggling modes will bring the need to reload images so it will
+            set the ImagesNeedReload state to true.
+            \since 0.8.2
+        **/
+        void ToggleFullscreen();
 
     /////////////////
     //Screen Access//
