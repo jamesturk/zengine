@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.20 2003/02/03 00:04:28 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.21 2003/04/18 21:59:56 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -45,14 +45,75 @@ namespace ZE
 **/
 class ZEngine
 {
+
+    private:
+        //! Static Pointer to Instance of ZEngine for Singleton.
+        static ZEngine *sInstance;
+        //! Width of Display
+        int mWidth;
+        //! Height of Display
+        int mHeight;
+        //! BPP Setting of Display
+        int mBPP;
+        //! Fullscreen setting of Display
+        bool mFullscreen;
+        //! If ZEngine display has been setup.
+        bool mInitialized;
+        //! Pointer to Display
+        SDL_Surface *mScreen;
+        //! Keep track of paused state of game.
+        bool mPaused;
+        //! Keep track of if ZEngine should unpause on active event.
+        bool mUnpauseOnActive;
+        //! Value framerate strives to be at, set by SetDesiredFramerate.
+        Uint8 mDesiredFramerate;
+        //! Time scheduled for next update (used for framerate locked movement).
+        Uint32 mNextUpdate;
+        //! Keep track of time game was last paused.
+        Uint32 mLastPause;
+        //! Keep track of total globally paused time.
+        Uint32 mPausedTime;
+        //! Keep track of last screen update time.
+        Uint32 mLastTime;
+        //! Seconds per frame.
+        double mSecPerFrame;
+        //! bool which is only set to true if the engine thinks the images need to be reloaded (loss of focus in fullscreen).
+        bool mNeedReload;
+        //! bool describing Active or Inactive State of Game
+        bool mActive;
+        //! bool for checking if a Quit event has been detected
+        bool mQuit;
+        //! Pointer to array of Keys
+        Uint8 *mKeyIsPressed;
+        //! Array of keys, used by KeyPress
+        bool mKeyPress[SDLK_LAST];
+        //! X Position of Mouse
+        int mMouseX;
+        //! Y Position of Mouse
+        int mMouseY;
+        //! Mouse Button Information
+        Uint8 mMouseB;
+        //! Stack of Errors which have occured.
+        queue<ZError> mErrorQueue;
+        //! Current error.
+        ZError mCurError;
+        //! Option controlling how logfile is used.
+        bool mLogAllErrors;
+        //! C-style FILE* for error logging.
+        FILE *mErrlog;
+
+#ifdef USE_SDL_MIXER 
+        //! Sound Bitrate
+        int mRate;
+        //! Stereo setting of Sound Subsystem
+        bool mStereo;
+#endif 
+
     /////////////////////////////////
     //Singleton + Memory Management//
     /////////////////////////////////
 
     private:
-        //! Static Pointer to Instance of ZEngine for Singleton.
-        static ZEngine *sInstance;
-
         /*!
             \brief Constructor for ZEngine.
             
@@ -88,29 +149,6 @@ class ZEngine
     //////////////////
     //Initialization//
     //////////////////
-
-    private:
-        //! Width of Display
-        int mWidth;
-        //! Height of Display
-        int mHeight;
-        //! BPP Setting of Display
-        int mBPP;
-        //! Fullscreen setting of Display
-        bool mFullscreen;
-        //! If ZEngine display has been setup.
-        bool mInitialized;
-
-#ifdef USE_SDL_MIXER 
-        //! Sound Bitrate
-        int mRate;
-        //! Stereo setting of Sound Subsystem
-        bool mStereo;
-#endif 
-
-
-    public:
-        //add initialization
 
         /*!
             \brief Setup Display for SDL.
@@ -178,11 +216,6 @@ class ZEngine
     //Screen Access//
     /////////////////
 
-    private:
-        //! Pointer to Display
-        SDL_Surface *mScreen;
-
-    public:
         /*!
             \brief Allow access to Screen Surface.
 
@@ -213,7 +246,6 @@ class ZEngine
     /////////////////////////////
     //OpenGL Specific Functions//
     /////////////////////////////
-    public:
 
         /*!
             \brief Setup OpenGL ortho mode.
@@ -226,26 +258,7 @@ class ZEngine
     ////////////////////////////////////////////
     //Timer and Framerate Independent Movement//
     ////////////////////////////////////////////
-    
-    private:
-        //! Keep track of paused state of game.
-        bool mPaused;
-        //! Keep track of if ZEngine should unpause on active event.
-        bool mUnpauseOnActive;
-        //! Value framerate strives to be at, set by SetDesiredFramerate.
-        Uint8 mDesiredFramerate;
-        //! Time scheduled for next update (used for framerate locked movement).
-        Uint32 mNextUpdate;
-        //! Keep track of time game was last paused.
-        Uint32 mLastPause;
-        //! Keep track of total globally paused time.
-        Uint32 mPausedTime;
-        //! Keep track of last screen update time.
-        Uint32 mLastTime;
-        //! Seconds per frame.
-        double mSecPerFrame;
 
-    public:
         /*!
             \brief Sleep for a certain amount of time.
 
@@ -324,25 +337,7 @@ class ZEngine
     ////////////////////////////
     //Event and Input Handling//
     ////////////////////////////
-    private:
-        //! bool which is only set to true if the engine thinks the images need to be reloaded (loss of focus in fullscreen).
-        bool mNeedReload;
-        //! bool describing Active or Inactive State of Game
-        bool mActive;
-        //! bool for checking if a Quit event has been detected
-        bool mQuit;
-        //! Pointer to array of Keys
-        Uint8 *mKeyIsPressed;
-        //! Array of keys, used by KeyPress
-        bool mKeyPress[SDLK_LAST];
-        //! X Position of Mouse
-        int mMouseX;
-        //! Y Position of Mouse
-        int mMouseY;
-        //! Mouse Button Information
-        Uint8 mMouseB;
 
-    public:
         /*!
             \brief Find out if application is active.
 
@@ -489,7 +484,6 @@ class ZEngine
     ////////////////////
     //Physfs Utilities//
     ////////////////////
-    public:
         /*!
             \brief Initialize PhysicsFS
 
@@ -512,15 +506,6 @@ class ZEngine
     //Error Logging//
     /////////////////
     private:
-        //! Stack of Errors which have occured.
-        queue<ZError> mErrorQueue;
-        //! Current error.
-        ZError mCurError;
-        //! Option controlling how logfile is used.
-        bool mLogAllErrors;
-        //! C-style FILE* for error logging.
-        FILE *mErrlog;
-
         /*!
             \brief Writes an error to file.
 
@@ -585,7 +570,6 @@ class ZEngine
     ////////////////////////////
     //Data Loading + Unloading//
     ////////////////////////////
-    public:
         /*!
             \brief Load an Image.
 
@@ -631,7 +615,6 @@ class ZEngine
     //Accessors//
     /////////////
 
-    public:    
         /*!
             \brief Get Current Display Width.
 
