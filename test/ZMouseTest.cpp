@@ -79,7 +79,7 @@ void Test()
         text[2].Draw(0,0);
         cursor.Draw(engine->MouseX()-8.0f,engine->MouseY()-8.0f);
 
-        engine->UpdateScreen();    //update the screen
+        engine->Update();    //update the screen
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }

@@ -73,7 +73,7 @@ void Test()
 
         image3.Draw(200,0);
         textImage.Draw(0,100);
-        engine->UpdateScreen();    //update the screen
+        engine->Update();    //update the screen
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }

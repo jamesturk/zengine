@@ -109,7 +109,7 @@ void Test()
         for(int i=0; i <= 4; i++)
             text[i].Draw(0,i*50.0f);
         
-        engine->UpdateScreen();    //update the screen
+        engine->Update();    //update the screen
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }

@@ -74,7 +74,7 @@ void Test()
         moveRect.Draw(255,0,0,128);
         stillRect.Draw(0,0,255,128);
         moveRect.Intersection(stillRect).Draw(0,255,0);
-        engine->UpdateScreen();
+        engine->Update();
 
     } while(!engine->QuitRequested());
 }

@@ -45,7 +45,7 @@ void Test()
         engine->CreateDisplay("ZMusic Test");
         font.DrawText("Music.ogg does not exist, please read music.txt.",text[0]);
         text[0].Draw(0,0);
-        engine->UpdateScreen();
+        engine->Update();
         do
         {
             engine->CheckEvents();
@@ -93,7 +93,7 @@ void Test()
             engine->Clear();    //clear screen
             for(int i=0; i < 4; i++)
                 text[i].Draw(0,i*50.0f);
-            engine->UpdateScreen();    //update the screen
+            engine->Update();    //update the screen
         } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
     }
 }
