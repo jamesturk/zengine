@@ -35,7 +35,7 @@ Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
-BuildCmd=$(CPP) -c VersionInfo.cpp -o ./VersionInfo.o $(CXXFLAGS)
+BuildCmd=
 
 [Unit2]
 FileName=..\src\ZE_Utility.cpp

@@ -1,0 +1,1 @@
+The projects in this directory were built using Dev-C++ 4.9.8.0 (aka 5 beta 8) Dev-C++ 4 has problems creating portable project files. 
