@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.37 2003/06/07 00:34:43 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.38 2003/06/09 02:46:22 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -107,6 +107,8 @@ class ZEngine
         bool mLogAllErrors;
         //! C-style FILE* for error logging.
         FILE *mErrlog;
+        //! Event filter, for users who need to process their own events.
+        SDL_EventFilter mEventFilter;
 
 #ifdef USE_SDL_MIXER 
         //! Sound Bitrate
@@ -477,9 +479,11 @@ class ZEngine
         /*!
             \brief Add a SDL Event Filter for user processing of events.
 
-            This is only needed when you need tight control with ZEngine.  The parameter is simply passed to SDL_SetEventFilter, 
-            generally only those with a good amount of SDL experience should use this function or ZEngine's internal message 
-            state could be corrupted.  For more information on SDL_SetEventFilter see http://sdldoc.csn.ul.ie/sdlseteventfilter.php.
+            This is only needed when you need tight control with ZEngine.  The parameter processed as if it were passed to 
+            SDL_SetEventFilter, generally only those with a good amount of SDL experience should use this function or 
+            ZEngine's internal message state could be corrupted.  For more information on SDL_SetEventFilter see 
+            http://sdldoc.csn.ul.ie/sdlseteventfilter.php.  (FYI: The parameter is now actually processed in check events, 
+            not passed to the SDL function, this is done because of problems with singletons and event threading.)
             \since 0.8.2
             \param filter An SDL_EventFilter (A function that takes a const SDL_Event* and returns 0 if the event should be removed from 
             the event queue and 1 otherwise.)

@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.42 2003/06/06 18:55:57 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.43 2003/06/09 02:46:22 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -41,6 +41,7 @@ ZEngine::ZEngine()
 
     mScreen = NULL;
 
+    mEventFilter = NULL;
     mActive = mQuit = false;
     mKeyIsPressed = NULL;
     mMouseX = mMouseY = 0;
@@ -500,44 +501,47 @@ void ZEngine::CheckEvents()
 
     while(SDL_PollEvent(&event))
     {
-        switch(event.type)
+        if(!mEventFilter || mEventFilter(&event))    //if the filter returns 0 it is removing the event, it will not be processed
         {
-            case SDL_VIDEOEXPOSE:
-            case SDL_ACTIVEEVENT:
-                if(event.active.state & SDL_APPACTIVE || event.active.state & SDL_APPINPUTFOCUS)
-                {
-                    if( (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) || event.type == SDL_VIDEOEXPOSE)
+            switch(event.type)
+            {
+                case SDL_VIDEOEXPOSE:
+                case SDL_ACTIVEEVENT:
+                    if(event.active.state & SDL_APPACTIVE || event.active.state & SDL_APPINPUTFOCUS)
                     {
-                        mActive = true;
-                        if(mUnpauseOnActive)
-                            UnpauseTimer();
-                        if(mFullscreen)
-                            mNeedReload = true;
-                    }
-                    else
-                    {
-                        mActive = mUnpauseOnActive = false;
-                        if(!mPaused)
+                        if( (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) || event.type == SDL_VIDEOEXPOSE)
                         {
-                            mUnpauseOnActive = true;
-                            PauseTimer();
+                            mActive = true;
+                            if(mUnpauseOnActive)
+                                UnpauseTimer();
+                            if(mFullscreen)
+                                mNeedReload = true;
                         }
                         else
-                            mUnpauseOnActive = false;
+                        {
+                            mActive = mUnpauseOnActive = false;
+                            if(!mPaused)
+                            {
+                                mUnpauseOnActive = true;
+                                PauseTimer();
+                            }
+                            else
+                                mUnpauseOnActive = false;
+                        }
                     }
-                }
-                break;
-            case SDL_KEYDOWN:
-                mKeyPress[event.key.keysym.sym] = true;
-                break;
-            case SDL_KEYUP:
-                mKeyPress[event.key.keysym.sym] = false;
-                break;
-            case SDL_QUIT:
-                mQuit = true;
-                break;
-            default:
-                break;
+                    break;
+                case SDL_KEYDOWN:
+                    mKeyPress[event.key.keysym.sym] = true;
+                    break;
+                case SDL_KEYUP:
+                    mKeyPress[event.key.keysym.sym] = false;
+                    break;
+                case SDL_QUIT:
+                    mQuit = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -553,7 +557,7 @@ void ZEngine::CheckEvents()
 
 void ZEngine::SetEventFilter(SDL_EventFilter filter)
 {
-    SDL_SetEventFilter(filter);
+    mEventFilter = filter;
 }
 
 #ifdef USE_PHYSFS
