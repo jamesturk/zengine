@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.6 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.7 2002/12/29 07:22:02 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -132,7 +132,7 @@ class ZImage : public ZObject
         **/
         void Attach(SDL_Surface *surface);
 
-        /*
+        /*!
             \brief Reattach a preloaded texture that has been lost.
 
             Attach loaded textures which have been lost due to loss of focus, should be called when ZEngine::ImagesNeedReload is true.

@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.14 2002/12/29 07:18:30 cozman Exp $<br>
+$Id: ZEngine.h,v 1.15 2002/12/29 07:22:01 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -21,15 +21,15 @@ $Id: ZEngine.h,v 1.14 2002/12/29 07:18:30 cozman Exp $<br>
 
     \section ZEngine About ZEngine
     <br>
-    ZEngine is designed to provide a powerful yet easy to use 2D game engine in a well designed Object Oriented manner, and uses
-    cross platform libraries such as SDL and OpenGL. (ZEngine can use SDL_ttf,SDL_image,SDL_mixer, and PhysFS 
-    all of which are cross platform as well as Open Source.)<br>
-    It is licensed under a BSD-style license, and anyone is free to suggest or implement changes to be added to the Engine,
-    as well as change the engine to their own needs or use it however they like.<br>
-    ZEngine now uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
+    &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine is designed to provide a powerful yet easy to use 2D game engine in a well designed 
+    Object Oriented manner, and uses cross platform libraries such as SDL and OpenGL. (ZEngine can use SDL_ttf,SDL_image,
+    SDL_mixer, and PhysFS all of which are cross platform as well as Open Source.)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-It is licensed under a BSD-style license, and anyone is free to suggest or implement changes 
+    to be added to the Engine, as well as modify the engine to their own needs or use it however they like.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine now uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
     and making the engine much faster in all test cases, and the engine was tested for memory leaks with MSVC and is known
     to have no leaks.<br>
-    The ZEngine website can be found at http://zengine.sourceforge.net/.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website can be found at http://zengine.sourceforge.net/.<br>
     
     \section Licensing Licensing
     <br>
