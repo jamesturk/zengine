@@ -13,7 +13,7 @@
     \brief Source file for ZSound.
 
     Implementation of ZSound, the basic Sound class for ZEngine.
-    <br>$Id: ZE_ZSound.cpp,v 1.8 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.cpp,v 1.9 2003/06/11 00:15:10 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -33,7 +33,7 @@ ZSound::ZSound()
     rChannelID = -1;    //request channel ID
 }
 
-ZSound::ZSound(string filename)
+ZSound::ZSound(std::string filename)
 {
     rEngine = ZEngine::GetInstance();
     rSound = NULL;
@@ -46,7 +46,7 @@ ZSound::~ZSound()
     Release();
 }
 
-void ZSound::Open(string filename)
+void ZSound::Open(std::string filename)
 {
     Release();
     rSound = rEngine->LoadSound(filename);

@@ -13,7 +13,7 @@
     \brief Definition file for ZMusic.
 
     Definition file for ZMusic, the Music file wrapper for ZEngine.
-    <br>$Id: ZE_ZMusic.h,v 1.8 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZE_ZMusic.h,v 1.9 2003/06/11 00:15:26 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -61,7 +61,7 @@ class ZMusic
             Constructor simply calls ZMusic::Open() with same filename. (WAV,MOD,MID,OGG)
             \param filename Music to open.
         **/
-        ZMusic(string filename);
+        ZMusic(std::string filename);
 
         /*!
             \brief Destructor, frees memory.
@@ -76,7 +76,7 @@ class ZMusic
             Open a music file to be used.
             \param filename Music to open.
         **/
-        void Open(string filename);
+        void Open(std::string filename);
 
         /*!
             \brief Release music.

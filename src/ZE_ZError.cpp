@@ -13,7 +13,7 @@
     \brief Source file for ZError.
 
     Implementation of ZError, the ZEngine internal error information storage class.
-    <br>$Id: ZE_ZError.cpp,v 1.8 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZError.cpp,v 1.9 2003/06/11 00:15:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,13 +22,13 @@
 namespace ZE
 {
 
-string *ZError::sErrorDesc = NULL; 
+std::string *ZError::sErrorDesc = NULL; 
 
 void ZError::CreateStringTable()
 {
     if(!sErrorDesc)
     {
-        sErrorDesc = new string[ZERR_LAST]; 
+        sErrorDesc = new std::string[ZERR_LAST]; 
         sErrorDesc[ZERR_NONE] = "No Error. [%s]";
         sErrorDesc[ZERR_SDL_INTERNAL] = "SDL Error. [%s]";
         sErrorDesc[ZERR_SDL_INIT] = "Error Initializing SDL: %s";
@@ -59,7 +59,7 @@ void ZError::DestroyStringTable()
     }
 }
 
-ZError::ZError(ZErrorCode code, string desc, string file, int line)
+ZError::ZError(ZErrorCode code, std::string desc, std::string file, int line)
 {
     rCode = code;
     rDescription = desc;
@@ -71,7 +71,7 @@ ZError::~ZError()
 {
 }
 
-void ZError::Create(ZErrorCode code, string desc, string file, int line)
+void ZError::Create(ZErrorCode code, std::string desc, std::string file, int line)
 {
     rCode = code;
     rDescription = desc;
@@ -84,9 +84,9 @@ ZErrorCode ZError::Code() const
     return rCode;
 }
 
-string ZError::LogString() const
+std::string ZError::LogString() const
 {
-    string msg;
+    std::string msg;
     
     msg = rDescription.length() ? FormatStr(sErrorDesc[rCode].c_str(),rDescription.c_str()) : sErrorDesc[rCode];
 

@@ -40,16 +40,16 @@ class ZConfigFile
         /*!
             \brief ZConfigFile Variable class.
             
-            ZConfigFile class for mapping a variable name to it's value, stored in string form (later converted to 
+            ZConfigFile class for mapping a variable name to it's value, stored in std::string form (later converted to 
             bool or int if needed).
         **/
         class ZCF_Variable
         {
             public:
                 //! Variable name.
-                string var;
+                std::string var;
                 //! Value associated with variable.
-                string val;
+                std::string val;
         };
 
         /*!
@@ -61,25 +61,25 @@ class ZConfigFile
         {
             public:
                 //! Section name.
-                string section;
+                std::string section;
                 //! STL list of variables.
-                list<ZCF_Variable> varList;
+                std::list<ZCF_Variable> varList;
         };
 
     protected:
         //! List of sections of internal type.
-        list<ZCF_Section> rFileLayout;
+        std::list<ZCF_Section> rFileLayout;
         //! Filename of file currently open.
-        string rFilename;
+        std::string rFilename;
 
         /*!
-            \brief Reformat a string in a form more suitable to parsing.
+            \brief Reformat a std::string in a form more suitable to parsing.
 
-            Removes whitespace from a string and makes all characters lowercase.
-            \param str The string to get a clean version of.
-            \return Cleaned string.
+            Removes whitespace from a std::string and makes all characters lowercase.
+            \param str The std::string to get a clean version of.
+            \return Cleaned std::string.
         **/
-        string CleanString(string str)  const;
+        std::string CleanString(std::string str)  const;
         
         /*!
             \brief Check if a section exists.
@@ -88,7 +88,7 @@ class ZConfigFile
             \param sec Section to check for.
             \return bool, true if section exists in file.
         **/
-        bool Exists(string sec) const;
+        bool Exists(std::string sec) const;
 
         /*!
             \brief Check if a variable exists.
@@ -98,7 +98,7 @@ class ZConfigFile
             \param var Variable to check for.
             \return bool, true if section exists in file.
         **/
-        bool Exists(string sec, string var) const;
+        bool Exists(std::string sec, std::string var) const;
 
         /*!
             \brief Internal function to set variables.
@@ -108,7 +108,7 @@ class ZConfigFile
             \param var Variable to set.
             \param val Value to set variable to.
         **/
-        void SetVariable(string sec, string var, string val);
+        void SetVariable(std::string sec, std::string var, std::string val);
 
         /*!
             \brief Internal function to get value of a variable.
@@ -119,7 +119,7 @@ class ZConfigFile
             \param defVal Value to return if variable doesnt exist.
             \return Value of variable.
         **/
-        string GetVariable(string sec, string var, string defVal) const;
+        std::string GetVariable(std::string sec, std::string var, std::string defVal) const;
 
     public:
 
@@ -136,7 +136,7 @@ class ZConfigFile
             Constructor takes filename, and calls process on it.
             \param filename File to load as ZConfigFile.
         **/
-        ZConfigFile(string filename);
+        ZConfigFile(std::string filename);
 
         /*!
             \brief Destructor, flushes file.
@@ -151,7 +151,7 @@ class ZConfigFile
             Parses the file, reading the contents into the fileLayout map.
             \param filename File to parse and attach this ZDataFile to.
         **/
-        void Process(string filename);
+        void Process(std::string filename);
 
         /*!
             \brief Get value in floating point format from file.
@@ -163,7 +163,7 @@ class ZConfigFile
             \param defVal Value to return if var does not exist within section.
             \return Contents of the variable in floating point format.
         **/
-        float GetFloat(string section, string var, float defVal) const;
+        float GetFloat(std::string section, std::string var, float defVal) const;
 
         /*!
             \brief Get value in integer format from file.
@@ -174,7 +174,7 @@ class ZConfigFile
             \param defVal Value to return if var does not exist within section.
             \return Contents of the variable in integer format.
         **/
-        int GetInt(string section, string var, int defVal) const;
+        int GetInt(std::string section, std::string var, int defVal) const;
 
         /*!
             \brief Get value in boolean format from file.
@@ -186,18 +186,18 @@ class ZConfigFile
             \param defVal Value to return if var does not exist within section.
             \return Contents of the variable in boolean format.
         **/
-        bool GetBool(string section, string var, bool defVal) const;
+        bool GetBool(std::string section, std::string var, bool defVal) const;
 
         /*!
-            \brief Get value in string format from file.
+            \brief Get value in std::string format from file.
 
             Get the current value of a variable in the file, or defVal if not found in file. 
             \param section Name of section to seek variable under.
             \param var Name of variable to seek value for.
             \param defVal Value to return if var does not exist within section.
-            \return Contents of the variable in string format.
+            \return Contents of the variable in std::string format.
         **/
-        string GetString(string section, string var, string defVal) const;
+        std::string GetString(std::string section, std::string var, std::string defVal) const;
 
         /*!
             \brief Set value in floating point format in file.
@@ -209,7 +209,7 @@ class ZConfigFile
             \param var Name of variable to set value for.
             \param val Floating point value to set variable to in file.
         **/
-        void SetFloat(string section, string var, float val);
+        void SetFloat(std::string section, std::string var, float val);
 
         /*!
             \brief Set value in integer format in file.
@@ -220,7 +220,7 @@ class ZConfigFile
             \param var Name of variable to set value for.
             \param val Integer value to set variable to in file.
         **/
-        void SetInt(string section, string var, int val);
+        void SetInt(std::string section, std::string var, int val);
 
         /*!
             \brief Set value in boolean format in file.
@@ -231,10 +231,10 @@ class ZConfigFile
             \param var Name of variable to set value for.
             \param val Boolean value to set variable to in file.
         **/
-        void SetBool(string section, string var, bool val);
+        void SetBool(std::string section, std::string var, bool val);
 
         /*!
-            \brief Set value in string format in file.
+            \brief Set value in std::string format in file.
 
             Set the new value of a variable in the file to val, creating the section and variable 
             if not already found in file.
@@ -242,7 +242,7 @@ class ZConfigFile
             \param var Name of variable to set value for.
             \param val String value to set variable to in file.
         **/
-        void SetString(string section, string var, string val);
+        void SetString(std::string section, std::string var, std::string val);
         
         /*!
             \brief Write all values to file

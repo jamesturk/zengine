@@ -13,7 +13,7 @@
     \brief Source file for ZClient.
 
     Implementation file for ZClient, the TCP Client class for ZEngine.
-    <br>$Id: ZE_ZClient.cpp,v 1.7 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZClient.cpp,v 1.8 2003/06/11 00:15:08 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -24,7 +24,7 @@
 namespace ZE
 {
 
-string num2dotted4(unsigned int num)
+std::string num2dotted4(unsigned int num)
 {
     vector<int> ip;
     int d=16777216; //2^24

@@ -13,7 +13,7 @@
     \brief Source file for ZConfigFile.
 
     Implementation of ZConfigFile, the ZEngine INI-Style Config File.
-    <br>$Id: ZE_ZConfigFile.cpp,v 1.10 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZConfigFile.cpp,v 1.11 2003/06/11 00:15:08 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,13 +22,13 @@
 namespace ZE
 {
 
-string ZConfigFile::CleanString(string str)  const
+std::string ZConfigFile::CleanString(std::string str)  const
 {
-    string tmpStr;
+    std::string tmpStr;
     bool inQuotes = false;
 
     //cycle through, only copy spaces and if a character is uppercase, convert it to lowercase
-    for(string::size_type i = 0; i < str.length(); ++i)
+    for(std::string::size_type i = 0; i < str.length(); ++i)
     {
         if(!isspace(str[i]) || inQuotes)
         {
@@ -42,9 +42,9 @@ string ZConfigFile::CleanString(string str)  const
     return tmpStr;
 }
 
-bool ZConfigFile::Exists(string sec) const
+bool ZConfigFile::Exists(std::string sec) const
 {
-    list<ZCF_Section>::const_iterator secIter;
+    std::list<ZCF_Section>::const_iterator secIter;
 
     sec = CleanString(sec);
 
@@ -56,10 +56,10 @@ bool ZConfigFile::Exists(string sec) const
     return false;
 }
 
-bool ZConfigFile::Exists(string sec, string var) const
+bool ZConfigFile::Exists(std::string sec, std::string var) const
 {
-    list<ZCF_Section>::const_iterator secIter;
-    list<ZCF_Variable>::const_iterator varIter;
+    std::list<ZCF_Section>::const_iterator secIter;
+    std::list<ZCF_Variable>::const_iterator varIter;
 
     sec = CleanString(sec);
     var = CleanString(var);
@@ -78,10 +78,10 @@ bool ZConfigFile::Exists(string sec, string var) const
     return false;
 }
 
-void ZConfigFile::SetVariable(string sec, string var, string val)
+void ZConfigFile::SetVariable(std::string sec, std::string var, std::string val)
 {
-    list<ZCF_Section>::iterator secIter;
-    list<ZCF_Variable>::iterator varIter;
+    std::list<ZCF_Section>::iterator secIter;
+    std::list<ZCF_Variable>::iterator varIter;
 
     if(Exists(CleanString(sec)))
     {
@@ -122,10 +122,10 @@ void ZConfigFile::SetVariable(string sec, string var, string val)
     }
 }
 
-string ZConfigFile::GetVariable(string sec, string var, string defVal) const
+std::string ZConfigFile::GetVariable(std::string sec, std::string var, std::string defVal) const
 {
-    list<ZCF_Section>::const_iterator secIter;
-    list<ZCF_Variable>::const_iterator varIter;
+    std::list<ZCF_Section>::const_iterator secIter;
+    std::list<ZCF_Variable>::const_iterator varIter;
 
     sec = CleanString(sec);
     var = CleanString(var);
@@ -159,7 +159,7 @@ string ZConfigFile::GetVariable(string sec, string var, string defVal) const
 
 ZConfigFile::ZConfigFile() {}
 
-ZConfigFile::ZConfigFile(string rFilename)
+ZConfigFile::ZConfigFile(std::string rFilename)
 {
     Process(rFilename);
 }
@@ -169,35 +169,35 @@ ZConfigFile::~ZConfigFile()
     Close();
 }
 
-void ZConfigFile::Process(string filename)
+void ZConfigFile::Process(std::string filename)
 {
     rFilename = filename;
 
-    ifstream cfile(rFilename.c_str());
-    string section, str, var, tmp;
+    std::ifstream cfile(rFilename.c_str());
+    std::string section, str, var, tmp;
 
     rFileLayout.clear();
 
     while(!cfile.eof() && cfile.is_open())
     {
-        getline(cfile,str);    //read in a line
+        std::getline(cfile,str);    //read in a line
         tmp = CleanString(str);    //get a clean version
 
-        //if string is bracketed it is a section, if it begins in a letter it is a variable
+        //if std::string is bracketed it is a section, if it begins in a letter it is a variable
         if(tmp[0] == '[' && tmp[tmp.length()-1] == ']')
             section = str;
         else if(isalpha(tmp[0]))
         {
-            var = str.substr(0,str.find('='));    //split the string at the equals sign
+            var = str.substr(0,str.find('='));    //split the std::string at the equals sign
             SetVariable(section,var,str.substr(str.find('=')+1,str.length()-var.length()-1));
         }
     }
     cfile.close();
 }
 
-float ZConfigFile::GetFloat(string section, string var, float defVal) const
+float ZConfigFile::GetFloat(std::string section, std::string var, float defVal) const
 {
-    string val;
+    std::string val;
     char tmp[20];
 
     section = CleanString(section);
@@ -214,9 +214,9 @@ float ZConfigFile::GetFloat(string section, string var, float defVal) const
         return static_cast<float>(atof(val.c_str()));   //atof returns a double(?!)
 }
 
-int ZConfigFile::GetInt(string section, string var, int defVal) const
+int ZConfigFile::GetInt(std::string section, std::string var, int defVal) const
 {
-    string val;
+    std::string val;
     char tmp[20];
 
     section = CleanString(section);
@@ -233,9 +233,9 @@ int ZConfigFile::GetInt(string section, string var, int defVal) const
         return atoi(val.c_str());
 }
 
-bool ZConfigFile::GetBool(string section, string var, bool defVal) const
+bool ZConfigFile::GetBool(std::string section, std::string var, bool defVal) const
 {
-    string val,tmp;
+    std::string val,tmp;
 
     section = CleanString(section);
     var = CleanString(var);
@@ -253,9 +253,9 @@ bool ZConfigFile::GetBool(string section, string var, bool defVal) const
         return defVal;
 }
 
-string ZConfigFile::GetString(string section, string var, string defVal) const
+std::string ZConfigFile::GetString(std::string section, std::string var, std::string defVal) const
 {
-    string val;
+    std::string val;
 
     section = CleanString(section);
     var = CleanString(var);
@@ -273,7 +273,7 @@ string ZConfigFile::GetString(string section, string var, string defVal) const
         return val;
 }
 
-void ZConfigFile::SetFloat(string section, string var, float val)
+void ZConfigFile::SetFloat(std::string section, std::string var, float val)
 {
     char buf[20];
     sprintf(buf,"%f",val);
@@ -282,7 +282,7 @@ void ZConfigFile::SetFloat(string section, string var, float val)
     SetVariable(section,var,buf);
 }
 
-void ZConfigFile::SetInt(string section, string var, int val)
+void ZConfigFile::SetInt(std::string section, std::string var, int val)
 {
     char buf[20];
     sprintf(buf,"%d",val);
@@ -291,15 +291,15 @@ void ZConfigFile::SetInt(string section, string var, int val)
     SetVariable(section,var,buf);
 }
 
-void ZConfigFile::SetBool(string section, string var, bool val)
+void ZConfigFile::SetBool(std::string section, std::string var, bool val)
 {
-    string tmp = val ? "true" : "false";
+    std::string tmp = val ? "true" : "false";
 
     section = '[' + section + ']';
     SetVariable(section,var,tmp);
 }
 
-void ZConfigFile::SetString(string section, string var, string val)
+void ZConfigFile::SetString(std::string section, std::string var, std::string val)
 {
     section = '[' + section + ']';
     val = "\"" + val + "\"";
@@ -308,14 +308,14 @@ void ZConfigFile::SetString(string section, string var, string val)
 
 void ZConfigFile::Flush()
 {
-    list<ZCF_Section>::iterator secIter;
-    list<ZCF_Variable>::iterator varIter;
-    string secName;
+    std::list<ZCF_Section>::iterator secIter;
+    std::list<ZCF_Variable>::iterator varIter;
+    std::string secName;
 
     //in case the filename is already cleared somehow
     if(rFilename.length())
     {
-        ofstream cfile(rFilename.c_str(), ios::out|ios::trunc);
+        std::ofstream cfile(rFilename.c_str(), std::ios::out|std::ios::trunc);
 
         if(cfile)
         {
@@ -326,13 +326,13 @@ void ZConfigFile::Flush()
                 secName = CleanString((*secIter).section);
                 if(secName.length() && secName[0] == '[' && secName[secName.length()-1] == ']')
                 {
-                    cfile << (*secIter).section << endl;    //write out raw section title
+                    cfile << (*secIter).section << std::endl;    //write out raw section title
 
                     //for each variable in section, write out variable=value
                     for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
                     {
                         if(CleanString((*varIter).var).length())    //ensures that variable is valid
-                            cfile << (*varIter).var << '=' << (*varIter).val << endl;
+                            cfile << (*varIter).var << '=' << (*varIter).val << std::endl;
                     }
                 }
             }

@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.10 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.11 2003/06/11 00:15:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -32,7 +32,7 @@ ZFont::ZFont()
     rBGColor.r = rBGColor.g = rBGColor.b = rBGColor.unused = 0;
 }
 
-ZFont::ZFont(string filename, int size)
+ZFont::ZFont(std::string filename, int size)
 {
     rEngine = ZEngine::GetInstance();
     rFont = NULL;
@@ -46,7 +46,7 @@ ZFont::~ZFont()
     Release();
 }
 
-void ZFont::Open(string filename, int size)
+void ZFont::Open(std::string filename, int size)
 {
     Release();
     rFont = rEngine->LoadFont(filename,size);
@@ -57,12 +57,12 @@ void ZFont::Release()
     FreeFont(rFont);
 }
 
-void ZFont::DrawText(string text, ZImage &image) const
+void ZFont::DrawText(std::string text, ZImage &image) const
 {
     image.Attach(TTF_RenderText_Solid(rFont, text.c_str(), rColor));
 }
 
-void ZFont::DrawShadedText(string text, ZImage &image) const
+void ZFont::DrawShadedText(std::string text, ZImage &image) const
 {
     image.Attach(TTF_RenderText_Shaded(rFont, text.c_str(), rColor, rBGColor));
 }
@@ -165,7 +165,7 @@ int ZFont::LineSkip() const
     }
 }
 
-int ZFont::StringWidth(string text) const
+int ZFont::StringWidth(std::string text) const
 {
     int w,h;
 
@@ -181,7 +181,7 @@ int ZFont::StringWidth(string text) const
     }
 }
 
-int ZFont::StringHeight(string text) const
+int ZFont::StringHeight(std::string text) const
 {
     int w,h;
 

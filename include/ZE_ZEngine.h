@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.39 2003/06/10 23:24:47 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.40 2003/06/11 00:15:25 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -96,7 +96,7 @@ class ZEngine
         //! Mouse Button Information
         Uint8 mMouseB;
         //! Stack of Errors which have occured.
-        queue<ZError> mErrorQueue;
+        std::queue<ZError> mErrorQueue;
         //! Current error.
         ZError mCurError;
         //! Option controlling how logfile is used.
@@ -181,7 +181,7 @@ class ZEngine
             \param icon Path to Icon File.
             \return result of setting up the display, true if everything went ok, false if any setup failed (check GetLastError).
         **/
-        bool CreateDisplay(string title, string icon="");
+        bool CreateDisplay(std::string title, std::string icon="");
 
         /*!
             \brief Quit SDL and any Subsystems.
@@ -488,7 +488,7 @@ class ZEngine
             Sets up PhysicsFS, must be called when application is started.
             \param argv argv[0] from application's main.
         **/
-        void InitPhysFS(string argv);
+        void InitPhysFS(std::string argv);
 
         /*!
             \brief Add Directory to PhysFS Search Path.
@@ -496,7 +496,7 @@ class ZEngine
             Add Directory to PhysicsFS search path, the path it looks in for files when attempting to load.
             \param dir Directory to add to search path.
         **/
-        void AddPhysFSDir(string dir);
+        void AddPhysFSDir(std::string dir);
 
 #endif    //USE_PHYSFS
 
@@ -524,7 +524,7 @@ class ZEngine
             \param logFile Name of file to use as log, passing in stderr or stdio will set the log to the C streams. 
             Passing in nothing will not change the current error log file, which defaults to stderr.
         **/
-        void SetErrorLog(bool logAll, string logFile="");
+        void SetErrorLog(bool logAll, std::string logFile="");
 
         /*!
             \brief Report an error.
@@ -532,11 +532,11 @@ class ZEngine
             Adds the error to the the error queue, and sets the current error to this error.
             \since 0.8.2
             \param code ZErrorCode of error.
-            \param desc Optional string describing error.
+            \param desc Optional std::string describing error.
             \param file Optional argument specifying the file the error occured in.
             \param line Optional argument specifying the line the error occured on.
         **/
-        void ReportError(ZErrorCode code, string desc="", string file="", unsigned int line=0);
+        void ReportError(ZErrorCode code, std::string desc="", std::string file="", unsigned int line=0);
 
         /*!
             \brief Get the last error.
@@ -550,11 +550,11 @@ class ZEngine
         /*!
             \brief Write to the log.
 
-            Write a string to the log, allowing special usage of the error log.
+            Write a std::string to the log, allowing special usage of the error log.
             \since 0.8.2
             \param str String to write to log file.
         **/
-        void WriteLog(string str);
+        void WriteLog(std::string str);
 
         /*!
             \brief Flush Stack of Errors to file.
@@ -628,7 +628,7 @@ class ZEngine
             \param filename path to file to load.
             \return A SDL_Surface pointer to data.
         **/
-        SDL_Surface* LoadImage(string filename);
+        SDL_Surface* LoadImage(std::string filename);
 
 #ifdef USE_SDL_MIXER
         /*!
@@ -638,7 +638,7 @@ class ZEngine
             \param filename path to file to load.
             \return A Mix_Chunk pointer to data.
         **/
-        Mix_Chunk* LoadSound(string filename);
+        Mix_Chunk* LoadSound(std::string filename);
 
         /*!
             \brief Load a Music File
@@ -647,7 +647,7 @@ class ZEngine
             \param filename path to file to load.
             \return A Mix_Music pointer to data.
         **/
-        Mix_Music* LoadMusic(string filename);
+        Mix_Music* LoadMusic(std::string filename);
 #endif
 
 #ifdef USE_SDL_TTF
@@ -659,7 +659,7 @@ class ZEngine
             \param size point size of font
             \return A TTF_Font pointer to data.
         **/
-        TTF_Font* LoadFont(string filename, int size);
+        TTF_Font* LoadFont(std::string filename, int size);
 #endif 
 
     /////////////

@@ -54,6 +54,5 @@
 #include <cstdarg>
 #include <cctype>
 #include <ctime>
-using namespace std;
 
 #endif //__ze_includes_h__

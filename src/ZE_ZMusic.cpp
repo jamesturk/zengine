@@ -13,7 +13,7 @@
     \brief Source file for ZMusic.
 
     Implementation of ZMusic, the basic Music class for ZEngine.
-    <br>$Id: ZE_ZMusic.cpp,v 1.8 2003/05/13 01:31:30 cozman Exp $<br>
+    <br>$Id: ZE_ZMusic.cpp,v 1.9 2003/06/11 00:15:10 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -32,7 +32,7 @@ ZMusic::ZMusic()
     rMusic = NULL;
 }
 
-ZMusic::ZMusic(string filename)
+ZMusic::ZMusic(std::string filename)
 {
     rEngine = ZEngine::GetInstance();
     rMusic = NULL;
@@ -44,7 +44,7 @@ ZMusic::~ZMusic()
     Release();
 }
 
-void ZMusic::Open(string filename)
+void ZMusic::Open(std::string filename)
 {
     Release();
     rMusic = rEngine->LoadMusic(filename);

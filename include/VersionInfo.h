@@ -14,7 +14,7 @@
 
     Definition file for VersinInfo class, simple class for containing and comparing 
     version numbers.
-    <br>$Id: VersionInfo.h,v 1.2 2003/06/10 23:24:47 cozman Exp $<br>
+    <br>$Id: VersionInfo.h,v 1.3 2003/06/11 00:15:24 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -38,7 +38,7 @@ class VersionInfo
         //! Version release number, changes on every release.
         unsigned int release;
         //! String Description of release. (Often blank.)
-        string extra;
+        std::string extra;
 
         /*!
             \brief Constructor for VersionInfo.
@@ -47,17 +47,17 @@ class VersionInfo
             \param maj Major version number.
             \param min Minor version number.
             \param rel Version release number.
-            \param ext Extra info string, optional (defaults to empty string).
+            \param ext Extra info std::string, optional (defaults to empty std::string).
         **/
-        VersionInfo(unsigned int maj, unsigned int min, unsigned int rel, string ext="");
+        VersionInfo(unsigned int maj, unsigned int min, unsigned int rel, std::string ext="");
 
         /*!
-            \brief Get string representing version number.
+            \brief Get std::string representing version number.
 
             Get dotted version number major.minor.release [extra].
-            \return Formatted version string.
+            \return Formatted version std::string.
         **/
-        string GetString() const;
+        std::string GetString() const;
 
         /*!
             \brief Less than operator overload for comparing VersionInfo.

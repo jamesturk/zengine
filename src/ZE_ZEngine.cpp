@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.44 2003/06/10 23:24:47 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.45 2003/06/11 00:15:08 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,7 +22,7 @@
 namespace ZE
 {
 
-VersionInfo ZEngine::Version(0,8,3);
+VersionInfo ZEngine::Version(0,8,4,"dev");
 ZEngine *ZEngine::sInstance=NULL;
 
 ZEngine::ZEngine()
@@ -97,7 +97,7 @@ void ZEngine::SetupSound(int rate, bool stereo)
 }
 #endif
 
-bool ZEngine::CreateDisplay(string title, string icon)
+bool ZEngine::CreateDisplay(std::string title, std::string icon)
 {
     Uint32 flags=0;
     SDL_Surface *iconImg;
@@ -557,24 +557,24 @@ void ZEngine::SetEventFilter(SDL_EventFilter filter)
 
 #ifdef USE_PHYSFS
 
-void ZEngine::InitPhysFS(string argv)
+void ZEngine::InitPhysFS(std::string argv)
 {
-    string::size_type pos;
+    std::string::size_type pos;
     PHYSFS_init(argv.c_str());
 
     pos = argv.rfind(PHYSFS_getDirSeparator());
-    if(pos != string::npos)
+    if(pos != std::string::npos)
         AddPhysFSDir(argv.substr(0,pos));
 }
 
-void ZEngine::AddPhysFSDir(string dir)
+void ZEngine::AddPhysFSDir(std::string dir)
 {
     PHYSFS_addToSearchPath(dir.c_str(),0);
 }
 
 #endif //USE_PHYSFS
 
-void ZEngine::SetErrorLog(bool logAll, string logFile)
+void ZEngine::SetErrorLog(bool logAll, std::string logFile)
 {
     mLogAllErrors = logAll;
     if(logFile.length())
@@ -588,7 +588,7 @@ void ZEngine::SetErrorLog(bool logAll, string logFile)
     }
 }
 
-void ZEngine::ReportError(ZErrorCode code, string desc, string file, unsigned int line)
+void ZEngine::ReportError(ZErrorCode code, std::string desc, std::string file, unsigned int line)
 {
     mCurError.Create(code,desc,file,line);
 
@@ -608,7 +608,7 @@ ZErrorCode ZEngine::GetLastError()
     return code;
 }
 
-void ZEngine::WriteLog(string str)
+void ZEngine::WriteLog(std::string str)
 {
     fprintf(mErrlog,str.c_str());
     fprintf(mErrlog,"\n");
@@ -654,7 +654,7 @@ double ZEngine::RandDouble(double min, double max)
     return min + (genrand_real1()*(max-min));
 }
 
-SDL_Surface* ZEngine::LoadImage(string filename)
+SDL_Surface* ZEngine::LoadImage(std::string filename)
 {
     SDL_Surface *image;
 //using physfs//
@@ -694,7 +694,7 @@ SDL_Surface* ZEngine::LoadImage(string filename)
 
 #ifdef USE_SDL_MIXER
 
-Mix_Chunk* ZEngine::LoadSound(string filename)
+Mix_Chunk* ZEngine::LoadSound(std::string filename)
 {
     Mix_Chunk *sound;
 
@@ -716,7 +716,7 @@ Mix_Chunk* ZEngine::LoadSound(string filename)
         return sound;
 }
 
-Mix_Music* ZEngine::LoadMusic(string filename)
+Mix_Music* ZEngine::LoadMusic(std::string filename)
 {
     Mix_Music *music;
 
@@ -743,7 +743,7 @@ Mix_Music* ZEngine::LoadMusic(string filename)
 
 #ifdef USE_SDL_TTF
 
-TTF_Font* ZEngine::LoadFont(string filename, int size)
+TTF_Font* ZEngine::LoadFont(std::string filename, int size)
 {
     TTF_Font *font;
 

@@ -14,7 +14,7 @@
 
     Definition file for ZError, the Error logging class for ZEngine.
     This class should never be used by the average user, it is used by ZEngine to store information on an error.
-    <br>$Id: ZE_ZError.h,v 1.10 2003/06/06 03:02:55 cozman Exp $<br>
+    <br>$Id: ZE_ZError.h,v 1.11 2003/06/11 00:15:25 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -23,7 +23,6 @@
 
 #include "ZE_Utility.h"
 #include <string>
-using namespace std;
 
 namespace ZE
 {
@@ -67,28 +66,28 @@ class ZError
 {
     protected:
         //! Static Array of Error Identifiers
-        static string *sErrorDesc;
+        static std::string *sErrorDesc;
         //! Error ID.
         ZErrorCode rCode;
         //! Error Description.
-        string rDescription;
+        std::string rDescription;
         //! File which error occured in.
-        string rFilename;
+        std::string rFilename;
         //! Line which error occured on.
         unsigned int rLine;
 
     public:
         /*!
-            \brief Construct string table for error strings.
+            \brief Construct std::string table for error strings.
 
-            Constructs a string table for errors, enabling ZEngine to properly delete the table on exit.
+            Constructs a std::string table for errors, enabling ZEngine to properly delete the table on exit.
         **/
         static void CreateStringTable();
 
         /*!
-            \brief Destroy string table of error strings.
+            \brief Destroy std::string table of error strings.
 
-            Properly delete the string table, freeing all memory used by the strings.
+            Properly delete the std::string table, freeing all memory used by the strings.
         **/
         static void DestroyStringTable();
 
@@ -101,7 +100,7 @@ class ZError
             \param file Optional argument specifying the file the error occured in.
             \param line Optional argument specifying the line the error occured on.
         **/
-        ZError(ZErrorCode code=ZERR_NONE, string desc="", string file="", int line=0);
+        ZError(ZErrorCode code=ZERR_NONE, std::string desc="", std::string file="", int line=0);
 
         /*!
             \brief Virtual Destructor.
@@ -119,7 +118,7 @@ class ZError
             \param file Optional argument specifying the file the error occured in.
             \param line Optional argument specifying the line the error occured on.
         **/
-        void Create(ZErrorCode code, string desc="", string file="", int line=0);
+        void Create(ZErrorCode code, std::string desc="", std::string file="", int line=0);
 
         /////////////
         //Accessors//
@@ -134,11 +133,11 @@ class ZError
         ZErrorCode Code() const;
 
         /*!
-            \brief Get formatted string for log file.
+            \brief Get formatted std::string for log file.
 
-            Return the string to be written to the logfile.  Called by ZEngine in LogError.
+            Return the std::string to be written to the logfile.  Called by ZEngine in LogError.
         **/
-        string LogString() const;
+        std::string LogString() const;
 };
 
 }

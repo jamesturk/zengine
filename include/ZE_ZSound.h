@@ -13,7 +13,7 @@
     \brief Definition file for ZSound.
 
     Definition file for ZSound, the Sound Effect wrapper for ZEngine.
-    <br>$Id: ZE_ZSound.h,v 1.8 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.h,v 1.9 2003/06/11 00:15:26 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -63,7 +63,7 @@ class ZSound
             Constructor simply calls ZSound::Open() with same filename. (WAV,MOD,MID,OGG)
             \param filename Sound effect to open.
         **/
-        ZSound(string filename);
+        ZSound(std::string filename);
 
         /*!
             \brief Destructor, frees memory.
@@ -78,7 +78,7 @@ class ZSound
             Open a music file to be used.
             \param filename Music to open.
         **/
-        void Open(string filename);
+        void Open(std::string filename);
 
         /*!
             \brief Release sound effect.

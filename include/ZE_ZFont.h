@@ -41,7 +41,7 @@ class ZFont
         //! Pointer to font data.
         TTF_Font *rFont;
         //! Filename, for resizing.
-        string rFilename;
+        std::string rFilename;
         //! SDL_Color for current text color.
         SDL_Color rColor;
         //! SDL_Color for background color to be used in shaded draws. 
@@ -67,7 +67,7 @@ class ZFont
             \param filename Font to open.
             \param size Size to use for font.
         **/
-        ZFont(string filename, int size);
+        ZFont(std::string filename, int size);
 
         /*!
             \brief Destructor, frees memory.
@@ -83,7 +83,7 @@ class ZFont
             \param filename Font to open.
             \param size Size to use for font.
         **/
-        void Open(string filename, int size);
+        void Open(std::string filename, int size);
 
         /*!
             \brief Release font.
@@ -97,22 +97,22 @@ class ZFont
         ////////////////////////
 
         /*!
-            \brief Draws a string in a color to a ZImage.
+            \brief Draws a std::string in a color to a ZImage.
 
             Draw to a surface in specified color and associate that surface with a ZImage.
             \param text String to write.
             \param image ZImage to draw to.
         **/
-        void DrawText(string text, ZImage &image) const;
+        void DrawText(std::string text, ZImage &image) const;
 
         /*!
-            \brief Draws a string with a colored background to a ZImage.
+            \brief Draws a std::string with a colored background to a ZImage.
 
-            Draw to a surface a string with a background of rBGColor and lettering in the normal color and associate that surface with a ZImage.
+            Draw to a surface a std::string with a background of rBGColor and lettering in the normal color and associate that surface with a ZImage.
             \param text String to write.
             \param image ZImage to draw to.
         **/
-        void DrawShadedText(string text, ZImage &image) const;
+        void DrawShadedText(std::string text, ZImage &image) const;
 
         /*!
             \brief Set Text rColor.
@@ -211,7 +211,7 @@ class ZFont
             \param text String to get width of.
             \return Width of String in Current font.
         **/
-        int StringWidth(string text) const;
+        int StringWidth(std::string text) const;
 
         /*!
             \brief Get String Height.
@@ -220,7 +220,7 @@ class ZFont
             \param text String to get height of.
             \return Height of String in Current font.
         **/
-        int StringHeight(string text) const;
+        int StringHeight(std::string text) const;
 };
 
 }

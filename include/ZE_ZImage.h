@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.18 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.19 2003/06/11 00:15:26 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -77,7 +77,7 @@ class ZImage
             Constructor is same as calling ZImage::Open() on passed filename.
             \param filename File to open as rImage.
         **/
-        ZImage(string filename);
+        ZImage(std::string filename);
 
         /*!
             \brief Constructor to Construct from SDL_Surface*.
@@ -130,7 +130,7 @@ class ZImage
             Open a file using ZEngine.  Loads into rImage member of class.
             \param filename File to open as rImage.
         **/
-        void Open(string filename);
+        void Open(std::string filename);
 
         /*!
             \brief Cuts part of an existing image to create a new image.

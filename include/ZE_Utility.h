@@ -14,7 +14,7 @@
 
     Definition file for ZEngine Utilities which are used throughout the engine and can be used in
     conjunction with ZEngine.
-    <br>$Id: ZE_Utility.h,v 1.4 2003/05/13 01:30:50 cozman Exp $<br>
+    <br>$Id: ZE_Utility.h,v 1.5 2003/06/11 00:15:25 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -28,15 +28,15 @@ namespace ZE
 {
 
 /*! 
-    \brief Parses a string and interprets variable arguments, similar to sprintf.
+    \brief Parses a std::string and interprets variable arguments, similar to sprintf.
 
     Takes % identifiers out of fmtstr and parses them, replacing them with cooresponding values 
     in the variable arguments list.  For more detail view stdarg documentation.
-    \param fmtstr defines format of resulting string
+    \param fmtstr defines format of resulting std::string
     \param ... variable number of arguments after fmtstr
-    \return string of parsed and combined string
+    \return std::string of parsed and combined std::string
 **/
-string FormatStr(const char *fmtstr, ...);
+std::string FormatStr(const char *fmtstr, ...);
 
 //////////
 //Memory//
@@ -79,7 +79,6 @@ void FreeMusic(Mix_Music *&music);
 **/
 void FreeFont(TTF_Font *&font);
 #endif
-
 
 }
 
