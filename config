@@ -8,11 +8,9 @@ BUILD_NAME=ZEngine-0.8.4
 #GL_LIB_NAME=OpenGL32
 #GL_INC_PATH=-I/usr/include/w32api/GL
 #GL_LIB_PATH=-L/lib/w32api
-#EXTRA_OPTIONS=-mno-cygwin -O2
 
     ###Linux###
 GL_LIB_NAME=GL
-EXTRA_OPTIONS=-O2
 
 ##Define compiler commands:
 CC=g++
@@ -23,6 +21,8 @@ WARN_LEVEL=-W -Wall
 SDL_INC_PATH=-I/usr/local/include/SDL
 SDL_LIB_PATH=-L/usr/local/lib/
 LIBS=-lZEngineS -lSDL_mixer -lSDL_image -lSDL_ttf -lSDLmain -lSDL -l$(GL_LIB_NAME)
+EXTRA_OPTIONS=-O2
+#add -mno-cygwin if compiling lib for non-cygwin g++ on windows
 
 ##Define install location:
 INSTALL_INC= /usr/local/include/$(BUILD_NAME)
