@@ -8,6 +8,8 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
+/*Id: */
+
 #include <ZEngine.h>
 #include <string> 
 using namespace std;
