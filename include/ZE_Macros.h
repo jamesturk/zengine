@@ -13,7 +13,7 @@
 File: ZE_Macros.h <br>
 Description: Header file for ZEngine Macros. <br>
 Author(s): James Turk <br>
-$Id: ZE_Macros.h,v 1.2 2002/12/03 04:11:41 cozman Exp $<br>
+$Id: ZE_Macros.h,v 1.3 2002/12/04 23:51:22 cozman Exp $<br>
 
     \file ZE_Macros.h
     \brief Definition file for ZEngine Macros
@@ -29,14 +29,26 @@ $Id: ZE_Macros.h,v 1.2 2002/12/03 04:11:41 cozman Exp $<br>
 namespace ZE
 {
 
+/*!
+    Safely free an SDL_Surface* and set it to NULL.
+**/
 #define FreeImage(image) if(image){SDL_FreeSurface(image); image = NULL;}
 
 #ifdef USE_SDL_MIXER
+/*!
+    Safely free a Mix_Chunk* and set it to NULL.
+**/
 #define FreeSound(sound) if(sound){Mix_FreeChunk(sound); sound = NULL;}
+/*!
+    Safely free a Mix_Music* and set it to NULL.
+**/
 #define FreeMusic(music) if(music){Mix_FreeMusic(music); music = NULL;}
 #endif
 
 #ifdef USE_SDL_TTF
+/*!
+    Safely free a TTF_Font and set it to NULL.
+**/
 #define FreeFont(font) if(font){TTF_CloseFont(font); font = NULL;}
 #endif
 
