@@ -51,183 +51,190 @@
 <a name="l00096"></a><a class="code" href="classZE_1_1ZEngine.html#o1">00096</a>         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#o1">mHeight</a>;
 <a name="l00098"></a><a class="code" href="classZE_1_1ZEngine.html#o2">00098</a>         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#o2">mBPP</a>;
 <a name="l00100"></a><a class="code" href="classZE_1_1ZEngine.html#o3">00100</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o3">mFullscreen</a>;
-00101 
-00102 <span class="preprocessor">#ifdef USE_SDL_MIXER </span>
-00103 <span class="preprocessor"></span>
-<a name="l00104"></a><a class="code" href="classZE_1_1ZEngine.html#o4">00104</a>         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#o4">mRate</a>;
-<a name="l00106"></a><a class="code" href="classZE_1_1ZEngine.html#o5">00106</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o5">mStereo</a>;
-00107 <span class="preprocessor">#endif </span>
-00108 <span class="preprocessor"></span>
-00109 
-00110     <span class="keyword">public</span>:
-00111         <span class="comment">//add initialization</span>
-00112 
-00123         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a0">SetupDisplay</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> bpp, <span class="keywordtype">bool</span> fullscreen);
-00124 
-00125 <span class="preprocessor">#ifdef USE_SDL_MIXER</span>
-00126 <span class="preprocessor"></span>
-00134         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a1">SetupSound</a>(<span class="keywordtype">int</span> rate, <span class="keywordtype">bool</span> stereo);
-00135 <span class="preprocessor">#endif </span>
-00136 <span class="preprocessor"></span>
-00148         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a2">CreateDisplay</a>(string title, string icon=<span class="stringliteral">""</span>);
-00149 
-00155         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a3">CloseDisplay</a>();
-00156 
-00158     <span class="comment">//Screen Access//</span>
-00160 <span class="comment"></span>
-00161     <span class="keyword">private</span>:
-<a name="l00163"></a><a class="code" href="classZE_1_1ZEngine.html#o6">00163</a>         SDL_Surface *<a class="code" href="classZE_1_1ZEngine.html#o6">mScreen</a>;
-00164 
-00165     <span class="keyword">public</span>:
-00172         SDL_Surface *<a class="code" href="classZE_1_1ZEngine.html#a4">Display</a>();
-00173 
-00180         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a5">Update</a>();
-00181 
-00191         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a6">Clear</a>(<span class="keywordtype">float</span> red=0.0f, <span class="keywordtype">float</span> green=0.0f, <span class="keywordtype">float</span> blue=0.0f, <span class="keywordtype">float</span> alpha=1.0f);
-00192 
-00194     <span class="comment">//OpenGL Specific Functions//</span>
-00196 <span class="comment">    public:</span>
-00197 
-00204         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a7">SetGL2D</a>();
-00205 
-00207     <span class="comment">//Timer and Framerate Independent Movement//</span>
-00209 <span class="comment">    </span>
-00210     <span class="keyword">private</span>:
-<a name="l00212"></a><a class="code" href="classZE_1_1ZEngine.html#o7">00212</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o7">mPaused</a>;
-<a name="l00214"></a><a class="code" href="classZE_1_1ZEngine.html#o8">00214</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o8">mUnpauseOnActive</a>;
-<a name="l00216"></a><a class="code" href="classZE_1_1ZEngine.html#o9">00216</a>         Uint8 <a class="code" href="classZE_1_1ZEngine.html#o9">mDesiredFramerate</a>;
-<a name="l00218"></a><a class="code" href="classZE_1_1ZEngine.html#o10">00218</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o10">mNextUpdate</a>;
-<a name="l00220"></a><a class="code" href="classZE_1_1ZEngine.html#o11">00220</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o11">mLastPause</a>;
-<a name="l00222"></a><a class="code" href="classZE_1_1ZEngine.html#o12">00222</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o12">mPausedTime</a>;
-<a name="l00224"></a><a class="code" href="classZE_1_1ZEngine.html#o13">00224</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o13">mLastTime</a>;
-<a name="l00226"></a><a class="code" href="classZE_1_1ZEngine.html#o14">00226</a>         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#o14">mSecPerFrame</a>;
-00227 
-00228     <span class="keyword">public</span>:
-00235         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a8">Delay</a>(Uint32 milliseconds);
-00236 
-00243         Uint32 <a class="code" href="classZE_1_1ZEngine.html#a9">GetTime</a>();
-00244 
-00250         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a10">PauseTimer</a>();
-00251 
-00257         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a11">UnpauseTimer</a>();
-00258 
-00265         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a12">GetFrameTime</a>();
-00266 
-00274         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a13">GetFramerate</a>();
-00275 
-00285         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a14">SetDesiredFramerate</a>(Uint8 rate);
+<a name="l00102"></a><a class="code" href="classZE_1_1ZEngine.html#o4">00102</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o4">mInitialized</a>;
+00103 
+00104 <span class="preprocessor">#ifdef USE_SDL_MIXER </span>
+00105 <span class="preprocessor"></span>
+<a name="l00106"></a><a class="code" href="classZE_1_1ZEngine.html#o5">00106</a>         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#o5">mRate</a>;
+<a name="l00108"></a><a class="code" href="classZE_1_1ZEngine.html#o6">00108</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o6">mStereo</a>;
+00109 <span class="preprocessor">#endif </span>
+00110 <span class="preprocessor"></span>
+00111 
+00112     <span class="keyword">public</span>:
+00113         <span class="comment">//add initialization</span>
+00114 
+00125         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a0">SetupDisplay</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> bpp, <span class="keywordtype">bool</span> fullscreen);
+00126 
+00127 <span class="preprocessor">#ifdef USE_SDL_MIXER</span>
+00128 <span class="preprocessor"></span>
+00136         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a1">SetupSound</a>(<span class="keywordtype">int</span> rate, <span class="keywordtype">bool</span> stereo);
+00137 <span class="preprocessor">#endif </span>
+00138 <span class="preprocessor"></span>
+00150         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a2">CreateDisplay</a>(string title, string icon=<span class="stringliteral">""</span>);
+00151 
+00157         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a3">CloseDisplay</a>();
+00158 
+00166         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a4">ToggleFullscreen</a>();
+00167 
+00175         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a5">Initialized</a>();
+00176 
+00178     <span class="comment">//Screen Access//</span>
+00180 <span class="comment"></span>
+00181     <span class="keyword">private</span>:
+<a name="l00183"></a><a class="code" href="classZE_1_1ZEngine.html#o7">00183</a>         SDL_Surface *<a class="code" href="classZE_1_1ZEngine.html#o7">mScreen</a>;
+00184 
+00185     <span class="keyword">public</span>:
+00192         SDL_Surface *<a class="code" href="classZE_1_1ZEngine.html#a6">Display</a>();
+00193 
+00200         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a7">Update</a>();
+00201 
+00211         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a8">Clear</a>(<span class="keywordtype">float</span> red=0.0f, <span class="keywordtype">float</span> green=0.0f, <span class="keywordtype">float</span> blue=0.0f, <span class="keywordtype">float</span> alpha=1.0f);
+00212 
+00214     <span class="comment">//OpenGL Specific Functions//</span>
+00216 <span class="comment">    public:</span>
+00217 
+00224         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a9">SetGL2D</a>();
+00225 
+00227     <span class="comment">//Timer and Framerate Independent Movement//</span>
+00229 <span class="comment">    </span>
+00230     <span class="keyword">private</span>:
+<a name="l00232"></a><a class="code" href="classZE_1_1ZEngine.html#o8">00232</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o8">mPaused</a>;
+<a name="l00234"></a><a class="code" href="classZE_1_1ZEngine.html#o9">00234</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#o9">mUnpauseOnActive</a>;
+<a name="l00236"></a><a class="code" href="classZE_1_1ZEngine.html#o10">00236</a>         Uint8 <a class="code" href="classZE_1_1ZEngine.html#o10">mDesiredFramerate</a>;
+<a name="l00238"></a><a class="code" href="classZE_1_1ZEngine.html#o11">00238</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o11">mNextUpdate</a>;
+<a name="l00240"></a><a class="code" href="classZE_1_1ZEngine.html#o12">00240</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o12">mLastPause</a>;
+<a name="l00242"></a><a class="code" href="classZE_1_1ZEngine.html#o13">00242</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o13">mPausedTime</a>;
+<a name="l00244"></a><a class="code" href="classZE_1_1ZEngine.html#o14">00244</a>         Uint32 <a class="code" href="classZE_1_1ZEngine.html#o14">mLastTime</a>;
+<a name="l00246"></a><a class="code" href="classZE_1_1ZEngine.html#o15">00246</a>         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#o15">mSecPerFrame</a>;
+00247 
+00248     <span class="keyword">public</span>:
+00255         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a10">Delay</a>(Uint32 milliseconds);
+00256 
+00263         Uint32 <a class="code" href="classZE_1_1ZEngine.html#a11">GetTime</a>();
+00264 
+00270         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a12">PauseTimer</a>();
+00271 
+00277         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a13">UnpauseTimer</a>();
+00278 
+00285         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a14">GetFrameTime</a>();
 00286 
-00294         Uint8 <a class="code" href="classZE_1_1ZEngine.html#a15">GetDesiredFramerate</a>();
+00294         <span class="keywordtype">double</span> <a class="code" href="classZE_1_1ZEngine.html#a15">GetFramerate</a>();
 00295 
-00302         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a16">IsPaused</a>();
-00303 
-00305     <span class="comment">//Event and Input Handling//</span>
-00307 <span class="comment">    private:</span>
-<a name="l00309"></a><a class="code" href="classZE_1_1ZEngine.html#o15">00309</a> <span class="comment">        bool mNeedReload;</span>
-<a name="l00311"></a><a class="code" href="classZE_1_1ZEngine.html#o16">00311</a> <span class="comment">        bool mActive;</span>
-<a name="l00313"></a><a class="code" href="classZE_1_1ZEngine.html#o17">00313</a> <span class="comment">        bool mQuit;</span>
-<a name="l00315"></a><a class="code" href="classZE_1_1ZEngine.html#o18">00315</a> <span class="comment">        Uint8 *mKeyIsPressed;</span>
-<a name="l00317"></a><a class="code" href="classZE_1_1ZEngine.html#o19">00317</a> <span class="comment">        bool mKeyPress[SDLK_LAST];</span>
-<a name="l00319"></a><a class="code" href="classZE_1_1ZEngine.html#o20">00319</a> <span class="comment">        int mMouseX;</span>
-<a name="l00321"></a><a class="code" href="classZE_1_1ZEngine.html#o21">00321</a> <span class="comment">        int mMouseY;</span>
-<a name="l00323"></a><a class="code" href="classZE_1_1ZEngine.html#o22">00323</a> <span class="comment">        Uint8 mMouseB;</span>
-00324 
-00325     <span class="keyword">public</span>:
-00332         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a17">IsActive</a>();
-00333 
-00340         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a18">RequestQuit</a>();
-00341 
-00349         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a19">QuitRequested</a>();
-00350 
-00355         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a20">SetReloadNeed</a>(<span class="keywordtype">bool</span> state);
-00356 
-00364         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a21">ImagesNeedReload</a>();
-00365         
-00375         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a22">SetKeyRepeatRate</a>(<span class="keywordtype">int</span> rate);
+00305         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a16">SetDesiredFramerate</a>(Uint8 rate);
+00306 
+00314         Uint8 <a class="code" href="classZE_1_1ZEngine.html#a17">GetDesiredFramerate</a>();
+00315 
+00322         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a18">IsPaused</a>();
+00323 
+00325     <span class="comment">//Event and Input Handling//</span>
+00327 <span class="comment">    private:</span>
+<a name="l00329"></a><a class="code" href="classZE_1_1ZEngine.html#o16">00329</a> <span class="comment">        bool mNeedReload;</span>
+<a name="l00331"></a><a class="code" href="classZE_1_1ZEngine.html#o17">00331</a> <span class="comment">        bool mActive;</span>
+<a name="l00333"></a><a class="code" href="classZE_1_1ZEngine.html#o18">00333</a> <span class="comment">        bool mQuit;</span>
+<a name="l00335"></a><a class="code" href="classZE_1_1ZEngine.html#o19">00335</a> <span class="comment">        Uint8 *mKeyIsPressed;</span>
+<a name="l00337"></a><a class="code" href="classZE_1_1ZEngine.html#o20">00337</a> <span class="comment">        bool mKeyPress[SDLK_LAST];</span>
+<a name="l00339"></a><a class="code" href="classZE_1_1ZEngine.html#o21">00339</a> <span class="comment">        int mMouseX;</span>
+<a name="l00341"></a><a class="code" href="classZE_1_1ZEngine.html#o22">00341</a> <span class="comment">        int mMouseY;</span>
+<a name="l00343"></a><a class="code" href="classZE_1_1ZEngine.html#o23">00343</a> <span class="comment">        Uint8 mMouseB;</span>
+00344 
+00345     <span class="keyword">public</span>:
+00352         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a19">IsActive</a>();
+00353 
+00360         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a20">RequestQuit</a>();
+00361 
+00369         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a21">QuitRequested</a>();
+00370 
+00375         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a22">SetReloadNeed</a>(<span class="keywordtype">bool</span> state);
 00376 
-00384         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a23">KeyIsPressed</a>(SDLKey key);
-00385 
-00393         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a24">KeyPress</a>(SDLKey key);
-00394 
-00400         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a25">HideCursor</a>();
-00401 
-00407         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a26">ShowCursor</a>();
-00408 
-00415         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a27">MouseX</a>();
-00416 
-00423         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a28">MouseY</a>();
-00424 
-00431         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a29">LButtonPressed</a>();
-00432 
-00439         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a30">RButtonPressed</a>();
-00440 
-00448         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a31">MouseInRect</a>(SDL_Rect *rect);
-00449 
-00455         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a32">CheckEvents</a>();
-00456 
-00457 <span class="preprocessor">#ifdef USE_PHYSFS</span>
-00458 <span class="preprocessor"></span>
-00459     <span class="comment">//Physfs Utilities//</span>
-00461 <span class="comment">    public:</span>
-00468 <span class="comment"></span>        <span class="keywordtype">void</span> InitPhysFS(string argv);
+00384         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a23">ImagesNeedReload</a>();
+00385         
+00395         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a24">SetKeyRepeatRate</a>(<span class="keywordtype">int</span> rate);
+00396 
+00404         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a25">KeyIsPressed</a>(SDLKey key);
+00405 
+00413         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a26">KeyPress</a>(SDLKey key);
+00414 
+00420         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a27">HideCursor</a>();
+00421 
+00427         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a28">ShowCursor</a>();
+00428 
+00435         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a29">MouseX</a>();
+00436 
+00443         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a30">MouseY</a>();
+00444 
+00451         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a31">LButtonPressed</a>();
+00452 
+00459         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a32">RButtonPressed</a>();
+00460 
+00468         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a33">MouseInRect</a>(SDL_Rect *rect);
 00469 
-00476         <span class="keywordtype">void</span> AddPhysFSDir(string dir);
-00477 
-00478 <span class="preprocessor">#endif    //USE_PHYSFS</span>
-00479 <span class="preprocessor"></span>
-00481     <span class="comment">//Error Logging//</span>
-00483 <span class="comment">    private:</span>
-<a name="l00485"></a><a class="code" href="classZE_1_1ZEngine.html#o23">00485</a> <span class="comment">        queue&lt;ZError&gt; mErrorQueue;</span>
-<a name="l00487"></a><a class="code" href="classZE_1_1ZEngine.html#o24">00487</a> <span class="comment">        ZError mCurError;</span>
-<a name="l00489"></a><a class="code" href="classZE_1_1ZEngine.html#o25">00489</a> <span class="comment">        bool mLogAllErrors;</span>
-<a name="l00491"></a><a class="code" href="classZE_1_1ZEngine.html#o26">00491</a> <span class="comment">        FILE *mErrlog;</span>
-00492 
-00500         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#c1">LogError</a>(<a class="code" href="classZE_1_1ZError.html">ZError</a> error);
+00475         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a34">CheckEvents</a>();
+00476 
+00487         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a35">SetEventFilter</a>(SDL_EventFilter filter);
+00488 
+00489 <span class="preprocessor">#ifdef USE_PHYSFS</span>
+00490 <span class="preprocessor"></span>
+00491     <span class="comment">//Physfs Utilities//</span>
+00493 <span class="comment">    public:</span>
+00500 <span class="comment"></span>        <span class="keywordtype">void</span> InitPhysFS(string argv);
 00501 
-00502     <span class="keyword">public</span>:
-00513         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a33">SetErrorLog</a>(<span class="keywordtype">bool</span> logAll, string logFile=<span class="stringliteral">""</span>);
-00514 
-00525         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a34">ReportError</a>(ZErrorCode code, string desc=<span class="stringliteral">""</span>, string file=<span class="stringliteral">""</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line=0);
-00526 
-00534         <a class="code" href="namespaceZE.html#a16">ZErrorCode</a> <a class="code" href="classZE_1_1ZEngine.html#a35">GetLastError</a>();
-00535 
-00543         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a36">WriteLog</a>(string str);
-00544 
-00551         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a37">FlushErrors</a>();
-00552 
-00553 
-00555     <span class="comment">//Data Loading + Unloading//</span>
-00557 <span class="comment">    public:</span>
-00565 <span class="comment"></span>        SDL_Surface* <a class="code" href="classZE_1_1ZEngine.html#a38">LoadImage</a>(string filename);
-00566 
-00567 <span class="preprocessor">#ifdef USE_SDL_MIXER</span>
-00568 <span class="preprocessor"></span>
-00575         Mix_Chunk* <a class="code" href="classZE_1_1ZEngine.html#a39">LoadSound</a>(string filename);
+00508         <span class="keywordtype">void</span> AddPhysFSDir(string dir);
+00509 
+00510 <span class="preprocessor">#endif    //USE_PHYSFS</span>
+00511 <span class="preprocessor"></span>
+00513     <span class="comment">//Error Logging//</span>
+00515 <span class="comment">    private:</span>
+<a name="l00517"></a><a class="code" href="classZE_1_1ZEngine.html#o24">00517</a> <span class="comment">        queue&lt;ZError&gt; mErrorQueue;</span>
+<a name="l00519"></a><a class="code" href="classZE_1_1ZEngine.html#o25">00519</a> <span class="comment">        ZError mCurError;</span>
+<a name="l00521"></a><a class="code" href="classZE_1_1ZEngine.html#o26">00521</a> <span class="comment">        bool mLogAllErrors;</span>
+<a name="l00523"></a><a class="code" href="classZE_1_1ZEngine.html#o27">00523</a> <span class="comment">        FILE *mErrlog;</span>
+00524 
+00532         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#c1">LogError</a>(<a class="code" href="classZE_1_1ZError.html">ZError</a> error);
+00533 
+00534     <span class="keyword">public</span>:
+00545         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a36">SetErrorLog</a>(<span class="keywordtype">bool</span> logAll, string logFile=<span class="stringliteral">""</span>);
+00546 
+00557         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a37">ReportError</a>(ZErrorCode code, string desc=<span class="stringliteral">""</span>, string file=<span class="stringliteral">""</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line=0);
+00558 
+00566         <a class="code" href="namespaceZE.html#a16">ZErrorCode</a> <a class="code" href="classZE_1_1ZEngine.html#a38">GetLastError</a>();
+00567 
+00575         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a39">WriteLog</a>(string str);
 00576 
-00584         Mix_Music* <a class="code" href="classZE_1_1ZEngine.html#a40">LoadMusic</a>(string filename);
-00585 <span class="preprocessor">#endif</span>
-00586 <span class="preprocessor"></span>
-00587 <span class="preprocessor">#ifdef USE_SDL_TTF</span>
-00588 <span class="preprocessor"></span>
-00596         TTF_Font* <a class="code" href="classZE_1_1ZEngine.html#a41">LoadFont</a>(string filename, <span class="keywordtype">int</span> size);
-00597 <span class="preprocessor">#endif </span>
-00598 <span class="preprocessor"></span>
-00600     <span class="comment">//Accessors//</span>
-00602 <span class="comment"></span>
-00603     <span class="keyword">public</span>:    
-00610         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a42">Width</a>();
-00611 
-00618         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a43">Height</a>();
-00619 
-00626         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a44">BPP</a>();
-00627 
-00634         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a45">IsFullscreen</a>();
-00635 };
-00636 
-00637 }
-00638 
-00639 <span class="preprocessor">#endif //__ze_zengine_h__</span>
-</pre></div><hr><address style="align: right;"><small>Generated on Sun Jan 19 01:04:50 2003 for ZEngine by
+00583         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZEngine.html#a40">FlushErrors</a>();
+00584 
+00585 
+00587     <span class="comment">//Data Loading + Unloading//</span>
+00589 <span class="comment">    public:</span>
+00597 <span class="comment"></span>        SDL_Surface* <a class="code" href="classZE_1_1ZEngine.html#a41">LoadImage</a>(string filename);
+00598 
+00599 <span class="preprocessor">#ifdef USE_SDL_MIXER</span>
+00600 <span class="preprocessor"></span>
+00607         Mix_Chunk* <a class="code" href="classZE_1_1ZEngine.html#a42">LoadSound</a>(string filename);
+00608 
+00616         Mix_Music* <a class="code" href="classZE_1_1ZEngine.html#a43">LoadMusic</a>(string filename);
+00617 <span class="preprocessor">#endif</span>
+00618 <span class="preprocessor"></span>
+00619 <span class="preprocessor">#ifdef USE_SDL_TTF</span>
+00620 <span class="preprocessor"></span>
+00628         TTF_Font* <a class="code" href="classZE_1_1ZEngine.html#a44">LoadFont</a>(string filename, <span class="keywordtype">int</span> size);
+00629 <span class="preprocessor">#endif </span>
+00630 <span class="preprocessor"></span>
+00632     <span class="comment">//Accessors//</span>
+00634 <span class="comment"></span>
+00635     <span class="keyword">public</span>:    
+00642         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a45">Width</a>();
+00643 
+00650         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a46">Height</a>();
+00651 
+00658         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZEngine.html#a47">BPP</a>();
+00659 
+00666         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZEngine.html#a48">IsFullscreen</a>();
+00667 };
+00668 
+00669 }
+00670 
+00671 <span class="preprocessor">#endif //__ze_zengine_h__</span>
+</pre></div><hr><address style="align: right;"><small>Generated on Tue Jan 28 16:31:28 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>

@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.21 2003/01/24 11:06:25 cozman Exp $<br>
+$Id: ZEngine.h,v 1.22 2003/01/28 21:33:02 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -17,7 +17,7 @@ $Id: ZEngine.h,v 1.21 2003/01/24 11:06:25 cozman Exp $<br>
 
     \author James Turk
     \version 0.8.2
-    \date January 18, 2003
+    \date January 28, 2003
 
     \section ZEngine About ZEngine
     <br>
@@ -53,6 +53,7 @@ $Id: ZEngine.h,v 1.21 2003/01/24 11:06:25 cozman Exp $<br>
 #ifndef __zengine_h__
 #define __zengine_h__
 
+#include "ZE_Defines.h"
 #include "ZE_ZEngine.h"
 #include "ZE_Utility.h"
 #include "ZE_ZImage.h"
