@@ -13,7 +13,7 @@
 File: ZE_ZError.h <br>
 Description: Header file for ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.2 2003/01/15 05:51:18 cozman Exp $<br>
+$Id: ZE_ZError.h,v 1.3 2003/01/16 05:06:54 cozman Exp $<br>
 
     \file ZE_ZError.h
     \brief Definition file for ZError.
@@ -32,15 +32,28 @@ using namespace std;
 namespace ZE
 {
 
+//! Enumeration of ZEngine error codes.
+/*!
+    All the error codes currently possibly by ZEngine, note that ZERR_LAST is not used as an error code, but instead
+    as a range check on the others.
+**/
 enum ZErrorCode 
-{ 
-    ZERR_NONE, //no error
-    ZERR_SDL_INTERNAL,  //other internal error
-    ZERR_SDL_INIT, ZERR_MIX_INIT, ZERR_TTF_INIT,    //Initialization errors
-    ZERR_VIDMODE, //Error setting video mode.
-    ZERR_LOAD_IMAGE, ZERR_LOAD_SOUND, ZERR_LOAD_MUSIC, ZERR_LOAD_FONT,  //Failed Loads
-    ZERR_NOIMAGE, ZERR_NOSOUND, ZERR_NOMUSIC, ZERR_NOFONT,   //Using class w/o loading
-    ZERR_LAST
+{
+    ZERR_NONE,          /*!< No error has occured.  */
+    ZERR_SDL_INTERNAL,  /*!< Error internal to SDL has occured, usually more detail is given by SDL. */
+    ZERR_SDL_INIT,      /*!< Error Initializing SDL. */
+    ZERR_MIX_INIT,      /*!< Error Initializing SDL_mixer. */
+    ZERR_TTF_INIT,      /*!< Error Initializing SDL_ttf. */
+    ZERR_VIDMODE,       /*!< Error setting up the display. */
+    ZERR_LOAD_IMAGE,    /*!< Error loading an image. */
+    ZERR_LOAD_SOUND,    /*!< Error loading a sound sample. */
+    ZERR_LOAD_MUSIC,    /*!< Error loading music. */
+    ZERR_LOAD_FONT,     /*!< Error loading a font. */
+    ZERR_NOIMAGE,       /*!< Error trying to use a ZImage without properly loading an image. */
+    ZERR_NOSOUND,       /*!< Error trying to use a ZSound without properly loading a sound. */
+    ZERR_NOMUSIC,       /*!< Error trying to use a ZMusic without properly loading music. */
+    ZERR_NOFONT,        /*!< Error trying to use a ZFont without properly loading a font. */
+    ZERR_LAST           /*!< Value used as range index, not a valid error code. */
 };
 
 /*!
