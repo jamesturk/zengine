@@ -13,7 +13,7 @@
     \brief Source file for ZServer.
 
     Implementation file for ZServer, the TCP Server class for ZEngine.
-    <br>$Id: ZE_ZServer.cpp,v 1.7 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZServer.cpp,v 1.8 2003/07/05 01:11:03 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -32,8 +32,7 @@ void ZServer::CloseSocket(int num)
         rEngine->WriteLog(FormatStr("Closing socket #%d",num));
 }
 
-ZServer::ZServer(bool verbose)
-{
+ZServer::ZServer(bool verbose) :
     rEngine(ZEngine::GetInstance()),
     rSocket(NULL), rSocketSet(NULL), rClientSockets(NULL),
     rMaxClients(0), rVerbose(verbose), rWaitTime(0)
