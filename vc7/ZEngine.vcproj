@@ -68,9 +68,6 @@
 				RelativePath="..\src\ZE_ZEngine.cpp">
 			</File>
 			<File
-				RelativePath="..\src\ZE_ZError.cpp">
-			</File>
-			<File
 				RelativePath="..\src\ZE_ZFont.cpp">
 			</File>
 			<File
@@ -115,9 +112,6 @@
 			</File>
 			<File
 				RelativePath="..\include\ZE_ZEngine.h">
-			</File>
-			<File
-				RelativePath="..\include\ZE_ZError.h">
 			</File>
 			<File
 				RelativePath="..\include\ZE_ZFont.h">
