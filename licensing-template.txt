@@ -1,0 +1,37 @@
+Licensing Information for ##PRODUCT##:
+
+##OTHER INFO##
+
+This application makes use of ZEngine which is available from http://zengine.sourceforge.net/ and is licensed under a BSD-style license.
+
+ZEngine uses the following LGPL (see lgpl.txt) libraries:
+    -SDL - http://libsdl.org
+    -SDL_image - http://libsdl.org/projects/SDL_image
+    -SDL_mixer - http://libsdl.org/projects/SDL_mixer
+    -SDL_ttf - http://libsdl.org/projects/SDL_ttf
+    -Physfs - http://icculus.org/physfs/
+
+SDL_Image makes use of the following libraries, each under it's own license:
+    libPNG - http://www.libpng.org/ - http://www.libpng.org/pub/png/src/libpng-LICENSE.txt
+    zlib - http://www.gzip.org/zlib/ - http://www.gzip.org/zlib/zlib_license.html
+    JPEG library - http://www.ijg.org/
+    TIFF library - ftp://ftp.sgi.com/graphics/tiff/ - ftp://ftp.sgi.com/graphics/tiff/README
+
+
+This application uses dynamic linking to comply with these licenses (namely the LGPL).  The author(s) of this program is(are) making no claims that any of the above libraries are of their creation. By dynamically linking the LGPL libraries, including this notice, and providing mirrored source for the LGPL libraries at ##DOWNLOAD LOCATION##, the creator(s) comply/complies with the LGPL as well the respective licenses of all other libraries used.
+
+-----
+(Leave all this below the line out)
+
+This is a license template for using ZEngine, if you are not using the 5 LGPL libraries listed you may remove the ones you are not using, and if you are not using SDL_image you dont need to include the part about SDL_Image libraries.  
+
+Your game's readme file (or some other location) should probably tell the end-user to look in this file for licensing information, and you should always include a copy of the LGPL along with this (to meet the requirements of the LGPL).  A copy of the LGPL can be obtained from http://www.gnu.org/copyleft/lesser.txt.  (Make sure you change the note "(see lgpl.txt)" to reflect what you call the lgpl text file in your release.)
+
+
+Things to change in your version of this file:
+##PRODUCT## should be the name of the application this notice is attached to.
+##AUTHORS## should be the list of authors.
+##OTHER INFO## is a good place to put copyright data for your game, information on contacting the authors, distributing the game, or anything else you feel belongs in this licensing file.
+The last paragraph needs to be modified to reflect the number of authors (single or plural) the product in question has.
+##DOWNLOAD LOCATION## is the location on your website that any LGPL libraries you use are available, this should be done to fulfill the requirements of the LGPL.
+Usually this file should be in the main directory, or the same directory you'd place a readme file in, and named something like licensing.txt.

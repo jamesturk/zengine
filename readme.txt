@@ -61,6 +61,8 @@ Closed-Source Application using ZEngine:
     (Open-Source applications do not need to have a link to a download for
     LGPL-licensed libraries.)
 
+(licensing-template.txt is included to help you comply with the LGPL)
+
 Adding to ZEngine:
     -This can currently be done with no restrictions, but we do ask that 
     you submit your changes back to the community.
