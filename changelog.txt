@@ -1,6 +1,12 @@
-ZEngine Version Log for Version 0.8.0-rc1
-$Id: changelog.txt,v 1.10 2002/12/05 03:50:27 cozman Exp $
+ZEngine Version Log for Version 0.8.0-rc2
+$Id: changelog.txt,v 1.11 2002/12/12 04:34:18 cozman Exp $
 
+
+0.8.0-rc2
+    -Added path stripping to ZEngine.linux.doxygen.
+    -Added information to ZEngine.h for Doxygen front page.
+    -Added force into makefile options.
+    -Changed ZEngine::UpdateScreen to ZEngine::Update
 
 0.8.0-rc1
     -Changed ZRect to use floats.
