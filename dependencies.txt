@@ -1,6 +1,8 @@
 Dependencies are now available from http://zengine.sourceforge.net/dependencies/
 ZE_dependencies_src.tar.bz2 is the source to the LGPL dependencies.
 ZE_dependencies_VC.zip is everything needed for ZEngine under Visual C++.
+ZE_dependencies_wing++.zip is everything needed for ZEngine under GCC based 
+compilers (such as Dev-C++).
 
 The home pages of each can be found:
 SDL 1.2.5 (http://libsdl.org)

@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.44 2003/09/05 19:44:13 cozman Exp $
+$Id: changelog.txt,v 1.45 2003/09/07 18:28:01 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -9,6 +9,7 @@ Changes are marked with symbols that describe them:
 # general changes
 
 0.8.5
+    + Addition of Dev-C++ project files and more Dev-C++ support.
     + Addition of DrawClipped and DrawClipped example in ZImageTest
     + New limited SDL graphics backend for platforms without OpenGL.
     - Removal of VC6 project files and official support.

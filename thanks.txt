@@ -14,5 +14,7 @@ Some people at GameDev.net for helping out in OpenGL.
     http://gamedev.net
 gametutorials.com and nehe.gamedev.net for Linking to ZEngine and OpenGL support.
     http://gametutorials.com & http://nehe.gamedev.net
+People at Bloodshed and in charge of MingW for together providing a great free compiler and IDE based on GCC.
+    http://bloodshed.net & http://mingw.org
 
 Also see the test/bin/readme.txt file for credits on the data used in the demos.

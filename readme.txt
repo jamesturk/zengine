@@ -28,8 +28,8 @@ III. Building ZEngine:
 
 ZEngine can be built on any system any system that has SDL and OpenGL 
 available. If you are in VC++ the folder vc7 contains project files for use,
-and if you are in a gcc compiler you can change the config & makefile to meet
-your needs.
+Dev-C++ project files are in the devcpp folder, and if you are in a gcc 
+compiler you can change the config & makefile to meet your needs.
 -If you are using VC++ you will need to add the path to the dependencies (SDL 
 and others) as well as the path to ZEngine before building.
 
