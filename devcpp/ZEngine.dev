@@ -1,7 +1,7 @@
 [Project]
 FileName=ZEngine.dev
 Name=ZEngine
-UnitCount=33
+UnitCount=34
 Type=2
 Ver=1
 ObjFiles=
@@ -374,4 +374,14 @@ OriginalFilename=
 ProductName=
 ProductVersion=
 AutoIncBuildNr=0
+
+[Unit34]
+FileName=..\src\ZE_main.cpp
+CompileCpp=1
+Folder=Source
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 

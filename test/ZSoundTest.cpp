@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZSoundTest.cpp,v 1.15 2003/07/10 23:30:07 cozman Exp $*/
+/*$Id: ZSoundTest.cpp,v 1.16 2003/09/09 02:45:58 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -99,16 +99,9 @@ void Test()
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
 
-int main(int argc, char *argv[])
+int ZE_main(int argc, char *argv[])
 {
-    ZEngine *engine = ZEngine::GetInstance();
-
     if(Initialize())
-    {
-        //engine->InitPhysFS(argv[0]);    //remove this line if PhysFS is not available
         Test();
-    }
-
-    ZEngine::ReleaseInstance();    //release engine instance
     return 0;
 }
