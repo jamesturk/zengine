@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.26 2003/10/21 01:17:35 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.27 2003/11/14 21:39:51 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -137,10 +137,7 @@ void Test()
 
 int main(int argc, char *argv[])
 {
-    //atexit(ZEngine::ReleaseInstance);
     if(Initialize())
         Test();
-    ZImage img("data/test01.bmp");
-    ZEngine::ReleaseInstance();
     return 0;
 }
