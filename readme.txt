@@ -27,9 +27,9 @@ The CVS page: http://sourceforge.net/cvs/?group_id=62098
 III. Building ZEngine:
 
 ZEngine can be built on any system that has SDL and OpenGL available.  It is
-currently being developed on Redhat 8.0 and Windows 2000/XP.  If you are on
-windows the folder vc7 contains project files for use, and if you are using
-mingw or cygwin you can replace the linux makefile with makefile.mingw32.
+currently being developed on Redhat 8.0 and Windows 2000/XP.  If you are in
+VC++ the folders vc6 and vc7 contains project files for use, and if you are 
+in mingw or cygwin you can change the linux makefile to suit your needs.
 -If you are using VC++ you will need to add the path to the dependencies (SDL 
 and others) as well as the path to ZEngine before building.
 -If you are using gcc on any OS you need to change configure (not the
@@ -56,6 +56,7 @@ under the OSI-certified BSD license (see licensing.txt). Below are quick
 guides of how you would distribute various packages making use of ZEngine.
 
 Closed-Source Application using ZEngine:
+    (see licensing-template.txt)
     -Include required DLLs or dynamic modules
     -Include notice of which libraries you used, and have a place for user to
     dowload them from your website.
