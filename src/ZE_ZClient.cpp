@@ -13,7 +13,7 @@
 File: ZE_ZClient.cpp <br>
 Description: Implementation source file for core ZEngine TCP Client Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZClient.cpp,v 1.3 2003/03/15 03:27:19 cozman Exp $<br>
+$Id: ZE_ZClient.cpp,v 1.4 2003/04/08 03:30:50 cozman Exp $<br>
 
     \file ZE_ZClient.cpp
     \brief Source file for ZClient.
@@ -31,7 +31,7 @@ namespace ZE
 string num2dotted4(unsigned int num)
 {
     vector<int> ip;
-    int d=256*256*256;
+    int d=16777216; //256*256*256
     int m;
     
     while(d > 0)

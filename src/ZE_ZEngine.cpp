@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.33 2003/03/17 19:04:47 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.34 2003/04/08 03:30:50 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -49,7 +49,7 @@ ZEngine::ZEngine()
     mMouseX = mMouseY = 0;
     mMouseB = 0;
 
-    for(int k = 0; k < SDLK_LAST; k++)
+    for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
 
     mUnpauseOnActive = mPaused = false;

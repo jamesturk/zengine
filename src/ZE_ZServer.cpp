@@ -13,7 +13,7 @@
 File: ZE_ZServer.cpp <br>
 Description: Implementation source file for core ZEngine TCP Server Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZServer.cpp,v 1.3 2003/03/15 03:27:19 cozman Exp $<br>
+$Id: ZE_ZServer.cpp,v 1.4 2003/04/08 03:30:50 cozman Exp $<br>
 
     \file ZE_ZServer.cpp
     \brief Source file for ZServer.
@@ -70,7 +70,7 @@ bool ZServer::Start(int maxClients, Uint16 port)
     else if(rVerbose)
         rEngine->WriteLog(FormatStr("ZServer: Created server with %d available sockets.",rMaxClients));
 
-    for(int i=0; i < rMaxClients; i++)
+    for(int i=0; i < rMaxClients; ++i)
         rClientSockets[i] = NULL;
 
     if(SDLNet_ResolveHost(&ip,NULL,port) < 0)   //try to resolve the host
@@ -103,7 +103,7 @@ void ZServer::Stop()
     }
     if(rClientSockets)
     {
-        for(int i=0; i < rMaxClients; i++)
+        for(int i=0; i < rMaxClients; ++i)
         {
             if(rClientSockets[i])
             {
@@ -130,7 +130,7 @@ void ZServer::CheckSockets()
 
     if(SDLNet_SocketReady(rSocket))  //new client
     {
-        for(count=0; count < rMaxClients; count++)  //find first open socket
+        for(count=0; count < rMaxClients; ++count)  //find first open socket
         {
             if(!rClientSockets[count]) 
                 break;
@@ -150,7 +150,7 @@ void ZServer::CheckSockets()
     }
 
     //check all sockets for activity//
-    for(int i=0; i < rMaxClients; i++)
+    for(int i=0; i < rMaxClients; ++i)
     {
         if(SDLNet_SocketReady(rClientSockets[i]))   //incoming message
         {
@@ -164,7 +164,7 @@ void ZServer::CheckSockets()
             size = result;
             if(rVerbose)
                 rEngine->WriteLog("ZServer: Mirroring data: ");
-            for(int j=0; j < rMaxClients; j++)
+            for(int j=0; j < rMaxClients; ++j)
             {
                 if(rClientSockets[j] && i != j) //send to open sockets that aren't the same
                 {
@@ -181,10 +181,10 @@ int ZServer::Clients()
 {
     int numClients=0;
 
-    for(int i=0; i < rMaxClients; i++)
+    for(int i=0; i < rMaxClients; ++i)
     {
         if(rClientSockets[i])
-            numClients++;
+            ++numClients;
     }
 
     return numClients;

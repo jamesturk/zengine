@@ -13,7 +13,7 @@
 File: ZE_ZConfigFile.cpp <br>
 Description: Implementation source file for ZConfigFile, the ZEngine INI-Style Config File. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.cpp,v 1.6 2003/02/10 04:02:38 cozman Exp $<br>
+$Id: ZE_ZConfigFile.cpp,v 1.7 2003/04/08 03:30:50 cozman Exp $<br>
 
     \file ZE_ZConfigFile.cpp
     \brief Source file for ZConfigFile.
@@ -32,7 +32,7 @@ string ZConfigFile::CleanString(string str)  const
     bool inQuotes = false;
 
     //cycle through, only copy spaces and if a character is uppercase, convert it to lowercase
-    for(string::size_type i = 0; i < str.length(); i++)
+    for(string::size_type i = 0; i < str.length(); ++i)
     {
         if(!isspace(str[i]) || inQuotes)
         {
@@ -52,7 +52,7 @@ bool ZConfigFile::Exists(string sec) const
 
     sec = CleanString(sec);
 
-    for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
+    for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
     {
         if(CleanString((*secIter).section) == sec)
             return true;
@@ -68,11 +68,11 @@ bool ZConfigFile::Exists(string sec, string var) const
     sec = CleanString(sec);
     var = CleanString(var);
 
-    for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
+    for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
     {
         if(CleanString((*secIter).section) == sec)
         {
-            for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); varIter++)
+            for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
             {
                 if(CleanString((*varIter).var) == var)
                     return true;
@@ -90,14 +90,14 @@ void ZConfigFile::SetVariable(string sec, string var, string val)
     if(Exists(CleanString(sec)))
     {
         sec = CleanString(sec);
-        for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
+        for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
         {
             if(CleanString((*secIter).section) == sec)    //if this is the section
             {
                 if(Exists(sec,var))
                 {
                     var = CleanString(var);
-                    for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); varIter++)
+                    for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
                     {
                         if(CleanString((*varIter).var) == var)    //if this is the variable
                         {
@@ -136,13 +136,13 @@ string ZConfigFile::GetVariable(string sec, string var, string defVal) const
 
     if(Exists(sec))
     {
-        for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
+        for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
         {
             if(CleanString((*secIter).section) == sec)    //if this is the section
             {
                 if(Exists(sec,var))
                 {
-                    for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); varIter++)
+                    for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
                     {
                         if(CleanString((*varIter).var) == var)    //if this is the variable
                             return (*varIter).val;    //return now
@@ -324,7 +324,7 @@ void ZConfigFile::Flush()
         if(cfile)
         {
             //iteration through sections
-            for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); secIter++)
+            for(secIter = rFileLayout.begin(); secIter != rFileLayout.end(); ++secIter)
             {
                 //ensure that section is valid
                 secName = CleanString((*secIter).section);
@@ -333,7 +333,7 @@ void ZConfigFile::Flush()
                     cfile << (*secIter).section << endl;    //write out raw section title
 
                     //for each variable in section, write out variable=value
-                    for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); varIter++)
+                    for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
                     {
                         if(CleanString((*varIter).var).length())    //ensures that variable is valid
                             cfile << (*varIter).var << '=' << (*varIter).val << endl;

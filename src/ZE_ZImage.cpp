@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.28 2003/03/17 03:56:19 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.29 2003/04/08 03:30:50 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -149,6 +149,7 @@ void ZImage::Attach(SDL_Surface *surface)
         rTexMaxX = coord[2];
         rTexMaxY = coord[3];
         rImage = surface;
+        rEngine->WriteLog(FormatStr("Attached %d with ID %d",this,rTexID));
     }
     else
         rEngine->ReportError(ZERR_NOIMAGE,"Attach");
@@ -164,7 +165,10 @@ void ZImage::Reload()
 void ZImage::Release()
 {
     if(glIsTexture(rTexID))
+    {
+        rEngine->WriteLog(FormatStr("Releasing %d with ID %d",this,rTexID));
         glDeleteTextures(1,&rTexID);
+    }
     rTexMinX = rTexMinY = rTexMaxX = rTexMaxY = 0.0f;
     rTexID = rWidth = rHeight = 0;
     FreeImage(rImage);
@@ -226,10 +230,11 @@ void ZImage::Resize(unsigned int width, unsigned int height)
 
 void ZImage::Bind() const
 {
-    if(!rTexID)
-        rEngine->ReportError(ZERR_NOIMAGE,"Bind");
-    else
+    if(rTexID)
         glBindTexture(GL_TEXTURE_2D, rTexID);
+    else
+        rEngine->ReportError(ZERR_NOIMAGE,"Bind");
+        
 }
 
 void ZImage::Draw(int x, int y) const
