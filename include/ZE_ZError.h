@@ -14,7 +14,7 @@
 
     Definition file for ZError, the Error logging class for ZEngine.
     This class should never be used by the average user, it is used by ZEngine to store information on an error.
-    <br>$Id: ZE_ZError.h,v 1.9 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZE_ZError.h,v 1.10 2003/06/06 03:02:55 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -28,8 +28,9 @@ using namespace std;
 namespace ZE
 {
 
-//! Enumeration of ZEngine error codes.
 /*!
+    \brief Enumeration of ZEngine error codes.
+
     All the error codes currently possibly by ZEngine, note that ZERR_LAST is not used as an error code, but instead
     as a range check on the others.
 **/

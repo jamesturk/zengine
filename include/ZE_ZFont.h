@@ -31,7 +31,7 @@ namespace ZE
 /*!
     \brief ZFont class for basic Font use.
 
-    ZFont font container class, class wraps common features of SDL_TTF.  Inherited from ZObject.
+    ZFont font container class, class wraps common features of SDL_TTF.
 **/
 class ZFont
 {
