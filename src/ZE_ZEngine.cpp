@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.4 2002/12/03 06:19:43 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -43,9 +43,12 @@ ZEngine::ZEngine()
     mScreen = NULL;
 
     mActive = mQuit = false;
-    mKeyPressed = NULL;
+    mKeyIsPressed = NULL;
     mMouseX = mMouseY = 0;
     mMouseB = 0;
+
+    for(int k = 0; k < SDLK_LAST; k++)
+        mKeyPress[k] = false;
 
     mUnpauseOnActive = mPaused = false;
     mLastPause = mPausedTime = mLastTime = 0;
@@ -140,6 +143,7 @@ void ZEngine::CreateDisplay(string title, string icon)
     flags = SDL_OPENGL;
 
     //Window Manager settings//
+    SDL_EnableKeyRepeat(30,30);
     if(!icon.length())
         SDL_WM_SetCaption(title.c_str(),NULL);
     else
@@ -167,7 +171,7 @@ void ZEngine::CreateDisplay(string title, string icon)
 
     SetGL2D();
 
-    mKeyPressed = SDL_GetKeyState(NULL);
+    mKeyIsPressed = SDL_GetKeyState(NULL);
 
 #ifdef USE_SDL_TTF
     TTF_Init();
@@ -294,9 +298,21 @@ bool ZEngine::QuitRequested()
     return mQuit;
 }
 
+void ZEngine::SetKeyRepeatRate(int rate)
+{
+    SDL_EnableKeyRepeat(rate,rate);
+}
+
 bool ZEngine::KeyIsPressed(SDLKey key)
 {
-    return mKeyPressed[key] == 1;
+    return mKeyIsPressed[key] == 1;
+}
+
+bool ZEngine::KeyPress(SDLKey key)
+{
+    bool temp = mKeyPress[key];
+    mKeyPress[key] = false;
+    return temp;
 }
 
 void ZEngine::HideCursor()
@@ -366,6 +382,12 @@ void ZEngine::CheckEvents()
                     }
                 }
                 break;
+            case SDL_KEYDOWN:
+                mKeyPress[event.key.keysym.sym] = true;
+                break;
+            case SDL_KEYUP:
+                mKeyPress[event.key.keysym.sym] = false;
+                break;
             case SDL_QUIT:
                 mQuit = true;
                 break;
@@ -374,9 +396,11 @@ void ZEngine::CheckEvents()
         }
     }
 
-    mKeyPressed = SDL_GetKeyState(NULL);        //recommended but not needed (says Sam)
+    mKeyIsPressed = SDL_GetKeyState(NULL);        //recommended but not needed (says Sam)
 
-    if(mKeyPressed[SDLK_F4] && (mKeyPressed[SDLK_LALT] || mKeyPressed[SDLK_RALT]))
+    //Alt-X or Alt-F4
+    if((mKeyIsPressed[SDLK_x] || mKeyIsPressed[SDLK_F4]) && 
+        (mKeyIsPressed[SDLK_LALT] || mKeyIsPressed[SDLK_RALT]))
         mQuit = true;
 
     mMouseB = SDL_GetMouseState(&mMouseX,&mMouseY);

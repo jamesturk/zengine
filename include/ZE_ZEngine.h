@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.4 2002/12/03 06:19:43 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -275,7 +275,9 @@ class ZEngine
         //! bool for checking if a Quit event has been detected
         bool mQuit;
         //! Pointer to array of Keys
-        Uint8 *mKeyPressed;
+        Uint8 *mKeyIsPressed;
+        //! Array of keys, used by KeyPress
+        bool mKeyPress[SDLK_LAST];
         //! X Position of Mouse
         int mMouseX;
         //! Y Position of Mouse
@@ -310,13 +312,33 @@ class ZEngine
         bool QuitRequested();
         
         /*!
+            \brief Set Key repeat rate.
+
+            Calls SDL_EnableKeyRepeat(rate,rate) because usually this is the desired movement style for games.
+            The rate is set to 30 upon the creation of the display, pass zero to disable this.
+            SDL_EnableKeyRepeat can be called separately: http://sdldoc.csn.ul.ie/sdlenablekeyrepeat.php.
+
+            \param rate Desired key repeat rate.
+        **/
+        void SetKeyRepeatRate(int rate);
+
+        /*!
             \brief Find the state of a key.
 
             Function returns true/false based on if key is <u>currently</u> pressed or not.
-            \param key code of key to find status of.
-            \return bool state of requested key.
+            \param key Code of key to find status of.
+            \return State of requested key.
         **/
         bool KeyIsPressed(SDLKey key);
+
+        /*!
+            \brief Find if key has been pressed since last check.
+
+            Function returns true/false based on if key has been pressed since last check.
+            \param key Code of key to find status of.
+            \return State of requested key.
+        **/
+        bool KeyPress(SDLKey key);
 
         /*!
             \brief Hide mouse cursor.

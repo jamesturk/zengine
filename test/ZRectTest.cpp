@@ -49,13 +49,13 @@ void Test()
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();
         //movement//
-        if(engine->KeyIsPressed(SDLK_LEFT))
+        if(engine->KeyPress(SDLK_LEFT))
             moveRect.MoveRel(-3,0);
-        if(engine->KeyIsPressed(SDLK_RIGHT))
+        if(engine->KeyPress(SDLK_RIGHT))
             moveRect.MoveRel(3,0);
-        if(engine->KeyIsPressed(SDLK_UP))
+        if(engine->KeyPress(SDLK_UP))
             moveRect.MoveRel(0,-3);
-        if(engine->KeyIsPressed(SDLK_DOWN))
+        if(engine->KeyPress(SDLK_DOWN))
             moveRect.MoveRel(0,3);
         if(engine->KeyIsPressed(SDLK_EQUALS))
         {
@@ -73,7 +73,7 @@ void Test()
         stillRect.Draw(0,0,255,128);
         moveRect.Intersection(stillRect).Draw(0,255,0);
         engine->UpdateScreen();
-            
+
     } while(!engine->QuitRequested());
 }
 
