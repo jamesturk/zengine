@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.37 2003/04/27 22:49:14 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.38 2003/04/28 00:23:06 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -61,7 +61,7 @@ ZEngine::ZEngine()
     mLogAllErrors = true;
     mErrlog = stderr;
 
-    ZEngine::SeedRandom(static_cast<unsigned long>(time(NULL)));
+    SeedRandom(static_cast<unsigned long>(time(NULL)));
 }
 
 ZEngine* ZEngine::GetInstance()
