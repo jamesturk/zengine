@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.15 2002/12/29 07:22:01 cozman Exp $<br>
+$Id: ZEngine.h,v 1.16 2003/01/03 03:48:01 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -16,8 +16,8 @@ $Id: ZEngine.h,v 1.15 2002/12/29 07:22:01 cozman Exp $<br>
     \mainpage ZEngine Documentation
 
     \author James Turk
-    \version 0.8.0
-    \date December 29, 2002
+    \version 0.8.1
+    \date January 2, 2003
 
     \section ZEngine About ZEngine
     <br>
@@ -30,6 +30,7 @@ $Id: ZEngine.h,v 1.15 2002/12/29 07:22:01 cozman Exp $<br>
     and making the engine much faster in all test cases, and the engine was tested for memory leaks with MSVC and is known
     to have no leaks.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website can be found at http://zengine.sourceforge.net/.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine tutorials can be found at http://conceptofzero.net/tutorials/zengine/.<br>
     
     \section Licensing Licensing
     <br>
@@ -45,6 +46,7 @@ $Id: ZEngine.h,v 1.15 2002/12/29 07:22:01 cozman Exp $<br>
     <br>
     James Turk <a href="mailto:james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes<br>
     Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
+    Sean <a href="mailto:sean@conceptofzero.net">sean@conceptofzero.net</a> - MSVC++6 Project Files<br>
 **/
 
 #ifndef __zengine_h__

@@ -1,8 +1,12 @@
-ZEngine Version Log for Version 0.8.0
-$Id: changelog.txt,v 1.19 2003/01/02 03:33:39 cozman Exp $
+ZEngine Version Log for Version 0.8.1
+$Id: changelog.txt,v 1.20 2003/01/03 03:48:01 cozman Exp $
 
 0.8.1
     -Added legal information for developers.
+    -Fixed VC7 to build without PhysFS by default.
+    -Added small notice into /lib directory.
+    -Added VC6 files based on updated VC7 files, courtesy of Sean.
+    -Added links to the tutorials.
 
 0.8.0
     -Added Surface Loss Protection.

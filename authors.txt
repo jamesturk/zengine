@@ -1,2 +1,3 @@
 James Turk james@conceptofzero.net - Core Engine, Design, Docs, and Classes
 Gamer Tazar tazar@conceptofzero.net - OpenGL assistance
+Sean sean@conceptofzero.net - MSVC++6 Project Files
