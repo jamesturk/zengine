@@ -1,11 +1,13 @@
-ZEngine Version Log for Version 0.8.0-rc4
-$Id: changelog.txt,v 1.17 2002/12/27 03:15:33 cozman Exp $
+ZEngine Version Log for Version 0.8.0
+$Id: changelog.txt,v 1.18 2002/12/29 06:24:15 cozman Exp $
 
 0.8.0
     -Added Surface Loss Protection.
     -Utilized Surface Loss Protection in ZImageTest for a demo.
+    -ZEngine now builds on FreeBSD.
+    -Updated copyright.
 
-0.8.0-rc4 (AKA "what rc3 should have been")
+0.8.0-rc4 (what rc3 should have been)
     -Fixed ZImage::SetColorKey for new Attach behavior.
     -Fixed ZMusicTest GL screen error if music fails to open.
     -Fixed VC7 "Release" Project files.
@@ -80,7 +82,7 @@ $Id: changelog.txt,v 1.17 2002/12/27 03:15:33 cozman Exp $
     -Added doxygen script for linux, and renamed old doxygen script.
 
 0.7.3
-    -Globally evised source variable naming standards.
+    -Globally revised source variable naming standards.
     -Fixed Error Logging in ZImage.
     -Added SDL_DisplaySurface and SDL_DisplaySurfaceAlpha calls to speed up blitting in ZImage.
     -Fixed bug in ZConfigFile that caused a NULL file to be closed.

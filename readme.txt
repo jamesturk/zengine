@@ -1,19 +1,28 @@
-About ZEngine 0.8
+Index
+------------------------------------------------------------
+I.   About ZEngine
+II.  Getting ZEngine
+III. Building ZEngine
+IV.  Using ZEngine
+V.   Legal Overview
+VI.  History of ZEngine
+------------------------------------------------------------
+I. About ZEngine 0.8
 
 ZEngine is a game library which is designed to compile that SDL and OpenGL
 are available on.  ZEngine is a set of classes and a main ZEngine class which
 are designed to make game development easier and more organized.  As of 0.7.7
 ZEngine uses OpenGL to do the 2D display, so it is much faster and can take
 advantage of hardware accelerated features. 
+------------------------------------------------------------
+II. Getting ZEngine:
 
-Getting ZEngine:
-
-The real home is at: http://conceptofzero.net/
+Support comes from: http://conceptofzero.net/
 The sourceforge page: http://zengine.sourceforge.net/
 The project page: http://sourceforge.net/projects/zengine/
 The CVS page: http://sourceforge.net/cvs/?group_id=62098
-
-Building ZEngine:
+------------------------------------------------------------
+III. Building ZEngine:
 
 ZEngine can be built on any system that has SDL and OpenGL available.  It is
 currently being developed on Redhat 8.0 and Windows 2000/XP.  If you are on
@@ -24,8 +33,8 @@ and others) as well as the path to ZEngine before building.
 -If you are using gcc on any OS you need to change configure (not the
 makefile) to meet your needs then run make.
 If you are having a problem building ask on http://conceptofzero.net/forums.
-
-Using ZEngine:
+------------------------------------------------------------
+IV. Using ZEngine:
 
 Using ZEngine is as easy as having a look at the sample programs and nice
 documentation provided and setting the compiler to link with the ZEngine lib
@@ -34,8 +43,8 @@ external libraries (other than SDL and OpenGL which are required) you want
 to use when you build the library file.  Depending on which libraries you are
 using you will need to distribute various files with your program, but none
 are part of ZEngine, but instead are files in use by the dependencies.
-
-Legal Overview:
+------------------------------------------------------------
+V. Legal Overview:
 
 The world of open source licenses can be confusing, if you are not familiar 
 with the LGPL I recommend reading it, as most libraries ZEngine makes use of
@@ -44,16 +53,47 @@ under the OSI-certified BSD license (see licensing.txt). Below are quick
 guides of how you would distribute various packages making use of ZEngine.
 
 Closed-Source Application using ZEngine:
-    -Include required DLLs or .so dynamic modules
-    -Include notice of which libraries you used, and have a place for them to
+    -Include required DLLs or dynamic modules
+    -Include notice of which libraries you used, and have a place for user to
     dowload them from your website.
     -If you are using non-LGPL libraries there may be other requirements.
     (Open-Source applications do not need to have a link to a download for
     LGPL-licensed libraries.)
-    
+
 Adding to ZEngine:
     -This can currently be done with no restrictions, but we do ask that 
     you submit your changes back to the community.
+------------------------------------------------------------
+History of ZEngine:
+    The changelog may not show it but 0.1 to 0.6 were some of the biggest 
+changes, often I'd rewrite massive portions of code, I wasn't keeping the 
+changelog, and I wasn't testing for compatibility. ZEngine was still 
+designed to be an engine that only CoZ members used, hardly clean but useful
+enough to speed up the process of making games, even if it was going to be 
+open source, I figured I'd put it out there as example code, but never really
+ make it an open source project.
+    By 0.5 and 0.6 I really got the idea that this could become something that
+some other people may want to use, so I started to document everything and I 
+began to prepare for the Linux version.  During 0.6.x I was struggling with 
+organizing the code as well as licensing, and SDL 1.2.5 was released which
+turned into an unnecessary rewrite.  (Honestly nothing changed in SDL that 
+affected ZEngine, but for some reason I felt ZEngine would be much better if 
+the code was cleaner and I tried to reduce the amount of legacy code left from
+the early versions.)
+    0.6.3 made the jump to 0.7.0 because there really was a change in ZEngine, 
+the target audience as well as the code base.  With ZConfigFile, ZEngine 
+started to gain features that SDL didn't have, so it wasn't just a SDL wrapper
+anymore. 0.7.x turned into a series of major releases, with some major changes
+including 0.7.3, 0.7.4, and the major 0.7.7, which almost became 0.8.0.
+    0.8.0 is a whole new ZEngine, I estimate that no more than 2% of the 
+original code remains, almost everything I added in 0.3.0 is still there, but
+other than that, nothing stuck until 0.7 for example the ZEngine class itself
+has gone 2 complete rewrites since 0.1.  I used to work in DirectX a lot, and
+ZEngine addresses a lot of grieviances I had with DirectX, ZEngine code is a 
+lot shorter, and is a good deal easier to read, everything is integrated, 
+unlike DirectX where Input and Graphics were entirely separate things, ZEngine
+runs a lot faster on most systems now, due to the OpenGL rendering, and as a
+little treat I threw in just in time for the 0.8.0 release, ZEngine attempts 
+to detect surface loss, and even provides methods to restore it.
 
--James Turk james@conceptofzero.net
-
+    -James Turk james@conceptofzero.net
