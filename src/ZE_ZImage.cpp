@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.27 2003/02/10 05:26:17 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.28 2003/03/17 03:56:19 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -229,10 +229,7 @@ void ZImage::Bind() const
     if(!rTexID)
         rEngine->ReportError(ZERR_NOIMAGE,"Bind");
     else
-    {
-        glColor4ub(255,255,255,rAlpha); 
         glBindTexture(GL_TEXTURE_2D, rTexID);
-    }
 }
 
 void ZImage::Draw(int x, int y) const
@@ -242,6 +239,7 @@ void ZImage::Draw(int x, int y) const
 
 void ZImage::Draw(float x, float y) const
 {
+    glColor4ub(255,255,255,rAlpha); 
     Bind();
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(x,y);
@@ -267,6 +265,7 @@ void ZImage::DrawRotated(float x, float y, float angle) const
     glPushMatrix();
     glTranslatef(x+cX,y+cY,0);
     glRotatef(angle,0,0,1.0f);
+    glColor4ub(255,255,255,rAlpha); 
     Bind(); 
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(-cX,-cY);
