@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.6 2002/12/05 00:10:42 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.7 2002/12/12 02:50:35 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -203,7 +203,7 @@ SDL_Surface *ZEngine::Display()
     return mScreen;
 }
 
-void ZEngine::UpdateScreen()
+void ZEngine::Update()
 {
     SDL_GL_SwapBuffers();
 

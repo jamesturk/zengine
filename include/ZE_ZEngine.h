@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.5 2002/12/04 23:58:54 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.6 2002/12/12 02:50:35 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -170,11 +170,11 @@ class ZEngine
         SDL_Surface *Display();
 
         /*!
-            \brief Update screen contents.
+            \brief Update display contents.
 
-            Flip double buffer in SDL if double buffered, otherwise tell video to refresh entire screen.
+            Swap OpenGL buffers, and update screen.  Must be called every frame.
         **/
-        void UpdateScreen();
+        void Update();
 
         /*!
             \brief Clear screen to a certain color (Black by default).
