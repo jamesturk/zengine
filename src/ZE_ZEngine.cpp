@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.26 2003/01/30 04:02:01 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.27 2003/02/02 23:30:15 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -31,9 +31,9 @@ ZEngine *ZEngine::sInstance=NULL;
 ZEngine::ZEngine()
 {
     mInitialized = false;
-    mWidth = 640;
-    mHeight = 480;
-    mBPP = 16;
+    mWidth = 800;
+    mHeight = 600;
+    mBPP = -1;
     mFullscreen = true;
 
 #ifdef USE_SDL_MIXER 
@@ -193,7 +193,6 @@ bool ZEngine::CreateDisplay(string title, string icon)
     if(!mInitialized)    //only set these settings the first time
     {
         //Default window manager settings//
-        SDL_EnableKeyRepeat(30,30);
         if(!icon.length())
             SDL_WM_SetCaption(title.c_str(),NULL);
         else

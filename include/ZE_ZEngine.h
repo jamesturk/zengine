@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.18 2003/01/27 04:33:34 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.19 2003/02/02 23:30:15 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -128,7 +128,7 @@ class ZEngine
         /*!
             \brief Initialize Sound for SDL.
 
-            Set sound settings to specified parameters. (called before CreateDisplay)
+            Set sound settings to specified parameters. (If not called before CreateDisplay rate will default to 22050+mono)
 
             \param rate Desired sound bitrate.
             \param stereo A bool for stereo setting.
@@ -140,7 +140,7 @@ class ZEngine
             \brief Create Display with predefined settings.
 
             SetupDisplay and SetupSound should be called prior to this to change settings, settings from those do not go into effect 
-            until this function is called.  Specify no icon file to use default icon.  Returns result of setting up ZEngine, and logs 
+            until this function is called.  Specify no icon file to use default icon for OS.  Returns result of setting up ZEngine, and logs 
             error if false is returned (Trys not to fail + returns bool in versions >= 0.8.2).
 
             \param title Window Title.
