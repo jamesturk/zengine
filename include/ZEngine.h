@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.13 2002/12/29 07:15:30 cozman Exp $<br>
+$Id: ZEngine.h,v 1.14 2002/12/29 07:18:30 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -21,7 +21,9 @@ $Id: ZEngine.h,v 1.13 2002/12/29 07:15:30 cozman Exp $<br>
 
     \section ZEngine About ZEngine
     <br>
-    ZEngine is designed to provide a powerful yet easy to use 2D game engine an Object Oriented manner. <br>
+    ZEngine is designed to provide a powerful yet easy to use 2D game engine in a well designed Object Oriented manner, and uses
+    cross platform libraries such as SDL and OpenGL. (ZEngine can use SDL_ttf,SDL_image,SDL_mixer, and PhysFS 
+    all of which are cross platform as well as Open Source.)<br>
     It is licensed under a BSD-style license, and anyone is free to suggest or implement changes to be added to the Engine,
     as well as change the engine to their own needs or use it however they like.<br>
     ZEngine now uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
