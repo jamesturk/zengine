@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.60 2003/12/24 04:42:43 cozman Exp $
+$Id: changelog.txt,v 1.61 2003/12/31 12:59:36 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -10,15 +10,19 @@ Changes are marked with symbols that describe them:
 
 (Note: Depreciated code (that marked with a *) is likely to disappear completely at the next major version.)
 
-0.8.6
+0.9.0
     ! Removed SetupDisplay/SetupSound and integrated them into CreateDisplay.
     ! Changed error system functions drastically.
-    * Depreciated (useless) SetDesiredFramerate and related functionality.
-    + Added severity option to error reporting for better error logs.
+    ! Removed (useless) SetDesiredFramerate and related functionality.
+    ! Removed all "depreciated" code.
+    ! Removed Doxygen documentation comments.
+    ! Changed several member functions with obsolete names.
+    + Introduced severity option to error reporting for better error logs.
     + Added HTML output option to error system.
     + Added XML resource file support via TinyXML (ZEngine::SetResourceFile, ZEngine::GetStringResource, etc)
     + Added ZAnimation class.
     + Added ZAnimTest, test of ZAnimation.
+    # Reworked small internal portions of API.
     # Changed several tests to support new resource file support.
     # Turned off warnings for zlib files in VC7 and DevC++.
     # Switched to updated zlib 1.2.1.

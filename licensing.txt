@@ -4,7 +4,7 @@ more info.
 
 A Note From James:
     I chose to license ZEngine under the most liberal license I could find for
-a number of reasons.  I really didn't want to think that anybody would steal all
+a number of reasons.  I really didn't want to think that anybody would steal 
 the work put into this and call it their own, and the person that does would do
 that even if it were under a more restrictive license.  I would like to know 
 where ZEngine is being used, but I'm not going to require it and I'd also like 
@@ -27,7 +27,7 @@ point without concern.
 
 ----------------------------------(begin license)
 
-Copyright (C) 2002, 2003 James Turk
+Copyright (C) 2002-2004 James Turk
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -60,7 +60,7 @@ the following notice:
 
 /*******************************************************************************
         This file is Part of the ZEngine Library for 2D game development.
-                   Copyright (C) 2002, 2003 James Turk
+                     Copyright (C) 2002-2004 James Turk
 
                      Licensed under a BSD-style license.
 

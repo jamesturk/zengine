@@ -5,7 +5,7 @@ Sam Lantinga and the SDL Crew - Creating and Maintaining such a great library an
 Dimitri van Heesch and Everyone Associated with Doxygen - Providing such a great Documentation Tool.
     http://doxygen.org
 Everybody Associated with ConceptOfZero.net - Keeping Me Working on ZEngine.
-    http://conceptofzero.net
+    http://conceptofzero.net (Sean for his VC6 support and Tazar for his OpenGL support)
 The people at the Kahvi Collective - Providing tons of free Ogg music.
     http://www.kahvi.org
 Sourceforge.net - Providing hosting for the project and CVS.
@@ -22,5 +22,7 @@ Authors of zlib for making a great library, and making it free and open source.
     http://www.gzip.org/zlib/
 Gilles Volant for making Unzip, making zlib so easy to use.
     http://www.winimage.com/zLibDll/unzip.html
+Lee Thomason and others involved in TinyXML for a simple XML parser.
+    http://tinyxml.sourceforge.net/
 
 Also see the test/bin/readme.txt file for credits on the data used in the demos.

@@ -9,8 +9,8 @@ VI.  History of ZEngine
 ------------------------------------------------------------
 I. About ZEngine 0.8
 
-ZEngine is a game library which is designed for any platform that SDL and/or
-OpenGL is available on.  ZEngine is a set of classes and a main ZEngine class 
+ZEngine is a game library which is designed for any platform that SDL and
+OpenGL are available on.  ZEngine is a set of classes and a main ZEngine class
 which are designed to make game development easier and more organized.  As of 
 0.7.7 ZEngine can use OpenGL to do the 2D display, so it is much faster and can
 take advantage of hardware accelerated features.   This file provides a simple

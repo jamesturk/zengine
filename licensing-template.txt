@@ -4,9 +4,12 @@ Licensing Information for ##PRODUCT##:
 
 This application makes use of ZEngine which is available from http://zengine.sourceforge.net/ and is licensed under a BSD-style license.
 
-ZEngine uses the following for reading from archives:
+ZEngine uses several libraries under the zlib license (http://www.gzip.org/zlib/zlib_license.html):
+Unzip and zlib for reading from archives:
     Gilles Vollant's unzip - http://www.winimage.com/zLibDll/unzip.html 
-    zlib - http://www.gzip.org/zlib/ - http://www.gzip.org/zlib/zlib_license.html   
+    zlib - http://www.gzip.org/zlib/
+TinyXML to parse XML resource files:
+    http://tinyxml.sourceforge.net/
 
 ZEngine uses the following LGPL (see lgpl.txt) libraries:
     SDL - http://libsdl.org
