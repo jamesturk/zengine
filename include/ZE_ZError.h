@@ -13,7 +13,7 @@
 File: ZE_ZError.h <br>
 Description: Header file for ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.5 2003/01/26 00:55:52 cozman Exp $<br>
+$Id: ZE_ZError.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZError.h
     \brief Definition file for ZError.
@@ -101,6 +101,13 @@ class ZError
             \param line Optional argument specifying the line the error occured on.
         **/
         ZError(ZErrorCode code=ZERR_NONE, string desc="", string file="", int line=0);
+
+        /*!
+            \brief Virtual Destructor.
+
+            Virtual destructor making future inheritance safe.
+        **/
+        virtual ~ZError();
 
         /*!
             \brief Set members of error object.

@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.6 2003/02/10 04:07:05 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.7 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -82,6 +82,13 @@ class ZRect
             \return New value of the ZRect.
         **/
         const ZRect& operator=(const ZRect &rhs);
+
+        /*!
+            \brief Virtual Destructor.
+
+            Virtual destructor making future inheritance safe.
+        **/
+        virtual ~ZRect();
 
         /*!
             \brief Overload for < operator with ZRect, based upon location then size.

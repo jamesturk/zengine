@@ -13,7 +13,7 @@
 File: ZE_ZError.cpp <br>
 Description: Implementation source file for core ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.cpp,v 1.3 2003/01/26 00:55:52 cozman Exp $<br>
+$Id: ZE_ZError.cpp,v 1.4 2003/02/10 04:40:30 cozman Exp $<br>
 
     \file ZE_ZError.cpp
     \brief Source file for ZError.
@@ -66,6 +66,10 @@ ZError::ZError(ZErrorCode code, string desc, string file, int line)
     rDescription = desc;
     rFilename = file;
     rLine = line;
+}
+
+ZError::~ZError()
+{
 }
 
 void ZError::Create(ZErrorCode code, string desc, string file, int line)

@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.8 2003/02/10 04:07:04 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.9 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -147,7 +147,7 @@ class ZConfigFile
 
             Flushes the file, ensures a flush if the file is left open.
         **/
-        ~ZConfigFile();
+        virtual ~ZConfigFile();
 
         /*!
             \brief Parse a file.

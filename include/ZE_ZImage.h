@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.12 2003/02/10 04:07:05 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.13 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -109,7 +109,7 @@ class ZImage
 
             Destructor calls ZImage::Release().
         **/
-        ~ZImage();
+        virtual ~ZImage();
 
         ///////////////////////
         //Opening and Closing//

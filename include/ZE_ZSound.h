@@ -13,7 +13,7 @@
 File: ZE_ZSound.h <br>
 Description: Header file for core ZEngine Sound Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZSound.h,v 1.5 2003/02/10 04:07:05 cozman Exp $<br>
+$Id: ZE_ZSound.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZSound.h
     \brief Definition file for ZSound.
@@ -74,7 +74,7 @@ class ZSound
 
             Destructor calls ZSound::Release().
         **/
-        ~ZSound();
+        virtual ~ZSound();
 
         /*!
             \brief Opens a sound effect file.

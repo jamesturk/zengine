@@ -13,7 +13,7 @@
 File: ZE_ZTimer.h <br>
 Description: Header file for core ZEngine Timer Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZTimer.h,v 1.5 2003/02/10 04:07:05 cozman Exp $<br>
+$Id: ZE_ZTimer.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZTimer.h
     \brief Definition file for ZTimer.
@@ -65,6 +65,13 @@ class ZTimer
             \param useZEngine Tells if timer should use ZEngine or SDL.
         **/
         ZTimer(bool useZEngine=true);
+
+        /*!
+            \brief Virtual Destructor.
+
+            Virtual destructor making future inheritance safe.
+        **/
+        virtual ~ZTimer();
 
         /*!
             \brief Reset Timer.

@@ -13,7 +13,7 @@
 File: ZE_ZTimer.cpp <br>
 Description: Implementation source file for core ZEngine Timer Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZTimer.cpp,v 1.5 2003/02/10 04:02:39 cozman Exp $<br>
+$Id: ZE_ZTimer.cpp,v 1.6 2003/02/10 04:40:30 cozman Exp $<br>
 
     \file ZE_ZTimer.cpp
     \brief Source file for ZTimer.
@@ -40,6 +40,10 @@ ZTimer::ZTimer(bool useZEngine)
     rUseZEngine = useZEngine;
     rPaused = false;
     Reset();
+}
+
+ZTimer::~ZTimer()
+{
 }
 
 void ZTimer::Reset()

@@ -13,7 +13,7 @@
 File: ZE_ZRect.cpp <br>
 Description: Implementation source file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.7 2003/01/16 05:45:58 cozman Exp $<br>
+$Id: ZE_ZRect.cpp,v 1.8 2003/02/10 04:40:30 cozman Exp $<br>
 
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
@@ -38,6 +38,10 @@ ZRect::ZRect(float x, float y, float width, float height) :
 
 ZRect::ZRect(const ZRect &rhs) :
     rX(rhs.X()),rY(rhs.Y()),rWidth(rhs.Width()),rHeight(rhs.Height())
+{
+}
+
+ZRect::~ZRect()
 {
 }
 

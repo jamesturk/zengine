@@ -13,7 +13,7 @@
 File: ZE_ZMusic.h <br>
 Description: Header file for core ZEngine Music Wrapper Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZMusic.h,v 1.5 2003/02/10 04:07:05 cozman Exp $<br>
+$Id: ZE_ZMusic.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZMusic.h
     \brief Definition file for ZMusic.
@@ -72,7 +72,7 @@ class ZMusic
 
             Destructor calls ZMusic::Release().
         **/
-        ~ZMusic();
+        virtual ~ZMusic();
 
         /*!
             \brief Opens a music file.

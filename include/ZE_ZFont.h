@@ -13,7 +13,7 @@
 File: ZE_ZFont.h <br>
 Description: Header file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.h,v 1.5 2003/02/10 04:07:04 cozman Exp $<br>
+$Id: ZE_ZFont.h,v 1.6 2003/02/10 04:40:16 cozman Exp $<br>
 
     \file ZE_ZFont.h
     \brief Definition file for ZFont.
@@ -78,7 +78,7 @@ class ZFont
 
             Destructor calls ZFont::Release().
         **/
-        ~ZFont();
+        virtual ~ZFont();
 
         /*!
             \brief Opens a font with a certain size.
