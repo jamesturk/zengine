@@ -1,1 +1,2 @@
-James Turk james@conceptofzero.net - Core Engine and Classes for Data Types
+James Turk james@conceptofzero.net - Core Engine, Design, Docs, and Classes
+Gamer Tazar tazar@conceptofzero.net - OpenGL assistance

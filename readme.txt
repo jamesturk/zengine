@@ -1,4 +1,4 @@
-About ZEngine 0.7.x
+About ZEngine 0.8
 
 ZEngine is a game library which is designed to compile that SDL and OpenGL
 are available on.  ZEngine is a set of classes and a main ZEngine class which

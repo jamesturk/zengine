@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.4 2002/12/02 00:36:35 cozman Exp $<br>
+$Id: ZEngine.h,v 1.5 2002/12/04 22:47:13 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -16,8 +16,8 @@ $Id: ZEngine.h,v 1.4 2002/12/02 00:36:35 cozman Exp $<br>
     \mainpage ZEngine Documentation
 
     \author James Turk
-    \version 0.7.8
-    \date 1 December, 2002
+    \version 0.8.0-rc1
+    \date 4 December, 2002
 
     \section ZEngine About ZEngine
     <br>
@@ -39,7 +39,8 @@ $Id: ZEngine.h,v 1.4 2002/12/02 00:36:35 cozman Exp $<br>
          and the home of this Library is http://www.conceptofzero.net/
      </pre>
     \section Authors Contributing Authors
-    James Turk <a href="james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine and Classes for Data Types
+    James Turk <a href="james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes
+    Gamer Tazar <a href="tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance
 **/
 
 #include "ZE_ZEngine.h"

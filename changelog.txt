@@ -1,8 +1,14 @@
-ZEngine Version Log for Version 0.7.8
-$Id: changelog.txt,v 1.7 2002/12/03 06:43:41 cozman Exp $
+ZEngine Version Log for Version 0.8.0-rc1
+$Id: changelog.txt,v 1.8 2002/12/04 22:47:06 cozman Exp $
 
 
-
+0.8.0-rc1
+    -Changed ZRect to use floats.
+    -Added Time based movement to ZRectTest.
+    -Changed behavior of 0 as bpp argument in ZEngine.
+    -Added readme.
+    -Updated rationale in licensing.txt. (fixed)
+    
 0.7.8
     -Added ZRect::Draw using OpenGL.
     -Fixed ZRectTest to use new ZRect.
