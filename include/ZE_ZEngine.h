@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.14 2003/01/19 05:43:40 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.15 2003/01/24 11:05:25 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -453,6 +453,18 @@ class ZEngine
             Cycle through event queue, processing events, updating all Event Related variables, should be called once per frame.
         **/
         void CheckEvents();
+
+        /*!
+            \brief Add a SDL Event Filter for user processing of events.
+
+            This is only needed when you need tight control with ZEngine.  The parameter is simply passed to SDL_SetEventFilter, 
+            generally only those with a good amount of SDL experience should use this function or ZEngine's internal message 
+            state could be corrupted.  For more information on SDL_SetEventFilter see http://sdldoc.csn.ul.ie/sdlseteventfilter.php.
+            \since 0.8.2
+            \param filter An SDL_EventFilter (A function that takes a const SDL_Event* and returns 0 if the event should be removed from 
+            the event queue and 1 otherwise.)
+        **/
+        void SetEventFilter(SDL_EventFilter filter);
 
 #ifdef USE_PHYSFS
     ////////////////////
