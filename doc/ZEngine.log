@@ -1,0 +1,10 @@
+/home/James/ZEngine-dev/include/ZE_ZConfigFile.h:49: Warning: Compound ZE::ZConfigFile::ZCF_Section is not documented.
+/home/James/ZEngine-dev/include/ZE_ZConfigFile.h:43: Warning: Compound ZE::ZConfigFile::ZCF_Variable is not documented.
+/home/James/ZEngine-dev/include/ZEngine.h:35: Error: end of paragraph without end of style command </preformatted>
+/home/James/ZEngine-dev/include/ZEngine.h:37: Error: Found unknown command `\conceptofzero'
+/home/James/ZEngine-dev/include/ZEngine.h:39: Error: found </preformatted> tag without matching <preformatted> in the same paragraph
+/home/James/ZEngine-dev/include/ZE_Error.h:58: Error: Unsupported html tag <cstdarg> found
+/home/James/ZEngine-dev/include/ZE_ZConfigFile.h:70: Warning: Member Exists of class ZE::ZConfigFile is not documented.
+/home/James/ZEngine-dev/include/ZE_ZConfigFile.h:71: Warning: Member Exists of class ZE::ZConfigFile is not documented.
+/home/James/ZEngine-dev/include/ZE_ZConfigFile.h:72: Warning: Member SetVariable of class ZE::ZConfigFile is not documented.
+/home/James/ZEngine-dev/include/ZE_ZConfigFile.h:73: Warning: Member GetVariable of class ZE::ZConfigFile is not documented.

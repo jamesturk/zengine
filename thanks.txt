@@ -1,0 +1,17 @@
+The following must be thanked for ZEngine:
+
+Sam Lantinga and the SDL Crew - Creating and Maintaining such a great library and helping on the mailing list.
+    http://libsdl.org
+Dimitri van Heesch and Everyone Associated with Doxygen - Providing such a great Documentation Tool.
+    http://doxygen.org
+Everybody Associated with ConceptOfZero.net - Keeping Me Working on ZEngine.
+    http://conceptofzero.net
+People on the Opensource.org Mailing list - Helping me figure out what license to use.
+    http://opensource.org
+The people at the Kahvi Collective - Providing tons of free Ogg music.
+    http://www.kahvi.org/
+Sourceforge.net - Providing hosting for the project and CVS.
+    http://sourceforge.net
+
+
+Also see the test/bin/Readme.txt file for credits on the data used in the demos.

@@ -1,0 +1,1 @@
+To use the music example program it is necessary to obtain an ogg vorbis file (see http://www.kahvi.org/ for tons of options) and make sure that it is at test/bin/data/music.ogg

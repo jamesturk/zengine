@@ -1,0 +1,101 @@
+ZEngine Version Log for Version 0.7.4
+$Id: changelog.txt,v 1.1 2002/11/21 05:40:49 cozman Exp $
+
+0.7.5
+    -Converted all tabs to spaces.
+    -Added CVS lines to files for date tracking.
+    -Fixed file layout for CVS and reuploaded files to CVS.
+
+
+0.7.4
+    -Modified behavior of ZImage::Attach and changed ZImageTest to use it.
+    -Added makefile for Linux build support.
+    -Renamed old makefile to makefile.mingw32
+    -Fixed problem in ZImage::SetAlpha when failure occured.
+    -Added warnings in ZImage for when the display format fails.
+    -Completely rewrote ZConfigFile to avoid problems with STL map.
+    -Fixed problem in ZImage with transparency.
+    -Added doxygen script for linux, and renamed old doxygen script.
+
+0.7.3
+    -Globally evised source variable naming standards.
+    -Fixed Error Logging in ZImage.
+    -Added SDL_DisplaySurface and SDL_DisplaySurfaceAlpha calls to speed up blitting in ZImage.
+    -Fixed bug in ZConfigFile that caused a NULL file to be closed.
+    -Several Documentation errors corrected.
+    -Added ZRect class, and ZRectTest.
+
+0.7.2
+    -Fixed small source problem in PhysFS handling of non-supported types.
+    -Added makefile for Cygwin and Mingw32
+    -Removed AFL license, and switched to BSD-style license.
+
+0.7.1
+    -Changed directory layout.
+    -Changed source files to compile without PhysicsFS.
+    -Added newline to end of all source files.
+
+0.7.0
+    -Changed slash direction in example programs (fixed non-windows problems).
+    -Added support for PhysicsFS.
+    -Added ZConfigFile.
+    -Updated all examples to be cleaner style and use more features.
+    -Addes ZConfigFile for test programs.
+
+0.6.3
+    -Fixed directory issues in distribution.
+    -Updated to specify SDL 1.2.5 compatibility.
+    -Added IsLoaded method to ZSound,ZMusic,ZImage and ZFont
+    -Added music.ogg warning to ZMusicTest.
+    -Minor fixes in Doxygen settings.
+    -Fixed issues compiling the ZObject Inherited Wrapper types caused by changes in documentation.
+    -Added file-level documentation for doxygen in src directory.
+
+0.6.2
+    -Updated License to APL 1.1 and all files with it.
+
+0.6.1
+    -Added Mouse Example
+    -Changed Email Address to james@conceptofzero.net
+    -Added more test data and information on where data came from
+    -Removed Ogg file from distribution.
+    -Changed names of the libraries.
+
+0.6.0
+    -Updated all documentation (including doxygen docs).
+    -Rewrote Licensing.txt
+    -Added Authors.txt and Credits.txt
+    -Added VC7 Non-Debug Projects.
+    -Removed LGPL.txt (legacy) and Added APL.txt
+    -Fixed a bug occuring in ZSound and ZFont test programs.
+    -Proofread and fixed some documentation errors.
+
+0.5.0
+    -Added APL Notice to source files.
+    -Updated source guidelines file for APL licensing.
+    -Added ZSound and test program.
+    -Updated examples to have similar coding guidelines.
+
+0.4.0
+    -Added Source Guidelines file.
+    -Added ZMusic and test program.
+    -Fixed a small keypress checking error in fullscreen mode.
+    -Redesigned entire data storage system (aka ZDataPtr classes)
+    -Fixed USE_SDL_MIXER and USE_SDL_TTF bugs in ZEngine.
+    -Removed LGPL licensing messages from source.
+    -Rewrote buggy ZImage::Attach code that was affecting the test program.
+
+0.3.0
+    -Added ZTimer and ZFont classes and test programs.
+    -Fixed major hardware setting bugs in ZImage and ZEngine.
+    -Added alpha blending to tests.
+    -Reorganized Directory Structure and VC7 Project Files
+
+0.2.0
+    -Doxygen Documentation and LGPL license addition
+    -Added ZImage, and test program.
+    -Fixed bugs throughout core of ZEngine and changed methods used to keep static vectors of data.
+    -Designed ZObject class with virtual destructor.
+
+0.1.0
+    -Initial ZEngine Proof of Concept, core ZEngine class.

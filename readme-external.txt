@@ -1,0 +1,1 @@
+Files in the src/external and include/external directories are not part of ZEngine, but may be used by ZEngine to interface with external libraries.  Such files are only modified to be compatible with ZEngine and marked where such modifcations occur.
