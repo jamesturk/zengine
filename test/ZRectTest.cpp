@@ -41,12 +41,6 @@ void Test()
     {
         //In the active loop, check events first//
         engine->CheckEvents();
-        if(engine->KeyIsPressed(SDLK_s))
-        {
-            //code to toggle screen//
-            engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
-            engine->CreateDisplay("ZRect Test");
-        }
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();
         //movement//
