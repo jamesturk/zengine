@@ -28,7 +28,7 @@ void Initialize()
     title = cfg.GetString("ZRectTest","title","ZRect Test");
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateWindow(title);
+    engine->CreateDisplay(title);
 }
 
 void Test()
@@ -43,8 +43,8 @@ void Test()
         if(engine->KeyIsPressed(SDLK_s))
         {
             //code to toggle screen//
-            engine->SetupDisplay(engine->GetWidth(),engine->GetHeight(),engine->GetBPP(),!engine->IsFullscreen());
-            engine->CreateWindow("ZRect Test");
+            engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
+            engine->CreateDisplay("ZRect Test");
         }
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();

@@ -1,5 +1,6 @@
 ZEngine Todo List
 
+-Add OpenGL 2D support for drawing.
 -Proofread, update, clarify documentation.
 -Add Support for PhysicsFS with SDL_ttf and SDL_mixer music.  (Waiting on other libraries.)
 -Write simple games using the library as examples

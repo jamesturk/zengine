@@ -1,11 +1,12 @@
-ZEngine Version Log for Version 0.7.4
-$Id: changelog.txt,v 1.1 2002/11/21 05:40:49 cozman Exp $
+ZEngine Version Log for Version 0.7.5
+$Id: changelog.txt,v 1.2 2002/11/28 23:15:52 cozman Exp $
 
 0.7.5
     -Converted all tabs to spaces.
     -Added CVS lines to files for date tracking.
     -Fixed file layout for CVS and reuploaded files to CVS.
-
+	-Major API changes (removed "Get" before accessors and changed some functions in ZEngine)
+	-Added Beginnings of OpenGL Render targets
 
 0.7.4
     -Modified behavior of ZImage::Attach and changed ZImageTest to use it.

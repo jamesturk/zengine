@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.1 2002/11/21 05:41:12 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.2 2002/11/28 23:19:55 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -64,7 +64,7 @@ void ZEngine::ReleaseInstance()
 {
     if(sInstance)
     {
-        sInstance->CloseWindow();
+        sInstance->CloseDisplay();
         delete sInstance;
     }
     sInstance = NULL;
@@ -91,11 +91,10 @@ void ZEngine::SetupSound(int rate, bool stereo)
 }
 #endif
 
-void ZEngine::CreateWindow(string title, string icon)
+void ZEngine::CreateDisplay(string title, string icon)
 {
-    Uint32 flags = SDL_DOUBLEBUF|SDL_HWPALETTE;
+    Uint32 flags;
     ImageData iconImg;
-    SDL_VideoInfo *videoInfo;
 
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
     {
@@ -107,8 +106,39 @@ void ZEngine::CreateWindow(string title, string icon)
     Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096);    //Open Audio Stream (Stereo?2:1 is conditional for number of channels)
 #endif 
 
-    videoInfo = const_cast<SDL_VideoInfo*>(SDL_GetVideoInfo());
+#ifdef USE_OPENGL_2D
+    int rgb_size[3];
 
+    switch (mBPP)
+    {
+        case 8:
+            rgb_size[0] = 3;
+            rgb_size[1] = 3;
+            rgb_size[2] = 2;
+            break;
+        case 15:
+        case 16:
+            rgb_size[0] = 5;
+            rgb_size[1] = 5;
+            rgb_size[2] = 5;
+            break;
+        default:
+            rgb_size[0] = 8;
+            rgb_size[1] = 8;
+            rgb_size[2] = 8;
+            break;
+    }
+    SDL_GL_SetAttribute( SDL_GL_RED_SIZE, rgb_size[0] );
+    SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, rgb_size[1] );
+    SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, rgb_size[2] );
+    SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
+    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+
+    flags = SDL_OPENGL;
+#else //!USE_OPENGL_2D
+    SDL_VideoInfo *videoInfo = const_cast<SDL_VideoInfo*>(SDL_GetVideoInfo());
+
+    flags = SDL_DOUBLEBUF|SDL_HWPALETTE;
     //check capabilities and use what we can//
     if(videoInfo->hw_available)
         flags |= SDL_HWSURFACE;
@@ -116,6 +146,7 @@ void ZEngine::CreateWindow(string title, string icon)
         flags |= SDL_SWSURFACE;
     if(videoInfo->blit_hw)
         flags |= SDL_HWACCEL;
+#endif //USE_OPENGL_2D
 
     //Window Manager settings//
     if(!icon.length())
@@ -128,15 +159,49 @@ void ZEngine::CreateWindow(string title, string icon)
         FreeImage(iconImg);
     }
 
-    //create SDL screen//
+    //create SDL screen and update settings based on returned screen//
     if(mFullscreen)
         flags |= SDL_FULLSCREEN;
     mScreen = SDL_SetVideoMode(mWidth, mHeight, mBPP, flags);
+    
+    mWidth = mScreen->w;
+    mHeight = mScreen->h;
+    mBPP = mScreen->format->BitsPerPixel;
+
+#ifdef USE_OPENGL_2D
+        //OpenGL code from SDL project testgl.c//
+        glViewport(0,0,mWidth,mHeight);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+
+        glPushAttrib(GL_ENABLE_BIT);
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
+        glEnable(GL_TEXTURE_2D);
+
+        /* This allows alpha blending of 2D textures with the scene*/
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glViewport(0, 0, mWidth, mHeight);
+
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+
+        glOrtho(0.0, (GLdouble)mWidth, (GLdouble)mHeight, 0.0, 0.0, 1.0);
+
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+#endif //USE_OPENGL_2D
 
     if(!mScreen)
     {
         LogError(FormatStr("Unable to set video mode %dx%d (%dBpp): %s",mWidth,mHeight,mBPP,SDL_GetError()));
-        CloseWindow();
+        CloseDisplay();
     }
     mKeyPressed = SDL_GetKeyState(NULL);
 
@@ -148,7 +213,7 @@ void ZEngine::CreateWindow(string title, string icon)
     mActive = true;
 }
 
-void ZEngine::CloseWindow()
+void ZEngine::CloseDisplay()
 {
 #ifdef USE_SDL_TTF
     TTF_Quit();
@@ -165,14 +230,18 @@ void ZEngine::CloseWindow()
     SDL_Quit();
 }
 
-SDL_Surface *ZEngine::GetDisplay()
+SDL_Surface *ZEngine::Display()
 {
     return mScreen;
 }
 
 void ZEngine::UpdateScreen()
 {
+#ifdef USE_OPENGL_2D
+    SDL_GL_SwapBuffers();
+#else //!USE_OPENGL_2D
     SDL_Flip(mScreen);
+#endif //USE_OPENGL_2D
 
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
     mLastTime = GetTime();
@@ -188,7 +257,7 @@ void ZEngine::Clear(Uint32 color, SDL_Rect *rect)
     SDL_FillRect(mScreen,rect,color);
 }
 
-void ZEngine::Sleep(Uint32 milliseconds)
+void ZEngine::Delay(Uint32 milliseconds)
 {
     SDL_Delay(milliseconds);
 }
@@ -259,12 +328,12 @@ void ZEngine::ShowCursor()
     SDL_ShowCursor(SDL_ENABLE);
 }
 
-int ZEngine::GetMouseX()
+int ZEngine::MouseX()
 {
     return mMouseX;
 }
 
-int ZEngine::GetMouseY()
+int ZEngine::MouseY()
 {
     return mMouseY;
 }
@@ -512,17 +581,17 @@ void ZEngine::FreeFont(FontData &font)
 
 #endif 
 
-int ZEngine::GetWidth()
+int ZEngine::Width()
 {
     return mWidth;
 }
 
-int ZEngine::GetHeight()
+int ZEngine::Height()
 {
     return mHeight;
 }
 
-int ZEngine::GetBPP()
+int ZEngine::BPP()
 {
     return mBPP;
 }

@@ -28,7 +28,7 @@ void Initialize()
     title = cfg.GetString("ZMouseTest","title","ZMouse Test");
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateWindow(title);
+    engine->CreateDisplay(title);
 }
 
 void Test()
@@ -58,26 +58,26 @@ void Test()
         if(engine->KeyIsPressed(SDLK_s))
         {
             //code to toggle screen//
-            engine->SetupDisplay(engine->GetWidth(),engine->GetHeight(),engine->GetBPP(),!engine->IsFullscreen());
-            engine->CreateWindow("ZEngine Mouse Test");
+            engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
+            engine->CreateDisplay("ZEngine Mouse Test");
         }
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();
 
         //show where mouse is (clicked or not)//
         if(engine->RButtonPressed())
-            font.DrawText(FormatStr("Right button clicked at %d,%d",engine->GetMouseX(),engine->GetMouseY()),text[2]);
+            font.DrawText(FormatStr("Right button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
         else if(engine->LButtonPressed())
-            font.DrawText(FormatStr("Left button clicked at %d,%d",engine->GetMouseX(),engine->GetMouseY()),text[2]);
+            font.DrawText(FormatStr("Left button clicked at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
         else
-            font.DrawText(FormatStr("Mouse at %d,%d",engine->GetMouseX(),engine->GetMouseY()),text[2]);
+            font.DrawText(FormatStr("Mouse at %d,%d",engine->MouseX(),engine->MouseY()),text[2]);
             
 
         engine->Clear();    //clear screen
         //draw the images//
         text[engine->MouseInRect(&textRect)].Draw(100,100);
         text[2].Draw(0,0);
-        cursor.Draw(engine->GetMouseX()-8,engine->GetMouseY()-8);
+        cursor.Draw(engine->MouseX()-8,engine->MouseY()-8);
 
         engine->UpdateScreen();    //update the screen
 

@@ -28,7 +28,7 @@ void Initialize()
     title = cfg.GetString("ZMusicTest","title","ZMusic Test");
 
     engine->SetupDisplay(w,h,bpp,fs);
-    engine->CreateWindow(title);
+    engine->CreateDisplay(title);
 }
 
 void Test()
@@ -42,7 +42,7 @@ void Test()
     if(!song.IsLoaded())    //this executes if there is no music.ogg file
     {
         engine->SetupDisplay(800,70,32,false);
-        engine->CreateWindow("ZMusic Test");
+        engine->CreateDisplay("ZMusic Test");
         font.DrawText("Music.ogg does not exist, please read music.txt.",text[0]);
         text[0].Draw(0,0);
         engine->UpdateScreen();
@@ -65,8 +65,8 @@ void Test()
             if(engine->KeyIsPressed(SDLK_s))
             {
                 //code to toggle screen//
-                engine->SetupDisplay(engine->GetWidth(),engine->GetHeight(),engine->GetBPP(),!engine->IsFullscreen());
-                engine->CreateWindow("ZMusic Test");
+                engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
+                engine->CreateDisplay("ZMusic Test");
             }
             if(engine->KeyIsPressed(SDLK_ESCAPE))
                 engine->RequestQuit();

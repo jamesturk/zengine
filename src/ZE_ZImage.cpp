@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZImage.cpp,v 1.1 2002/11/21 05:41:13 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.2 2002/11/28 23:19:55 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -59,7 +59,7 @@ void ZImage::Open(string filename)
 void ZImage::OpenFromImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
 {
     Uint32 flags;
-    SDL_Surface *screen = rEngine->GetDisplay();
+    SDL_Surface *screen = rEngine->Display();
     SDL_Rect rect;
     SDL_VideoInfo *videoInfo;
 
@@ -82,7 +82,7 @@ void ZImage::OpenFromImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint1
     if(!img)
         LogError("Invalid Parameter to ZImage::OpenFromImage: img==NULL");
 
-    rImage.image = SDL_CreateRGBSurface(flags, rect.w, rect.h, rEngine->GetBPP(),
+    rImage.image = SDL_CreateRGBSurface(flags, rect.w, rect.h, rEngine->BPP(),
         screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
 
     if(!rImage.image)
@@ -123,7 +123,7 @@ void ZImage::SetAlpha(Uint8 alpha)
             }
             else    //can't convert (add error warning here?)
             {
-                    LogError("Alpha surface conversion failed.");
+                LogError("Alpha surface conversion failed.");
                 rImage.image = temp;
             }
         }
@@ -169,7 +169,7 @@ void ZImage::Draw(Sint16 x, Sint16 y)
     rect.y = y;
 
     if(rImage.image)
-        SDL_BlitSurface(rImage.image,NULL,rEngine->GetDisplay(),&rect);
+        SDL_BlitSurface(rImage.image,NULL,rEngine->Display(),&rect);
     else
         LogError("ZImage not initialized in ZImage::Draw.");
 }

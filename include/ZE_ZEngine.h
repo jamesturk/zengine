@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.2 2002/11/28 23:18:54 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -135,7 +135,7 @@ class ZEngine
 #endif 
 
         /*!
-            \brief Create Window with predefined settings.
+            \brief Create Display with predefined settings.
 
             SetupDisplay and SetupSound should be called prior to this to change settings, settings from those do not go into effect 
             until this function is called.  Specify no icon file to use default OS icon.
@@ -143,14 +143,14 @@ class ZEngine
             \param title Window Title.
             \param icon Path to Icon File.
         **/
-        void CreateWindow(string title, string icon="");
+        void CreateDisplay(string title, string icon="");
 
         /*!
             \brief Quit SDL and any Subsystems.
 
             Shut down SDL (and SDL_ttf,SDL_mixer if necessary).
         **/
-        void CloseWindow();
+        void CloseDisplay();
 
     /////////////////
     //Screen Access//
@@ -167,7 +167,7 @@ class ZEngine
             Get pointer to screen SDL_Surface, allowing direct screen manipulation using SDL.
             \return Pointer to Display Surface.
         **/
-        SDL_Surface *GetDisplay();
+        SDL_Surface *Display();
 
         /*!
             \brief Update screen contents.
@@ -223,7 +223,7 @@ class ZEngine
             Freeze everything for given number of milliseconds.
             \param milliseconds Number of milliseconds to freeze.
         **/
-        void Sleep(Uint32 milliseconds);
+        void Delay(Uint32 milliseconds);
 
         /*!
             \brief Get Global ZEngine time.
@@ -310,7 +310,7 @@ class ZEngine
         /*!
             \brief Find the state of a key.
 
-            Function returns true/false based on if key is pressed or not.
+            Function returns true/false based on if key is <u>currently</u> pressed or not.
             \param key code of key to find status of.
             \return bool state of requested key.
         **/
@@ -336,7 +336,7 @@ class ZEngine
             Find X Position of Mouse on screen.
             \return X Position of Mouse.
         **/
-        int GetMouseX();
+        int MouseX();
 
         /*!
             \brief Get Y Position of Mouse.
@@ -344,7 +344,7 @@ class ZEngine
             Find Y Position of Mouse on screen.
             \return Y Position of Mouse.
         **/
-        int GetMouseY();
+        int MouseY();
 
         /*!
             \brief Get Status of Left Button.
@@ -490,7 +490,7 @@ class ZEngine
             Get Width of Window or Fullscreen mode.
             \return Width of Display.
         **/
-        int GetWidth();
+        int Width();
 
         /*!
             \brief Get Current Display Height.
@@ -498,7 +498,7 @@ class ZEngine
             Get Height of Window or Fullscreen mode.
             \return Height of Display.
         **/
-        int GetHeight();
+        int Height();
 
         /*!
             \brief Get Current Display BPP.
@@ -506,7 +506,7 @@ class ZEngine
             Get BPP of Window or Fullscreen mode.
             \return BPP of Display.
         **/
-        int GetBPP();
+        int BPP();
 
         /*!
             \brief Get Fullscreen setting.

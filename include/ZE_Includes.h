@@ -13,7 +13,7 @@
 File: ZE_Includes.h <br>
 Description: Header file for ZEngine universal includes. <br>
 Author(s): James Turk <br>
-$Id: ZE_Includes.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
+$Id: ZE_Includes.h,v 1.2 2002/11/28 23:18:54 cozman Exp $<br>
 
     \file ZE_Includes.h
     \brief Include file for SDL and C++ Includes that many ZEngine files need.
@@ -28,6 +28,9 @@ $Id: ZE_Includes.h,v 1.1 2002/11/21 05:41:10 cozman Exp $<br>
 #include "ZE_Defines.h"
 
 #include "SDL.h"
+#ifdef USE_OPENGL_2D
+#include "SDL_opengl.h"
+#endif
 #ifdef USE_SDL_IMAGE
 #include "SDL_image.h"
 #endif
