@@ -374,7 +374,7 @@ Sets display parameters to specified parameters. (called before CreateDisplay)
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign=top><em>width</em>&nbsp;</td><td>Desired width of screen or window. </td></tr>
     <tr><td valign=top><em>height</em>&nbsp;</td><td>Desired height of screen or window. </td></tr>
-    <tr><td valign=top><em>bpp</em>&nbsp;</td><td>Desired BPP for screen (only works in fullscreen). </td></tr>
+    <tr><td valign=top><em>bpp</em>&nbsp;</td><td>Desired BPP for screen (generally use 32). </td></tr>
     <tr><td valign=top><em>fullscreen</em>&nbsp;</td><td>A bool for fullscreen setting. </td></tr>
   </table>
 </dl>
@@ -470,6 +470,7 @@ SetupDisplay and SetupSound should be called prior to this to change settings, s
     <tr><td valign=top><em>icon</em>&nbsp;</td><td>Path to Icon File. </td></tr>
   </table>
 </dl>
+<dl compact><dt><b>Returns:</b></dt><dd>result of setting up the display, true if everything went ok, false if any setup failed (check GetLastError). </dd></dl>
     </td>
   </tr>
 </table>
@@ -1907,7 +1908,7 @@ Get Fullscreen setting of Display. <dl compact><dt><b>Returns:</b></dt><dd>True 
 </table>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/include/<a class="el" href="ZE__ZEngine_8h-source.html">ZE_ZEngine.h</a><li>/src/<a class="el" href="ZE__ZEngine_8cpp.html">ZE_ZEngine.cpp</a></ul>
-<hr><address style="align: right;"><small>Generated on Sat Jan 18 17:53:20 2003 for ZEngine by
+<hr><address style="align: right;"><small>Generated on Sun Jan 19 01:04:50 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>
