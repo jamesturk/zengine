@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.17 2003/01/19 02:05:13 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.18 2003/01/19 04:55:18 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -145,6 +145,11 @@ bool ZEngine::CreateDisplay(string title, string icon)
             mBPP = bpp;
         }
     }
+    
+#ifdef linux	//fix for GLX visual
+    if(mBPP == 32)
+        mBPP = 24;
+#endif
 
 #ifdef USE_OPENGL
     switch (mBPP)
@@ -198,7 +203,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
 
     if(!mScreen)
     {
-        ReportError(ZERR_VIDMODE,FormatStr("Unknown Error. (%s)",SDL_GetError()));
+        ReportError(ZERR_VIDMODE,FormatStr("Unknown Error. %dx%d %dBPP (%s)",mWidth, mHeight, mBPP, SDL_GetError()));
 
 #ifdef USE_SDL_MIXER
         Mix_CloseAudio();
