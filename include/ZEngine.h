@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.17 2003/01/12 04:38:01 cozman Exp $<br>
+$Id: ZEngine.h,v 1.18 2003/01/15 05:46:20 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -29,8 +29,9 @@ $Id: ZEngine.h,v 1.17 2003/01/12 04:38:01 cozman Exp $<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine now uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
     and making the engine much faster in all test cases, and the engine was tested for memory leaks with MSVC and is known
     to have no leaks.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website can be found at http://zengine.sourceforge.net/.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine tutorials can be found at http://conceptofzero.net/tutorials/zengine/.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine website : http://zengine.sourceforge.net/.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine tutorials : http://conceptofzero.net/tutorials/zengine/.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;-The ZEngine forums : http://www.conceptofzero.net/forums/index.php?act=SF&f=15
     
     \section Licensing Licensing
     <br>
