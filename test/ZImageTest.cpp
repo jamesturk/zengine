@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.24 2003/09/09 02:45:58 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.25 2003/09/24 02:05:56 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -41,9 +41,9 @@ void Test()
     ZEngine *engine = ZEngine::GetInstance();
     float angle=0.0f,movDelta;
     Uint8 alpha=128,alphaDelta=1;
+    SDL_Surface *temp;
 
     //Open and Setup all the Images//
-    SDL_Surface *temp;
     ZImage image1,image2,image3,image4,textImage;
     ZFont font("data/almontew.ttf",30);
     ZRect clipRect(400,300,30,30);
@@ -51,14 +51,14 @@ void Test()
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
 
-    temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
-    image1.Attach(temp);    //this attaches the surface into itself
-    image2.Open("data/test01.bmp");
-    image3.OpenFromImage(image2.Surface(),5,5,20,20);
-    image4.Open("data/test02.bmp");
-    temp = NULL;    //and temp will now be controlled and freed by image1
+    temp = SDL_LoadBMP("data/rainbow.bmp");    //this is a separate surface
+    image1.OpenFromZip("data/data.zip","test02.bmp");
     image1.SetColorKey(255,0,255);
+    image2.Open("data/test01.bmp");
     image2.SetColorKey(255,0,255);
+    image3.OpenFromImage(image2.Surface(),5,5,20,20);
+    image4.Attach(temp);    //this attaches the surface into itself
+
 #if (GFX_BACKEND == ZE_OGL)
     image4.Resize(400,300);
     image4.Flip(true,false);
@@ -110,7 +110,7 @@ void Test()
             engine->Clear();    //clear screen
             //draw the images//
             alpha += alphaDelta;
-            if(alpha ==255 || alpha == 0)
+            if(alpha == 255 || alpha == 0)
                 alphaDelta *= -1;
             image1.SetAlpha(alpha);
             image1.Draw(0,0);
@@ -134,9 +134,12 @@ void Test()
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
 
-int ZE_main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
+    //atexit(ZEngine::ReleaseInstance);
     if(Initialize())
         Test();
+    ZImage img("data/test01.bmp");
+    ZEngine::ReleaseInstance();
     return 0;
 }

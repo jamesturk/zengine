@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZMusicTest.cpp,v 1.17 2003/09/09 02:45:58 cozman Exp $*/
+/*$Id: ZMusicTest.cpp,v 1.18 2003/09/24 02:05:56 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -103,9 +103,10 @@ void Test()
     }
 }
 
-int ZE_main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if(Initialize())
         Test();
+    ZEngine::ReleaseInstance();
     return 0;
 }
