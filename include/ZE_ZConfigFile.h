@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.6 2003/01/16 05:46:39 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.7 2003/02/10 03:19:37 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -159,6 +159,18 @@ class ZConfigFile : public ZObject
         void Process(string filename);
 
         /*!
+            \brief Get value in floating point format from file.
+
+            Get the current value of a variable in the file, or defVal if not found in file.
+            \since 0.8.3
+            \param section Name of section to seek variable under.
+            \param var Name of variable to seek value for.
+            \param defVal Value to return if var does not exist within section.
+            \return Contents of the variable in floating point format.
+        **/
+        float GetFloat(string section, string var, float defVal) const;
+
+        /*!
             \brief Get value in integer format from file.
 
             Get the current value of a variable in the file, or defVal if not found in file.
@@ -191,6 +203,18 @@ class ZConfigFile : public ZObject
             \return Contents of the variable in string format.
         **/
         string GetString(string section, string var, string defVal) const;
+
+        /*!
+            \brief Set value in floating point format in file.
+
+            Set the new value of a variable in the file to val, creating the section and variable 
+            if not already found in file. 
+            \since 0.8.3
+            \param section Name of section to edit variable under.
+            \param var Name of variable to set value for.
+            \param val Floating point value to set variable to in file.
+        **/
+        void SetFloat(string section, string var, float val);
 
         /*!
             \brief Set value in integer format in file.
