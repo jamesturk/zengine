@@ -22,15 +22,6 @@
 
 //Defines- undefine any of these if you dont have the indicated SDL extension//
 
-//! Major version number.
-#define VERSION_MAJOR 0
-//! Minor version number.
-#define VERSION_MINOR 8
-//! Version release number.
-#define VERSION_RELEASE 3
-//! String representation of Version #
-#define VERSION_STR "0.8.3"
-
 //! Define to include font support.
 #define USE_SDL_TTF
 //! Define to include non-bmp image file support.
@@ -42,9 +33,13 @@
 //! Define to use the Physfs file system.
 //#define USE_PHYSFS
 
+#ifdef USE_SDL_MIXER
+
 //! Maximum message length (for SDL_net). (10kb [10240] default)
 #define MAX_MSG_LEN 10240
 //! Define a ZByte as a plain char (for SDL_net).
 typedef char ZByte;
+
+#endif
 
 #endif //__ze_defines_h__

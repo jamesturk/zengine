@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.35 2003/05/13 01:30:51 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.36 2003/06/06 18:55:58 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -45,6 +45,14 @@ class ZEngine
 {
 
     private:
+        //! Major version number.
+        static const int VersionMajor = 0;
+        //! Minor version number, changes upon signifigant releases.
+        static const int VersionMinor = 8;
+        //! Version release number, changes on every release.
+        static const int VersionRelease = 3;
+        //! Version string.
+        static const char* VersionStr;
         //! Static Pointer to Instance of ZEngine for Singleton.
         static ZEngine *sInstance;
         //! Width of Display
