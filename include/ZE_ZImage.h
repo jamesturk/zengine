@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.22 2003/08/07 05:54:45 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.23 2003/09/01 00:22:27 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -21,6 +21,7 @@
 #define __ze_zimage_h__
 
 #include "ZE_ZEngine.h"
+#include "ZE_ZRect.h"
 
 namespace ZE
 {
@@ -245,6 +246,17 @@ class ZImage
             \param angle Angle in degrees to rotate image.
         **/
         void DrawRotated(float x, float y, float angle) const;
+
+        /*!
+            \brief Draw Clipped Image to screen.
+
+            Image is drawn such that only portions of image which fall within a certain area appear.
+            \since 0.8.5
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param clipRect Rectangle to clip within.
+        **/
+        void DrawClipped(float x, float y, ZRect clipRect) const;
 
         /*!
             \brief Flip image over one or both axes.

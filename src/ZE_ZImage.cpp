@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.41 2003/08/08 03:52:25 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.42 2003/09/01 00:22:35 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -235,6 +235,42 @@ void ZImage::DrawRotated(float x, float y, float angle) const
         glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(-cX+rWidth,-cY+rHeight);
     glEnd();
     glPopMatrix();
+}
+
+void ZImage::DrawClipped(float x, float y, ZRect clipRect) const
+{
+    ZRect imgRect(x,y,rWidth,rHeight),inRect;
+    float xDiff,yDiff,nx,ny,nw,nh;
+    xDiff = rTexMaxX - rTexMinX;
+    yDiff = rTexMaxY - rTexMinY;
+
+    if(clipRect.Contains(imgRect))
+    {
+        Draw(x,y);
+    }
+    else if(clipRect.Intersects(imgRect))
+    {
+        inRect = clipRect.Intersection(imgRect);
+
+        nx = rTexMinX + (inRect.X()-imgRect.X())/imgRect.Width()*xDiff;
+        ny = rTexMinY + (inRect.Y()-imgRect.Y())/imgRect.Height()*yDiff;
+        nw = nx + (inRect.Width()/imgRect.Width())*xDiff;
+        nh = ny + (inRect.Height()/imgRect.Height())*yDiff;
+
+        glColor4ub(255,255,255,rAlpha); //sets the color correctly
+        Bind();
+        glBegin(GL_TRIANGLE_STRIP);
+            glTexCoord2f(nx,ny);    glVertex2f(inRect.Left(),inRect.Top());
+            glTexCoord2f(nw,ny);    glVertex2f(inRect.Right(),inRect.Top());
+            glTexCoord2f(nx,nh);    glVertex2f(inRect.Left(),inRect.Bottom());
+            glTexCoord2f(nw,nh);    glVertex2f(inRect.Right(),inRect.Bottom());
+        glEnd();
+        glColor4ub(255,255,255,255);    //be responsible, return to standard color state
+    }
+    else    //doesn't contain nor intersect
+    {
+        //draw nothing
+    }
 }
 
 void ZImage::Flip(bool horizontal, bool vertical)
