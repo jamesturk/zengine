@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.5 2002/12/02 05:18:52 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.6 2002/12/02 05:46:37 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -210,10 +210,10 @@ void ZImage::DrawRotated(int x, int y, float angle)
     glRotatef(angle,0,0,1.0f);
     Bind(); 
     glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2f(0.0f,0.0f);            glVertex2f(-cX, -cY);
-        glTexCoord2f(rTexMaxX,0.0f);        glVertex2f(-cX+rWidth, -cY);
-        glTexCoord2f(0.0f,rTexMaxY);        glVertex2f(-cX, -cY+rHeight);
-        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(-cX+rWidth, -cY+rHeight);
+        glTexCoord2f(rTexMinX,rTexMinY);    glVertex2f(-cX,-cY);
+        glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2f(-cX+rWidth,-cY);
+        glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2f(-cX,-cY+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(-cX+rWidth,-cY+rHeight);
     glEnd();
     glPopMatrix();
 }
