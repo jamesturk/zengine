@@ -1,3 +1,7 @@
+Listed are the authors of actual ZEngine code, these authors make no claim to
+have written any of the SDL dependencies nor code in the external or zlib 
+directories.
+
 James Turk james@conceptofzero.net - Core Engine, Design, Docs, and Classes
 Gamer Tazar tazar@conceptofzero.net - OpenGL assistance
 Sean sean@conceptofzero.net - MSVC++6 Project Files
