@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.4
-$Id: changelog.txt,v 1.40 2003/07/12 09:22:13 cozman Exp $
+$Id: changelog.txt,v 1.41 2003/08/01 22:00:17 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -7,6 +7,10 @@ Changes are marked with symbols that describe them:
 + is added features
 - is removed features
 # is changed features
+
+0.8.5
+    + Addition of limited SDL graphics backend.
+    # New linux build system (by Atani)
 
 0.8.4
     ! Removed Rand* functions from ZEngine and replaced with overloaded Rand.

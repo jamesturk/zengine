@@ -26,19 +26,17 @@ The CVS page: http://sourceforge.net/cvs/?group_id=62098
 ------------------------------------------------------------
 III. Building ZEngine:
 
-ZEngine can be built on any system that has SDL and OpenGL available.  It is
-currently being developed on Redhat 8.0 and Windows 2000/XP.  If you are in
-VC++ the folders vc6 and vc7 contains project files for use, and if you are 
-in mingw or cygwin you can change the linux makefile to suit your needs.
+ZEngine can be built on any system any system that has SDL and OpenGL 
+available. If you are in VC++ the folder vc7 contains project files for use,
+and if you are in a gcc compiler you can change the config & makefile to meet
+your needs.
 -If you are using VC++ you will need to add the path to the dependencies (SDL 
 and others) as well as the path to ZEngine before building.
--If you are using gcc on any OS you need to change configure (not the
-makefile) to meet your needs then run make.
 
 See dependencies.txt for information on obtaining the dependencies.
 
-If you are having a problem building ask at 
-http://www.conceptofzero.net/index.php?name=PNphpBB2&file=viewforum&f=4
+If you are having a problem building ask at the ZEngine forum.
+(Click forum link at http://zengine.sourceforge.net)
 ------------------------------------------------------------
 IV. Using ZEngine:
 
