@@ -1,0 +1,27 @@
+#Config file for ZEngine#
+  #Edit only this file#
+
+BUILD= ZEngine-0.8.0
+
+#Define compiler commands:
+CC= g++
+AR= ar rcs
+
+#Define compiler options:
+WARN=-W -Wall
+LIBS=-lZEngineS -lSDL_mixer -lSDL_image -lSDL_ttf -lSDLmain -lSDL -lGL
+INC_PATH=-I/usr/include/SDL
+
+#Define install location:
+INSTALL_ROOT= /usr/local
+INSTALL_INC= $(INSTALL_ROOT)/include/$(BUILD)
+INSTALL_LIB= $(INSTALL_ROOT)/lib
+INSTALL_DOC= $(INSTALL_ROOT)/doc/$(BUILD)
+
+############change nothing below this line#################
+LIB= $(ZE)/lib
+SRC= $(ZE)/src
+TEST = $(ZE)/test
+
+INCLUDE_PATH = -I$(ZE)/include $(INC_PATH)
+CFLAGS = -O2 $(WARN) $(INCLUDE_PATH)

@@ -21,8 +21,8 @@ windows the folder vc7 contains project files for use, and if you are using
 mingw or cygwin you can replace the linux makefile with makefile.mingw32.
 -If you are using VC++ you will need to add the path to the dependencies (SDL 
 and others) as well as the path to ZEngine before building.
--If you are using gcc on any system you will need to modify the makefile you
-are using to set the proper include and lib paths.
+-If you are using gcc on any OS you need to change configure (not the
+makefile) to meet your needs then run make.
 If you are having a problem building ask on http://conceptofzero.net/forums.
 
 Using ZEngine:
