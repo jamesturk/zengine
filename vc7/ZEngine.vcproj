@@ -94,9 +94,6 @@
 			<File
 				RelativePath="..\src\ZE_ZTimer.cpp">
 			</File>
-			<File
-				RelativePath="..\src\ZE_main.cpp">
-			</File>
 		</Filter>
 		<Filter
 			Name="Source Headers"
