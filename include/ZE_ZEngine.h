@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.42 2003/07/05 00:40:45 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.43 2003/07/11 20:51:44 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -698,6 +698,31 @@ class ZEngine
             Get Width of Window or Fullscreen mode.
             \return Width of Display.
         **/
+        int DisplayWidth();
+
+        /*!
+            \brief Get Current Display Height.
+
+            Get Height of Window or Fullscreen mode.
+            \return Height of Display.
+        **/
+        int DisplayHeight();
+
+        /*!
+            \brief Get Current Display BPP.
+
+            Get color depth of Window or Fullscreen mode. BPP means bits per pixel.
+            \return BPP or depth of Display.
+        **/
+        int DisplayDepth();
+
+#ifdef DEPRECIATED
+        /*!
+            \brief Get Current Display Width.
+
+            Get Width of Window or Fullscreen mode.
+            \return Width of Display.
+        **/
         int Width();
 
         /*!
@@ -715,6 +740,7 @@ class ZEngine
             \return BPP of Display.
         **/
         int BPP();
+#endif //DEPRECIATED
 
         /*!
             \brief Get Fullscreen setting.

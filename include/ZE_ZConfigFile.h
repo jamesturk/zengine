@@ -29,7 +29,10 @@ namespace ZE
 /*!
     \brief ZConfigFile Class for use in ZEngine.
 
-    ZConfigFile class for INI-style configuration files for games or applications.  Inherited from ZObject.
+    ZConfigFile class for INI-style configuration files for games or applications.
+    ZConfigFile can have comments using the semicolon (;) or octothorpe (#) characters.
+    Sections are delimited by [section-name], and variables must start with a letter
+    and should be in the format <var>variable = data</var>.
 **/
 class ZConfigFile
 {

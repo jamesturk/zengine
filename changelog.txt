@@ -1,223 +1,236 @@
-ZEngine Version Log for Version 0.8.3
-$Id: changelog.txt,v 1.37 2003/07/11 00:07:49 cozman Exp $
+ZEngine Version Log for Version 0.8.4
+$Id: changelog.txt,v 1.38 2003/07/11 20:51:44 cozman Exp $
 
-As of 0.8.3 changes which may break backwards compatibility are marked with a `!!!`.
+Changes are marked with symbols that describe them:
+! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
+* is code that breaks backwards compatibility but defining DEPRECIATED preserves compatibility for.
++ is added features
+- is removed features
+# is changed features
 
 0.8.4
-    -Added particle system example program.
-    -Added simple particle system implemented on top of base.
-    -Added entire base particle system, templated, and designed for expandability.
-    -Changed implementation of parts of ZImage for tiny optimization.
-    !!! Removed Rand* functions from ZEngine and replaced with overloaded Rand.
-    -Added random generation classes, for if an object needs it's own random stream.
-    -Removed mt19937ar.h/cpp (replaced with ZE_ZRandGen.h/cpp)
-    -Fixed tiny problem in ZImage use of alpha.
-    -Changed default font rendering to blended, much better results.  Also added alpha parameter.
-    -ZEngine no longer forces use namespace std, library references prefixed with std::.
-    -Revised all source, cleaned up various areas.
-    -Moved versioning information.
-    -Changed way event hook is implemented, more control, should be threadsafe. (needed for Gewi 0.2)
+    ! Removed Rand* functions from ZEngine and replaced with overloaded Rand.
+    ! Moved versioning information and changed format.
+    * Changed ZEngine members Width-->DisplayWidth, Height-->DisplayHeight, and BPP-->DisplayDepth.
+    + Added comment & newline support to ZConfigFile.
+    + Added particle system example program.
+    + Added simple particle system implemented on top of base.
+    + Added entire base particle system, templated, and designed for expandability.
+    + Added random generation classes, for if an object needs it's own random stream.
+    - Removed mt19937ar.h/cpp rand system (replaced with ZE_ZRandGen.h/cpp)
+    # Disabled warning C4702, unreachable code, this was to fix a build problem in newer versions of VC++.
+    # Reworked changelog to contain symbols.
+    # Changed implementation of parts of ZImage for tiny optimization.
+    # Fixed tiny problem in ZImage use of alpha.
+    # Changed default font rendering to blended, much better results.  Also added alpha parameter.
+    # ZEngine no longer forces use namespace std, library references prefixed with std::.
+    # Revised all source, cleaned up various areas.
+    # Changed way event hook is implemented, more control, should be threadsafe. (needed for Gewi 0.2)
 
 0.8.3 
-    -Changed Macros in ZE_Utility to functions.
-    -Added Random Number generation to the ZEngine singleton.
-    -Fixed project files for people who don't want to add ZEngine to their path.
-    -Altered layout of some of the header files to hopefully be more readable.
-    -Fixed minor bugs in ZImage, allowing Gewi to work properly.
-    -Added loading of fonts from withen an archive via PhysFS (needs SDL_ttf 2.0.6)
-    -Changed behavior of ZImage::Bind to work with blending.
-    -Fixed timer problems when used before ZEngine::Update.
-    -Updated ZError for ZServer & ZClient.
-    -Simple ZServer and ZClient classes using SDL_net.
-    -Fixed ZImage::SetColorKey. (thanks to Kevin Watters)
-    -Added floats to ZConfigFile.
-    !!! Removed ZObject inheritance hierarchy and made classes inheritance-safe.
-    -Added ZImage<-->ZImage drawing in OpenFromImage.
-    -Added ZImage::Draw(int,int) and ZImage::DrawRotated(float,float,float).
-    -New ZRect constructor (construct from SDL_Rect).
+    ! Removed ZObject inheritance hierarchy and made classes inheritance-safe.
+    + Added ZImage<-->ZImage drawing in OpenFromImage.
+    + Added ZImage::Draw(int,int) and ZImage::DrawRotated(float,float,float).
+    + New ZRect constructor (construct from SDL_Rect).
+    + Added Random Number generation to the ZEngine singleton.
+    + Added floats to ZConfigFile.
+    + Simple ZServer and ZClient classes using SDL_net.
+    + Added loading of fonts from withen an archive via PhysFS (needs SDL_ttf 2.0.6)
+    # Fixed project files for people who don't want to add ZEngine to their path.
+    # Altered layout of some of the header files to hopefully be more readable.
+    # Fixed minor bugs in ZImage, allowing Gewi to work properly.
+    # Changed behavior of ZImage::Bind to work with blending.
+    # Fixed timer problems when used before ZEngine::Update.
+    # Updated ZError for ZServer & ZClient.
+    # Fixed ZImage::SetColorKey. (thanks to Kevin Watters)
+    # Changed Macros in ZE_Utility to functions.
 
 0.8.2
-    -Added ZImage::SetAlpha and example in ZImageTest.
-    -Added ZEngine::SetEventFilter.
-    -Fixed the DisplayFormat + Dithering Bugs in ZImage / SDLGL_Util.
-    -Added copy constructor to ZImage.
-    -Fixed problems setting bit depth in OpenGL.
-    -Added const modifier to members of ZImage,ZTimer,ZMusic,ZSound,ZRect,ZConfigFile,ZFont and ZError.
-    -Fixed several documentation problems.
-    -Added complete error handling system to ZEngine including internal ZError class.
-    -Updated examples to use newer features and check for errors.
-    -Changed ZEngine::CreateDisplay to return a boolean value.
-    -Added \since option to documentation (Everything after 0.8.0 will be labeled with a version.)
-    -Added "desired framerate" functionality into the test programs.
-    -Added "desired framerate" code to ZEngine.
-    -Fixed OpenGL color bleed in ZRect.
+    + Added "desired framerate" functionality into the test programs.
+    + Added "desired framerate" code to ZEngine.
+    + Added ZImage::SetAlpha and example in ZImageTest.
+    + Added complete error handling system to ZEngine including internal ZError class.
+    + Added ZEngine::SetEventFilter.
+    + Changed ZEngine::CreateDisplay to return a boolean value.
+    + Added copy constructor to ZImage.
+    + Added const modifier to members of ZImage,ZTimer,ZMusic,ZSound,ZRect,ZConfigFile,ZFont and ZError.
+    # Fixed the DisplayFormat + Dithering Bugs in ZImage / SDLGL_Util.
+    # Fixed problems setting bit depth in OpenGL.
+    # Fixed several documentation problems.
+    # Updated examples to use newer features and check for errors.
+    # Fixed OpenGL color bleed in ZRect.
 
 0.8.1
-    -Added legal information for developers.
-    -Fixed VC7 to build without PhysFS by default.
-    -Added small notice into /lib directory.
-    -Added VC6 files based on updated VC7 files, courtesy of Sean.
-    -Added links to the tutorials.
+    + Added legal information for developers.
+    + Fixed VC7 to build without PhysFS by default.
+    + Added small notice into /lib directory.
+    + Added VC6 files based on updated VC7 files, courtesy of Sean.
+    + Added links to the tutorials.
 
 0.8.0
-    -Added Surface Loss Protection.
-    -Utilized Surface Loss Protection in ZImageTest for a demo.
-    -ZEngine now builds on FreeBSD.
-    -Updated copyright.
+    + Added Surface Loss Protection.
+    + Utilized Surface Loss Protection in ZImageTest for a demo.
+    # ZEngine now builds on FreeBSD.
+    # Updated copyright.
 
 0.8.0-rc4 (what rc3 should have been)
-    -Fixed ZImage::SetColorKey for new Attach behavior.
-    -Fixed ZMusicTest GL screen error if music fails to open.
-    -Fixed VC7 "Release" Project files.
-    -Removed switch option from tests due to surface loss.
+    - Removed switch option from tests due to surface loss.
+    # Fixed ZImage::SetColorKey for new Attach behavior.
+    # Fixed ZMusicTest GL screen error if music fails to open.
+    # Fixed VC7 "Release" Project files.
+
 
 0.8.0-rc3
-    -Fixed MAJOR memory leak when using ZImage::Attach, and in ZFont.
-    -Updated ZEngine web info. (mostly in rc2)
-    -Fixed time based movement and some compile time warnings in ZRectTest.cpp.
-    -Added gamedev.net to thanks.txt.
-    -Fixed documentation in ZE_ZImage.h
+    + Fixed memory leak when using ZImage::Attach, and in ZFont.
+    + Updated ZEngine web info. (mostly in rc2)
+    # Fixed time based movement and some compile time warnings in ZRectTest.cpp.
+    # Added gamedev.net to thanks.txt.
+    # Fixed documentation in ZE_ZImage.h
 
 0.8.0-rc2
-    -Added path stripping to ZEngine.linux.doxygen.
-    -Added information to ZEngine.h for Doxygen front page.
-    -Added force into makefile options.
-    -Changed ZEngine::UpdateScreen to ZEngine::Update
+    ! Changed ZEngine::UpdateScreen to ZEngine::Update
+    + Added information to ZEngine.h for Doxygen front page.
+    + Added force into makefile options.
+    # Added path stripping to ZEngine.linux.doxygen.
+
 
 0.8.0-rc1
-    -Changed ZRect to use floats.
-    -Added Time based movement to ZRectTest.
-    -Changed behavior of 0 as bpp argument in ZEngine.
-    -Added readme.
-    -Updated rationale in licensing.txt. (fixed)
-    -Fixed loads of doxygen errors and documented all undocumented members.
-    -Fixed makefile to be much more portable and added config.
+    ! Changed behavior of 0 as bpp argument in ZEngine.
+    + Fixed makefile to be much more portable and added config.
+    + Added Time based movement to ZRectTest.
+    + Added readme.
+    # Changed ZRect to use floats.
+    # Updated rationale in licensing.txt. (fixed)
+    # Fixed loads of doxygen errors and documented all undocumented members.
+
     
 0.7.8
-    -Added ZRect::Draw using OpenGL.
-    -Fixed ZRectTest to use new ZRect.
-    -Added ZImage rotation and 2 forms of stretching using OpenGL.
-    -Added some testing to ZImageTest of new stretching.
-    -Added ZImage::Flip.
-    -Fixed Linux makefile for new OpenGL code.
-    -Added new means of keyboard input, and key repeat enable/disable code.
-    -Fixed warnings in Test programs.
+    + Added ZRect::Draw using OpenGL.
+    + Fixed ZRectTest to use new ZRect.
+    + Added ZImage rotation and 2 forms of stretching using OpenGL.
+    + Added ZImage::Flip.
+    + Added Linux makefile for new OpenGL code.
+    + Added new means of keyboard input, and key repeat enable/disable code.
+    # Fixed warnings in Test programs.
+    # Added some testing to ZImageTest of new stretching.
 
 0.7.7
-    -Changed behavior of core ZEngine class methods to reflect new OpenGL behavior.
-    -Eliminated certain SDL specific functions, no longer needed with OpenGL render target.
-    -Completely removed old SDL_Image.h and replaced with what had been SDL_ImageGL.h.
-    -Documented new ZImage class as well as ZConfigFile's ZCF_Variable and ZCF_Section.
-    -Fixed memory leak and general failure in new ZImage::OpenFromImage.
-    -Simplified SDL_GL Initialization.
-    -Shortened most lines to reasonable screen width.
-    -Added notice to licensing explaining license choice.
+    + Changed behavior of core ZEngine class methods to reflect new OpenGL behavior.
+    + Added notice to licensing explaining license choice.
+    - Eliminated certain SDL specific functions, no longer needed with OpenGL render target.
+    # Completely removed old SDL_Image.h and replaced with what had been SDL_ImageGL.h.
+    # Documented new ZImage class as well as ZConfigFile's ZCF_Variable and ZCF_Section.
+    # Fixed memory leak and general failure in new ZImage::OpenFromImage.
+    # Simplified SDL_GL Initialization.
+    # Shortened most lines to reasonable screen width.
 
 0.7.6
-    -Added ZImageGL, still in testing phase.
-    -Followed up major API changes from 0.7.5 with whole new series of changes:
+    + Added ZImageGL, still in testing phase.
+    + Followed up major API changes from 0.7.5 with whole new series of changes:
         (API from 0.7.x at least 25% rewritten)
-    -Added new /external files for SDL_GL* extensions
-    -Added Macros in ZE_Macros.h
-    -Removed ZE_DataPtr.h
-    -Rewrote warnings in Sound,Music,Font and Image classes.
+    + Added new /external files for SDL_GL* extensions
+    + Added Macros in ZE_Macros.h
+    - Removed ZE_DataPtr.h
+    # Rewrote warnings in Sound,Music,Font and Image classes.
 
 0.7.5
-    -Converted all tabs to spaces.
-    -Added CVS lines to files for date tracking.
-    -Fixed file layout for CVS and reuploaded files to CVS.
-    -Major API changes (removed "Get" before accessors and changed some functions in ZEngine)
-    -Added Beginnings of OpenGL Render target
+    + Added Beginnings of OpenGL Render target
+    # Major API changes (removed "Get" before accessors and changed some functions in ZEngine)
+    # Converted all tabs to spaces.
+    # Added CVS lines to files for date tracking.
+    # Fixed file layout for CVS and reuploaded files to CVS.
+
 
 0.7.4
-    -Modified behavior of ZImage::Attach and changed ZImageTest to use it.
-    -Added makefile for Linux build support.
-    -Renamed old makefile to makefile.mingw32
-    -Fixed problem in ZImage::SetAlpha when failure occured.
-    -Added warnings in ZImage for when the display format fails.
-    -Completely rewrote ZConfigFile to avoid problems with STL map.
-    -Fixed problem in ZImage with transparency.
-    -Added doxygen script for linux, and renamed old doxygen script.
+    + Added doxygen script for linux, and renamed old doxygen script.
+    + Added warnings in ZImage for when the display format fails.
+    + Added makefile for Linux build support.
+    # Modified behavior of ZImage::Attach and changed ZImageTest to use it.
+    # Renamed old makefile to makefile.mingw32
+    # Fixed problem in ZImage::SetAlpha when failure occured.
+    # Completely rewrote ZConfigFile to avoid problems with STL map.
+    # Fixed problem in ZImage with transparency.
+
 
 0.7.3
-    -Globally revised source variable naming standards.
-    -Fixed Error Logging in ZImage.
-    -Added SDL_DisplaySurface and SDL_DisplaySurfaceAlpha calls to speed up blitting in ZImage.
-    -Fixed bug in ZConfigFile that caused a NULL file to be closed.
-    -Several Documentation errors corrected.
-    -Added ZRect class, and ZRectTest.
+    + Added ZRect class, and ZRectTest.
+    # Globally revised source variable naming standards.
+    # Fixed Error Logging in ZImage.
+    # Added SDL_DisplaySurface and SDL_DisplaySurfaceAlpha calls to speed up blitting in ZImage.
+    # Fixed bug in ZConfigFile that caused a NULL file to be closed.
+    # Several Documentation errors corrected.
+
 
 0.7.2
-    -Fixed small source problem in PhysFS handling of non-supported types.
-    -Added makefile for Cygwin and Mingw32
-    -Removed AFL license, and switched to BSD-style license.
+    + Added makefile for Cygwin and Mingw32
+    # Fixed small source problem in PhysFS handling of non-supported types.
+    # Removed AFL license, and switched to BSD-style license.
 
 0.7.1
-    -Changed directory layout.
-    -Changed source files to compile without PhysicsFS.
-    -Added newline to end of all source files.
+    # Changed directory layout.
+    # Changed source files to compile without PhysicsFS.
+    # Added newline to end of all source files.
 
 0.7.0
-    -Changed slash direction in example programs (fixed non-windows problems).
-    -Added support for PhysicsFS.
-    -Added ZConfigFile.
-    -Updated all examples to be cleaner style and use more features.
-    -Addes ZConfigFile for test programs.
+    + Added support for PhysicsFS.
+    + Added ZConfigFile.
+    # Added ZConfigFile for test programs.
+    # Changed slash direction in example programs (fixed non-windows problems).
+    # Updated all examples to be cleaner style and use more features.
 
 0.6.3
-    -Fixed directory issues in distribution.
-    -Updated to specify SDL 1.2.5 compatibility.
-    -Added IsLoaded method to ZSound,ZMusic,ZImage and ZFont
-    -Added music.ogg warning to ZMusicTest.
-    -Minor fixes in Doxygen settings.
-    -Fixed issues compiling the ZObject Inherited Wrapper types caused by changes in documentation.
-    -Added file-level documentation for doxygen in src directory.
+    + Added IsLoaded method to ZSound,ZMusic,ZImage and ZFont
+    + Added music.ogg warning to ZMusicTest.
+    # Stablized directory issues in distribution.
+    # Added file-level documentation for doxygen in src directory.
+    # Updated to specify SDL 1.2.5 compatibility.
+    # Minor fixes in Doxygen settings.
 
 0.6.2
-    -Updated License to APL 1.1 and all files with it.
+    + Updated License to APL 1.1 and all files with it.
 
 0.6.1
-    -Added Mouse Example
-    -Changed Email Address to james@conceptofzero.net
-    -Added more test data and information on where data came from
-    -Removed Ogg file from distribution.
-    -Changed names of the libraries.
+    + Added Mouse Example
+    + Added more test data and information on where data came from
+    - Removed Ogg file from distribution.
+    # Changed names of the libraries.
+    # Changed Email Address to james@conceptofzero.net
 
 0.6.0
-    -Updated all documentation (including doxygen docs).
-    -Rewrote Licensing.txt
-    -Added Authors.txt and Credits.txt
-    -Added VC7 Non-Debug Projects.
-    -Removed LGPL.txt (legacy) and Added APL.txt
-    -Fixed a bug occuring in ZSound and ZFont test programs.
-    -Proofread and fixed some documentation errors.
+    + Added Authors.txt and Credits.txt
+    + Added VC7 Non-Debug Projects.
+    # Updated all documentation (including doxygen docs).
+    # Rewrote Licensing.txt
+    # Fixed a bug occuring in ZSound and ZFont test programs.
+    # Proofread and fixed some documentation errors.
+    # Switched LGPL.txt for APL.txt
 
 0.5.0
-    -Added APL Notice to source files.
-    -Updated source guidelines file for APL licensing.
-    -Added ZSound and test program.
-    -Updated examples to have similar coding guidelines.
+    + Added APL Notice to source files.
+    + Added ZSound and test program.
+    # Updated source guidelines file for APL licensing.
+    # Updated examples to have similar coding guidelines.
 
 0.4.0
-    -Added Source Guidelines file.
-    -Added ZMusic and test program.
-    -Fixed a small keypress checking error in fullscreen mode.
-    -Redesigned entire data storage system (aka ZDataPtr classes)
-    -Fixed USE_SDL_MIXER and USE_SDL_TTF bugs in ZEngine.
-    -Removed LGPL licensing messages from source.
-    -Rewrote buggy ZImage::Attach code that was affecting the test program.
+    + Added Source Guidelines file.
+    + Added ZMusic and test program.
+    - Removed LGPL licensing messages from source.
+    # Fixed a small keypress checking error in fullscreen mode.
+    # Rewrote buggy ZImage::Attach code that was affecting the test program.
+    # Fixed USE_SDL_MIXER and USE_SDL_TTF bugs in ZEngine.
+    # Redesigned entire data storage system (aka ZDataPtr classes)
 
 0.3.0
-    -Added ZTimer and ZFont classes and test programs.
-    -Fixed major hardware setting bugs in ZImage and ZEngine.
-    -Added alpha blending to tests.
-    -Reorganized Directory Structure and VC7 Project Files
+    + Added ZTimer and ZFont classes and test programs.
+    + Added alpha blending to tests.
+    # Fixed major hardware setting bugs in ZImage and ZEngine.
+    # Reorganized Directory Structure and VC7 Project Files
 
 0.2.0
-    -Doxygen Documentation and LGPL license addition
-    -Added ZImage, and test program.
-    -Fixed bugs throughout core of ZEngine and changed methods used to keep static vectors of data.
-    -Designed ZObject class with virtual destructor.
+    + Doxygen Documentation and LGPL license addition
+    + Added ZImage, and test program.
+    + Designed ZObject class with virtual destructor.
+    # Fixed bugs throughout core of ZEngine and changed methods used to keep static vectors of data.
 
 0.1.0
-    -Initial ZEngine Proof of Concept, core ZEngine class.
+    Initial ZEngine Proof of Concept, core ZEngine class.

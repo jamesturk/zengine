@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine particle system class ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.3 2003/07/10 23:45:08 cozman Exp $<br>
+    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.4 2003/07/11 20:51:44 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -244,8 +244,8 @@ void ZBaseParticleSystem<particleType>::Update()
         for(unsigned int i=0; i < rCurParticles; ++i)
         {
             UpdateParticle(i,elapsed);
-            if(rParticles[i].xPos < 0 || rParticles[i].xPos > rEngine->Width() 
-                || rParticles[i].yPos < 0 || rParticles[i].yPos > rEngine->Height() || rParticles[i].energy <= 0)
+            if(rParticles[i].xPos < 0 || rParticles[i].xPos > rEngine->DisplayWidth() 
+                || rParticles[i].yPos < 0 || rParticles[i].yPos > rEngine->DisplayHeight() || rParticles[i].energy <= 0)
             {
                 rParticles[i] = rParticles[--rCurParticles];
                 --i;    //go back one to process that particle

@@ -13,7 +13,7 @@
     \brief Source file for ZConfigFile.
 
     Implementation of ZConfigFile, the ZEngine INI-Style Config File.
-    <br>$Id: ZE_ZConfigFile.cpp,v 1.13 2003/06/16 07:45:03 cozman Exp $<br>
+    <br>$Id: ZE_ZConfigFile.cpp,v 1.14 2003/07/11 20:51:44 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -177,6 +177,8 @@ ZConfigFile::~ZConfigFile()
 void ZConfigFile::Process(std::string filename)
 {
     rFilename = filename;
+    int commentNum=0;
+    int newlineNum=0;
 
     std::ifstream cfile(rFilename.c_str()); 
     std::string section, str, var, tmp;
@@ -191,11 +193,22 @@ void ZConfigFile::Process(std::string filename)
         //if std::string is bracketed it is a section, if it begins in a letter it is a variable
         if(tmp[0] == '[' && tmp[tmp.length()-1] == ']')
             section = str;
-        else if(std::isalpha(tmp[0]))
+        else if(std::isalpha(tmp[0]))   //variables must start with a letter
         {
             var = str.substr(0,str.find('='));    //split the std::string at the equals sign
             SetVariable(section,var,str.substr(str.find('=')+1,str.length()-var.length()-1));
         }
+        else if(tmp[0] == '#' || tmp[0] == ';') //acceptable comment characters
+        {
+            SetVariable(section,FormatStr("__comment%d",commentNum),str);
+            ++commentNum;
+        }
+        else if(tmp.length() == 0 && !cfile.eof())  //prevent writing a new newline with every write to disk
+        {
+            SetVariable(section,FormatStr("__newline%d",newlineNum),"");
+            ++newlineNum;
+        }
+
     }
     cfile.close();
 }
@@ -339,7 +352,14 @@ void ZConfigFile::Flush()
                     //for each variable in section, write out variable=value
                     for(varIter = (*secIter).varList.begin(); varIter != (*secIter).varList.end(); ++varIter)
                     {
-                        if(CleanString((*varIter).var).length())    //ensures that variable is valid
+                        if((*varIter).var[0] == '_') 
+                        {
+                            if( ((*varIter).var).substr(2,7) == "comment")
+                                cfile << (*varIter).val << std::endl;
+                            else if( ((*varIter).var).substr(2,7) == "newline")
+                                cfile << std::endl;
+                        }
+                        else if(CleanString((*varIter).var).length())    //ensures that variable is valid
                             cfile << (*varIter).var << '=' << (*varIter).val << std::endl;
                     }
                 }

@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZParticleTest.cpp,v 1.1 2003/07/10 23:30:05 cozman Exp $*/
+/*$Id: ZParticleTest.cpp,v 1.2 2003/07/11 20:51:45 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -56,7 +56,7 @@ void Test()
     effect[0].SetRate(120);
     effect[0].SetImage("data/particle1.tga");
 
-    effect[1].SetPosRange(0,0,static_cast<float>(engine->Width()),20);
+    effect[1].SetPosRange(0,0,static_cast<float>(engine->DisplayWidth()),20);
     effect[1].SetColorRange(230,255,230,255,250,255,200,240);
     effect[1].SetVelocityRange(-10,30,10,50);
     effect[1].SetEnergyRange(1,1);
@@ -76,7 +76,7 @@ void Test()
     effect[2].SetImage("data/particle2.tga");
 
     bg.Open("data/rainbow.bmp");
-    bg.Resize(engine->Width()/2,engine->Height());  //gives perspective on alpha on half of screen
+    bg.Resize(engine->DisplayWidth()/2,engine->DisplayHeight());  //gives perspective on alpha on half of screen
 
     font.DrawText("(P)ause    (U)npause    (C)lear",text[0]);
     font.DrawText("1-3 : Change System Being Controlled",text[1]);

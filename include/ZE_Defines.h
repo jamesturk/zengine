@@ -32,6 +32,8 @@
 //#define USE_SDL_NET
 //! Define to use the Physfs file system.
 //#define USE_PHYSFS
+//! Define to use depreciated code that has not been entirely removed.
+//#define DEPRECIATED
 
 #ifdef USE_SDL_NET
 

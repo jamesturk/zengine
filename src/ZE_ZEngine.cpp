@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.50 2003/07/11 00:27:26 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.51 2003/07/11 20:51:44 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -22,7 +22,7 @@
 namespace ZE
 {
 
-VersionInfo ZEngine::Version(0,8,4,"dev");
+VersionInfo ZEngine::Version(0,8,4);
 ZEngine *ZEngine::sInstance=NULL;
 
 ZEngine::ZEngine() : 
@@ -50,6 +50,7 @@ ZEngine* ZEngine::GetInstance()
         sInstance = new ZEngine;
 
     return sInstance;
+    sInstance = NULL;
 }
 
 void ZEngine::ReleaseInstance()
@@ -776,6 +777,23 @@ TTF_Font* ZEngine::LoadFont(std::string filename, int size)
 
 #endif 
 
+int ZEngine::DisplayWidth()
+{
+    return mWidth;
+}
+
+int ZEngine::DisplayHeight()
+{
+    return mHeight;
+}
+
+int ZEngine::DisplayDepth()
+{
+    return mBPP;
+}
+
+#ifdef DEPRECIATED
+
 int ZEngine::Width()
 {
     return mWidth;
@@ -790,6 +808,8 @@ int ZEngine::BPP()
 {
     return mBPP;
 }
+
+#endif //DEPRECIATED
 
 bool ZEngine::IsFullscreen()
 {

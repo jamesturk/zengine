@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.36 2003/07/05 00:40:45 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.37 2003/07/11 20:51:44 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -101,7 +101,7 @@ void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sin
     if(!image)
         rEngine->ReportError(ZERR_NOIMAGE,"OpenFromImage");
 
-    cutImg = SDL_CreateRGBSurface(0, rect.w, rect.h, rEngine->BPP(),
+    cutImg = SDL_CreateRGBSurface(0, rect.w, rect.h, rEngine->DisplayDepth(),
         screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
 
     if(!cutImg)
