@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.1 2002/11/21 05:41:11 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.2 2002/12/01 08:36:39 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -36,15 +36,15 @@ namespace ZE
 **/
 class ZRect
 {
-    private:
+    protected:  
         //! X Position of top left corner of rectangle.
-        int mX;
+        int rX;
         //! Y Position of top left corner of rectangle.
-        int mY;
+        int rY;
         //! Width of Rectangle.
-        int mWidth;
+        int rWidth;
         //! Height of Rectangle.
-        int mHeight;
+        int rHeight;
 
     public:
 
@@ -92,6 +92,17 @@ class ZRect
             \return True if this rectangle is smaller than the rhs rectangle, false otherwise.
         **/
         bool operator<(const ZRect &rhs) const;
+
+        /*!
+            \brief Draw rectangle. (filled)
+
+            Draw the ZRect, this function is mainly provided for testing purposes.
+            \param red Red component of color (0-255).
+            \param green Green component of color (0-255).
+            \param blue Blue component of color (0-255).
+            \param alpha Alpha component of color (0-255).
+        **/
+        void Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha=255);
 
         /*!
             \brief Changes the location of the rectangle.

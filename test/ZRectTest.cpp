@@ -69,9 +69,9 @@ void Test()
         }
 
         engine->Clear();
-        engine->Clear(engine->MapColor(255,0,0,128),&moveRect.SDLrect());
-        engine->Clear(engine->MapColor(0,0,255),&stillRect.SDLrect());
-        engine->Clear(engine->MapColor(0,255,0),&moveRect.Intersection(stillRect).SDLrect());
+        moveRect.Draw(255,0,0,128);
+        stillRect.Draw(0,0,255,128);
+        moveRect.Intersection(stillRect).Draw(0,255,0);
         engine->UpdateScreen();
             
     } while(!engine->QuitRequested());

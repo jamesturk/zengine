@@ -13,7 +13,7 @@
 File: ZE_ZRect.cpp <br>
 Description: Implementation source file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.1 2002/11/21 05:41:13 cozman Exp $<br>
+$Id: ZE_ZRect.cpp,v 1.2 2002/12/01 08:36:39 cozman Exp $<br>
 
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
@@ -27,17 +27,17 @@ namespace ZE
 {
 
 ZRect::ZRect() :
-    mX(0),mY(0),mWidth(0),mHeight(0)
+    rX(0),rY(0),rWidth(0),rHeight(0)
 {
 }
 
 ZRect::ZRect(int x, int y, int width, int height) :
-    mX(x),mY(y),mWidth(width),mHeight(height)
+    rX(x),rY(y),rWidth(width),rHeight(height)
 {
 }
 
 ZRect::ZRect(const ZRect &rhs) :
-    mX(rhs.X()),mY(rhs.Y()),mWidth(rhs.Width()),mHeight(rhs.Height())
+    rX(rhs.X()),rY(rhs.Y()),rWidth(rhs.Width()),rHeight(rhs.Height())
 {
 }
 
@@ -45,10 +45,10 @@ const ZRect& ZRect::operator=(const ZRect &rhs)
 {
     if(this != &rhs)
     {
-        mX = rhs.X();
-        mY = rhs.Y();
-        mWidth = rhs.Width();
-        mHeight = rhs.Height();
+        rX = rhs.X();
+        rY = rhs.Y();
+        rWidth = rhs.Width();
+        rHeight = rhs.Height();
     }
     return *this;
 }
@@ -57,27 +57,27 @@ bool ZRect::operator<(const ZRect &rhs) const
 {
     //< is the one that is closer to top corner (as a whole)//
 
-    if(mY < rhs.Y())    //check Ys
+    if(rY < rhs.Y())    //check Ys
         return true;
-    else if(mY > rhs.Y())
+    else if(rY > rhs.Y())
         return false;
     else
     {
-        if(mX < rhs.X())    //check Xs
+        if(rX < rhs.X())    //check Xs
             return true;
-        else if(mX > rhs.X())
+        else if(rX > rhs.X())
             return false;
         else
         {
-            if(mHeight < rhs.Height())    //check heights
+            if(rHeight < rhs.Height())    //check heights
                 return true;
-            else if(mHeight > rhs.Height())
+            else if(rHeight > rhs.Height())
                 return false;
             else
             {
-                if(mWidth < rhs.Width())    //check widths
+                if(rWidth < rhs.Width())    //check widths
                     return true;
-                else if(mWidth > rhs.Width())
+                else if(rWidth > rhs.Width())
                     return false;
                 else
                     return false;    //nothing left to check they are ==
@@ -86,39 +86,50 @@ bool ZRect::operator<(const ZRect &rhs) const
     }
 }
 
+void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
+{
+    glColor4ub(red,green,blue,alpha);
+    glBegin(GL_QUADS);
+        glVertex2i(rX, rY);
+        glVertex2i(rX+rWidth, rY);
+        glVertex2i(rX+rWidth, rY+rHeight);
+        glVertex2i(rX, rY+rHeight);
+    glEnd();
+}
+
 void ZRect::Move(int x, int y)
 {
-    mX = x;
-    mY = y;
+    rX = x;
+    rY = y;
 }
 
 void ZRect::MoveRel(int xMove, int yMove)
 {
-    mX += xMove;
-    mY += yMove;
+    rX += xMove;
+    rY += yMove;
 }
 
 void ZRect::Resize(int width, int height)
 {
-    mWidth = width;
-    mHeight = height;
+    rWidth = width;
+    rHeight = height;
 }
 
 void ZRect::ResizeRel(int widthChange, int heightChange)
 {
-    mWidth += widthChange;
-    mHeight += heightChange;
+    rWidth += widthChange;
+    rHeight += heightChange;
 }
 
 bool ZRect::Intersects(const ZRect &rect) const
 {
-    return !(mX > rect.Right() || rect.Left() > mX+mWidth ||
-        mY > rect.Bottom() || rect.Top() > mY+mHeight);
+    return !(rX > rect.Right() || rect.Left() > rX+rWidth ||
+        rY > rect.Bottom() || rect.Top() > rY+rHeight);
 }
 
 bool ZRect::Contains(int x, int y) const
 {
-    return x > mX && x < mX+mWidth && y > mY && y < mY+mHeight;
+    return x > rX && x < rX+rWidth && y > rY && y < rY+rHeight;
 }
 
 bool ZRect::Contains(const ZRect &rect) const
@@ -134,10 +145,10 @@ ZRect ZRect::Intersection(const ZRect &rect) const
 
     if(Intersects(rect))
     {
-        tempX = mX > rect.X() ? mX : rect.X();
-        tempY = mY > rect.Y() ? mY : rect.Y();
-        tempW = mX+mWidth < rect.Right() ? mX+mWidth : rect.Right();
-        tempH = mY+mHeight < rect.Bottom() ? mY+mHeight : rect.Bottom();
+        tempX = rX > rect.X() ? rX : rect.X();
+        tempY = rY > rect.Y() ? rY : rect.Y();
+        tempW = rX+rWidth < rect.Right() ? rX+rWidth : rect.Right();
+        tempH = rY+rHeight < rect.Bottom() ? rY+rHeight : rect.Bottom();
 
         tempW -= tempX;        //adjust width and height
         tempH -= tempY;
@@ -150,52 +161,52 @@ SDL_Rect ZRect::SDLrect() const
 {
     SDL_Rect ret;
     
-    ret.x = static_cast<Sint16>(mX);
-    ret.y = static_cast<Sint16>(mY);
-    ret.w = static_cast<Sint16>(mWidth);
-    ret.h = static_cast<Sint16>(mHeight);
+    ret.x = static_cast<Sint16>(rX);
+    ret.y = static_cast<Sint16>(rY);
+    ret.w = static_cast<Sint16>(rWidth);
+    ret.h = static_cast<Sint16>(rHeight);
 
     return ret;
 }
 
 int ZRect::X() const
 {
-    return mX;
+    return rX;
 }
 
 int ZRect::Y() const
 {
-    return mY;
+    return rY;
 }
 
 int ZRect::Left() const
 {
-    return mX;
+    return rX;
 }
 
 int ZRect::Right() const
 {
-    return mX+mWidth;
+    return rX+rWidth;
 }
 
 int ZRect::Top() const
 {
-    return mY;
+    return rY;
 }
 
 int ZRect::Bottom() const
 {
-    return mY+mHeight;
+    return rY+rHeight;
 }
 
 int ZRect::Width() const
 {
-    return mWidth;
+    return rWidth;
 }
 
 int ZRect::Height() const
 {
-    return mHeight;
+    return rHeight;
 }
 
 }    //namespace ZE
