@@ -14,7 +14,8 @@ BUILD_NAME=ZEngine-0.8.4
 GL_LIB_NAME=GL
 
 ##Define compiler commands:
-CC=g++
+CC=gcc      #c compiler
+CPPC=g++    #cpp compiler
 AR=ar rcs
 
 ###Define compiler options:

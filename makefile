@@ -1,24 +1,31 @@
 #Makefile for ZEngine
+#Created and maintained by James Turk
+#Incremental build optimizations submitted by Atani
 
 include $(CURDIR)/config
 #defines the user shouldn't change#
 INCLUDES = -I$(CURDIR)/include $(SDL_INC_PATH) $(GL_INC_PATH)
 LIBRARIES = -L$(CURDIR)/lib $(SDL_LIB_PATH) $(GL_LIB_PATH)
-CFLAGS = $(EXTRA_OPTIONS) $(WARN_LEVEL) $(INCLUDES) $(LIBRARIES)
+CPPFLAGS = $(EXTRA_OPTIONS) $(WARN_LEVEL) $(INCLUDES) $(LIBRARIES)
+CFLAGS = -w
 LIB_OUT = $(CURDIR)/lib/libZEngineS.a
 ALL_TESTS = ZFontTest ZMouseTest ZMusicTest ZSoundTest ZTimerTest ZImageTest ZRectTest ZParticleTest
 
 %.o: $(CURDIR)/src/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CPPC) $(CPPFLAGS) -c $< -o $@
 
 %.o: $(CURDIR)/src/external/%.cpp
+	$(CPPC) $(CPPFLAGS) -c $< -o $@
+
+%.o: $(CURDIR)/zlib/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-SOURCES = $(wildcard $(CURDIR)/src/external/*.cpp) \
-	  $(wildcard $(CURDIR)/src/*.cpp)
+CPP_SOURCES = $(wildcard $(CURDIR)/src/external/*.cpp) \
+	  $(wildcard $(CURDIR)/src/*.cpp) 
+C_SOURCES = $(wildcard $(CURDIR)/zlib/*.c)
 
-#SOURCES with path stripped and .cpp changed to .o
-OBJECTS = $(notdir $(SOURCES:.cpp=.o))
+#sources with path stripped and .cpp changed to .o
+OBJECTS = $(notdir $(CPP_SOURCES:.cpp=.o)) $(notdir $(C_SOURCES:.c=.o))
 
 #build targets#
 
@@ -32,7 +39,7 @@ $(LIB_OUT): $(OBJECTS)
 
 $(ALL_TESTS) : $(LIB_OUT)
 	@echo Building $@...
-	$(CC) $(CFLAGS) $(CURDIR)/test/$@.cpp -o $(CURDIR)/test/bin/$@ $(LIBS)
+	$(CPPC) $(CPPFLAGS) $(CURDIR)/test/$@.cpp -o $(CURDIR)/test/bin/$@ $(LIBS)
 	@echo $@ compiled.
 
 .PHONY: $(ALL_TESTS) install clean veryclean
