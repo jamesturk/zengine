@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.48 2003/07/05 00:40:45 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.49 2003/07/05 01:02:05 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -759,7 +759,7 @@ TTF_Font* ZEngine::LoadFont(std::string filename, int size)
 #ifdef USE_PHYSFS
     SDL_RWops *rw;
     rw = PHYSFSRWOPS_openRead(filename.c_str());
-    font = TTF_OpenFontRW(rw,0);
+    font = TTF_OpenFontRW(rw,0,size);
     SDL_FreeRW(rw);
 #else
     font = TTF_OpenFont(filename.c_str(),size);
