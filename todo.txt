@@ -1,9 +1,8 @@
 ZEngine Todo List
-    -Integrate Particle Engine (Particle Engine shell complete, working on integration)
     -Net Example (waiting on finalized net classes)
     -Add Support for PhysFS in ZMusic.  (Waiting on SDL_mixer.)
-    -ZSprite class (XML?)
-    -Entirely New ZFont class, using display lists
+    -ZSprite class (using XML layout?)
+    -Entirely New ZFont class, using display lists (possible)
     -OSX support
     -Lua Scripting Integration
 

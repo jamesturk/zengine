@@ -1,18 +1,22 @@
 ZEngine Version Log for Version 0.8.3
-$Id: changelog.txt,v 1.36 2003/07/05 00:40:44 cozman Exp $
+$Id: changelog.txt,v 1.37 2003/07/11 00:07:49 cozman Exp $
 
-As of 0.8.3 changes with a !!! may break backwards compatibility.
+As of 0.8.3 changes which may break backwards compatibility are marked with a `!!!`.
 
 0.8.4
+    -Added particle system example program.
+    -Added simple particle system implemented on top of base.
+    -Added entire base particle system, templated, and designed for expandability.
     -Changed implementation of parts of ZImage for tiny optimization.
     !!! Removed Rand* functions from ZEngine and replaced with overloaded Rand.
-    -Removed mt19937ar.h/cpp replaced with ZE_ZRandGen.h/cpp
-    -Fixed tiny problem ZImage use of alpha.
+    -Added random generation classes, for if an object needs it's own random stream.
+    -Removed mt19937ar.h/cpp (replaced with ZE_ZRandGen.h/cpp)
+    -Fixed tiny problem in ZImage use of alpha.
     -Changed default font rendering to blended, much better results.  Also added alpha parameter.
     -ZEngine no longer forces use namespace std, library references prefixed with std::.
     -Revised all source, cleaned up various areas.
     -Moved versioning information.
-    -Changed way event hook is implemented, more control, should be threadsafe.
+    -Changed way event hook is implemented, more control, should be threadsafe. (needed for Gewi 0.2)
 
 0.8.3 
     -Changed Macros in ZE_Utility to functions.

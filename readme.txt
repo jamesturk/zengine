@@ -97,7 +97,7 @@ other than that, nothing stuck until 0.7 for example the ZEngine class itself
 has gone 2 complete rewrites since 0.1.  I used to work in DirectX a lot, and
 ZEngine addresses a lot of grieviances I had with DirectX, ZEngine code is a 
 lot shorter, and is a good deal easier to read, everything is integrated, 
-unlike DirectX where Input and Graphics were entirely separate things, ZEngine
+unlike DirectX where Input and Graphics were entirely separate things. ZEngine
 runs a lot faster on most systems now, due to the OpenGL rendering, and as a
 little treat I threw in just in time for the 0.8.0 release, ZEngine attempts 
 to detect surface loss, and even provides methods to restore it.

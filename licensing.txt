@@ -14,6 +14,9 @@ of ZEngine, but may be used by ZEngine to interface with external libraries.
 Such files are only modified to be compatible with ZEngine and marked where
 such modifcations occur.
 
+Note2: The Test files are now public domain, you can use them as a starting
+point without concern.
+
 ----------------------------------(begin license)
 
 Copyright (C) 2002, 2003 James Turk
