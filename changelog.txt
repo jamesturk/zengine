@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.0-rc1
-$Id: changelog.txt,v 1.9 2002/12/05 00:20:10 cozman Exp $
+$Id: changelog.txt,v 1.10 2002/12/05 03:50:27 cozman Exp $
 
 
 0.8.0-rc1
@@ -9,6 +9,7 @@ $Id: changelog.txt,v 1.9 2002/12/05 00:20:10 cozman Exp $
     -Added readme.
     -Updated rationale in licensing.txt. (fixed)
     -Fixed loads of doxygen errors and documented all undocumented members.
+    -Fixed makefile to be much more portable and added config.
     
 0.7.8
     -Added ZRect::Draw using OpenGL.
