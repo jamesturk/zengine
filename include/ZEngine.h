@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.8 2002/12/05 00:44:12 cozman Exp $<br>
+$Id: ZEngine.h,v 1.9 2002/12/12 04:30:31 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -27,19 +27,19 @@ $Id: ZEngine.h,v 1.8 2002/12/05 00:44:12 cozman Exp $<br>
     rewrite large amounts of code.<br>
     As of version 0.7.7 ZEngine uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
     and making the engine much faster in most test cases.<br>
+    The ZEngine website can be found at http://zengine.sourceforge.net/.<br>
     
     \section Licensing Licensing
     <br>
-<pre>         This file is Part of the ZEngine Library for SDL Game Development.
+<pre>        This file is Part of the ZEngine Library for SDL Game Development.
                       Copyright (C) 2002 ConceptOfZero.net
              Licensed under the BSD License, see licensing.txt.
-     The maintainer of this library is James Turk (james@conceptofzero.net) 
-         and the home of this Library is http://www.conceptofzero.net/
+        and the library is developed for http://www.conceptofzero.net/
     </pre>
     \section Authors Contributing Authors
     <br>
-    James Turk <a href="james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes<br>
-    Gamer Tazar <a href="tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
+    James Turk <a href="mailto:james@conceptofzero.net">james@conceptofzero.net</a> - Core Engine, Design, Docs, and Classes<br>
+    Gamer Tazar <a href="mailto:tazar@conceptofzero.net">tazar@conceptofzero.net</a> - OpenGL assistance<br>
 **/
 
 #include "ZE_ZEngine.h"
