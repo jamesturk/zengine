@@ -26,35 +26,35 @@
 00031 <span class="keyword">namespace </span>ZE
 00032 {
 00033 
-00041 <span class="keyword">class </span>ZServer
+<a name="l00041"></a><a class="code" href="classZE_1_1ZServer.html">00041</a> <span class="keyword">class </span><a class="code" href="classZE_1_1ZServer.html">ZServer</a>
 00042 {
 00043     <span class="keyword">private</span>:
-00045         ZEngine *rEngine;
-00047         TCPsocket rSocket;
-00049         SDLNet_SocketSet rSocketSet;
-00051         TCPsocket *rClientSockets;
-00053         <span class="keywordtype">int</span> rMaxClients;
-00055         <span class="keywordtype">bool</span> rVerbose;
-00057         <span class="keywordtype">int</span> rWaitTime;
+<a name="l00045"></a><a class="code" href="classZE_1_1ZServer.html#o0">00045</a>         <a class="code" href="classZE_1_1ZEngine.html">ZEngine</a> *<a class="code" href="classZE_1_1ZServer.html#o0">rEngine</a>;
+<a name="l00047"></a><a class="code" href="classZE_1_1ZServer.html#o1">00047</a>         TCPsocket <a class="code" href="classZE_1_1ZServer.html#o1">rSocket</a>;
+<a name="l00049"></a><a class="code" href="classZE_1_1ZServer.html#o2">00049</a>         SDLNet_SocketSet <a class="code" href="classZE_1_1ZServer.html#o2">rSocketSet</a>;
+<a name="l00051"></a><a class="code" href="classZE_1_1ZServer.html#o3">00051</a>         TCPsocket *<a class="code" href="classZE_1_1ZServer.html#o3">rClientSockets</a>;
+<a name="l00053"></a><a class="code" href="classZE_1_1ZServer.html#o4">00053</a>         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZServer.html#o4">rMaxClients</a>;
+<a name="l00055"></a><a class="code" href="classZE_1_1ZServer.html#o5">00055</a>         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZServer.html#o5">rVerbose</a>;
+<a name="l00057"></a><a class="code" href="classZE_1_1ZServer.html#o6">00057</a>         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZServer.html#o6">rWaitTime</a>;
 00058 
-00065         <span class="keywordtype">void</span> CloseSocket(<span class="keywordtype">int</span> num);
+00065         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZServer.html#c0">CloseSocket</a>(<span class="keywordtype">int</span> num);
 00066 
 00067     <span class="keyword">public</span>:
-00074         ZServer(<span class="keywordtype">bool</span> verbose=<span class="keyword">false</span>);
+00074         <a class="code" href="classZE_1_1ZServer.html#a0">ZServer</a>(<span class="keywordtype">bool</span> verbose=<span class="keyword">false</span>);
 00075 
-00081         <span class="keyword">virtual</span> ~ZServer();
+00081         <span class="keyword">virtual</span> <a class="code" href="classZE_1_1ZServer.html#a1">~ZServer</a>();
 00082 
-00091         <span class="keywordtype">bool</span> Start(<span class="keywordtype">int</span> maxClients, Uint16 port);
+00091         <span class="keywordtype">bool</span> <a class="code" href="classZE_1_1ZServer.html#a2">Start</a>(<span class="keywordtype">int</span> maxClients, Uint16 port);
 00092 
-00098         <span class="keywordtype">void</span> Stop();
+00098         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZServer.html#a3">Stop</a>();
 00099 
-00107         <span class="keywordtype">void</span> SetWaitTime(<span class="keywordtype">int</span> wait);
+00107         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZServer.html#a4">SetWaitTime</a>(<span class="keywordtype">int</span> wait);
 00108 
-00115         <span class="keywordtype">void</span> CheckSockets();
+00115         <span class="keywordtype">void</span> <a class="code" href="classZE_1_1ZServer.html#a5">CheckSockets</a>();
 00116 
-00123         <span class="keywordtype">int</span> Clients();
+00123         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZServer.html#a6">Clients</a>();
 00124 
-00131         <span class="keywordtype">int</span> WaitTime();
+00131         <span class="keywordtype">int</span> <a class="code" href="classZE_1_1ZServer.html#a7">WaitTime</a>();
 00132 };
 00133 
 00134 } <span class="comment">//namespace ZE</span>
@@ -62,7 +62,7 @@
 00136 <span class="preprocessor">#endif //USE_SDL_NET</span>
 00137 <span class="preprocessor"></span>
 00138 <span class="preprocessor">#endif //__ze_zserver_h__</span>
-</pre></div><hr><address style="align: right;"><small>Generated on Sun Apr 27 18:14:01 2003 for ZEngine by
+</pre></div><hr><address style="align: right;"><small>Generated on Sun Apr 27 18:16:26 2003 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc2 </small></address>
