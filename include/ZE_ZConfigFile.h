@@ -13,7 +13,7 @@
 File: Types/ZE_ZConfigFile.h <br>
 Description: Header file for ZEngine INI-Style Config Files.<br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZE_ZConfigFile.h,v 1.3 2002/12/04 23:06:45 cozman Exp $<br>
 
     \file ZE_ZConfigFile.h
     \brief Definition file for ZConfigFile.
@@ -86,9 +86,44 @@ class ZConfigFile : public ZObject
         **/
         string CleanString(string str);
         
+        /*
+            \brief Check if a section exists.
+
+            Find out if a section currently exists.
+            \param sec Section to check for.
+            \return bool, true if section exists in file.
+        **/
         bool Exists(string sec);
+
+        /*
+            \brief Check if a variable exists.
+
+            Find out if a variable currently exists.
+            \param sec Section to check in.
+            \param var Variable to check for.
+            \return bool, true if section exists in file.
+        **/
         bool Exists(string sec, string var);
+
+        /*!
+            \brief Internal function to set variables.
+
+            Set variable to value, called internally only.
+            \param sec Section for variable.
+            \param var Variable to set.
+            \param val Value to set variable to.
+        **/
         void SetVariable(string sec, string var, string val);
+
+        /*!
+            \brief Internal function to get value of a variable.
+
+            Get value of variable, called internally only.
+            \param sec Section for variable.
+            \param var Variable to get.
+            \param defVal Value to return if variable doesnt exist.
+            \return Value of variable.
+        **/
         string GetVariable(string sec, string var, string defVal);
 
     public:
