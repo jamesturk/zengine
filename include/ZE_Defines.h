@@ -13,7 +13,7 @@
 File: ZE_Defines.h <br>
 Description: Defines header file for ZEngine class, where all #define statements to control compilation options are placed. <br>
 Author(s): James Turk <br>
-$Id: ZE_Defines.h,v 1.10 2003/03/15 03:34:08 cozman Exp $<br>
+$Id: ZE_Defines.h,v 1.11 2003/04/08 03:33:10 cozman Exp $<br>
 
     \file ZE_Defines.h
     \brief Define file for ZEngine.
@@ -27,7 +27,7 @@ $Id: ZE_Defines.h,v 1.10 2003/03/15 03:34:08 cozman Exp $<br>
 //Defines- undefine any of these if you dont have the indicated SDL extension//
 
 //! Version number.
-#define VERSION "0.8.2-devel"
+#define VERSION "0.8.3-pre"
 
 //! Define to include font support.
 #define USE_SDL_TTF
