@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.18 2003/01/24 02:50:19 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.19 2003/01/24 06:30:42 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -147,7 +147,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
         {
             //surface conversion//
             temp = rImage;
-            rImage = SDL_DisplayFormatAlpha(temp);
+            rImage = SDL_DisplayFormat(temp);
             if(rImage)
             {
                 FreeImage(temp);
