@@ -14,7 +14,7 @@
 
     ZE_*.h files should only include this file and any other ZE_*.h files that they need, External Library or C/C++ Standard Library
     files should be included from within this file.
-    $Id: ZE_Includes.h,v 1.19 2003/10/13 20:59:30 cozman Exp $<br>
+    $Id: ZE_Includes.h,v 1.20 2003/10/13 21:40:05 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -26,7 +26,6 @@
 #include "SDL.h"
 #if (GFX_BACKEND == ZE_OGL)
 #include "SDL_opengl.h"
-#include "external/SDLGL_Util.h"
 #endif
 #ifdef USE_SDL_IMAGE
 #include "SDL_image.h"

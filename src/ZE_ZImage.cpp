@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.48 2003/10/11 16:21:50 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.49 2003/10/13 21:40:05 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -172,7 +172,7 @@ void ZImage::Attach(SDL_Surface *surface)
     
         rWidth = static_cast<float>(surface->w);
         rHeight = static_cast<float>(surface->h);
-        rTexID = SDL_GL_LoadTexture(surface,coord); //major helper, not written by me, from libsdl.org
+        rTexID = SurfaceToTexture(surface,coord);
         rTexMinX = coord[0];
         rTexMinY = coord[1];
         rTexMaxX = coord[2];
