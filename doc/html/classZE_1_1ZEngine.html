@@ -24,8 +24,8 @@
 <tr><td>&nbsp;</td><td><font size=-1><em>Quit SDL and any Subsystems.</em> <a href="#a3"></a><em></em></font><br><br></td></tr>
 <tr><td nowrap align=right valign=top>SDL_Surface *&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a4">Display</a> ()</td></tr>
 <tr><td>&nbsp;</td><td><font size=-1><em>Allow access to Screen Surface.</em> <a href="#a4"></a><em></em></font><br><br></td></tr>
-<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a5">UpdateScreen</a> ()</td></tr>
-<tr><td>&nbsp;</td><td><font size=-1><em>Update screen contents.</em> <a href="#a5"></a><em></em></font><br><br></td></tr>
+<tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a5">Update</a> ()</td></tr>
+<tr><td>&nbsp;</td><td><font size=-1><em>Update display contents.</em> <a href="#a5"></a><em></em></font><br><br></td></tr>
 <tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a6">Clear</a> (float red=0.0f, float green=0.0f, float blue=0.0f, float alpha=1.0f)</td></tr>
 <tr><td>&nbsp;</td><td><font size=-1><em>Clear screen to a certain color (Black by default).</em> <a href="#a6"></a><em></em></font><br><br></td></tr>
 <tr><td nowrap align=right valign=top>void&nbsp;</td><td valign=bottom><a class="el" href="classZE_1_1ZEngine.html#a7">SetGL2D</a> ()</td></tr>
@@ -487,13 +487,13 @@ Get pointer to screen SDL_Surface, allowing direct screen manipulation using SDL
     </td>
   </tr>
 </table>
-<a name="a5" doxytag="ZE::ZEngine::UpdateScreen"></a><p>
+<a name="a5" doxytag="ZE::ZEngine::Update"></a><p>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="md">
       <table cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td class="md" nowrap valign="top"> void ZE::ZEngine::UpdateScreen </td>
+          <td class="md" nowrap valign="top"> void ZE::ZEngine::Update </td>
           <td class="md" valign="top">(&nbsp;</td>
           <td class="mdname1" valign="top" nowrap>&nbsp;          </td>
           <td class="md" valign="top">)&nbsp;</td>
@@ -512,7 +512,7 @@ Get pointer to screen SDL_Surface, allowing direct screen manipulation using SDL
     <td>
 
 <p>
-Flip double buffer in SDL if double buffered, otherwise tell video to refresh entire screen.     </td>
+Swap OpenGL buffers, and update screen. Must be called every frame.     </td>
   </tr>
 </table>
 <a name="a6" doxytag="ZE::ZEngine::Clear"></a><p>
@@ -1472,8 +1472,8 @@ Get Fullscreen setting of Display. <dl compact><dt><b>Returns:</b></dt><dd>True 
   </tr>
 </table>
 <hr>The documentation for this class was generated from the following files:<ul>
-<li>/home/James/ZEngine-dev/include/<a class="el" href="ZE__ZEngine_8h-source.html">ZE_ZEngine.h</a><li>/home/James/ZEngine-dev/src/<a class="el" href="ZE__ZEngine_8cpp.html">ZE_ZEngine.cpp</a></ul>
-<hr><address style="align: right;"><small>Generated on Wed Dec 4 19:16:09 2002 for ZEngine by
+<li>include/<a class="el" href="ZE__ZEngine_8h-source.html">ZE_ZEngine.h</a><li>src/<a class="el" href="ZE__ZEngine_8cpp.html">ZE_ZEngine.cpp</a></ul>
+<hr><address style="align: right;"><small>Generated on Wed Dec 11 23:42:26 2002 for ZEngine by
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border=0 
 width=110 height=53></a>1.3-rc1 </small></address>
