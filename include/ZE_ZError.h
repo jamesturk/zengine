@@ -13,7 +13,7 @@
 File: ZE_ZError.h <br>
 Description: Header file for ZEngine Error Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZError.h,v 1.1 2003/01/15 05:40:09 cozman Exp $<br>
+$Id: ZE_ZError.h,v 1.2 2003/01/15 05:51:18 cozman Exp $<br>
 
     \file ZE_ZError.h
     \brief Definition file for ZError.
@@ -25,7 +25,7 @@ $Id: ZE_ZError.h,v 1.1 2003/01/15 05:40:09 cozman Exp $<br>
 #ifndef __ze_zerror_h__
 #define __ze_zerror_h__
 
-#include "ZE_Macros.h"
+#include "ZE_Utility.h"
 #include <string>
 using namespace std;
 

@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.11 2003/01/13 06:31:08 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.12 2003/01/15 05:51:18 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -25,7 +25,7 @@ $Id: ZE_ZEngine.h,v 1.11 2003/01/13 06:31:08 cozman Exp $<br>
 #define __ze_zengine_h__
 
 #include "ZE_Defines.h"
-#include "ZE_Macros.h"
+#include "ZE_Utility.h"
 #include "ZE_Includes.h"
 #include "ZE_ZError.h"
 
