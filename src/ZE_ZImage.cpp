@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.50 2003/10/13 21:48:13 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.51 2003/11/14 02:11:50 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -114,7 +114,11 @@ ZImage::ZImage(const ZImage &rhs) :
     rImage(NULL),
     rAlpha(rhs.Alpha())
 {
-    OpenFromImage(rhs.Surface(),0,0,(Sint16)rhs.Width(),(Sint16)rhs.Height());
+    OpenFromImage(rhs.Surface(),0,0,(Sint16)rhs.Surface()->w,(Sint16)rhs.Surface()->h);
+#if (GFX_BACKEND == ZE_OGL)
+    rWidth = rhs.rWidth;
+    rHeight = rhs.rHeight;
+#endif
 }
 
 ZImage::ZImage(std::string filename) : 
