@@ -13,7 +13,7 @@
 File: ZE_ZRect.h <br>
 Description: Header file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.h,v 1.8 2003/02/10 05:40:28 cozman Exp $<br>
+$Id: ZE_ZRect.h,v 1.9 2003/02/16 21:54:29 cozman Exp $<br>
 
     \file ZE_ZRect.h
     \brief Definition file for ZRect.
@@ -265,6 +265,6 @@ class ZRect
         float Height() const;
 };
 
-} //namspace ZE
+} //namespace ZE
 
 #endif //__ze_zrect_h__
