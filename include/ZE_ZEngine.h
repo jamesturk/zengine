@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.46 2003/08/02 01:18:45 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.47 2003/08/08 03:54:34 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -161,7 +161,7 @@ class ZEngine
 
 #ifdef USE_SDL_MIXER
         /*!
-            \brief Initialize Sound for SDL.
+            \brief Setup Sound for SDL.
 
             Set sound settings to specified parameters. (If not called before CreateDisplay rate will default to 22050+mono)
 
@@ -170,6 +170,16 @@ class ZEngine
         **/
         void SetupSound(int rate, bool stereo);
 #endif 
+
+#ifdef USE_SDL_IMAGE
+        /*!
+            \brief Init Sound for ZEngine.
+
+            Initialize sound for ZEngine.
+        **/
+        bool InitSound();
+#endif 
+
 
         /*!
             \brief Create Display with predefined settings.

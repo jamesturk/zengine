@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.55 2003/08/02 01:18:45 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.56 2003/08/08 03:54:34 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -104,7 +104,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
         if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
         {
             ReportError(ZERR_MIX_INIT,SDL_GetError());
-            status = false; //continue setup without sound
+            status = false;
         }
     }
 #endif //USE_SDL_MIXER
@@ -121,7 +121,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     else    //this decides correcr BPP
     {
         if(mBPP == -1)
-            mBPP = SDL_GetVideoInfo()->vfmt->BitsPerPixel;
+            mBPP = SDL_GetVideoInfo()->vfmt->BitsPerPixel;  //try desktop resolution
 
         bpp = SDL_VideoModeOK(mWidth, mHeight, mBPP, flags);
         if(!bpp)
