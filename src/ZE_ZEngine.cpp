@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.12 2003/01/12 17:27:05 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.13 2003/01/12 17:28:11 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -180,7 +180,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
             Mix_CloseAudio();
 #endif
             SDL_Quit();
-            LogError(FormatStr("Unable to set video mode %dx%d (%dBpp): %s.  Desktop Depth (%d) failed, exit",mWidth,mHeight,mBPP,SDL_GetError()));
+            LogError(FormatStr("Unable to set video mode %dx%d (%dBpp): %s.  Desktop Depth (%d) failed, fatal error.",mWidth,mHeight,mBPP,SDL_GetError()));
             return false;
         }
         else    //let them know what they wanted failed
