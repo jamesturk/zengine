@@ -13,7 +13,7 @@
     \brief Definition file for ZRect.
 
     Definition file for ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.h,v 1.12 2003/08/01 21:57:32 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.h,v 1.13 2003/10/03 22:03:29 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -81,6 +81,13 @@ class ZRect
         ZRect(const ZRect &rhs);
 
         /*!
+            \brief Virtual Destructor.
+
+            Virtual destructor making future inheritance safe.
+        **/
+        virtual ~ZRect();
+
+        /*!
             \brief Overload for = operator with ZRect.
 
             Copies all values from one ZRect into another.
@@ -88,13 +95,6 @@ class ZRect
             \return New value of the ZRect.
         **/
         const ZRect& operator=(const ZRect &rhs);
-
-        /*!
-            \brief Virtual Destructor.
-
-            Virtual destructor making future inheritance safe.
-        **/
-        virtual ~ZRect();
 
         /*!
             \brief Overload for < operator with ZRect, based upon location then size.

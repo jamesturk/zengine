@@ -13,7 +13,7 @@
     \brief Define file for ZEngine where all #define statements to control compilation options are placed.
 
     Definition file, holds #define statements describing optional features of ZEngine.
-    <br>$Id: ZE_Defines.h,v 1.23 2003/09/05 19:44:13 cozman Exp $<br>
+    <br>$Id: ZE_Defines.h,v 1.24 2003/10/03 22:03:29 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -35,8 +35,6 @@
 #define USE_SDL_IMAGE
 //! Define to include sound support.
 #define USE_SDL_MIXER
-//! Define to use the Physfs file system.
-//#define USE_PHYSFS
 //! Define to use depreciated code that has not been entirely removed.
 //#define DEPRECIATED
 

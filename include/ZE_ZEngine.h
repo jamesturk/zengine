@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.51 2003/10/03 21:54:42 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.52 2003/10/03 22:03:29 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -645,38 +645,6 @@ class ZEngine
             \return Random double [0,1).
         **/
         double RandDouble();
-
-#ifdef USE_SDL_MIXER
-        /*!
-            \brief Load a Sound
-
-            Loads a Sound to a SoundData class which keeps vital information on the Sound
-            \param filename path to file to load.
-            \return A Mix_Chunk pointer to data.
-        **/
-        Mix_Chunk* LoadSound(std::string filename);
-
-        /*!
-            \brief Load a Music File
-
-            Loads a Music Clip to a MusicData class which keeps vital information on the Music Data
-            \param filename path to file to load.
-            \return A Mix_Music pointer to data.
-        **/
-        Mix_Music* LoadMusic(std::string filename);
-#endif
-
-#ifdef USE_SDL_TTF
-        /*!
-            \brief Load a Font.
-
-            Loads a Font to a FontData class which keeps vital information on the Font
-            \param filename path to file to load.
-            \param size point size of font
-            \return A TTF_Font pointer to data.
-        **/
-        TTF_Font* LoadFont(std::string filename, int size);
-#endif 
 
     /////////////
     //Accessors//
