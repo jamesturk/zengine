@@ -24,7 +24,6 @@ namespace ZE
 
 string *ZError::sErrorDesc = NULL; 
 
-
 void ZError::CreateStringTable()
 {
     if(!sErrorDesc)
