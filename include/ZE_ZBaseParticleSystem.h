@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine particle system class ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$id$<br>
+    <br>$Id: ZE_ZBaseParticleSystem.h,v 1.2 2003/07/10 19:20:56 cozman Exp $<br>
     \author James Turk
 **/
 

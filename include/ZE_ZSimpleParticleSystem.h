@@ -14,7 +14,7 @@
 
     Definition and implementation file for ZEngine simple particle system, ZSimpleParticleSystem based on ZBaseParticleSystem.
     Due to problems with template classes the template implementation needs to be in the same file as the declaration.
-    <br>$id$<br>
+    <br>$Id: ZE_ZSimpleParticleSystem.h,v 1.2 2003/07/10 19:21:36 cozman Exp $<br>
     \author James Turk
 **/
 
