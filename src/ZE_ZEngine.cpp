@@ -13,12 +13,12 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.14 2003/01/12 20:55:46 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.15 2003/01/13 06:31:09 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
 
-    Actual implementation of ZEngine singleton class at heart of ZEngine.
+    Actual implementation of ZEngine singleton class, the core of ZEngine.
 **/
 
 #include "ZE_ZEngine.h"
@@ -55,6 +55,9 @@ ZEngine::ZEngine()
     mDesiredFramerate = 0;
     mNextUpdate = mLastPause = mPausedTime = mLastTime = 0;
     mSecPerFrame = 0.0;
+
+    mLogAllErrors = true;
+    mErrlog = stderr;
 }
 
 ZEngine* ZEngine::GetInstance()
@@ -106,14 +109,14 @@ bool ZEngine::CreateDisplay(string title, string icon)
 
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
     {
-        LogError(FormatStr("SDL could not be initialized: %s", SDL_GetError()));
+        ReportError(ZERR_SDL_INIT,SDL_GetError());
         return false;
     }
     
 #ifdef USE_SDL_MIXER
     if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
     {
-        LogError(FormatStr("SDL_mixer could not be initialized: %s", Mix_GetError()));
+        ReportError(ZERR_MIX_INIT,SDL_GetError());
         return false;
     }
 #endif //USE_SDL_MIXER
@@ -172,6 +175,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
 
     if(!mScreen)    //try 0 for BPP if supplied bpp failed
     {
+        ReportError(ZERR_VIDMODE,SDL_GetError());
         mScreen = SDL_SetVideoMode(mWidth, mHeight, 0, flags);
 
         if(!mScreen)    //if safe screen setup fails
@@ -180,11 +184,10 @@ bool ZEngine::CreateDisplay(string title, string icon)
             Mix_CloseAudio();
 #endif
             SDL_Quit();
-            LogError(FormatStr("Unable to set video mode %dx%d (%dBpp): %s.  Desktop Depth failed, fatal error.",mWidth,mHeight,mBPP,SDL_GetError()));
+            
+            ReportError(ZERR_VIDMODE,FormatStr("Desktop Depth failed: %s",SDL_GetError()));
             return false;
         }
-        else    //let them know what they wanted failed
-            LogError(FormatStr("Unable to set video mode %dx%d (%dBpp): %s.  Desktop Depth worked.",mWidth,mHeight,mBPP,SDL_GetError()));
     }
     
     mWidth = mScreen->w;
@@ -200,7 +203,7 @@ bool ZEngine::CreateDisplay(string title, string icon)
 #ifdef USE_SDL_TTF
     if(TTF_Init() < 0)
     {
-        LogError(FormatStr("SDL_ttf could not be initialized: %s", TTF_GetError()));
+        ReportError(ZERR_TTF_INIT,TTF_GetError());
         return false;
     }
 #endif  //USE_SDL_TTF
@@ -226,6 +229,9 @@ void ZEngine::CloseDisplay()
 #endif
 
     SDL_Quit();
+
+    if(mErrlog != stderr && mErrlog != stdin)
+        fclose(mErrlog);
 }
 
 SDL_Surface *ZEngine::Display()
@@ -489,6 +495,57 @@ void ZEngine::AddPhysFSDir(string dir)
 
 #endif //USE_PHYSFS
 
+void ZEngine::SetErrorLog(bool logAll, string logFile)
+{
+    mLogAllErrors = logAll;
+    if(logFile.length())
+    {
+        if(logFile == "stderr")
+            mErrlog = stderr;
+        else if(logFile == "stdout")
+            mErrlog = stdout;
+        else
+            mErrlog = fopen(logFile.c_str(),"w");
+    }
+}
+
+void ZEngine::ReportError(ZErrorCode code, string desc, string file, unsigned int line)
+{
+    mCurError.Create(code,desc,file,line);
+
+    if(mLogAllErrors)
+    {
+        LogError(mCurError);
+        fflush(mErrlog);
+    }
+    else
+        mErrorQueue.push(mCurError);
+}
+
+ZErrorCode ZEngine::GetLastError()
+{
+    return mCurError.Code();
+}
+
+void ZEngine::WriteLog(string str)
+{
+    fprintf(mErrlog,str.c_str());
+}
+
+void ZEngine::LogError(ZError error)
+{
+    fprintf(mErrlog,error.LogString().c_str());
+}
+
+void ZEngine::FlushErrors()
+{
+    while(!mErrorQueue.empty())
+    {
+        LogError(mErrorQueue.front());
+        mErrorQueue.pop();
+    }
+}
+
 SDL_Surface* ZEngine::LoadImage(string filename)
 {
     SDL_Surface *image;
@@ -497,7 +554,10 @@ SDL_Surface* ZEngine::LoadImage(string filename)
     SDL_RWops *rw;
     rw = PHYSFSRWOPS_openRead(filename.c_str());
     if(!rw)
-        LogError(FormatStr("PhysFS RWops failed: %s",SDL_GetError()));
+    {
+        ReportError(ZERR_LOAD_IMAGE,FormatStr("%s [PhysFS RWops failed: %s]",filename.c_str(),SDL_GetError()));
+        return NULL;
+    }
 #ifdef USE_SDL_IMAGE
     image = IMG_Load_RW(rw,0);
 #else
@@ -517,7 +577,7 @@ SDL_Surface* ZEngine::LoadImage(string filename)
 
     if(!image)
     {
-        LogError(FormatStr("LoadImage could not load %s.",filename.c_str()));
+        ReportError(ZERR_LOAD_IMAGE,filename);
         return NULL;
     }
     else
@@ -541,7 +601,7 @@ Mix_Chunk* ZEngine::LoadSound(string filename)
 
     if(!sound)
     {
-        LogError(FormatStr("LoadImage could not load %s.",filename.c_str()));
+        ReportError(ZERR_LOAD_SOUND,filename);
         return NULL;
     }
     else
@@ -564,7 +624,7 @@ Mix_Music* ZEngine::LoadMusic(string filename)
     
     if(!music)
     {
-        LogError(FormatStr("LoadMusic could not load %s.",filename.c_str()));
+        ReportError(ZERR_LOAD_MUSIC,filename);
         return NULL;
     }
     else
@@ -591,7 +651,7 @@ TTF_Font* ZEngine::LoadFont(string filename, int size)
 
     if(!font)
     {
-        LogError(FormatStr("LoadFont could not load %s.",filename.c_str()));
+        ReportError(ZERR_LOAD_FONT,filename);
         return NULL;
     }
     else

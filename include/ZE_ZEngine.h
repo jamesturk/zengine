@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.10 2003/01/12 07:09:04 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.11 2003/01/13 06:31:08 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -24,10 +24,10 @@ $Id: ZE_ZEngine.h,v 1.10 2003/01/12 07:09:04 cozman Exp $<br>
 #ifndef __ze_zengine_h__
 #define __ze_zengine_h__
 
-#include "ZE_Error.h"
 #include "ZE_Defines.h"
 #include "ZE_Macros.h"
 #include "ZE_Includes.h"
+#include "ZE_ZError.h"
 
 /*!
     \brief ZEngine Namespace.
@@ -150,7 +150,7 @@ class ZEngine
         /*!
             \brief Quit SDL and any Subsystems.
 
-            Shut down SDL (and SDL_ttf,SDL_mixer if necessary).
+            Shut down SDL (and SDL_ttf,SDL_mixer if necessary) You shouldn't ever have to call this, ReleaseInstance calls this for you.
         **/
         void CloseDisplay();
 
@@ -476,6 +476,79 @@ class ZEngine
         void AddPhysFSDir(string dir);
 
 #endif    //USE_PHYSFS
+
+    /////////////////
+    //Error Logging//
+    /////////////////
+    private:
+        //! Stack of Errors which have occured.
+        queue<ZError> mErrorQueue;
+        //! Current error.
+        ZError mCurError;
+        //! Option controlling how logfile is used.
+        bool mLogAllErrors;
+        //! C-style FILE* for error logging.
+        FILE *mErrlog;
+
+        /*!
+            \brief Writes an error to file.
+
+            Writes error to current error file.
+            \since 0.8.2
+            \param error ZError to write to file.
+        **/
+        void LogError(ZError error);
+
+    public:
+        /*!
+            \brief Modify Error Logging.
+
+            Change the way errors are logged and the file they are logged to, before calling this errors are logged to stderr.
+            (SDL may define stderr.txt on some platforms.)
+            \since 0.8.2
+            \param logAll If set to true every error will be written to file instead of stored in the logfile.
+            \param logFile Name of file to use as log, passing in stderr or stdio will set the log to the C streams. 
+            Passing in nothing will not change the current error log file, which defaults to stderr.
+        **/
+        void SetErrorLog(bool logAll, string logFile="");
+
+        /*!
+            \brief Report an error.
+
+            Adds the error to the the error queue, and sets the current error to this error.
+            \since 0.8.2
+            \param code ZErrorCode of error.
+            \param desc Optional string describing error.
+            \param file Optional argument specifying the file the error occured in.
+            \param line Optional argument specifying the line the error occured on.
+        **/
+        void ReportError(ZErrorCode code, string desc="", string file="", unsigned int line=0);
+
+        /*!
+            \brief Get the last error.
+
+            Get the last error reported.
+            \since 0.8.2
+            \return ZErrorCode of last error reported.
+        **/
+        ZErrorCode GetLastError();
+
+        /*!
+            \brief Write to the log.
+
+            Write a string to the log, allowing special usage of the error log.
+            \since 0.8.2
+            \param str String to write to log file.
+        **/
+        void WriteLog(string str);
+
+        /*!
+            \brief Flush Stack of Errors to file.
+
+            Write the error stack to the error log.
+            \since 0.8.2
+        **/
+        void FlushErrors();
 
 
     ////////////////////////////
