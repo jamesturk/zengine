@@ -40,8 +40,8 @@ RSC=rc.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /I "../include" /Zi /W4 /WX /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
-# ADD CPP /nologo /MD /I "../include" /Zi /W4 /WX /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
+# ADD BASE CPP /nologo /MD /I "../include" /Zi /W4 /WX /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy /c /GX 
+# ADD CPP /nologo /MD /I "../include" /Zi /W4 /WX /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy /c /GX 
 # ADD BASE MTL /nologo /win32 
 # ADD MTL /nologo /win32 
 # ADD BASE RSC /l 1033 
@@ -64,6 +64,10 @@ LIB32=link.exe -lib
 # Begin Source File
 
 SOURCE=..\src\external\SDLGL_Util.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\VersionInfo.cpp
 # End Source File
 # Begin Source File
 
@@ -99,14 +103,11 @@ SOURCE=..\src\ZE_ZMusic.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\ZE_ZRandGen.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\ZE_ZRect.cpp
-
-!IF  "$(CFG)" == "ZEngine - Win32 Release"
-
-# PROP Intermediate_Dir "$(IntDir)/$(InputName)1.obj"
-# ADD CPP /nologo /Fo"$(IntDir)/$(InputName)1.obj" /GX 
-!ENDIF
-
 # End Source File
 # Begin Source File
 
@@ -122,10 +123,6 @@ SOURCE=..\src\ZE_ZTimer.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\external\mt19937ar.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\external\physfsrwops.cpp
 # End Source File
 # End Group
@@ -138,6 +135,10 @@ SOURCE=..\include\external\SDLGL_Util.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\VersionInfo.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\ZE_Defines.h
 # End Source File
 # Begin Source File
@@ -147,6 +148,10 @@ SOURCE=..\include\ZE_Includes.h
 # Begin Source File
 
 SOURCE=..\include\ZE_Utility.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\ZE_ZBaseParticleSystem.h
 # End Source File
 # Begin Source File
 
@@ -178,11 +183,19 @@ SOURCE=..\include\ZE_ZMusic.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\ZE_ZRandGen.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\ZE_ZRect.h
 # End Source File
 # Begin Source File
 
 SOURCE=..\include\ZE_ZServer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\ZE_ZSimpleParticleSystem.h
 # End Source File
 # Begin Source File
 
@@ -195,10 +208,6 @@ SOURCE=..\include\ZE_ZTimer.h
 # Begin Source File
 
 SOURCE=..\include\ZEngine.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\include\external\mt19937ar.h
 # End Source File
 # Begin Source File
 

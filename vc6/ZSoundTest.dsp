@@ -40,8 +40,8 @@ RSC=rc.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /I "../include" /Zi /W3 /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
-# ADD CPP /nologo /MD /I "../include" /Zi /W3 /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy PRECOMP_VC7_TOBEREMOVED /c /GX 
+# ADD BASE CPP /nologo /MD /I "../include" /Zi /W3 /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy /c /GX 
+# ADD CPP /nologo /MD /I "../include" /Zi /W3 /O2 /Ob1 /Oy /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /GF /Gy /c /GX 
 # ADD BASE MTL /nologo /win32 
 # ADD MTL /nologo /win32 
 # ADD BASE RSC /l 1033 

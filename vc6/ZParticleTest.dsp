@@ -1,23 +1,23 @@
-# Microsoft Developer Studio Project File - Name="ZMouseTest" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="ZParticleTest" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (x86) Application" 0x0101
 
-CFG=ZMouseTest - Win32 Release
+CFG=ZParticleTest - Win32 Release
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
-!MESSAGE NMAKE /f "ZMouseTest.mak".
+!MESSAGE NMAKE /f "ZParticleTest.mak".
 !MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "ZMouseTest.mak" CFG="ZMouseTest - Win32 Release"
+!MESSAGE NMAKE /f "ZParticleTest.mak" CFG="ZParticleTest - Win32 Release"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "ZMouseTest - Win32 Release" (based on "Win32 (x86) Application")
+!MESSAGE "ZParticleTest - Win32 Release" (based on "Win32 (x86) Application")
 !MESSAGE 
 
 # Begin Project
@@ -28,7 +28,7 @@ CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "ZMouseTest - Win32 Release"
+!IF  "$(CFG)" == "ZParticleTest - Win32 Release"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -50,14 +50,14 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo 
 # ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /out:"..\test\bin\ZMouseTest.exe" /incremental:no /libpath:"../lib" /debug /pdbtype:sept /subsystem:windows /opt:ref /opt:icf /machine:ix86 sdl.lib
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /out:"..\test\bin\ZParticleTest.exe" /incremental:no /libpath:"../lib" /debug /pdbtype:sept /subsystem:windows /opt:ref /opt:icf /machine:ix86 sdl.lib
 sdlmain.lib
 opengl32.lib
 sdl_ttf.lib
 sdl_mixer.lib
 sdl_image.lib
 ZEngineS.lib
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /out:"..\test\bin\ZMouseTest.exe" /incremental:no /libpath:"../lib" /debug /pdbtype:sept /subsystem:windows /opt:ref /opt:icf /machine:ix86 sdl.lib
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /out:"..\test\bin\ZParticleTest.exe" /incremental:no /libpath:"../lib" /debug /pdbtype:sept /subsystem:windows /opt:ref /opt:icf /machine:ix86 sdl.lib
 sdlmain.lib
 opengl32.lib
 sdl_ttf.lib
@@ -69,10 +69,10 @@ ZEngineS.lib
 
 # Begin Target
 
-# Name "ZMouseTest - Win32 Release"
+# Name "ZParticleTest - Win32 Release"
 # Begin Source File
 
-SOURCE=..\test\ZMouseTest.cpp
+SOURCE=..\test\ZParticleTest.cpp
 # End Source File
 # End Target
 # End Project
