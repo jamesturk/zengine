@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.53 2003/10/21 01:17:09 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.54 2003/10/24 21:20:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -56,8 +56,6 @@ class ZEngine
         SDL_Surface *mScreen;
         //! Fullscreen setting of Display
         bool mFullscreen;
-        //! Filename of window icon.
-        std::string mIconFile;
         //! If ZEngine display has been setup.
         bool mInitialized;
         //! Keep track of paused state of game.
@@ -74,9 +72,9 @@ class ZEngine
         Uint32 mPausedTime;
         //! Keep track of last screen update time.
         Uint32 mLastTime;
-        //! Seconds per frame.
+        //! Seconds per frame. (1/FPS)
         double mSecPerFrame;
-        //! bool which is only set to true if the engine thinks the images need to be reloaded (loss of focus in fullscreen).
+        //! Keeps track of when engine thinks the images need to be reloaded (loss of focus in fullscreen).
         bool mNeedReload;
         //! bool describing Active or Inactive State of Game
         bool mActive;
@@ -106,8 +104,10 @@ class ZEngine
         ZRandGen mRandGen;
 
 #ifdef USE_SDL_MIXER 
+        //! Sound Initialized
+        bool mSoundInitialized;
         //! Sound Bitrate
-        int mRate;
+        int mSoundRate;
         //! Stereo setting of Sound Subsystem
         bool mStereo;
 #endif 

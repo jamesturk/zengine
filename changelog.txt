@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.55 2003/10/13 21:20:18 cozman Exp $
+$Id: changelog.txt,v 1.56 2003/10/24 21:20:08 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -11,10 +11,11 @@ Changes are marked with symbols that describe them:
 (Note: Depreciated code (that marked with a *) is likely to disappear completely at the next major version.)
 
 0.8.6
+    ! Removed SetupDisplay/SetupSound and integrated them into CreateDisplay
     # Fixed ZImage crash on missing image.  ZFont crash fix relys on SDL_ttf 2.0.7
     # Switched ZImage stretch code to GL_LINEAR.
     # Moved ZLib for convinience of non-MSVC build processes. (fixing #include "../zlib/unzip.h")
-
+    # Fixed display format switching bugs with title and icon.
 
 0.8.5
     + OpenFromZip code added for ZImage,ZFont and ZSound.

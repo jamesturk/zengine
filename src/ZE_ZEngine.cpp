@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.63 2003/10/21 01:18:08 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.64 2003/10/24 21:20:09 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -34,9 +34,6 @@ ZEngine::ZEngine() :
     mNeedReload(false), mActive(false), mQuit(false), mKeyIsPressed(NULL),
     mMouseX(0), mMouseY(0), mMouseB(0),
     mLogAllErrors(true), mErrlog(stderr), mEventFilter(NULL)
-#ifdef USE_SDL_MIXER
-    , mRate(22050), mStereo(false)
-#endif
 {
     for(int k = 0; k < SDLK_LAST; ++k)
         mKeyPress[k] = false;
@@ -65,10 +62,11 @@ void ZEngine::ReleaseInstance()
 bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, 
             int soundRate, bool stereo, std::string icon)
 {
-    Uint32 flags=0;
+    Uint32 sdlFlags=SDL_INIT_VIDEO|SDL_INIT_TIMER;
+    Uint32 vidFlags=0;
     SDL_Surface *iconImg;
-    bool status=true;   //status of setup, only true if everything went flawless
-    int okBPP;
+    bool status=true;   //status of setup, only true if everything went flawlessly
+    int okBPP;  //used to find working BPP
 #if (GFX_BACKEND == ZE_OGL)
     int rgb_size[3];
 #endif
@@ -77,8 +75,10 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
 
     if(!mInitialized)
     {
-        //audio initialized just in case, must be initialized w/ video to work so InitSubsystem wasn't an option
-        if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO) < 0) 
+        //audio only initialized if soundRate != 0
+        if(soundRate)
+            sdlFlags |= SDL_INIT_AUDIO;
+        if(SDL_Init(sdlFlags) < 0) 
         {
             ReportError(ZERR_SDL_INIT,SDL_GetError());
             return false;   //return now, nothing else should be called
@@ -96,9 +96,9 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
     }
 #endif //USE_SDL_MIXER
 
-    //set flags and bpp//
+    //set vidFlags and bpp//
     if(mFullscreen)
-        flags |= SDL_FULLSCREEN;
+        vidFlags |= SDL_FULLSCREEN;
 
     if(bpp != -1 && bpp != 8 && bpp != 15 && bpp != 16 && bpp != 24 && bpp !=32)
     {
@@ -110,7 +110,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
         if(bpp == -1)
             bpp = SDL_GetVideoInfo()->vfmt->BitsPerPixel;  //try desktop resolution
 
-        okBPP = SDL_VideoModeOK(width, height, bpp, flags);
+        okBPP = SDL_VideoModeOK(width, height, bpp, vidFlags);
         if(!okBPP)
         {
             ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in any depth.",width,height));
@@ -152,20 +152,17 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
     SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
-    flags |= SDL_OPENGL;
+    vidFlags |= SDL_OPENGL;
 #elif (GFX_BACKEND == ZE_SDL)
-    flags |= SDL_DOUBLEBUF;
+    vidFlags |= SDL_DOUBLEBUF;
 #endif //GFX_BACKEND
 
+    //Window manager settings
     if(!mInitialized)    //only set these settings the first time
     {
-        //Default window manager settings//
-        if(!icon.length())
-            SDL_WM_SetCaption(title.c_str(),NULL);
-        else
+        SDL_WM_SetCaption(title.c_str(),title.c_str());
+        if(icon.length())
         {
-            SDL_WM_SetCaption(title.c_str(),title.c_str());
-
 #ifdef USE_SDL_IMAGE
             iconImg = IMG_Load(icon.c_str());
 #else
@@ -177,7 +174,7 @@ bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std
     }
 
     //create SDL screen and update settings based on returned screen//
-    mScreen = SDL_SetVideoMode(width, height, bpp, flags);
+    mScreen = SDL_SetVideoMode(width, height, bpp, vidFlags);
 
     if(!mScreen)
     {
@@ -243,10 +240,7 @@ void ZEngine::ToggleFullscreen()
 #ifdef linux    //SDL_WM_TF only works on Linux
     SDL_WM_ToggleFullScreen(mScreen);
 #else
-    char *title,*junk;
-
-    SDL_WM_GetCaption(&title,&junk);
-    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen,title,mRate,mStereo,mIconFile);
+    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen,""); //title, soundRate, stereo, and icon not used
 #endif
     SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
