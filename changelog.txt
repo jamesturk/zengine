@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.4
-$Id: changelog.txt,v 1.38 2003/07/11 20:51:44 cozman Exp $
+$Id: changelog.txt,v 1.39 2003/07/12 02:47:44 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -18,6 +18,7 @@ Changes are marked with symbols that describe them:
     + Added entire base particle system, templated, and designed for expandability.
     + Added random generation classes, for if an object needs it's own random stream.
     - Removed mt19937ar.h/cpp rand system (replaced with ZE_ZRandGen.h/cpp)
+    # Fixed multiple warnings given by g++ for cleaner linux compilation.
     # Disabled warning C4702, unreachable code, this was to fix a build problem in newer versions of VC++.
     # Reworked changelog to contain symbols.
     # Changed implementation of parts of ZImage for tiny optimization.
