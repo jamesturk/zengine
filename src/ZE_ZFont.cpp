@@ -13,7 +13,7 @@
 File: ZE_ZFont.cpp <br>
 Description: Implementation source file for core ZEngine Font Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZFont.cpp,v 1.6 2003/02/10 04:02:38 cozman Exp $<br>
+$Id: ZE_ZFont.cpp,v 1.7 2003/04/08 03:33:29 cozman Exp $<br>
 
     \file ZE_ZFont.cpp
     \brief Source file for ZFont.
@@ -85,7 +85,7 @@ void ZFont::SetBGColor(Uint8 r, Uint8 g, Uint8 b)
     rBGColor.b = b;
 }
 
-void ZFont::SetStyle(bool Bold, bool Italic, bool Underline)
+void ZFont::SetStyle(bool bold, bool italic, bool underline)
 {
     int flags=0;
 
