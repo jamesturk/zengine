@@ -1,11 +1,13 @@
 ZEngine Version Log for Version 0.8.2
-$Id: changelog.txt,v 1.28 2003/02/10 05:28:19 cozman Exp $
+$Id: changelog.txt,v 1.29 2003/02/10 05:44:52 cozman Exp $
 
 0.8.3
     -Fixed ZImage::SetColorKey. (thanks to Kevin Watters)
     -Added floats to ZConfigFile.
     -Removed ZObject inheritance hierarchy and made classes inheritance-safe.
+    -Added ZImage<-->ZImage drawing in OpenFromImage.
     -Added ZImage::Draw(int,int) and ZImage::DrawRotated(float,float,float).
+    -New ZRect constructor (from SDL_Rect).
 
 0.8.2
     -Added ZImage::SetAlpha and example in ZImageTest.
