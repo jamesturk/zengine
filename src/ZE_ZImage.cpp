@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.21 2003/01/25 19:56:05 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.22 2003/01/30 04:02:01 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -33,7 +33,8 @@ ZImage::ZImage()
     Release();
 }
 
-ZImage::ZImage(const ZImage &rhs)
+ZImage::ZImage(const ZImage &rhs) :
+    ZObject()
 {
     rImage = NULL;
     rAlpha = rhs.Alpha();

@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.25 2003/01/27 04:33:34 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.26 2003/01/30 04:02:01 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -274,10 +274,10 @@ void ZEngine::CloseDisplay()
 
 void ZEngine::ToggleFullscreen()
 {
-    char *title,*icon;
 #ifdef linux    //SDL_WM_TF only works on Linux
-    SDL_WM_ToggleFullscreen(mScreen);
+    SDL_WM_ToggleFullScreen(mScreen);
 #else
+    char *title,*icon;
     SetupDisplay(mWidth,mHeight,mBPP,!mFullscreen);
     SDL_WM_GetCaption(&title,&icon);
     if(icon)
