@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.62 2003/10/11 16:21:49 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.63 2003/10/21 01:18:08 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -27,8 +27,7 @@ VersionInfo ZEngine::Version(0,8,5);
 ZEngine *ZEngine::sInstance=NULL;
 
 ZEngine::ZEngine() :
-    mWidth(800), mHeight(600), mBPP(-1), mFullscreen(true), mInitialized(false),
-    mScreen(NULL),
+    mScreen(NULL), mFullscreen(true), mInitialized(false),
     mPaused(false), mUnpauseOnActive(false),
     mDesiredFramerate(0), mNextUpdate(0), mLastPause(0), mPausedTime(0), mLastTime(0),
     mSecPerFrame(0.0),
@@ -63,31 +62,18 @@ void ZEngine::ReleaseInstance()
     sInstance = NULL;
 }
 
-void ZEngine::SetupDisplay(int width, int height, int bpp, bool fullscreen)
-{
-    mWidth = width;
-    mHeight = height;
-    mBPP = bpp;
-    mFullscreen = fullscreen;
-}
-
-#ifdef USE_SDL_MIXER
-void ZEngine::SetupSound(int rate, bool stereo)
-{
-    mRate = rate;
-    mStereo = stereo;
-}
-#endif
-
-bool ZEngine::CreateDisplay(std::string title, std::string icon)
+bool ZEngine::CreateDisplay(int width, int height, int bpp, bool fullscreen, std::string title, 
+            int soundRate, bool stereo, std::string icon)
 {
     Uint32 flags=0;
     SDL_Surface *iconImg;
     bool status=true;   //status of setup, only true if everything went flawless
-    int bpp;
+    int okBPP;
 #if (GFX_BACKEND == ZE_OGL)
     int rgb_size[3];
 #endif
+
+    mFullscreen = fullscreen;
 
     if(!mInitialized)
     {
@@ -102,7 +88,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
 #ifdef USE_SDL_MIXER
     if(!mInitialized)
     {
-        if(Mix_OpenAudio(mRate, AUDIO_S16SYS, mStereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
+        if(Mix_OpenAudio(soundRate, AUDIO_S16SYS, stereo?2:1, 4096) < 0)  //Open Audio (Stereo?2:1 is conditional for number of channels)
         {
             ReportError(ZERR_MIX_INIT,SDL_GetError());
             status = false;
@@ -114,48 +100,43 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     if(mFullscreen)
         flags |= SDL_FULLSCREEN;
 
-    if(mBPP != -1 && mBPP != 8 && mBPP != 15 && mBPP != 16 && mBPP != 24 && mBPP !=32)
+    if(bpp != -1 && bpp != 8 && bpp != 15 && bpp != 16 && bpp != 24 && bpp !=32)
     {
-        ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",mBPP));
-        mBPP = -1;
+        ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",bpp));
+        bpp = -1;
     }
     else    //this decides correcr BPP
     {
-        if(mBPP == -1)
-            mBPP = SDL_GetVideoInfo()->vfmt->BitsPerPixel;  //try desktop resolution
+        if(bpp == -1)
+            bpp = SDL_GetVideoInfo()->vfmt->BitsPerPixel;  //try desktop resolution
 
-        bpp = SDL_VideoModeOK(mWidth, mHeight, mBPP, flags);
-        if(!bpp)
+        okBPP = SDL_VideoModeOK(width, height, bpp, flags);
+        if(!okBPP)
         {
-            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in any depth.",mWidth,mHeight));
+            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in any depth.",width,height));
             return false;   //return now
         }
-        else if(bpp != mBPP)
+        else if(okBPP != bpp)
         {
-            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in %dBPP, trying %dBPP.",mWidth,mHeight,mBPP,bpp));
-            mBPP = bpp;
+            ReportError(ZERR_VIDMODE,FormatStr("%dx%d not supported in %dBPP, trying %dBPP.",width,height,bpp,okBPP));
+            bpp = okBPP;
         }
     }
 
 #if (GFX_BACKEND == ZE_OGL)
     //buffer sizes
-    switch (mBPP)
+    switch(bpp)
     {
         case 8:
-            rgb_size[0] = 3;
-            rgb_size[1] = 3;
+            rgb_size[0] = rgb_size[1] = 3;
             rgb_size[2] = 2;
             break;
         case 15:
         case 16:
-            rgb_size[0] = 5;
-            rgb_size[1] = 5;
-            rgb_size[2] = 5;
+            rgb_size[0] = rgb_size[1] = rgb_size[2] = 5;
             break;
         default:
-            rgb_size[0] = 8;
-            rgb_size[1] = 8;
-            rgb_size[2] = 8;
+            rgb_size[0] = rgb_size[1] = rgb_size[2] = 8;
             break;
     }
 
@@ -164,7 +145,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, rgb_size[1]);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, rgb_size[2]);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, mBPP==32 ? 24 : mBPP);   //use 24 if BPP is 32
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, bpp==32 ? 24 : bpp);   //use 24 if BPP is 32
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 0);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
@@ -196,11 +177,11 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     }
 
     //create SDL screen and update settings based on returned screen//
-    mScreen = SDL_SetVideoMode(mWidth, mHeight, mBPP, flags);
+    mScreen = SDL_SetVideoMode(width, height, bpp, flags);
 
     if(!mScreen)
     {
-        ReportError(ZERR_VIDMODE,FormatStr("Unknown Error. %dx%d %dBPP (%s)",mWidth, mHeight, mBPP, SDL_GetError()));
+        ReportError(ZERR_VIDMODE,FormatStr("Unknown Error. %dx%d %dBPP (%s)", width, height, bpp, SDL_GetError()));
 
 #ifdef USE_SDL_MIXER
         Mix_CloseAudio();
@@ -209,10 +190,6 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
 
         return false;   //bail if display fails
     }
-    
-    mWidth = mScreen->w;
-    mHeight = mScreen->h;
-    mBPP = mScreen->format->BitsPerPixel;
 
 #if (GFX_BACKEND == ZE_OGL)
     SetGL2D();
@@ -266,15 +243,10 @@ void ZEngine::ToggleFullscreen()
 #ifdef linux    //SDL_WM_TF only works on Linux
     SDL_WM_ToggleFullScreen(mScreen);
 #else
-    char *title,*icon;
+    char *title,*junk;
 
-    SetupDisplay(mWidth,mHeight,mBPP,!mFullscreen);
-
-    SDL_WM_GetCaption(&title,&icon);
-    if(icon)
-        CreateDisplay(title,icon);
-    else
-        CreateDisplay(title);
+    SDL_WM_GetCaption(&title,&junk);
+    CreateDisplay(mScreen->w,mScreen->h,mScreen->format->BitsPerPixel,!mFullscreen,title,mRate,mStereo,mIconFile);
 #endif
     SetReloadNeed(true);    //images need to be reloaded on fullscreen swap
 }
@@ -333,13 +305,13 @@ void ZEngine::SetGL2D()
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
     //setup viewport & ortho mode to emulate standard 2D API conventions
-    glViewport(0, 0, mWidth, mHeight);
+    glViewport(0, 0, mScreen->w, mScreen->h);
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
 
-    glOrtho(0.0, (GLdouble)mWidth, (GLdouble)mHeight, 0.0, 0.0, 1.0);
+    glOrtho(0.0, (GLdouble)mScreen->w, (GLdouble)mScreen->h, 0.0, 0.0, 1.0);
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -664,34 +636,34 @@ double ZEngine::RandDouble()
 
 int ZEngine::DisplayWidth()
 {
-    return mWidth;
+    return mScreen->w;
 }
 
 int ZEngine::DisplayHeight()
 {
-    return mHeight;
+    return mScreen->h;
 }
 
 int ZEngine::DisplayDepth()
 {
-    return mBPP;
+    return mScreen->format->BitsPerPixel;
 }
 
 #ifdef DEPRECIATED
 
 int ZEngine::Width()
 {
-    return mWidth;
+    return mScreen->w;
 }
 
 int ZEngine::Height()
 {
-    return mHeight;
+    return mScreen->h;
 }
 
 int ZEngine::BPP()
 {
-    return mBPP;
+    return mScreen->format->BitsPerPixel;
 }
 
 #endif //DEPRECIATED
