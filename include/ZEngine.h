@@ -3,7 +3,7 @@
     \brief Header file for ZEngine.
 
     Public header file for ZEngine, this is the file that programs that wish to utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.34 2003/10/06 00:04:11 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.35 2003/10/20 00:11:58 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -65,10 +65,6 @@
 #ifdef USE_SDL_MIXER
 #include "ZE_ZSound.h"
 #include "ZE_ZMusic.h"
-#endif
-#ifdef USE_SDL_NET
-#include "ZE_ZClient.h"
-#include "ZE_ZServer.h"
 #endif
 
 #endif //__zengine_h__
