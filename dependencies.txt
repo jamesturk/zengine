@@ -1,1 +1,12 @@
-Dependencies are now available from http://zengine.sourceforge.net/dependencies/ZE_dependencies_src.tar.bz2 is the source to the LGPL dependencies.ZE_dependencies_VC.zip contains prebuilt dependencies for Visual C++.ZE_dependencies_wing++.zip contains prebuilt dependencies for GCC based compilers (such as Dev-C++).The home pages of each can be found:SDL 1.2.6 (http://libsdl.org)SDL_image 1.2.3 (http://libsdl.org/projects/SDL_image/)SDL_ttf 2.0.6 (http://libsdl.org/projects/SDL_ttf/)SDL_mixer 1.2.5 (http://libsdl.org/projects/SDL_mixer/)
+Dependencies are now available from http://zengine.sourceforge.net/dependencies/
+ZE_dependencies_src.tar.bz2 is the source to the LGPL dependencies.
+ZE_dependencies_VC.zip contains prebuilt dependencies for Visual C++.
+ZE_dependencies_wing++.zip contains prebuilt dependencies for GCC based 
+compilers (such as Dev-C++).
+
+The home pages of each can be found:
+SDL 1.2.6 (http://libsdl.org)
+SDL_image 1.2.3 (http://libsdl.org/projects/SDL_image/)
+SDL_ttf 2.0.6 (http://libsdl.org/projects/SDL_ttf/)
+SDL_mixer 1.2.5 (http://libsdl.org/projects/SDL_mixer/)
+
