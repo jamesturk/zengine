@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZRectTest.cpp,v 1.13 2003/01/04 05:18:51 cozman Exp $*/
+/*$Id: ZRectTest.cpp,v 1.14 2003/01/08 06:07:07 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -69,7 +69,6 @@ void Test()
         }
 
         engine->Clear();
-		LogError(FormatStr("FPS=%.2f",1/engine->GetFrameTime()));
         moveRect.Draw(255,0,0,128);
         stillRect.Draw(0,0,255,128);
         moveRect.Intersection(stillRect).Draw(0,255,0);

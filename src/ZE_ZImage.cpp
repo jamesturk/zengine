@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.12 2003/01/07 06:11:26 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.13 2003/01/08 06:07:06 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -204,7 +204,6 @@ void ZImage::Draw(float x, float y)
         glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2f(x,y+rHeight);
         glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(x+rWidth,y+rHeight);
     glEnd();
-    glBindTexture(GL_TEXTURE_2D,0); //reset to blank texture
 }
 
 void ZImage::DrawRotated(int x, int y, float angle)

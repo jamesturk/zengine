@@ -13,7 +13,7 @@
 File: ZE_ZRect.cpp <br>
 Description: Implementation source file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.5 2003/01/07 05:44:32 cozman Exp $<br>
+$Id: ZE_ZRect.cpp,v 1.6 2003/01/08 06:07:07 cozman Exp $<br>
 
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
@@ -80,7 +80,7 @@ bool ZRect::operator<(const ZRect &rhs) const
                 else if(rWidth > rhs.Width())
                     return false;
                 else
-                    return false;    //nothing left to check they are ==
+                    return false;    //nothing left to check, they are ==
             }
         }
     }
@@ -88,6 +88,7 @@ bool ZRect::operator<(const ZRect &rhs) const
 
 void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
 {
+    glBindTexture(GL_TEXTURE_2D,0); //reset to blank texture
     glColor4ub(red,green,blue,alpha);
     glBegin(GL_QUADS);
         glVertex2f(rX, rY);
@@ -95,7 +96,7 @@ void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
         glVertex2f(rX+rWidth, rY+rHeight);
         glVertex2f(rX, rY+rHeight);
     glEnd();
-    glColor4ub(255,255,255,255);
+    glColor4ub(255,255,255,255);    //restore color setting
 }
 
 void ZRect::Move(float x, float y)
