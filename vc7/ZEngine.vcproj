@@ -56,9 +56,6 @@
 			Name="Source Implementations"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm">
 			<File
-				RelativePath="..\src\external\SDLGL_Util.cpp">
-			</File>
-			<File
 				RelativePath="..\src\VersionInfo.cpp">
 			</File>
 			<File
@@ -98,9 +95,6 @@
 		<Filter
 			Name="Source Headers"
 			Filter="h;hpp;hxx;hm;inl;inc">
-			<File
-				RelativePath="..\include\external\SDLGL_Util.h">
-			</File>
 			<File
 				RelativePath="..\include\VersionInfo.h">
 			</File>
