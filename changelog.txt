@@ -1,5 +1,11 @@
 ZEngine Version Log for Version 0.8.1
-$Id: changelog.txt,v 1.20 2003/01/03 03:48:01 cozman Exp $
+$Id: changelog.txt,v 1.21 2003/01/07 05:44:32 cozman Exp $
+
+0.8.2
+    -Added \since option to documentation (Everything after 0.8.0 will be labeled with a version.)
+    -Added "desired framerate" code to ZEngine.
+    -Added "desired framerate" functionality into the test programs.
+    -Fixed OpenGL color bleed in ZRect.
 
 0.8.1
     -Added legal information for developers.

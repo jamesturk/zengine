@@ -13,7 +13,7 @@
 File: ZE_ZRect.cpp <br>
 Description: Implementation source file for core ZEngine Rectangle Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZRect.cpp,v 1.4 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZRect.cpp,v 1.5 2003/01/07 05:44:32 cozman Exp $<br>
 
     \file ZE_ZRect.cpp
     \brief Source file for ZRect.
@@ -95,6 +95,7 @@ void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
         glVertex2f(rX+rWidth, rY+rHeight);
         glVertex2f(rX, rY+rHeight);
     glEnd();
+    glColor4ub(255,255,255,255);
 }
 
 void ZRect::Move(float x, float y)
