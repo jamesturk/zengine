@@ -13,7 +13,7 @@
 File: ZE_Error.h <br>
 Description: Header file for ZEngine Error Handling Functions. <br>
 Author(s): James Turk <br>
-$Id: ZE_Error.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZE_Error.h,v 1.3 2002/12/05 00:00:42 cozman Exp $<br>
 
     \file ZE_Error.h
     \brief Definition file for ZEngine Error Handling Functions.
@@ -59,7 +59,7 @@ void _LogError(int line, string file, string str);
     \brief Parses a string and interprets variable arguments, similar to sprintf.
 
     Takes % identifiers out of fmtstr and parses them, replacing them with cooresponding values 
-    in the variable arguments list.  For more detail view <cstdarg> documentation.
+    in the variable arguments list.  For more detail view stdarg documentation.
     \param fmtstr defines format of resulting string
     \param ... variable number of arguments after fmtstr
     \return string of parsed and combined string
