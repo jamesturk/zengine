@@ -14,7 +14,7 @@
 
     ZE_*.h files should only include this file and any other ZE_*.h files that they need, External Library or C/C++ Standard Library
     files should be included from within this file.
-    $Id: ZE_Includes.h,v 1.17 2003/08/08 04:05:22 cozman Exp $<br>
+    $Id: ZE_Includes.h,v 1.18 2003/09/24 01:49:52 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -37,10 +37,8 @@
 #ifdef USE_SDL_MIXER
 #include "SDL_mixer.h"
 #endif
-#ifdef USE_PHYSFS
-#include "physfs.h"
-#include "external/physfsrwops.h"
-#endif
+
+#include "../zlib/unzip.h"
 
 #include <string>   //used frequently
 #include <queue>    //used by ZEngine for ZErrors

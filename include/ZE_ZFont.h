@@ -42,6 +42,8 @@ class ZFont
         TTF_Font *rFont;
         //! Filename, for resizing.
         std::string rFilename;
+        //! Zip filename, for resizing when file was from archive.
+        std::string rZipname;
         //! SDL_Color for current text color.
         SDL_Color rColor;
         //! SDL_Color for background color to be used in shaded draws. 
@@ -86,9 +88,19 @@ class ZFont
         void Open(std::string filename, int size);
 
         /*!
+            \brief Opens a font from within a zip archive.
+
+            Open a font from within a zip archive using zlib and SDL_RWops.
+            \param zipname Zip file to open image from.
+            \param filename File to open as new image.
+            \param size Size to use for font.
+        **/
+        void OpenFromZip(std::string zipname, std::string filename, int size);
+
+        /*!
             \brief Release font.
 
-            Release memory held by font.
+            Release memory held by font. (Called by destructor).
         **/
         void Release();
 

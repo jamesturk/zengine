@@ -14,7 +14,7 @@
 
     Definition file for ZEngine Utilities which are used throughout the engine and can be used in
     conjunction with ZEngine.
-    <br>$Id: ZE_Utility.h,v 1.5 2003/06/11 00:15:25 cozman Exp $<br>
+    <br>$Id: ZE_Utility.h,v 1.6 2003/09/24 01:49:52 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -38,9 +38,7 @@ namespace ZE
 **/
 std::string FormatStr(const char *fmtstr, ...);
 
-//////////
-//Memory//
-//////////
+SDL_RWops* RWFromZip(std::string zipname, std::string filename);
 
 /*!
     \brief Properly free SDL_Surface. 

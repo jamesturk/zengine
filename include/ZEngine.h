@@ -4,7 +4,7 @@
 
     Header file for ZEngine Game Engine from Concept of Zero, this is the file that programs that wish to 
     utilize ZEngine should include.
-    <br>$Id: ZEngine.h,v 1.31 2003/08/07 07:16:11 cozman Exp $<br>
+    <br>$Id: ZEngine.h,v 1.32 2003/09/24 01:49:52 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -19,7 +19,7 @@
     <br>
     &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine is designed to provide a powerful yet easy to use 2D game engine in a well designed 
     Object Oriented manner, and uses cross platform libraries such as SDL and OpenGL. (ZEngine can use SDL_ttf,SDL_image,
-    SDL_mixer, and PhysFS all of which are cross platform as well as Open Source.)<br>
+    and SDL_mixer all of which are cross platform as well as Open Source.)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-It is licensed under a BSD-style license, and anyone is free to suggest or implement changes 
     to be added to the Engine, as well as modify the engine to their own needs or use it however they like.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;-ZEngine now uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine

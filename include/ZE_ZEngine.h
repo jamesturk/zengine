@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.49 2003/09/21 03:28:53 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.50 2003/09/24 01:49:52 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -173,16 +173,6 @@ class ZEngine
         **/
         void SetupSound(int rate, bool stereo);
 #endif 
-
-#ifdef USE_SDL_IMAGE
-        /*!
-            \brief Init Sound for ZEngine.
-
-            Initialize sound for ZEngine.
-        **/
-        bool InitSound();
-#endif 
-
 
         /*!
             \brief Create Display with predefined settings.
@@ -503,28 +493,6 @@ class ZEngine
         **/
         void SetEventFilter(SDL_EventFilter filter);
 
-#ifdef USE_PHYSFS
-    ////////////////////
-    //Physfs Utilities//
-    ////////////////////
-        /*!
-            \brief Initialize PhysicsFS
-
-            Sets up PhysicsFS, must be called when application is started.
-            \param argv argv[0] from application's main.
-        **/
-        void InitPhysFS(std::string argv);
-
-        /*!
-            \brief Add Directory to PhysFS Search Path.
-
-            Add Directory to PhysicsFS search path, the path it looks in for files when attempting to load.
-            \param dir Directory to add to search path.
-        **/
-        void AddPhysFSDir(std::string dir);
-
-#endif    //USE_PHYSFS
-
     /////////////////
     //Error Logging//
     /////////////////
@@ -665,18 +633,6 @@ class ZEngine
             \return Random double [0,1).
         **/
         double RandDouble();
-
-    ////////////////////////////
-    //Data Loading + Unloading//
-    ////////////////////////////
-        /*!
-            \brief Load an Image.
-
-            Loads an Image to an ImageData class which keeps vital information on the Image.
-            \param filename path to file to load.
-            \return A SDL_Surface pointer to data.
-        **/
-        SDL_Surface* LoadImage(std::string filename);
 
 #ifdef USE_SDL_MIXER
         /*!

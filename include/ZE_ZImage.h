@@ -12,8 +12,8 @@
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
 
-    Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.26 2003/09/07 20:59:20 cozman Exp $<br>
+    Definition file for ZImage, the ZImage class for ZEngine.
+    <br>$Id: ZE_ZImage.h,v 1.27 2003/09/24 01:49:52 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -29,7 +29,7 @@ namespace ZE
 /*!
     \brief ZImage class for basic Image use.
 
-    ZImage image drawing class, class wraps common features of SDL_Surface.  Inherited from ZObject.
+    ZImage image drawing class, class wraps 2d textures under OpenGL or SDL_Surface under SDL.
 **/
 class ZImage
 {
@@ -130,10 +130,19 @@ class ZImage
         /*!
             \brief Opens a file.
 
-            Open a file using ZEngine.  Loads into rImage member of class.
-            \param filename File to open as rImage.
+            Open an image file using ZEngine.
+            \param filename File to open as new image.
         **/
         void Open(std::string filename);
+
+        /*!
+            \brief Opens an image file from within a zip archive.
+
+            Open an image file from within a zip archive using zlib and SDL_RWops.
+            \param zipname Zip file to open image from.
+            \param filename File to open as new image.
+        **/
+        void OpenFromZip(std::string zipname, std::string filename);
 
         /*!
             \brief Cuts part of an existing image to create a new image.
@@ -179,7 +188,7 @@ class ZImage
         /*!
             \brief Releases image.
 
-            Frees memory via call to SDL_FreeSurface for the image.
+            Frees memory for the image. (Called by destructor).
         **/
         void Release();
 
