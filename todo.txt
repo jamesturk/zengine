@@ -1,11 +1,13 @@
 ZEngine Todo List
+    -Random number class
     -Net Example
-    -Add Support for PhysicsFS in ZMusic.  (Waiting on SDL_mixer.)
-    -ZSprite class (need community input)
+    -Integrate Particle Engine
+    -Add Support for PhysFS in ZMusic.  (Waiting on SDL_mixer.)
+    -ZSprite class (XML?)
     -Entirely New ZFont class, using display lists
     -FreeBSD support / OSX support
-    -Possible Scripting Integration
+    -Lua Scripting Integration
 
 Things to add outside ZEngine:
-    external widget library
+    external widget library (Gewi)
     Examples + Tutorials
