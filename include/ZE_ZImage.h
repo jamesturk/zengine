@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.10 2003/01/24 02:47:06 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.11 2003/01/25 19:56:05 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -53,6 +53,8 @@ class ZImage : public ZObject
         unsigned int rWidth;
         //! Current draw height of Texture.
         unsigned int rHeight;
+        //! Stored alpha value for drawing texture.
+        Uint8 rAlpha;
     
     public:
 
@@ -159,7 +161,16 @@ class ZImage : public ZObject
         ////////////
 
         /*!
-            \brief Set Color Key (transparent color) of Image.
+            \brief Set alpha value (translucency) of image.
+
+            Set translucency value 0-255 (0 is transparent, 255 = opaque).
+            \since 0.8.2
+            \param alpha Number 0-255 setting translucency for image.
+        **/
+        void SetAlpha(Uint8 alpha);
+
+        /*!
+            \brief Set Color Key (transparent color) of image.
 
             Set color which will not be drawn in image.
             \param red Red component of colorkey (0-255).
@@ -256,6 +267,15 @@ class ZImage : public ZObject
             \return Image Height.
         **/
         int Height() const;
+
+        /*!
+            \brief Get Alpha component.
+
+            Get current alpha value of image.
+            \since 0.8.2
+            \return Image Alpha.
+        **/
+        Uint8 Alpha() const;
 };
 
 }

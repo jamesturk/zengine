@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.20 2003/01/24 10:27:42 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.21 2003/01/25 19:56:05 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -29,30 +29,35 @@ namespace ZE
 ZImage::ZImage()
 {
     rImage = NULL;
+    rAlpha = 255;
     Release();
 }
 
 ZImage::ZImage(const ZImage &rhs)
 {
     rImage = NULL;
+    rAlpha = rhs.Alpha();
     OpenFromImage(rhs.Surface(),0,0,(Sint16)rhs.Width(),(Sint16)rhs.Height());
 }
 
 ZImage::ZImage(string filename)
 {
     rImage = NULL;
+    rAlpha = 255;
     Open(filename);
 }
 
 ZImage::ZImage(SDL_Surface *surface)
 {
     rImage = NULL;
+    rAlpha = 255;
     Attach(surface);
 }
 
 ZImage::ZImage(SDL_Surface *img, Sint16 x, Sint16 y, Sint16 w, Sint16 h)
 {
     rImage = NULL;
+    rAlpha = 255;
     OpenFromImage(img,x,y,w,h);
 }
 
@@ -147,6 +152,11 @@ void ZImage::Release()
     FreeImage(rImage);
 }
 
+void ZImage::SetAlpha(Uint8 alpha)
+{
+    rAlpha = alpha;
+}
+
 void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 {
     SDL_Surface *temp=NULL;
@@ -201,7 +211,10 @@ void ZImage::Bind() const
     if(!rTexID)
         rEngine->ReportError(ZERR_NOIMAGE,"Bind");
     else
+    {
+        glColor4ub(255,255,255,rAlpha); 
         glBindTexture(GL_TEXTURE_2D, rTexID);
+    }
 }
 
 void ZImage::Draw(float x, float y) const
@@ -213,6 +226,7 @@ void ZImage::Draw(float x, float y) const
         glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2f(x,y+rHeight);
         glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(x+rWidth,y+rHeight);
     glEnd();
+    glColor4ub(255,255,255,255);    //return to standard color state
 }
 
 void ZImage::DrawRotated(int x, int y, float angle) const
@@ -253,6 +267,11 @@ int ZImage::Width() const
 int ZImage::Height() const
 {
     return rHeight;
+}
+
+Uint8 ZImage::Alpha() const
+{
+    return rAlpha;
 }
 
 }

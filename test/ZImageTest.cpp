@@ -8,7 +8,7 @@
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.14 2003/01/12 19:00:15 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.15 2003/01/25 19:59:38 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -39,10 +39,11 @@ void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
     float angle=0.0f;
+    Uint8 alpha=128,alphaDelta=1;
 
     //Open and Setup all the Images//
     SDL_Surface *temp;
-    ZImage image1, image2, image3, textImage;
+    ZImage image1, image2, image3, textImage, cp;
     ZFont font("data/almontew.ttf",30);
 
     font.SetColor(0,255,0);
@@ -76,16 +77,19 @@ void Test()
             if(engine->KeyIsPressed(SDLK_s))
             {
                 //code to toggle screen//
-                engine->SetupDisplay(engine->Width(),engine->Height(),engine->BPP(),!engine->IsFullscreen());
-                engine->CreateDisplay("ZImage Test");
-                engine->SetReloadNeed(true);
+                engine->ToggleFullscreen();
             }
             if(engine->KeyIsPressed(SDLK_ESCAPE))
                 engine->RequestQuit();
 
             engine->Clear();    //clear screen
             //draw the images//
+            alpha += alphaDelta;
+            if(alpha ==255 || alpha == 0)
+                alphaDelta *= -1;
+            image1.SetAlpha(alpha);
             image1.Draw(0,0);
+
             
             image2.DrawRotated(100,0,angle);
             if(++angle > 360)
@@ -95,6 +99,8 @@ void Test()
             textImage.Draw(0,100);
             engine->Update();    //update the screen
         }
+        else
+            engine->Delay(10);
 
     } while(!engine->QuitRequested());    //quit only when engine has encountered a quit request
 }
