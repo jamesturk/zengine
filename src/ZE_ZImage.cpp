@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.39 2003/08/02 01:18:45 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.40 2003/08/07 05:54:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -193,16 +193,7 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
 
 void ZImage::Draw(int x, int y) const
 {
-    //source is same as float version, but uses glVertex2i
-    glColor4ub(255,255,255,rAlpha);
-    Bind();
-    glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2f(rTexMinX,rTexMinY);    glVertex2i(x,y);
-        glTexCoord2f(rTexMaxX,rTexMinY);    glVertex2i(x+rWidth,y);
-        glTexCoord2f(rTexMinX,rTexMaxY);    glVertex2i(x,y+rHeight);
-        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2i(x+rWidth,y+rHeight);
-    glEnd();
-    glColor4ub(255,255,255,255);
+    Draw(x,y);
 }
 
 void ZImage::Draw(float x, float y) const
@@ -267,11 +258,11 @@ void ZImage::Flip(bool horizontal, bool vertical)
 //stretching and resizing is very inexpensive, done via variables
 void ZImage::Stretch(float xFactor, float yFactor)
 {
-    rWidth = static_cast<unsigned int>(xFactor*rWidth);
-    rHeight = static_cast<unsigned int>(yFactor*rHeight);
+    rWidth = xFactor*rWidth;
+    rHeight = yFactor*rHeight;
 }
 
-void ZImage::Resize(unsigned int width, unsigned int height)
+void ZImage::Resize(float width, float height)
 {
     rWidth = width;
     rHeight = height;
@@ -384,6 +375,20 @@ SDL_Surface* ZImage::Surface() const
     return rImage;
 }
 
+#if (GFX_BACKEND == ZE_OGL)
+
+float ZImage::Width() const
+{
+    return rWidth;
+}
+
+float ZImage::Height() const
+{
+    return rHeight;
+}
+
+#elif (GFX_BACKEND == ZE_SDL)
+
 int ZImage::Width() const
 {
     return rImage->w;
@@ -393,6 +398,8 @@ int ZImage::Height() const
 {
     return rImage->h;
 }
+
+#endif //GFX_BACKEND
 
 Uint8 ZImage::Alpha() const
 {

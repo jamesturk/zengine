@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.21 2003/08/02 01:18:45 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.22 2003/08/07 05:54:45 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -51,9 +51,9 @@ class ZImage
         //! Texture ID for OpenGL.
         unsigned int rTexID;
         //! Current draw width of Texture.
-        unsigned int rWidth;
+        GLfloat rWidth;
         //! Current draw height of Texture.
-        unsigned int rHeight;
+        GLfloat rHeight;
 #endif //GFX_BACKEND == OGL
     
     public:
@@ -271,7 +271,7 @@ class ZImage
             \param width New width to stretch image to.
             \param height New height to stretch image to.
         **/
-        void Resize(unsigned int width, unsigned int height);
+        void Resize(float width, float height);
 
         /*!
             \brief OpenGL related bind call.
@@ -301,6 +301,25 @@ class ZImage
         **/
         SDL_Surface *Surface() const;
 
+#if (GFX_BACKEND == ZE_OGL)
+
+        /*!
+            \brief Get Width.
+
+            Get Current Width of Image.
+            \return Image Width.
+        **/
+        float Width() const;
+
+        /*!
+            \brief Get Height.
+
+            Get Current Height of Image.
+            \return Image Height.
+        **/
+        float Height() const;
+
+#elif (GFX_BACKEND == ZE_SDL)
         /*!
             \brief Get Width.
 
@@ -316,6 +335,7 @@ class ZImage
             \return Image Height.
         **/
         int Height() const;
+#endif //GFX_BACKEND
 
         /*!
             \brief Get Alpha component.
