@@ -1,7 +1,8 @@
-ZEngine Version Log for Version 0.8.1
-$Id: changelog.txt,v 1.24 2003/01/16 05:16:17 cozman Exp $
+ZEngine Version Log for Version 0.8.2
+$Id: changelog.txt,v 1.25 2003/01/18 22:00:52 cozman Exp $
 
 0.8.2
+    -Added "const" to members of ZImage,ZTimer,ZMusic,ZSound,ZRect,ZConfigFile,ZFont and ZError.
     -Fixed several documentation problems.
     -Added complete error handling system to ZEngine including internal ZError class.
     -Updated examples to use newer features and check for errors.

@@ -1,7 +1,7 @@
 #Config file for ZEngine#
   #Edit only this file#
 
-BUILD= ZEngine-0.8.1
+BUILD= ZEngine-0.8.2
 
 #Define compiler commands:
 CC= g++
