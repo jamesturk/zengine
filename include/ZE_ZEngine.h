@@ -13,7 +13,7 @@
     \brief Definition file for core ZEngine class.
 
     ZEngine Game Engine core Engine definition.
-    <br>$Id: ZE_ZEngine.h,v 1.48 2003/09/09 02:49:10 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.h,v 1.49 2003/09/21 03:28:53 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -34,6 +34,8 @@
 **/
 namespace ZE
 {
+
+class ZRect;
 
 /*!
     \brief Main ZEngine Singleton Class
@@ -139,7 +141,7 @@ class ZEngine
         /*!
             \brief Release Instance (obsolete as of 0.8.5).
 
-            Release memory held by instance of engine and closes window.  
+            Release memory held by instance of engine and closes window.
             If you are using ZE_main (new in 0.8.5) this needs not ever be called.
         **/
         static void ReleaseInstance();
@@ -465,11 +467,20 @@ class ZEngine
         /*!
             \brief Check if mouse is in given rectangle.
 
-            Return status of mouse in current rectangle (used for buttons)
+            Return status of mouse in current rectangle (eg. GUI buttons).
             \param rect Rectangle to check if mouse is in.
             \return true if mouse is in rectangle, false otherwise
         **/
         bool MouseInRect(SDL_Rect *rect);
+
+        /*!
+            \brief Check if mouse is in given rectangle.
+
+            Return status of mouse in current rectangle (eg. GUI buttons).
+            \param rect Rectangle to check if mouse is in.
+            \return true if mouse is in rectangle, false otherwise
+        **/
+        bool MouseInRect(ZRect rect);
 
         /*!
             \brief Check for Activation, Window Manager, and Quit Events.

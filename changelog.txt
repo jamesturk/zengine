@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.47 2003/09/09 02:55:01 cozman Exp $
+$Id: changelog.txt,v 1.48 2003/09/21 03:28:53 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -11,6 +11,7 @@ Changes are marked with symbols that describe them:
 (Note: Depreciated code (that marked with a *) is likely to disappear completely at the next major version.)
 
 0.8.5
+    + ZRect overload for ZEngine::MouseInRect.
     + ZE_main as new entrypoint instead of main, ZE_main entrypoint allows ZEngine to initialize PhysFS and release itself.
     + New Draw,DrawRotated, and DrawClipped overloads with vertex coloring parameter for advanced needs.
     + Addition of Dev-C++ project files and more Dev-C++ support.

@@ -13,11 +13,12 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.57 2003/08/08 04:03:32 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.58 2003/09/21 03:28:53 cozman Exp $<br>
     \author James Turk
 **/
 
 #include "ZE_ZEngine.h"
+#include "ZE_ZRect.h"
 
 namespace ZE
 {
@@ -487,6 +488,11 @@ bool ZEngine::MouseInRect(SDL_Rect *rect)
     //useful function, needed so much it made it in
     return (mMouseX >= rect->x && mMouseX <= rect->x+rect->w && 
         mMouseY >= rect->y && mMouseY <= rect->y+rect->h);
+}
+
+bool ZEngine::MouseInRect(ZRect rect)
+{
+    return rect.Contains(static_cast<float>(mMouseX),static_cast<float>(mMouseY));
 }
 
 void ZEngine::CheckEvents()
