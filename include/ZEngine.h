@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.20 2003/01/18 22:00:52 cozman Exp $<br>
+$Id: ZEngine.h,v 1.21 2003/01/24 11:06:25 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -41,7 +41,7 @@ $Id: ZEngine.h,v 1.20 2003/01/18 22:00:52 cozman Exp $<br>
                      Licensed under a BSD-style license.
 
     The maintainer of this library is James Turk (james@conceptofzero.net) 
-     and the home of this Library is http://www.zengine.sourceforge.net
+     and the home of this Library is http://zengine.sourceforge.net
     </pre>
     \section Authors Contributing Authors
     <br>
