@@ -37,9 +37,6 @@
 #ifdef USE_SDL_MIXER
 #include "SDL_mixer.h"
 #endif
-#ifdef USE_SDL_NET
-#include "SDL_net.h"
-#endif
 #ifdef USE_PHYSFS
 #include "physfs.h"
 #include "external/physfsrwops.h"

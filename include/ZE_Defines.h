@@ -28,7 +28,7 @@
 //! SDL Rendering Target.
 #define ZE_SDL (2)
 //! Define the graphics backend for ZEngine to use. (Options are ZE_OGL,ZE_SDL,ZE_D3D)
-#define GFX_BACKEND (ZE_SDL)
+#define GFX_BACKEND (ZE_OGL)
 
 //! Define to include font support.
 #define USE_SDL_TTF
@@ -42,18 +42,6 @@
 //#define USE_PHYSFS
 //! Define to use depreciated code that has not been entirely removed.
 //#define DEPRECIATED
-
-#ifdef USE_SDL_NET
-
-namespace ZE
-{
-
-//! Maximum message length (for SDL_net). (10kb [10240] default)
-const int MAX_MSG_LEN = 10240;
-//! Define a ZByte as a plain char (for SDL_net).
-typedef char ZByte;
-
-}
 
 #endif
 

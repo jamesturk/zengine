@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.56 2003/08/08 03:54:34 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.57 2003/08/08 04:03:32 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -225,17 +225,6 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     }
 #endif  //USE_SDL_TTF
 
-#ifdef USE_SDL_NET
-    if(!mInitialized)
-    {
-        if(SDLNet_Init() < 0)
-        {
-            ReportError(ZERR_NET_INIT,SDLNet_GetError());
-            status = false; //possible to go on without SDL_Net
-        }
-    }
-#endif //USE_SDL_NET
-
     if(!mInitialized)
         mPausedTime = SDL_GetTicks();
     mActive = true;
@@ -248,10 +237,6 @@ void ZEngine::CloseDisplay()
 {
     if(mInitialized)
     {
-
-#ifdef USE_SDL_NET
-        SDLNet_Quit();
-#endif
 
 #ifdef USE_SDL_TTF
         TTF_Quit();
