@@ -13,7 +13,7 @@
     \brief Define file for ZEngine where all #define statements to control compilation options are placed.
 
     Definition file, holds #define statements describing optional features of ZEngine.
-    <br>$Id: ZE_Defines.h,v 1.22 2003/08/08 04:24:42 cozman Exp $<br>
+    <br>$Id: ZE_Defines.h,v 1.23 2003/09/05 19:44:13 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -21,7 +21,6 @@
 #define __ze_defines_h__
 
 //Defines- undefine any of these if you dont have the indicated SDL extension//
-
 
 //! OpenGL 2D Rendering Target.
 #define ZE_OGL (1)

@@ -1,5 +1,5 @@
-ZEngine Version Log for Version 0.8.4
-$Id: changelog.txt,v 1.43 2003/08/31 22:15:00 cozman Exp $
+ZEngine Version Log for Version 0.8.5
+$Id: changelog.txt,v 1.44 2003/09/05 19:44:13 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -9,9 +9,11 @@ Changes are marked with symbols that describe them:
 # general changes
 
 0.8.5
-    + Addition of limited SDL graphics backend.
+    + Addition of DrawClipped and DrawClipped example in ZImageTest
+    + New limited SDL graphics backend for platforms without OpenGL.
     - Removal of VC6 project files and official support.
     - Removal of SDL_net support. 
+    # Tiny optimizations within newer ZImage code.
     # Changed ZImage stretching to floating-point.
     # New linux build system (by Atani).
 

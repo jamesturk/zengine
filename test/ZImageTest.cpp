@@ -9,7 +9,7 @@ This example file is in the public domain, it may be used with no restrictions.
      and the home of this Library is http://www.zengine.sourceforge.net
 *******************************************************************************/
 
-/*$Id: ZImageTest.cpp,v 1.22 2003/09/01 06:01:06 cozman Exp $*/
+/*$Id: ZImageTest.cpp,v 1.23 2003/09/05 19:44:13 cozman Exp $*/
 
 #include <ZEngine.h>
 #include <string> 
@@ -55,12 +55,13 @@ void Test()
     image1.Attach(temp);    //this attaches the surface into itself
     image2.Open("data/test01.bmp");
     image3.OpenFromImage(image2.Surface(),5,5,20,20);
-    image4.Open("data/rainbow.bmp");
+    image4.Open("data/test02.bmp");
     temp = NULL;    //and temp will now be controlled and freed by image1
     image1.SetColorKey(255,0,255);
     image2.SetColorKey(255,0,255);
 #if (GFX_BACKEND == ZE_OGL)
     image4.Resize(400,300);
+    image4.Flip(true,false);
 #endif
     font.DrawShadedText("ZImage Test.",textImage);
 

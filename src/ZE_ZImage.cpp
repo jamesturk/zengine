@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.44 2003/09/01 06:01:34 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.45 2003/09/05 19:44:13 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -244,10 +244,7 @@ void ZImage::DrawRotated(float x, float y, float angle) const
 
 void ZImage::DrawClipped(float x, float y, ZRect clipRect) const
 {
-    ZRect imgRect(x,y,rWidth,rHeight),inRect;
-    float xDiff,yDiff,nx,ny,nw,nh;
-    xDiff = rTexMaxX - rTexMinX;
-    yDiff = rTexMaxY - rTexMinY;
+    ZRect imgRect(x,y,rWidth,rHeight);
 
     if(clipRect.Contains(imgRect))
     {
@@ -255,20 +252,30 @@ void ZImage::DrawClipped(float x, float y, ZRect clipRect) const
     }
     else if(clipRect.Intersects(imgRect))
     {
-        inRect = clipRect.Intersection(imgRect);
+        //This is some pretty complex code, it is broken down in 4 steps. 
 
-        nx = rTexMinX + (inRect.X()-imgRect.X())/imgRect.Width()*xDiff;
-        ny = rTexMinY + (inRect.Y()-imgRect.Y())/imgRect.Height()*yDiff;
-        nw = nx + (inRect.Width()/imgRect.Width())*xDiff;
-        nh = ny + (inRect.Height()/imgRect.Height())*yDiff;
+        //Step 1: The intersection rectangle (inRect) is compared to the image rectangle and the overlapping area is found. 
+        ZRect inRect = clipRect.Intersection(imgRect); 
 
-        glColor4ub(255,255,255,rAlpha); //sets the color correctly
+        //Step 2: The portion of the image that needs to be drawn is being mapped to triangle strips the same size as the intersection
+        //        of the clipping and image rectangles and then transformed to texture coordinates via xScale and yScale.
+        //        (double is used for needed precision when dealing with the scaling)
+        double xScale = (rTexMaxX - rTexMinX)*rWidth;   //texCoordWidth/imgWidth
+        double yScale = (rTexMaxY - rTexMinY)*rHeight;  //texCoordHeight/imgHeight
+        double nx = rTexMinX + (inRect.X()-x)/xScale;    //cut off left side
+        double ny = rTexMinY + (inRect.Y()-y)/yScale;    //cut off top
+        double nw = nx + inRect.Width()/xScale;      //cut off right side
+        double nh = ny + inRect.Height()/yScale;     //cut off bottom
+
+        glColor4ub(255,255,255,rAlpha);
         Bind();
         glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2f(nx,ny);    glVertex2f(inRect.Left(),inRect.Top());
-            glTexCoord2f(nw,ny);    glVertex2f(inRect.Right(),inRect.Top());
-            glTexCoord2f(nx,nh);    glVertex2f(inRect.Left(),inRect.Bottom());
-            glTexCoord2f(nw,nh);    glVertex2f(inRect.Right(),inRect.Bottom());
+            //Step 3: The texture coords are modified to only specify the portion of the texture which falls within the clipping rect.
+            //Step 4: The vertices are changed to the sides of the clipping rectangle in glVertex2f.
+            glTexCoord2d(nx,ny);  glVertex2f(inRect.Left(),inRect.Top());
+            glTexCoord2d(nw,ny);  glVertex2f(inRect.Right(),inRect.Top());
+            glTexCoord2d(nx,nh);  glVertex2f(inRect.Left(),inRect.Bottom());
+            glTexCoord2d(nw,nh);  glVertex2f(inRect.Right(),inRect.Bottom());
         glEnd();
         glColor4ub(255,255,255,255);    //be responsible, return to standard color state
     }
@@ -280,21 +287,11 @@ void ZImage::DrawClipped(float x, float y, ZRect clipRect) const
 
 void ZImage::Flip(bool horizontal, bool vertical)
 {
-    GLfloat temp;
     //all that a flip does is invert the Min/Max coordinates
     if(horizontal)
-    {
-        temp = rTexMinX;
-        rTexMinX = rTexMaxX;
-        rTexMaxX = temp;
-    }
-
+        std::swap(rTexMinX,rTexMaxX);
     if(vertical)
-    {
-        temp = rTexMinY;
-        rTexMinY = rTexMaxY;
-        rTexMaxY = temp;
-    }
+        std::swap(rTexMinY,rTexMaxY);
 }
 
 //stretching and resizing is very inexpensive, done via variables

@@ -13,7 +13,7 @@
     \brief Definition file for ZImage.
 
     Definition file for ZImage, the OpenGL version of the ZImage class for ZEngine.
-    <br>$Id: ZE_ZImage.h,v 1.24 2003/09/01 03:30:39 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.h,v 1.25 2003/09/05 19:44:13 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -216,9 +216,11 @@ class ZImage
         void Draw(int x, int y) const;
 
         /*!
-            \brief Draw Clipped Image to screen.
+            \brief Draw Image, clipped within a given rectangle to the screen.
 
-            Image is drawn such that only portions of image which fall within a certain area appear.
+            Image is drawn such that only portions of image which fall within a certain area appear.  This clipping rectangle
+            can be used for areas of the screen which are separated from others such as a splitscreen mode in a game or a 
+            map on a HUD.
             \since 0.8.5
             \param x X coord to draw Image to.
             \param y Y coord to draw Image to.
@@ -259,9 +261,11 @@ class ZImage
         void DrawRotated(float x, float y, float angle) const;
 
         /*!
-            \brief Draw Clipped Image to screen.
+            \brief Draw Image, clipped within a given rectangle to the screen.
 
-            Image is drawn such that only portions of image which fall within a certain area appear.
+            Image is drawn such that only portions of image which fall within a certain area appear.  This clipping rectangle
+            can be used for areas of the screen which are separated from others such as a splitscreen mode in a game or a 
+            map on a HUD.
             \since 0.8.5
             \param x X coord to draw Image to.
             \param y Y coord to draw Image to.
