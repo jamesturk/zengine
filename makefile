@@ -32,7 +32,7 @@ $(LIB_OUT): $(OBJECTS)
 
 $(ALL_TESTS) : $(LIB_OUT)
 	@echo Building $@...
-	$(CC) $(CFLAGS) $(CURDIR)/test/$@.cpp -o $(CURDIR)/test/bin/$@$(EXE) $(LIBS)
+	$(CC) $(CFLAGS) $(CURDIR)/test/$@.cpp -o $(CURDIR)/test/bin/$@ $(LIBS)
 	@echo $@ compiled.
 
 .PHONY: $(ALL_TESTS) install clean veryclean
@@ -51,7 +51,7 @@ clean:
 
 veryclean:
 	rm -f $(OBJECTS)
-	rm -f $(CURDIR)/test/bin/*$(EXE)
+	rm -f $(CURDIR)/test/bin/Z* 
 	rm -f $(LIB_OUT)
 	@echo All output files removed.
 
