@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.43 2003/09/01 03:30:39 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.44 2003/09/01 06:01:34 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -407,10 +407,16 @@ void ZImage::Draw(int x, int y) const
 
 void ZImage::DrawClipped(int x, int y, ZRect clipRect) const
 {
-    SDL_Rect rect;
-    rect.x = static_cast<Sint16>(x);
-    rect.y = static_cast<Sint16>(y); 
-    SDL_BlitSurface(rImage, &clipRect.SDLrect(), rEngine->Display(), &rect);
+    ZRect img(static_cast<Sint16>(x),static_cast<Sint16>(y),static_cast<Sint16>(rImage->w),static_cast<Sint16>(rImage->h));
+    SDL_Rect inRect,imgRect;
+    
+
+    imgRect = inRect = clipRect.Intersection(img).SDLrect();
+    inRect.x -= x;
+    inRect.y -= y;
+    
+    SDL_BlitSurface(rImage, &inRect, rEngine->Display(), &imgRect);
+    //SDL_FillRect(rEngine->Display(), &inRect, SDL_MapRGB(rEngine->Display()->format,0,255,0));
 }
 
 bool ZImage::IsLoaded() const
