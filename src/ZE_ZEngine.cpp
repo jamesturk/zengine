@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.21 2003/01/24 11:05:25 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.22 2003/01/24 19:41:54 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -124,13 +124,16 @@ bool ZEngine::CreateDisplay(string title, string icon)
     //set flags and bpp//
     if(mFullscreen)
         flags |= SDL_FULLSCREEN;
-    if(mBPP != 8 && mBPP != 15 && mBPP != 16 && mBPP != 24 && mBPP !=32)
+    if(mBPP != -1 && mBPP != 8 && mBPP != 15 && mBPP != 16 && mBPP != 24 && mBPP !=32)
     {
-        ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying desktop BPP.",mBPP));
-        mBPP = 0;
+        ReportError(ZERR_VIDMODE,FormatStr("%d is invalid BPP, must be 8,15,16,24 or 32, trying best BPP.",mBPP));
+        mBPP = -1;
     }
     else
     {
+        if(mBPP == -1)
+            mBPP = SDL_GetVideoInfo()->vfmt->BitsPerPixel;
+
         bpp = SDL_VideoModeOK(mWidth, mHeight, mBPP, flags);
         if(!bpp)
         {

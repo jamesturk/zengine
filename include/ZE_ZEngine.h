@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.15 2003/01/24 11:05:25 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.16 2003/01/24 19:43:59 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -117,7 +117,7 @@ class ZEngine
 
             \param width Desired width of screen or window.
             \param height Desired height of screen or window.
-            \param bpp Desired BPP for screen (generally use 32).
+            \param bpp Desired BPP for screen, generally use 8,16 or 32, pass -1 if you want ZEngine to guess the best choice.
             \param fullscreen A bool for fullscreen setting.
         **/
         void SetupDisplay(int width, int height, int bpp, bool fullscreen);
@@ -139,7 +139,7 @@ class ZEngine
 
             SetupDisplay and SetupSound should be called prior to this to change settings, settings from those do not go into effect 
             until this function is called.  Specify no icon file to use default icon.  Returns result of setting up ZEngine, and logs 
-            error if false is returned (returns bool in versions >= 0.8.2).
+            error if false is returned (Trys not to fail + returns bool in versions >= 0.8.2).
 
             \param title Window Title.
             \param icon Path to Icon File.
