@@ -5,9 +5,9 @@ include $(ZE)/config
 
 LIB_OUT=$(ZE)/lib/libZEngineS.a
 
-libZEngineS.a: $(SRC)/ZE_Utility.cpp $(SRC)/ZE_ZTimer.cpp $(SRC)/ZE_ZImage.cpp $(SRC)/ZE_ZFont.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZConfigFile.cpp $(SRC)/ZE_ZSound.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZRect.cpp  $(SRC)/ZE_ZError.cpp $(SRC)/ZE_ZEngine.cpp $(SRC)/external/SDLGL_Util.cpp
-	$(CC) $(CFLAGS) -c $(SRC)/ZE_Utility.cpp $(SRC)/ZE_ZTimer.cpp $(SRC)/ZE_ZImage.cpp $(SRC)/ZE_ZFont.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZConfigFile.cpp $(SRC)/ZE_ZSound.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZRect.cpp $(SRC)/ZE_ZError.cpp $(SRC)/ZE_ZEngine.cpp $(SRC)/external/SDLGL_Util.cpp
-	$(AR) $(LIB_OUT) ZE_Utility.o ZE_ZTimer.o ZE_ZImage.o ZE_ZFont.o ZE_ZMusic.o ZE_ZConfigFile.o ZE_ZSound.o ZE_ZMusic.o ZE_ZError.o ZE_ZRect.o ZE_ZEngine.o SDLGL_Util.o
+libZEngineS.a: $(SRC)/ZE_Utility.cpp $(SRC)/ZE_ZTimer.cpp $(SRC)/ZE_ZImage.cpp $(SRC)/ZE_ZFont.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZConfigFile.cpp $(SRC)/ZE_ZSound.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZRect.cpp  $(SRC)/ZE_ZError.cpp $(SRC)/ZE_ZEngine.cpp $(SRC)/external/SDLGL_Util.cpp $(SRC)/external/mt19937ar.cpp
+	$(CC) $(CFLAGS) -c $(SRC)/ZE_Utility.cpp $(SRC)/ZE_ZTimer.cpp $(SRC)/ZE_ZImage.cpp $(SRC)/ZE_ZFont.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZConfigFile.cpp $(SRC)/ZE_ZSound.cpp $(SRC)/ZE_ZMusic.cpp $(SRC)/ZE_ZRect.cpp $(SRC)/ZE_ZError.cpp $(SRC)/ZE_ZEngine.cpp $(SRC)/external/SDLGL_Util.cpp $(SRC)/external/mt19937ar.cpp
+	$(AR) $(LIB_OUT) ZE_Utility.o ZE_ZTimer.o ZE_ZImage.o ZE_ZFont.o ZE_ZMusic.o ZE_ZConfigFile.o ZE_ZSound.o ZE_ZMusic.o ZE_ZError.o ZE_ZRect.o ZE_ZEngine.o SDLGL_Util.o mt19937ar.o
 
 tests: $(TEST)/ZFontTest.cpp $(TEST)/ZMouseTest.cpp $(TEST)/ZMusicTest.cpp $(TEST)/ZSoundTest.cpp $(TEST)/ZTimerTest.cpp $(TEST)/ZImageTest.cpp $(TEST)/ZRectTest.cpp
 	$(CC) $(CFLAGS) -L$(ZE)/lib $(TEST)/ZFontTest.cpp -o $(TEST)/bin/ZFontTest  $(LIBS)

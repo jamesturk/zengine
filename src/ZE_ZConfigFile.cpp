@@ -13,7 +13,7 @@
 File: ZE_ZConfigFile.cpp <br>
 Description: Implementation source file for ZConfigFile, the ZEngine INI-Style Config File. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZConfigFile.cpp,v 1.7 2003/04/08 03:30:50 cozman Exp $<br>
+$Id: ZE_ZConfigFile.cpp,v 1.8 2003/04/28 03:15:18 cozman Exp $<br>
 
     \file ZE_ZConfigFile.cpp
     \brief Source file for ZConfigFile.
@@ -209,7 +209,7 @@ float ZConfigFile::GetFloat(string section, string var, float defVal) const
 
     section = '[' + section + ']';
 
-    sprintf(tmp,"%d",defVal);
+    sprintf(tmp,"%f",defVal);
     val = GetVariable(section,var,tmp);
 
     if(!atof(val.c_str()) && val[0] !='0')    //if it is zero but doesn't start with a zero
