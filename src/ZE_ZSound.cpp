@@ -13,7 +13,7 @@
     \brief Source file for ZSound.
 
     Implementation of ZSound, the basic Sound class for ZEngine.
-    <br>$Id: ZE_ZSound.cpp,v 1.10 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZSound.cpp,v 1.11 2003/09/24 02:03:18 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -51,7 +51,28 @@ ZSound::~ZSound()
 void ZSound::Open(std::string filename)
 {
     Release();
-    rSound = rEngine->LoadSound(filename);
+
+    rSound = Mix_LoadWAV(filename.c_str());
+
+    if(!rSound)
+        rEngine->ReportError(ZERR_LOAD_SOUND,filename);
+}
+
+void ZSound::OpenFromZip(std::string zipname, std::string filename)
+{
+    SDL_RWops *rw;
+
+    rw = RWFromZip(zipname,filename);
+
+    if(rw)
+    {
+        rSound = Mix_LoadWAV_RW(rw,0);
+        delete []rw->hidden.mem.base;   //must free buffer
+        SDL_FreeRW(rw);
+    }
+
+    if(!rSound)
+        rEngine->ReportError(ZERR_LOAD_SOUND,FormatStr("%s in %s archive",filename.c_str(),zipname.c_str()));
 }
 
 void ZSound::Release()

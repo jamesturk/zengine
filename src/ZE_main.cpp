@@ -15,9 +15,11 @@
     The entry point 'main' defined in this file simply does the initial creation and freeing of ZEngine.
     An application that defines main overrides this main, so backwards compatibility is not broken, however as of 0.8.5 ZE_main is the 
     expected entry point of ZEngine applications.
-    <br>$Id: ZE_main.cpp,v 1.2 2003/09/22 23:49:22 cozman Exp $<br>
+    <br>$Id: ZE_main.cpp,v 1.3 2003/09/24 02:03:18 cozman Exp $<br>
     \author James Turk
 **/
+
+#ifdef USE_PHYSFS
 
 #include "ZEngine.h"
 
@@ -51,3 +53,4 @@ int main(int argc, char *argv[])
     return ret;
 }
 
+#endif //USE_PHYSFS

@@ -13,7 +13,7 @@
     \brief Source file for ZEngine utility functions.
 
     Source file containing open utilities for use inside and alongside ZEngine.
-    <br>$Id: ZE_Utility.cpp,v 1.10 2003/07/12 01:25:42 cozman Exp $<br>
+    <br>$Id: ZE_Utility.cpp,v 1.11 2003/09/24 02:03:18 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -31,6 +31,48 @@ std::string FormatStr(const char *fmtstr, ...)
     vsprintf(buf, fmtstr, args);
     va_end(args);
     return buf;
+}
+
+SDL_RWops* RWFromZip(std::string zipname, std::string filename)
+{
+    unzFile zip = unzOpen(zipname.c_str());
+    unz_file_info info;
+    void *buffer;
+
+    if(!zip)    //failed to open zip
+    {
+        //log error
+        return NULL;
+    }
+
+    //locate the file and open it (last param means case sensitive comparison)
+    unzLocateFile(zip,filename.c_str(),0);
+    if(unzOpenCurrentFile(zip) != UNZ_OK)   //failed to open file within zip
+    {
+        return NULL;
+    }
+
+    //find current file info (we are looking for uncompressed file size)
+    unzGetCurrentFileInfo(zip,&info,NULL,0,NULL,0,NULL,0);
+
+    //create a buffer big enough to hold uncompressed file in memory
+    buffer = (void*)new char[info.uncompressed_size];
+    if(!buffer)
+    {
+        unzCloseCurrentFile(zip);
+        unzClose(zip);
+        //log error (failed to allocate memory?!)
+        return NULL;
+    }
+
+    //load into memory
+    unzReadCurrentFile(zip, buffer, info.uncompressed_size);
+
+    //close archive
+    unzCloseCurrentFile(zip);
+    unzClose(zip);
+
+    return SDL_RWFromMem(buffer, info.uncompressed_size);   //return buffer in RW form
 }
 
 //Each of the Free*s safely frees & NULLs the pointer

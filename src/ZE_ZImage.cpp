@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.46 2003/09/07 20:59:20 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.47 2003/09/24 02:03:18 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -79,8 +79,40 @@ void ZImage::Open(std::string filename)
 {
     SDL_Surface *image;
 
-    image = rEngine->LoadImage(filename.c_str());
-    Attach(image);
+#ifdef USE_SDL_IMAGE
+    image = IMG_Load(filename.c_str());
+#else
+    image = SDL_LoadBMP(filename.c_str());
+#endif    //USE_SDL_IMAGE
+
+    if(!image)
+        rEngine->ReportError(ZERR_LOAD_IMAGE,filename);
+    else
+        Attach(image);
+}
+
+void ZImage::OpenFromZip(std::string zipname, std::string filename)
+{
+    SDL_Surface *image=NULL;
+    SDL_RWops *rw;
+
+    rw = RWFromZip(zipname,filename);
+
+    if(rw)
+    {
+#ifdef USE_SDL_IMAGE
+        image = IMG_Load_RW(rw,0);
+#else
+        image = SDL_LoadBMP_RW(rw,0);
+#endif    //USE_SDL_IMAGE
+        delete []rw->hidden.mem.base;   //must free buffer
+        SDL_FreeRW(rw);
+    }
+
+    if(!image)
+        rEngine->ReportError(ZERR_LOAD_IMAGE,FormatStr("%s in %s archive",filename.c_str(),zipname.c_str()));
+    else
+        Attach(image);
 }
 
 void ZImage::OpenFromImage(SDL_Surface *image, Sint16 x, Sint16 y, Sint16 w, Sint16 h)

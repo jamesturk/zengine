@@ -13,7 +13,7 @@
     \brief Source file for ZFont.
 
     Implementation of ZFont, the basic Font class for ZEngine.
-    <br>$Id: ZE_ZFont.cpp,v 1.12 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZFont.cpp,v 1.13 2003/09/24 02:03:18 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -50,7 +50,32 @@ void ZFont::Open(std::string filename, int size)
 {
     Release();
     rFilename = filename;
-    rFont = rEngine->LoadFont(filename,size);
+
+    rFont = TTF_OpenFont(filename.c_str(),size);
+
+    if(!rFont)
+        rEngine->ReportError(ZERR_LOAD_FONT,filename);
+}
+
+void ZFont::OpenFromZip(std::string zipname, std::string filename, int size)
+{
+    SDL_RWops *rw;
+
+    Release();
+    rZipname = zipname;
+    rFilename = filename;
+    
+    rw = RWFromZip(zipname,filename);
+
+    if(rw)
+    {
+        rFont = TTF_OpenFontRW(rw,0,size);
+        //delete []rw->hidden.mem.base;   //must free buffer
+        //SDL_FreeRW(rw);
+    }
+
+    if(!rFont)
+        rEngine->ReportError(ZERR_LOAD_FONT,FormatStr("%s in %s archive",filename.c_str(),zipname.c_str()));
 }
 
 void ZFont::Release()
@@ -106,7 +131,10 @@ void ZFont::SetStyle(bool bold, bool italic, bool underline)
 
 void ZFont::Resize(int size)
 {
-    Open(rFilename,size);
+    if(rZipname.length())
+        OpenFromZip(rZipname,rFilename,size);
+    else
+        Open(rFilename,size);
 }
 
 bool ZFont::IsLoaded() const

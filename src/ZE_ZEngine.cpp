@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.58 2003/09/21 03:28:53 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.59 2003/09/24 02:03:18 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -184,7 +184,12 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
         else
         {
             SDL_WM_SetCaption(title.c_str(),title.c_str());
-            iconImg = LoadImage(icon);
+
+#ifdef USE_SDL_IMAGE
+            iconImg = IMG_Load(icon.c_str());
+#else
+            iconImg = SDL_LoadBMP(icon.c_str());
+#endif
             SDL_WM_SetIcon(iconImg,NULL);
             FreeImage(iconImg);
         }
@@ -676,120 +681,6 @@ double ZEngine::RandDouble()
 {
     return mRandGen.RandDouble();
 }
-
-SDL_Surface* ZEngine::LoadImage(std::string filename)
-{
-    SDL_Surface *image;
-//using physfs//
-#ifdef USE_PHYSFS
-    SDL_RWops *rw;
-    rw = PHYSFSRWOPS_openRead(filename.c_str());
-    if(!rw)
-    {
-        ReportError(ZERR_LOAD_IMAGE,FormatStr("%s [PhysFS RWops failed: %s]",filename.c_str(),SDL_GetError()));
-        return NULL;
-    }
-#ifdef USE_SDL_IMAGE
-    image = IMG_Load_RW(rw,0);
-#else
-    image = SDL_LoadBMP_RW(rw,0);
-#endif    //USE_SDL_IMAGE
-    SDL_FreeRW(rw);
-//end using physfs//
-
-//Just SDL//
-#else
-#ifdef USE_SDL_IMAGE
-    image = IMG_Load(filename.c_str());
-#else
-    image = SDL_LoadBMP(filename.c_str());
-#endif    //USE_SDL_IMAGE
-#endif    //USE_PHYSFS
-
-    if(!image)
-    {
-        ReportError(ZERR_LOAD_IMAGE,filename);
-        return NULL;
-    }
-    else
-        return image;
-}
-
-#ifdef USE_SDL_MIXER
-
-Mix_Chunk* ZEngine::LoadSound(std::string filename)
-{
-    Mix_Chunk *sound;
-
-#ifdef USE_PHYSFS
-    SDL_RWops *rw;
-    rw = PHYSFSRWOPS_openRead(filename.c_str());
-    sound = Mix_LoadWAV_RW(rw,0);
-    SDL_FreeRW(rw);
-#else
-    sound = Mix_LoadWAV(filename.c_str());
-#endif //USE_PHYSFS
-
-    if(!sound)
-    {
-        ReportError(ZERR_LOAD_SOUND,filename);
-        return NULL;
-    }
-    else
-        return sound;
-}
-
-Mix_Music* ZEngine::LoadMusic(std::string filename)
-{
-    Mix_Music *music;
-
-//Currently SDL_Mixer doesn't support Music from a RW
-//#ifdef USE_PHYSFS
-//    SDL_RWops *rw;
-//    rw = PHYSFSRWOPS_openRead(filename.c_str());
-//    mus.music = Mix_LoadMUS_RW(filename.c_str(),0);
-//    SDL_FreeRW(rw);
-//#else
-    music = Mix_LoadMUS(filename.c_str());
-//#endif //USE_PHYSFS
-    
-    if(!music)
-    {
-        ReportError(ZERR_LOAD_MUSIC,filename);
-        return NULL;
-    }
-    else
-        return music;
-}
-
-#endif
-
-#ifdef USE_SDL_TTF
-
-TTF_Font* ZEngine::LoadFont(std::string filename, int size)
-{
-    TTF_Font *font;
-
-#ifdef USE_PHYSFS
-    SDL_RWops *rw;
-    rw = PHYSFSRWOPS_openRead(filename.c_str());
-    font = TTF_OpenFontRW(rw,0,size);
-    SDL_FreeRW(rw);
-#else
-    font = TTF_OpenFont(filename.c_str(),size);
-#endif //USE_PHYSFS
-
-    if(!font)
-    {
-        ReportError(ZERR_LOAD_FONT,filename);
-        return NULL;
-    }
-    else
-        return font;
-}
-
-
-#endif 
 
 int ZEngine::DisplayWidth()
 {
