@@ -3,7 +3,7 @@
 File: ZEngine.h <br>
 Description: Public Header File for ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZEngine.h,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZEngine.h,v 1.4 2002/12/02 00:36:35 cozman Exp $<br>
 
     \file ZEngine.h
     \brief Header file for ZEngine.
@@ -16,16 +16,17 @@ $Id: ZEngine.h,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
     \mainpage ZEngine Documentation
 
     \author James Turk
-    \version 0.7.7
+    \version 0.7.8
     \date 1 December, 2002
 
     \section ZEngine About ZEngine
     <br>
-    ZEngine is designed to wrap common interfaces of the SDL API in an Object Oriented manner.  It is licensed under 
-    a very liberal BSD-style license, and anyone is free to suggest or implement changes to be added to the Engine.  In addition
-    ZEngine hopes to provide a core engine which can be used to develop a game without having to rewrite large amounts
-    of code. As of version 0.7.7 ZEngine uses OpenGL rather than SDL to do 2D drawing, thus increasing the use of the engine
-    and making the engine much faster in most test cases.
+    ZEngine is designed to wrap common interfaces of the SDL API in an Object Oriented manner. <br> It is licensed under 
+    a very liberal BSD-style license, and anyone is free to suggest or implement changes to be added to the Engine.<br>
+    In addition ZEngine aims to provide a core engine which can be used to develop a game without having to 
+    rewrite large amounts of code.<br>
+    As of version 0.7.7 ZEngine uses OpenGL rather than SDL to do 2D drawing, thus increasing the uses of the engine
+    and making the engine much faster in most test cases.<br>
     
     \section Licensing Licensing
     <br><pre>

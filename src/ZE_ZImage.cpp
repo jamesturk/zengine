@@ -13,7 +13,7 @@
 File: ZE_ZImage.cpp <br>
 Description: Implementation source file for core ZEngine Image or Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.cpp,v 1.3 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZE_ZImage.cpp,v 1.4 2002/12/02 00:36:35 cozman Exp $<br>
 
     \file ZE_ZImage.cpp
     \brief Source file for ZImage.
@@ -151,21 +151,53 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
         LogError("ZImage not initialized in ZImage::SetColorKey.");
 }
 
+void ZImage::Stretch(float xFactor, float yFactor)
+{
+    rWidth = static_cast<unsigned int>(xFactor*rWidth);
+    rHeight = static_cast<unsigned int>(yFactor*rHeight);
+}
+
+void ZImage::Resize(unsigned int width, unsigned int height)
+{
+    rWidth = width;
+    rHeight = height;
+}
+
 void ZImage::Bind()
 {
     glBindTexture(GL_TEXTURE_2D, rTexID);
 }
 
-void ZImage::Draw(int x, int y)
+void ZImage::Draw(float x, float y)
 {
     Bind(); 
 
     glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2f(0.0f,0.0f);            glVertex2i(x, y);
-        glTexCoord2f(rTexMaxX,0.0f);        glVertex2i(x+rWidth, y);
-        glTexCoord2f(0.0f,rTexMaxY);        glVertex2i(x, y+rHeight);
-        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2i(x+rWidth, y+rHeight);
+        glTexCoord2f(0.0f,0.0f);            glVertex2f(x, y);
+        glTexCoord2f(rTexMaxX,0.0f);        glVertex2f(x+rWidth, y);
+        glTexCoord2f(0.0f,rTexMaxY);        glVertex2f(x, y+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(x+rWidth, y+rHeight);
     glEnd();
+}
+
+void ZImage::DrawRotated(int x, int y, float angle)
+{
+    float cX,cY; //center variables
+
+    cX = rWidth/2.0f;
+    cY = rHeight/2.0f;
+
+    glPushMatrix();
+    glTranslatef(x+cX,y+cY,0);
+    glRotatef(angle,0,0,1.0f);
+    Bind(); 
+    glBegin(GL_TRIANGLE_STRIP);
+        glTexCoord2f(0.0f,0.0f);            glVertex2f(-cX, -cY);
+        glTexCoord2f(rTexMaxX,0.0f);        glVertex2f(-cX+rWidth, -cY);
+        glTexCoord2f(0.0f,rTexMaxY);        glVertex2f(-cX, -cY+rHeight);
+        glTexCoord2f(rTexMaxX,rTexMaxY);    glVertex2f(-cX+rWidth, -cY+rHeight);
+    glEnd();
+    glPopMatrix();
 }
 
 bool ZImage::IsLoaded()

@@ -34,17 +34,17 @@ void Initialize()
 void Test()
 {
     ZEngine *engine = ZEngine::GetInstance();
+    float angle=0.0f;
 
     //Open and Setup all the Images//
     SDL_Surface *temp;
-    ZImage image1, image2("data/test01.bmp"), image3(image2.Surface(),20,20,20,20), textImage;
+    ZImage image1, image2("data/test01.bmp"), image3(image2.Surface(),5,5,20,20), textImage;
     ZFont font("data/almontew.ttf",30);
 
     temp = SDL_LoadBMP("data/test02.bmp");    //this is a separate surface
     image1.Attach(temp);    //this attaches the surface into itself
     temp = NULL;    //and temp will now be controlled and freed by image1
     image1.SetColorKey(255,0,255);
-//    image2.SetAlpha(75);
     image2.SetColorKey(255,0,255);
     font.SetColor(0,255,0);
     font.SetBGColor(0,0,255);
@@ -66,7 +66,11 @@ void Test()
         engine->Clear();    //clear screen
         //draw the images//
         image1.Draw(0,0);
-        image2.Draw(100,0);
+        
+        image2.DrawRotated(100,0,angle);
+        if(++angle > 360)
+            angle = 0.0f;
+
         image3.Draw(200,0);
         textImage.Draw(0,100);
         engine->UpdateScreen();    //update the screen

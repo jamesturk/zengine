@@ -13,7 +13,7 @@
 File: ZE_ZImage.h <br>
 Description: Header file for core ZEngine Image and Texture Object. <br>
 Author(s): James Turk, Gamer Tazar <br>
-$Id: ZE_ZImage.h,v 1.2 2002/12/01 07:56:17 cozman Exp $<br>
+$Id: ZE_ZImage.h,v 1.3 2002/12/02 00:36:35 cozman Exp $<br>
 
     \file ZE_ZImage.h
     \brief Definition file for ZImage.
@@ -150,6 +150,24 @@ class ZImage : public ZObject
         void SetColorKey(Uint8 red, Uint8 green, Uint8 blue);
 
         /*!
+            \brief Stretch the image by a certain X and Y factor.
+
+            Stretch image using a factor to multiply width and height by.
+            \param xFactor Stretch factor for width. [newWidth = oldWidth * xStretch]
+            \param yFactor Stretch factor for height. [newHeight = oldHeight * yStretch]
+        **/
+        void Stretch(float xFactor, float yFactor);
+
+        /*!
+            \brief Resizes an image, stretching to new size.
+
+            Stretch image to new width and height.
+            \param width New width to stretch image to.
+            \param height New height to stretch image to.
+        **/
+        void Resize(unsigned int width, unsigned int height);
+
+        /*!
             \brief OpenGL related bind call.
 
             OpenGL related bind call, only available in case you want to bind image in 3D.
@@ -164,7 +182,17 @@ class ZImage : public ZObject
             \param x X coord to draw Image to.
             \param y Y coord to draw Image to.
         **/
-        void Draw(int x, int y);
+        void Draw(float x, float y);
+
+        /*!
+            \brief Draw Image rotated to screen.
+
+            Image is rotated about it's own center by specified angle, then drawn to screen.
+            \param x X coord to draw Image to.
+            \param y Y coord to draw Image to.
+            \param angle Angle in degrees to rotate image.
+        **/
+        void DrawRotated(int x, int y, float angle);
 
         /////////////
         //Accessors//
