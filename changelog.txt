@@ -1,5 +1,5 @@
 ZEngine Version Log for Version 0.8.5
-$Id: changelog.txt,v 1.49 2003/09/24 02:17:09 cozman Exp $
+$Id: changelog.txt,v 1.50 2003/09/24 05:11:32 cozman Exp $
 
 Changes are marked with symbols that describe them:
 ! is code that breaks backwards compatibility (used after 0.8.0-rc1, previous versions broke compatibility)
@@ -21,11 +21,12 @@ Changes are marked with symbols that describe them:
     + New limited SDL graphics backend for platforms without OpenGL.
     - Removal of PhysFS.
     - Removal of VC6 project files and official support.
-    - Removal of SDL_net support. 
+    - Removal of SDL_net support in favour of external library.
+    # Sweep of non-used legacy code.
     # Tests modified to show off loading of compressed files.
     # Moved image,sound,music and font loading code from legacy ZEngine location to respective classes.
     # Tiny optimizations within newer ZImage code.
-    # Changed ZImage stretching to floating-point.
+    # Changed ZImage stretching to floating-point (irregular screen sizes, emulation).
     # New linux build system (by Atani).
 
 0.8.4
