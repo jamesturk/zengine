@@ -13,7 +13,7 @@
 File: ZE_ZClient.h <br>
 Description: Header file for core ZEngine TCP Client Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZClient.h,v 1.1 2003/03/14 22:18:14 cozman Exp $<br>
+$Id: ZE_ZClient.h,v 1.2 2003/03/15 03:27:19 cozman Exp $<br>
 
     \file ZE_ZClient.h
     \brief Definition file for ZClient.
@@ -25,6 +25,8 @@ $Id: ZE_ZClient.h,v 1.1 2003/03/14 22:18:14 cozman Exp $<br>
 #define __ze_zclient_h__
 
 #include "ZE_ZEngine.h"
+
+#ifdef USE_SDL_NET
 
 namespace ZE
 {
@@ -127,5 +129,7 @@ class ZClient
 };
 
 } //namespace ZE
+
+#endif //USE_SDL_NET
 
 #endif //__ze_zclient_h__

@@ -13,7 +13,7 @@
 File: ZE_ZServer.h <br>
 Description: Header file for core ZEngine TCP Server Object. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZServer.h,v 1.1 2003/03/14 22:18:14 cozman Exp $<br>
+$Id: ZE_ZServer.h,v 1.2 2003/03/15 03:27:19 cozman Exp $<br>
 
     \file ZE_ZServer.h
     \brief Definition file for ZServer.
@@ -25,6 +25,8 @@ $Id: ZE_ZServer.h,v 1.1 2003/03/14 22:18:14 cozman Exp $<br>
 #define __ze_zserver_h__
 
 #include "ZE_ZEngine.h"
+
+#ifdef USE_SDL_NET
 
 namespace ZE
 {
@@ -129,5 +131,7 @@ class ZServer
 };
 
 } //namespace ZE
+
+#endif //USE_SDL_NET
 
 #endif //__ze_zserver_h__
