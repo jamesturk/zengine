@@ -17,7 +17,7 @@ void Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
-    int w,h,bpp;
+    int w,h,bpp,rate;
     bool fs;
     string title;
 
@@ -26,9 +26,11 @@ void Initialize()
     bpp = cfg.GetInt("ZSoundTest","bpp",32);
     fs = cfg.GetBool("ZSoundTest","fullscreen",false);
     title = cfg.GetString("ZSoundTest","title","ZSound Test");
+    rate = cfg.GetInt("ZSoundTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
     engine->CreateDisplay(title);
+    engine->SetDesiredFramerate(rate);
 }
 
 void Test()
@@ -78,7 +80,6 @@ void Test()
             sample[sampleNum].SetVolume(sample[sampleNum].Volume()+1);
         if(engine->KeyIsPressed(SDLK_DOWN))
             sample[sampleNum].SetVolume(sample[sampleNum].Volume()-1);
-
 
         font.DrawText(FormatStr("Volume: %d",sample[sampleNum].Volume()),text[4]);
         font.DrawText(FormatStr("Sample: %s",name[sampleNum].c_str()),text[5]);

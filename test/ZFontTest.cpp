@@ -17,7 +17,7 @@ void Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
-    int w,h,bpp;
+    int w,h,bpp,rate;
     bool fs;
     string title;
 
@@ -26,9 +26,11 @@ void Initialize()
     bpp = cfg.GetInt("ZFontTest","bpp",32);
     fs = cfg.GetBool("ZFontTest","fullscreen",false);
     title = cfg.GetString("ZFontTest","title","ZFont Test");
+    rate = cfg.GetInt("ZFontTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
     engine->CreateDisplay(title);
+    engine->SetDesiredFramerate(rate);
 }
 
 void Test()
@@ -36,7 +38,7 @@ void Test()
     ZEngine *engine = ZEngine::GetInstance();
 
     //Open and Setup all the Fonts and Create Images//
-    ZImage text[5];
+    ZImage text[6];
     ZFont almonte("data/almontew.ttf",48), axaxax("data/axaxax.ttf",32), betsy("data/betsy.ttf",64);
     almonte.SetColor(255,0,0);
     almonte.DrawText("This is the font test.",text[0]);
@@ -58,10 +60,11 @@ void Test()
         engine->CheckEvents();
         if(engine->KeyIsPressed(SDLK_ESCAPE))
             engine->RequestQuit();
+        betsy.DrawText(FormatStr("FPS: %.2f",engine->GetFramerate()),text[5]);
 
         engine->Clear();    //clear screen
         //draw the images//
-        for(int i=0; i <= 4; i++)
+        for(int i=0; i <= 5; i++)
             text[i].Draw(10.0f*i,50.0f*i);
         engine->Update();    //update the screen
 

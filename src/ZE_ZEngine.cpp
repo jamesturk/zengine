@@ -13,7 +13,7 @@
 File: ZE_ZEngine.cpp <br>
 Description: Implementation source file for ZEngine library main singleton class. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.cpp,v 1.9 2002/12/29 06:52:07 cozman Exp $<br>
+$Id: ZE_ZEngine.cpp,v 1.10 2003/01/04 05:16:01 cozman Exp $<br>
 
     \file ZE_ZEngine.cpp
     \brief Central source file for ZEngine.
@@ -52,7 +52,8 @@ ZEngine::ZEngine()
         mKeyPress[k] = false;
 
     mUnpauseOnActive = mPaused = false;
-    mLastPause = mPausedTime = mLastTime = 0;
+    mDesiredFramerate = 0;
+    mNextUpdate = mLastPause = mPausedTime = mLastTime = 0;
     mSecPerFrame = 0.0;
 }
 
@@ -210,6 +211,13 @@ void ZEngine::Update()
 
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
     mLastTime = GetTime();
+
+    if(mDesiredFramerate)
+    {
+        if(mLastTime < mNextUpdate)
+            SDL_Delay(mNextUpdate-mLastTime);
+        mNextUpdate = GetTime()+(1000/mDesiredFramerate);
+    }
 }
 
 void ZEngine::Clear(float red, float green, float blue, float alpha)
@@ -277,6 +285,21 @@ void ZEngine::UnpauseTimer()
 double ZEngine::GetFrameTime()
 {
     return mSecPerFrame;
+}
+
+double ZEngine::GetFramerate()
+{
+    return 1/mSecPerFrame;
+}
+
+void ZEngine::SetDesiredFramerate(Uint8 rate)
+{
+    mDesiredFramerate = rate;
+}
+
+Uint8 ZEngine::GetDesiredFramerate()
+{
+    return mDesiredFramerate;
 }
 
 bool ZEngine::IsPaused()

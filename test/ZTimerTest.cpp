@@ -17,7 +17,7 @@ void Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
-    int w,h,bpp;
+    int w,h,bpp,rate;
     bool fs;
     string title;
 
@@ -26,9 +26,11 @@ void Initialize()
     bpp = cfg.GetInt("ZTimerTest","bpp",32);
     fs = cfg.GetBool("ZTimerTest","fullscreen",false);
     title = cfg.GetString("ZTimerTest","title","ZTimer Test");
+    rate = cfg.GetInt("ZTimerTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
     engine->CreateDisplay(title);
+    engine->SetDesiredFramerate(rate);
 }
 
 void Test()

@@ -13,7 +13,7 @@
 File: ZE_ZEngine.h <br>
 Description: Header file for ZEngine class, the core of the ZEngine. <br>
 Author(s): James Turk <br>
-$Id: ZE_ZEngine.h,v 1.8 2002/12/29 06:50:19 cozman Exp $<br>
+$Id: ZE_ZEngine.h,v 1.9 2003/01/04 05:16:02 cozman Exp $<br>
 
     \file ZE_ZEngine.h
     \brief Definition file for core ZEngine class.
@@ -172,7 +172,8 @@ class ZEngine
         /*!
             \brief Update display contents.
 
-            Swap OpenGL buffers, and update screen.  Must be called every frame.
+            Swap OpenGL buffers, and update screen, if a desired framerate is set it will delay to stay under that rate.
+            Must be called every frame.
         **/
         void Update();
 
@@ -209,6 +210,10 @@ class ZEngine
         bool mPaused;
         //! Keep track of if ZEngine should unpause on active event.
         bool mUnpauseOnActive;
+        //! Value framerate strives to be at, set by SetDesiredFramerate.
+        Uint8 mDesiredFramerate;
+        //! Time scheduled for next update (used for framerate locked movement).
+        Uint32 mNextUpdate;
         //! Keep track of time game was last paused.
         Uint32 mLastPause;
         //! Keep track of total globally paused time.
@@ -252,10 +257,39 @@ class ZEngine
         /*!
             \brief Get Seconds Per Frame.
 
-            Get double that describes the time passed between screen updates. (used for Framerate Independant Movement)
+            Get double that describes the time passed between screen updates. (should be used for Framerate Independant Movement)
             \return Time between screen updates.
         **/
         double GetFrameTime();
+
+        /*!
+            \brief Get Frames Per Second.
+
+            Get double representing current (approximate) FPS.  This value is always the same as 1/GetFrameTime().
+            \since 0.8.2
+            \return Current Framerate.
+        **/
+        double GetFramerate();
+
+        /*!
+            \brief Set Desired Framerate.
+
+            Sets desired framerate, if engine gets ahead of desired rate during a frame it will stall in Update until
+            current framerate is closer to that desired.  Acceptable values are 1-255, setting this value to 0 will disable this
+            feature.  (Desired framerate is disabled upon initialization of ZEngine.)
+            \since 0.8.2
+            \param rate Desired framerate 1-255, or 0 to disable.
+        **/
+        void SetDesiredFramerate(Uint8 rate);
+
+        /*!
+            \brief Get Desired Framerate.
+
+            Get desired framerate set by SetDesiredFramerate.
+            \since 0.8.2
+            \return Current setting for desired framerate.
+        **/
+        Uint8 GetDesiredFramerate();
 
         /*!
             \brief Check Engine Paused State.

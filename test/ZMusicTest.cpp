@@ -17,7 +17,7 @@ void Initialize()
 {
     ZEngine *engine = ZEngine::GetInstance();
     ZConfigFile cfg("tests.zcf");
-    int w,h,bpp;
+    int w,h,bpp,rate;
     bool fs;
     string title;
 
@@ -26,9 +26,11 @@ void Initialize()
     bpp = cfg.GetInt("ZMusicTest","bpp",32);
     fs = cfg.GetBool("ZMusicTest","fullscreen",false);
     title = cfg.GetString("ZMusicTest","title","ZMusic Test");
+    rate = cfg.GetInt("ZMusicTest","framerate",60);
 
     engine->SetupDisplay(w,h,bpp,fs);
     engine->CreateDisplay(title);
+    engine->SetDesiredFramerate(rate);
 }
 
 void Test()
@@ -51,6 +53,7 @@ void Test()
         {
             
             engine->CheckEvents();
+            engine->Update();
         } while(!engine->QuitRequested());
     }
     else    //this is the actual example
