@@ -13,7 +13,7 @@
     \brief Central source file for ZEngine.
 
     Actual implementation of ZEngine singleton class, the core of ZEngine.
-    <br>$Id: ZE_ZEngine.cpp,v 1.53 2003/07/13 05:35:11 cozman Exp $<br>
+    <br>$Id: ZE_ZEngine.cpp,v 1.54 2003/08/01 21:56:58 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -84,7 +84,9 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     SDL_Surface *iconImg;
     bool status=true;   //status of setup, only true if everything went flawless
     int bpp;
+#if GFX_BACKEND == OGL
     int rgb_size[3];
+#endif
 
     if(!mInitialized)
     {
@@ -134,6 +136,7 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
         }
     }
 
+#if GFX_BACKEND == OGL
     //buffer sizes
     switch (mBPP)
     {
@@ -168,6 +171,9 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
     flags |= SDL_OPENGL;
+#elif GFX_BACKEND == SDL
+    flags |= SDL_DOUBLEBUF;
+#endif //GFX_BACKEND
 
     if(!mInitialized)    //only set these settings the first time
     {
@@ -202,7 +208,9 @@ bool ZEngine::CreateDisplay(std::string title, std::string icon)
     mHeight = mScreen->h;
     mBPP = mScreen->format->BitsPerPixel;
 
+#if GFX_BACKEND == OGL
     SetGL2D();
+#endif 
 
     mKeyIsPressed = SDL_GetKeyState(NULL);
 
@@ -296,7 +304,11 @@ SDL_Surface *ZEngine::Display()
 
 void ZEngine::Update()
 {
+#if GFX_BACKEND == OGL
     SDL_GL_SwapBuffers();
+#elif GFX_BACKEND == SDL
+    SDL_Flip(mScreen);
+#endif
 
     //keeps track of spf//
     mSecPerFrame = (GetTime()-mLastTime)/1000.0;
@@ -311,9 +323,12 @@ void ZEngine::Update()
     }
 }
 
-void ZEngine::Clear(float red, float green, float blue, float alpha)
+#if GFX_BACKEND == OGL
+
+void ZEngine::Clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
 {
-    glClearColor(red,green,blue,alpha);
+    GLclampf r = red/255.0f, g = green/255.0f, b = blue/255.0f, a = alpha/255.0f;
+    glClearColor(r,g,b,a);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 }
@@ -343,6 +358,15 @@ void ZEngine::SetGL2D()
     glPushMatrix();
     glLoadIdentity();
 }
+
+#elif GFX_BACKEND == SDL
+
+void ZEngine::Clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
+{
+    SDL_FillRect(mScreen,NULL,SDL_MapRGBA(mScreen->format,red,green,blue,alpha));
+}
+
+#endif //GFX_BACKEND
 
 void ZEngine::Delay(Uint32 milliseconds)
 {

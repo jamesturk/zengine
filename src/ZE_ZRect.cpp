@@ -13,7 +13,7 @@
     \brief Source file for ZRect.
 
     Implementation of ZRect, the Rectangle class for ZEngine.
-    <br>$Id: ZE_ZRect.cpp,v 1.12 2003/06/11 05:51:16 cozman Exp $<br>
+    <br>$Id: ZE_ZRect.cpp,v 1.13 2003/08/01 21:56:58 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -23,16 +23,19 @@ namespace ZE
 {
 
 ZRect::ZRect() :
+    rEngine(ZEngine::GetInstance()),
     rX(0),rY(0),rWidth(0),rHeight(0)
 {
 }
 
 ZRect::ZRect(float x, float y, float width, float height) :
+    rEngine(ZEngine::GetInstance()),
     rX(x),rY(y),rWidth(width),rHeight(height)
 {
 }
 
 ZRect::ZRect(const SDL_Rect &rect) :
+    rEngine(ZEngine::GetInstance()),
     rX(static_cast<float>(rect.x)),
     rY(static_cast<float>(rect.y)),
     rWidth(static_cast<float>(rect.w)),
@@ -41,6 +44,7 @@ ZRect::ZRect(const SDL_Rect &rect) :
 }
 
 ZRect::ZRect(const ZRect &rhs) :
+    rEngine(ZEngine::GetInstance()),
     rX(rhs.X()),rY(rhs.Y()),rWidth(rhs.Width()),rHeight(rhs.Height())
 {
 }
@@ -96,6 +100,7 @@ bool ZRect::operator<(const ZRect &rhs) const
 
 void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) const
 {
+#if GFX_BACKEND == OGL
     glBindTexture(GL_TEXTURE_2D,0); //reset to blank texture
     glColor4ub(red,green,blue,alpha);
     glBegin(GL_QUADS);
@@ -105,6 +110,11 @@ void ZRect::Draw(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) const
         glVertex2f(rX, rY+rHeight);
     glEnd();
     glColor4ub(255,255,255,255);    //restore color setting
+#elif GFX_BACKEND == SDL
+    SDL_Rect rect = SDLrect();
+    SDL_FillRect(rEngine->Display(), &rect, SDL_MapRGBA(rEngine->Display()->format,red,green,blue,alpha));
+#endif //GFX_BACKEND
+
 }
 
 void ZRect::Move(float x, float y)

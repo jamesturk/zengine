@@ -13,7 +13,7 @@
     \brief Source file for ZImage.
 
     Implementation of ZImage, the Image class for ZEngine.
-    <br>$Id: ZE_ZImage.cpp,v 1.37 2003/07/11 20:51:44 cozman Exp $<br>
+    <br>$Id: ZE_ZImage.cpp,v 1.38 2003/08/01 21:56:58 cozman Exp $<br>
     \author James Turk
 **/
 
@@ -116,6 +116,8 @@ void ZImage::OpenFromImage(const ZImage &img, Sint16 x, Sint16 y, Sint16 w, Sint
     OpenFromImage(img.Surface(),x,y,w,h);
 }
 
+#if GFX_BACKEND == OGL
+
 //attach is really the core of ZImage, everything calls it, it converts SDL_Surface->OpenGL Texture->ZImage
 void ZImage::Attach(SDL_Surface *surface)
 {
@@ -189,48 +191,6 @@ void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
         rEngine->ReportError(ZERR_NOIMAGE,"SetColorKey");
 }
 
-void ZImage::Flip(bool horizontal, bool vertical)
-{
-    GLfloat temp;
-    //all that a flip does is invert the Min/Max coordinates
-    if(horizontal)
-    {
-        temp = rTexMinX;
-        rTexMinX = rTexMaxX;
-        rTexMaxX = temp;
-    }
-
-    if(vertical)
-    {
-        temp = rTexMinY;
-        rTexMinY = rTexMaxY;
-        rTexMaxY = temp;
-    }
-}
-
-//stretching and resizing is very inexpensive, done via variables
-void ZImage::Stretch(float xFactor, float yFactor)
-{
-    rWidth = static_cast<unsigned int>(xFactor*rWidth);
-    rHeight = static_cast<unsigned int>(yFactor*rHeight);
-}
-
-void ZImage::Resize(unsigned int width, unsigned int height)
-{
-    rWidth = width;
-    rHeight = height;
-}
-
-//this is available for other uses of ZEngine
-void ZImage::Bind() const
-{
-    if(rTexID)
-        glBindTexture(GL_TEXTURE_2D, rTexID);
-    else
-        rEngine->ReportError(ZERR_NOIMAGE,"Bind");
-        
-}
-
 void ZImage::Draw(int x, int y) const
 {
     //source is same as float version, but uses glVertex2i
@@ -285,10 +245,139 @@ void ZImage::DrawRotated(float x, float y, float angle) const
     glPopMatrix();
 }
 
+void ZImage::Flip(bool horizontal, bool vertical)
+{
+    GLfloat temp;
+    //all that a flip does is invert the Min/Max coordinates
+    if(horizontal)
+    {
+        temp = rTexMinX;
+        rTexMinX = rTexMaxX;
+        rTexMaxX = temp;
+    }
+
+    if(vertical)
+    {
+        temp = rTexMinY;
+        rTexMinY = rTexMaxY;
+        rTexMaxY = temp;
+    }
+}
+
+//stretching and resizing is very inexpensive, done via variables
+void ZImage::Stretch(float xFactor, float yFactor)
+{
+    rWidth = static_cast<unsigned int>(xFactor*rWidth);
+    rHeight = static_cast<unsigned int>(yFactor*rHeight);
+}
+
+void ZImage::Resize(unsigned int width, unsigned int height)
+{
+    rWidth = width;
+    rHeight = height;
+}
+
+//this is available for other uses of ZEngine
+void ZImage::Bind() const
+{
+    if(rTexID)
+        glBindTexture(GL_TEXTURE_2D, rTexID);
+    else
+        rEngine->ReportError(ZERR_NOIMAGE,"Bind");
+        
+}
+
 bool ZImage::IsLoaded() const
 {
     return glIsTexture(rTexID) == GL_TRUE;
 }
+
+#elif GFX_BACKEND == SDL
+
+void ZImage::Attach(SDL_Surface *surface)
+{
+    Release();
+
+    //surface conversion//
+    SDL_Surface *temp = surface;
+    surface = SDL_DisplayFormatAlpha(temp); //TTF_RenderTextBlended relys on this
+    if(surface)
+    {
+        FreeImage(temp);
+    }
+    else    //can't convert
+    {
+        rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::Attach: %s",SDL_GetError()));
+        surface = temp;
+    }
+
+    if(surface)
+        rImage = surface;
+    else
+        rEngine->ReportError(ZERR_NOIMAGE,"Attach");
+}
+
+void ZImage::Reload()
+{
+    //currently a no-op
+}
+
+void ZImage::Release()
+{
+    FreeImage(rImage);
+}
+
+void ZImage::SetAlpha(Uint8 alpha)
+{
+    rAlpha = alpha;
+    if(rImage)
+    {
+        if(SDL_SetAlpha(rImage, SDL_SRCALPHA, alpha) < 0)
+            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetAlpha failed in ZImage::SetAlpha: %s",SDL_GetError()));
+    }
+    else
+        rEngine->ReportError(ZERR_NOIMAGE,"SetAlpha");
+}
+
+void ZImage::SetColorKey(Uint8 red, Uint8 green, Uint8 blue)
+{
+    Uint32 color = SDL_MapRGBA(rImage->format,red,green,blue,255);
+
+    if(rImage)
+    {
+        if(SDL_SetColorKey(rImage, SDL_RLEACCEL|SDL_SRCCOLORKEY, color) < 0)
+            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_SetColorKey failed in ZImage::SetColorKey: %s",SDL_GetError()));
+        //surface conversion//
+        SDL_Surface *temp = rImage;
+        rImage = SDL_DisplayFormatAlpha(temp); //TTF_RenderTextBlended relys on this
+        if(rImage)
+        {
+            FreeImage(temp);
+        }
+        else    //can't convert
+        {
+            rEngine->ReportError(ZERR_SDL_INTERNAL,FormatStr("SDL_DisplayFormatAlpha failed in ZImage::SetColorKey: %s",SDL_GetError()));
+            rImage = temp;
+        }
+    }
+    else
+        rEngine->ReportError(ZERR_NOIMAGE,"SetColorKey");
+}
+
+void ZImage::Draw(int x, int y) const
+{
+    SDL_Rect rect;
+    rect.x = static_cast<Sint16>(x);
+    rect.y = static_cast<Sint16>(y);
+    SDL_BlitSurface(rImage, NULL, rEngine->Display(), &rect);
+}
+
+bool ZImage::IsLoaded() const
+{
+    return rImage ? true : false;
+}
+
+#endif //GFX_BACKEND
 
 SDL_Surface* ZImage::Surface() const
 {
@@ -297,12 +386,12 @@ SDL_Surface* ZImage::Surface() const
 
 int ZImage::Width() const
 {
-    return rWidth;
+    return rImage->w;
 }
 
 int ZImage::Height() const
 {
-    return rHeight;
+    return rImage->h;
 }
 
 Uint8 ZImage::Alpha() const

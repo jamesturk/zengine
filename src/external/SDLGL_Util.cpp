@@ -4,6 +4,8 @@
 
 #include "external/SDLGL_Util.h"
 
+#if GFX_BACKEND == OGL
+
 //finds nearest power of two (going up), needed for surfaces
 int power_of_two(int input)
 {
@@ -87,3 +89,5 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
 
     return texture;
 }
+
+#endif //GFX_BACKEND == OGL
