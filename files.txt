@@ -19,4 +19,5 @@
     test/               Source for test programs.
         bin/            Test programs and files about using them.
             data/       Data needed for test programs.
-    vc7/                Visual C++ 7 Solution file for ZEngine.
+    vc6/                Visual C++ 6 Project files for ZEngine.
+    vc7/                Visual C++ 7 Project files for ZEngine.
